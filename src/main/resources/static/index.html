@@ -6,6 +6,11 @@
     </head>
     <body>
         <div id="app">
+            <ul>
+                <li v-for="datasource in datasources">
+                    <a href='/datasources/{{ datasource.id }}'>{{ datasource.name }}</a>
+                </li>
+            </ul>
             {{ message }}
         </div>
 
@@ -13,7 +18,8 @@
             var app = new Vue({
               el: '#app',
               data: {
-                message: 'Digger!'
+                datasources: [{"id":1,"name":"Microsoft SQL Server","url":null,"username":null,"password":null},
+                              {"id":2,"name":"PostgreSQL","url":null,"username":null,"password":null}]
               }
             })
         </script>
