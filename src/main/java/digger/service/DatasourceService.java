@@ -16,4 +16,9 @@ public class DatasourceService {
     public List<Datasource> findAll() {
         return datasourceRepository.findAll();
     }
+
+    public Datasource findById(Long id) {
+        Datasource datasource = datasourceRepository.findById(id);
+        return datasource;
+    }
 }
