@@ -3,11 +3,9 @@ package digger.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.xml.crypto.Data;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="datasource")
 public class Datasource {
 
     @Id
@@ -15,6 +13,9 @@ public class Datasource {
 
     @Column
     private String name;
+
+    @Column
+    private String driver;
 
     @Column
     private String url;
@@ -25,7 +26,12 @@ public class Datasource {
     @Column
     private String password;
 
-    public Datasource() {}
+    @Transient
+    private Boolean available;
+
+    public Datasource() {
+        this.available = true;
+    }
 
     public Long getId() {
         return id;
@@ -41,6 +47,14 @@ public class Datasource {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 
     public String getUrl() {
@@ -65,5 +79,13 @@ public class Datasource {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }
