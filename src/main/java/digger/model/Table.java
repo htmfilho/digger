@@ -14,12 +14,13 @@ public class Table {
     private String name;
 
     @Column
-    private String description;
-
-    @Column
-    private String documentation;
+    private String type;
 
     public Table() {}
+
+    public Table(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -37,19 +38,11 @@ public class Table {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType() {
+        return type;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDocumentation() {
-        return documentation;
-    }
-
-    public void setDocumentation(String documentation) {
-        this.documentation = documentation;
+    public void setType(String type) {
+        this.type = type;
     }
 }

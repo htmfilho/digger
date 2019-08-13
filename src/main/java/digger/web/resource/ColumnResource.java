@@ -16,24 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class TableResource {
+public class ColumnResource {
 
     @Autowired
     private DatasourceService datasourceService;
 
     @Autowired
-    private TableService tableService;
+    private ColumnService columnService;
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Table> getTables(@PathVariable Long datasourceId, @RequestParam(value = "key", defaultValue = "") String key) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        return tableService.listTables(datasource, key);
-    }
-
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Table getTable(@PathVariable Long datasourceId, @PathVariable String tableName) {
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}/columns", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Column> getColumns(@PathVariable Long datasourceId, @PathVariable String tableName, @RequestParam(value = "key", defaultValue = "") String key) {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = new Table(tableName);
-        return tableService.getTable(datasource, table);
+        return columnService.listColumns(datasource, table, key);
+    }
+
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}/columns/{columnName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Column getTable(@PathVariable Long datasourceId, @PathVariable String tableName, @PathVariable String columnName) {
+        Datasource datasource = datasourceService.findById(datasourceId);
+        Table table = new Table(tableName);
+        Column column = new Column(columnName);
+        return columnService.getColumn(datasource, table, column);
     }
 }
