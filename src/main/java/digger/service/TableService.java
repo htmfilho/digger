@@ -22,12 +22,12 @@ public class TableService {
     @Autowired
     private DatasourceService datasourceService;
 
-    public List<Table> listAllTables(Datasource datasource) {
+    public List<Table> listAllTables(Datasource datasource, String key) {
         List<Table> tables = new ArrayList<>();
         try {
             Connection connection = datasourceService.getConnection(datasource);
             DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(connection.getCatalog(), null, "%", null);
+            ResultSet resultSet = databaseMetaData.getTables(connection.getCatalog(), null, key + "%", null);
             while (resultSet.next()) {
                 Table table = new Table();
                 table.setName(resultSet.getString(3));
