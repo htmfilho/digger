@@ -1,13 +1,16 @@
 package digger.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Column {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    private Table table;
 
     @javax.persistence.Column
     private String name;
