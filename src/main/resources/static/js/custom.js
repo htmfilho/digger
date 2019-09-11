@@ -1,6 +1,6 @@
 $(document).ready(
     function() {
-        if ($("#list-datasources")) {
+        if ($("#list-datasources").length != 0) {
             $.ajax({
                 url: "/api/datasources",
                 success: function(result) {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+    <head>
+       <title>Digger - Datasource</title>
+    </head>
+
+    <body>
+        <section>
+            <h1>Datasource</h1>
+
+            <form method="POST" action="/datasources">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" name="description">
+                </div>
+                <div class="form-group">
+                    <label for="driver">Driver Class</label>
+                    <input type="text" class="form-control" id="driver" name="driver">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="url">URL</label>
+                            <input type="text" class="form-control" id="url" name="url">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="saveDatasource">Save</button>
+            </form>
+        </section>
+    </body>
+</html>

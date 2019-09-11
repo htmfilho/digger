@@ -37,6 +37,10 @@ public class DatasourceService {
         return datasource;
     }
 
+    public void save(Datasource datasource) {
+        datasourceRepository.save(datasource);
+    }
+
     private boolean testConnection(Datasource datasource) throws SQLException {
         return (getConnection(datasource) != null);
     }
