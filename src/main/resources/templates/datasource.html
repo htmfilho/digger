@@ -30,13 +30,13 @@
                         <div id="driver" class="value" th:utext="${datasource.driver}"></div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="url">URL</label>
                         <div id="url" class="value" th:utext="${datasource.url}"></div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-2">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <div id="username" class="value" th:utext="${datasource.username}"></div>
@@ -44,6 +44,14 @@
                 </div>
             </div>
             <hr>
+            <div class="row">
+                <div class="col-10">
+                    <h2>Tables</h2>
+                </div>
+                <div class="col-2">
+                    <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true">New</a>
+                </div>
+            </div>
         </section>
     </body>
 </html>

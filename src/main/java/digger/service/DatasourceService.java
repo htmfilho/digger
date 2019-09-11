@@ -49,7 +49,7 @@ public class DatasourceService {
         try {
             Class.forName(datasource.getDriver());
             log.info("Driver '{}' available.", datasource.getDriver());
-            Connection connection = DriverManager.getConnection(datasource.getUrl());
+            Connection connection = DriverManager.getConnection(datasource.getUrl(), datasource.getUsername(), datasource.getPassword());
             log.info("Connection to '{}' is successful.", datasource.getName());
             return connection;
         } catch (ClassNotFoundException cnfe) {
