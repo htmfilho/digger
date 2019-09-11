@@ -14,6 +14,9 @@ public class Datasource {
     private String name;
 
     @Column
+    private String description;
+
+    @Column
     private String driver;
 
     @Column
@@ -46,6 +49,14 @@ public class Datasource {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDriver() {
