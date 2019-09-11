@@ -1,9 +1,7 @@
 package digger.web.resource;
 
-import digger.model.Column;
 import digger.model.Datasource;
 import digger.model.Table;
-import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;

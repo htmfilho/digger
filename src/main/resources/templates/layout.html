@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+        <link rel="manifest" href="/images/site.webmanifest">
+        <link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+        <link rel="stylesheet" href="/css/custom.css"/>
+
+        <title th:replace="${title}">Digger</title>
+    </head>
+    <body>
+        <nav class="navbar fixed-top navbar-light" style="background-color: rgb(255, 227, 167)">
+            <a class="navbar-brand" href="#">
+                <img src="/images/favicon-32x32.png" width="32" height="32" class="d-inline-block align-top" alt="">
+                Digger
+            </a>
+        </nav>
+
+        <div class="container">
+            <div th:replace="${content}">
+                <p>Content</p>
+            </div>    
+        </div>
+        
+        <footer class="navbar fixed-bottom navbar-light" style="background-color:beige">
+            Copyright &copy; Hildeberto Mendonca
+        </footer>
+
+        <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    </body>
+</html>
