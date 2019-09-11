@@ -15,12 +15,12 @@ public class DatasourceResource {
     private DatasourceService datasourceService;
 
     @GetMapping(value = "/api/datasources", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Datasource> getResources() {
+    public List<Datasource> getDatasources() {
         return this.datasourceService.findAll();
     }
 
     @GetMapping(value = "/api/datasources/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Datasource getResources(@PathVariable Long id) {
+    public Datasource getDatasource(@PathVariable Long id) {
         return this.datasourceService.findById(id);
     }
 }

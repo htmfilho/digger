@@ -2,3 +2,7 @@ body {
     padding-top: 75px;
     font-family: 'Abel', sans-serif;
 }
+
+.value {
+    font-weight: bold;
+}
