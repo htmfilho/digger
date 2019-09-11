@@ -1,4 +1,8 @@
+.classpath
+.project
 .idea/
 .mvn/
+.settings/
+.vscode/
 data/
 target/
