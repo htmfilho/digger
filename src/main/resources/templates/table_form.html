@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title>Digger - Table</title>
+    </head>
+
+    <body>
+        <section>
+            <h1>Table</h1>
+
+            <form method="POST" th:action="@{/datasources/{id}/tables(id=${datasource.id})}">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="database-table-name">Name</label>
+                            <select class="form-control" id="database-table-name" name="name">
+                                <option value="">Select...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <div id="type-label">-</div>
+                            <input type="hidden" name="type" id="type">
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group">
+                            <label for="friendlyName">Friendly Name</label>
+                            <input type="text" class="form-control" id="friendlyName" name="friendlyName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="documentation">Documentation</label>
+                    <textarea class="form-control" id="documentation" name="documentation" rows="5"></textarea>
+                </div>
+
+                <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">
+
+                <button type="submit" class="btn btn-primary" id="saveTable">Save</button>
+            </form>
+        </section>
+    </body>
+</html>

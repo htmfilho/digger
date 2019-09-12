@@ -9,4 +9,5 @@ public interface TableRepository extends Repository<Table, Long> {
     List<Table> findAll();
     Table findById(Long id);
     Table findByName(String name);
+    void save(Table datasource);
 }

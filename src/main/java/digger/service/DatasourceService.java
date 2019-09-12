@@ -45,7 +45,7 @@ public class DatasourceService {
         return (getConnection(datasource) != null);
     }
 
-    public Connection getConnection(Datasource datasource) throws SQLException {
+    Connection getConnection(Datasource datasource) throws SQLException {
         try {
             Class.forName(datasource.getDriver());
             log.info("Driver '{}' available.", datasource.getDriver());

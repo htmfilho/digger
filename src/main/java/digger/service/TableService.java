@@ -2,6 +2,7 @@ package digger.service;
 
 import digger.model.Datasource;
 import digger.model.Table;
+import digger.repository.TableRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class TableService {
 
     @Autowired
     private DatasourceService datasourceService;
+
+    @Autowired
+    private TableRepository tableRepository;
 
     public List<Table> listTables(Datasource datasource, String key) {
         List<Table> tables = new ArrayList<>();
@@ -49,5 +53,13 @@ public class TableService {
         } else {
             return tables.get(0);
         }
+    }
+
+    public void save(Table table) {
+        tableRepository.save(table);
+    }
+
+    public Table findById(Long id) {
+        return tableRepository.findById(id);
     }
 }

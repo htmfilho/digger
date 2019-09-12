@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
     <head>
        <title>Digger - Datasource</title>
     </head>
@@ -12,13 +12,13 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <div id="name" class="value" th:utext="${datasource.name}"></div>
+                        <div id="name" th:utext="${datasource.name}"></div>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <div id="description" class="value" th:utext="${datasource.description}"></div>
+                        <div id="description" th:utext="${datasource.description}"></div>
                     </div>
                 </div>
             </div>
@@ -27,19 +27,19 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="driver">Driver Class</label>
-                        <div id="driver" class="value" th:utext="${datasource.driver}"></div>
+                        <div id="driver" th:utext="${datasource.driver}"></div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="url">URL</label>
-                        <div id="url" class="value" th:utext="${datasource.url}"></div>
+                        <div id="url" th:utext="${datasource.url}"></div>
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <div id="username" class="value" th:utext="${datasource.username}"></div>
+                        <div id="username" th:utext="${datasource.username}"></div>
                     </div>
                 </div>
             </div>

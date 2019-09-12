@@ -3,6 +3,6 @@ body {
     font-family: 'Abel', sans-serif;
 }
 
-.value {
+label {
     font-weight: bold;
 }
