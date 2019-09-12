@@ -43,7 +43,9 @@
                     </div>
                 </div>
             </div>
+
             <hr>
+
             <div class="row">
                 <div class="col-10">
                     <h2>Tables</h2>
@@ -52,6 +54,18 @@
                     <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true">New</a>
                 </div>
             </div>
+
+            <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Friendly Name</th>
+                        <th scope="col">Type</th>
+                    </tr>
+                </thead>
+                <tbody id="datasource-tables"></tbody>
+            </table>
         </section>
     </body>
 </html>

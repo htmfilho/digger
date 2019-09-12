@@ -28,6 +28,12 @@ public class TableResource {
         return tableService.listTables(datasource, key);
     }
 
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/documented", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Table> getDocumentedTables(@PathVariable Long datasourceId) {
+        Datasource datasource = datasourceService.findById(datasourceId);
+        return tableService.findByDatasource(datasource);
+    }
+
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Table getTable(@PathVariable Long datasourceId, @PathVariable String tableName) {
         Datasource datasource = datasourceService.findById(datasourceId);

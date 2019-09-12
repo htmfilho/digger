@@ -11,6 +11,20 @@ $(function() {
     }
 });
 
+$(function() {
+    datasourceId = $("#datasource").val()
+    if ($("#datasource-tables").length != 0) {
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/documented",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#datasource-tables").append('<tr><td>'+ element.name +'</td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
+                });
+            }
+        });
+    }
+});
+
 var databaseTables = null;
 
 $(function() {

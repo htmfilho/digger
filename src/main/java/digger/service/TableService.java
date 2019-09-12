@@ -62,4 +62,8 @@ public class TableService {
     public Table findById(Long id) {
         return tableRepository.findById(id);
     }
+
+    public List<Table> findByDatasource(Datasource datasource) {
+        return tableRepository.findByDatasource(datasource);
+    }
 }
