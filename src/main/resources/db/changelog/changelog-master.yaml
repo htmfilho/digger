@@ -110,6 +110,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: friendly_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
                   name: type
                   type: varchar(20)
                   constraints:

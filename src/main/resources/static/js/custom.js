@@ -41,6 +41,7 @@ $(function() {
 });
 
 var databaseTables = null;
+var tableColumns = null;
 
 $(function() {
     datasourceId = $("#datasource").val();
@@ -57,6 +58,22 @@ $(function() {
     }
 });
 
+$(function() {
+    datasourceId = $("#datasource").val();
+    tableId = $("#table").val();
+    if ($("#table-column-name").length != 0) {
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId + "/columns",
+            success: function(result) {
+                tableColumns = result;
+                tableColumns.forEach(column => {
+                    $("#table-column-name").append('<option value="'+ column.name +'">'+ column.name +'</option>');
+                });
+            }
+        });
+    }
+});
+
 $("#database-table-name").change(function(event) {
     var elem = $(this);
     if(elem.val() === "") {
@@ -67,6 +84,31 @@ $("#database-table-name").change(function(event) {
             if(table.name === elem.val()) {
                 $("#type-label").html(table.type);
                 $("#type").val(table.type);
+            }
+        });
+    }
+});
+
+$("#table-column-name").change(function(event) {
+    var elem = $(this);
+    if(elem.val() === "") {
+        $("#type-label").html("-");
+        $("#type").val("");
+        $("#size").val("");
+        $("#nullable-label").html("-");
+        $("#nullable").val("");
+        $("#default-label").html("-");
+        $("#default").val("");
+    } else {
+        tableColumns.forEach(column => {
+            if(column.name === elem.val()) {
+                $("#type-label").html(column.type + " ("+ column.size +")");
+                $("#type").val(column.type);
+                $("#size").val(column.size);
+                $("#nullable-label").text(column.nullable);
+                $("#nullable").val(column.nullable);
+                $("#default-label").html(column.defaultValue);
+                $("#default").val(column.defaultValue);
             }
         });
     }
