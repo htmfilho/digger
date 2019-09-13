@@ -18,7 +18,7 @@ $(function() {
             url: "/api/datasources/"+ datasourceId +"/tables/documented",
             success: function(result) {
                 result.forEach(element => {
-                    $("#datasource-tables").append('<tr><td>'+ element.name +'</td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
+                    $("#datasource-tables").append('<tr><td><a href="/api/datasources/'+ datasourceId +'/tables/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
                 });
             }
         });
