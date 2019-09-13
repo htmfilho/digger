@@ -28,6 +28,7 @@ public class TableController {
     @PostMapping("/datasources/{id}/tables")
     public String saveTable(Model model, @PathVariable Long id, @ModelAttribute Table table) {
         Datasource datasource = datasourceService.findById(id);
+        table.setId(null);
         table.setDatasource(datasource);
         tableService.save(table);
         model.addAttribute("datasource", datasource);

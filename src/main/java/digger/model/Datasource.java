@@ -35,6 +35,10 @@ public class Datasource {
         this.available = true;
     }
 
+    public Datasource(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
