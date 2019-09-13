@@ -11,7 +11,7 @@ public class Table {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "datasource")
     private Datasource datasource;
 

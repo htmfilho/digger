@@ -12,13 +12,28 @@ $(function() {
 });
 
 $(function() {
-    datasourceId = $("#datasource").val()
+    datasourceId = $("#datasource").val();
     if ($("#datasource-tables").length != 0) {
         $.ajax({
             url: "/api/datasources/"+ datasourceId +"/tables/documented",
             success: function(result) {
                 result.forEach(element => {
-                    $("#datasource-tables").append('<tr><td><a href="/api/datasources/'+ datasourceId +'/tables/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
+                    $("#datasource-tables").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
+                });
+            }
+        });
+    }
+});
+
+$(function() {
+    datasourceId = $("#datasource").val();
+    tableName = $("#table").val();
+    if ($("#table-columns").length != 0) {
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableName +"/columns",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.name +'">'+ element.name +'</a></td><td>'+ element.type +'</td><td>'+ element.size +'</td><td>'+ element.nullable +'</td><td>'+ element.default +'</td></tr>');
                 });
             }
         });
@@ -28,7 +43,7 @@ $(function() {
 var databaseTables = null;
 
 $(function() {
-    datasourceId = $("#datasource").val()
+    datasourceId = $("#datasource").val();
     if ($("#database-table-name").length != 0) {
         $.ajax({
             url: "/api/datasources/"+ datasourceId +"/tables",

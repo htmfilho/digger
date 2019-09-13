@@ -5,7 +5,6 @@ import digger.model.Datasource;
 import digger.model.Table;
 import digger.service.ColumnService;
 import digger.service.DatasourceService;
-import digger.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +31,7 @@ public class ColumnResource {
     }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}/columns/{columnName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Column getTable(@PathVariable Long datasourceId, @PathVariable String tableName, @PathVariable String columnName) {
+    public Column getColumn(@PathVariable Long datasourceId, @PathVariable String tableName, @PathVariable String columnName) {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = new Table(tableName);
         Column column = new Column(columnName);
