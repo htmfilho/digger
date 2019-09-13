@@ -19,8 +19,8 @@ public class DatasourceResource {
         return this.datasourceService.findAll();
     }
 
-    @GetMapping(value = "/api/datasources/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Datasource getDatasource(@PathVariable Long id) {
-        return this.datasourceService.findById(id);
+    @GetMapping(value = "/api/datasources/{datasourceId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Datasource getDatasource(@PathVariable Long datasourceId) {
+        return this.datasourceService.findById(datasourceId);
     }
 }

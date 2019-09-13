@@ -24,9 +24,9 @@ public class DatasourceController {
         return "index";
     }
 
-    @GetMapping("/datasources/{id}")
-    public String openResource(Model model, @PathVariable Long id) {
-        model.addAttribute("datasource", datasourceService.findById(id));
+    @GetMapping("/datasources/{datasourceId}")
+    public String openResource(Model model, @PathVariable Long datasourceId) {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId));
         return "datasource";
     }
 }
