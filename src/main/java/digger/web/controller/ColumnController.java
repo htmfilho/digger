@@ -42,4 +42,12 @@ public class ColumnController {
         model.addAttribute("table", table);
         return "table";
     }
+
+    @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}")
+    public String openColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @PathVariable Long columnId) {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        model.addAttribute("table", tableService.findById(tableId));
+        model.addAttribute("column", columnService.findById(columnId));
+        return "column";
+    }
 }

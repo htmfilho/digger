@@ -9,19 +9,25 @@
             <h1>Table</h1>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="datasource-link">Datasource</label><br>
+                        <a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}" id="datasource-link"></a>
+                    </div>
+                </div>
+                <div class="col-3">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <div id="name" th:utext="${table.name}"></div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <label for="type">Type</label>
                         <div id="type" th:utext="${table.type}"></div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <div class="form-group">
                         <label for="friendly-name">Friendly Name</label>
                         <div id="friendly-name" th:utext="${table.friendlyName}"></div>

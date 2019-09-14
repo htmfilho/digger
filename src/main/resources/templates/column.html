@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title>Digger - Column</title>
+    </head>
+
+    <body>
+        <section>
+            <h1>Column</h1>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="table-link">Table</label><br>
+                        <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.name}" id="table-link"></a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <div id="name" th:utext="${column.name}"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="friendly-name">Friendly Name</label>
+                        <div id="friendly-name" th:utext="${column.friendlyName}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="type">Type</label><br>
+                        <span id="type" th:utext="${column.type}"></span> 
+                        (<span id="name" th:utext="${column.size}"></span>)
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="defaultValue">Default Value</label>
+                        <div id="defaultValue" th:utext="${column.defaultValue}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="documentation">Documentation</label>
+                <div id="documentation" th:utext="${table.documentation}"></div>
+            </div>
+        </section>
+    </body>
+</html>
