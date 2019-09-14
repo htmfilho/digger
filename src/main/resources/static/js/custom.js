@@ -27,13 +27,13 @@ $(function() {
 
 $(function() {
     datasourceId = $("#datasource").val();
-    tableName = $("#table").val();
+    tableId = $("#table").val();
     if ($("#table-columns").length != 0) {
         $.ajax({
-            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableName +"/columns",
+            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/documented",
             success: function(result) {
                 result.forEach(element => {
-                    $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.name +'">'+ element.name +'</a></td><td>'+ element.type +'</td><td>'+ element.size +'</td><td>'+ element.nullable +'</td><td>'+ element.default +'</td></tr>');
+                    $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>'+ element.defaultValue +'</td></tr>');
                 });
             }
         });

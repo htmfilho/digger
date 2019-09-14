@@ -10,7 +10,7 @@ public class Column {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "database_table")
     private Table table;
 

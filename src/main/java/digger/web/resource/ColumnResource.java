@@ -34,6 +34,12 @@ public class ColumnResource {
         return columnService.listColumns(datasource, table, key);
     }
 
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/documented", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Column> getDocumentedTables(@PathVariable Long datasourceId, @PathVariable Long tableId) {
+        Table table = tableService.findById(tableId);
+        return columnService.findByTable(table);
+    }
+
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}/columns/{columnName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Column getColumn(@PathVariable Long datasourceId, @PathVariable String tableName, @PathVariable String columnName) {
         Datasource datasource = datasourceService.findById(datasourceId);
