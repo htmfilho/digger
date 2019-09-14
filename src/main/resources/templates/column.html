@@ -11,7 +11,7 @@
                     <h1>Column</h1>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/datasources/{id}/tables/{tableId}/columns/new(id=${datasource.id}, tableId=${table.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true">Edit</a>
+                    <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true">Edit</a>
                 </div>
             </div>
 

@@ -22,6 +22,7 @@ public class TableController {
     public String newTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
+        model.addAttribute("table", new Table());
         return "table_form";
     }
 
@@ -39,5 +40,12 @@ public class TableController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         return "table";
+    }
+
+    @GetMapping("/datasources/{datasourceId}/tables/{tableId}/edit")
+    public String editTable(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        model.addAttribute("table", tableService.findById(tableId));
+        return "table_form";
     }
 }

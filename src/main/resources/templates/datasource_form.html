@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
     <head>
        <title>Digger - Datasource</title>
     </head>
@@ -9,36 +9,38 @@
             <h1>Datasource</h1>
 
             <form method="POST" action="/datasources">
+                <input type="hidden" name="id" th:value="${datasource.id}"/>
+
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name" th:value="${datasource.name}">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description">
+                    <input type="text" class="form-control" id="description" name="description" th:value="${datasource.description}">
                 </div>
                 <div class="form-group">
                     <label for="driver">Driver Class</label>
-                    <input type="text" class="form-control" id="driver" name="driver">
+                    <input type="text" class="form-control" id="driver" name="driver" th:value="${datasource.driver}">
                 </div>
 
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="url">URL</label>
-                            <input type="text" class="form-control" id="url" name="url">
+                            <input type="text" class="form-control" id="url" name="url" th:value="${datasource.url}">
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username">
+                            <input type="text" class="form-control" id="username" name="username" th:value="${datasource.username}">
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="text" class="form-control" id="password" name="password" th:value="${datasource.password}">
                         </div>
                     </div>
                 </div>

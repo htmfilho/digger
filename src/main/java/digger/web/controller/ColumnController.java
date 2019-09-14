@@ -25,10 +25,9 @@ public class ColumnController {
 
     @RequestMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
     public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        Table table = tableService.findById(tableId);
-        model.addAttribute("datasource", datasource);
-        model.addAttribute("table", table);
+        model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        model.addAttribute("table", tableService.findById(tableId));
+        model.addAttribute("column", new Column());
         return "column_form";
     }
 
@@ -49,5 +48,13 @@ public class ColumnController {
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", columnService.findById(columnId));
         return "column";
+    }
+
+    @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit")
+    public String editColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @PathVariable Long columnId) {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        model.addAttribute("table", tableService.findById(tableId));
+        model.addAttribute("column", columnService.findById(columnId));
+        return "column_form";
     }
 }

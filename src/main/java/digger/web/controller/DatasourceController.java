@@ -14,7 +14,8 @@ public class DatasourceController {
     private DatasourceService datasourceService;
 
     @RequestMapping("/datasources/new")
-    public String newDatasource() {
+    public String newDatasource(Model model) {
+        model.addAttribute("datasource", new Datasource());
         return "datasource_form";
     }
 
@@ -25,8 +26,14 @@ public class DatasourceController {
     }
 
     @GetMapping("/datasources/{datasourceId}")
-    public String openResource(Model model, @PathVariable Long datasourceId) {
+    public String openDatasource(Model model, @PathVariable Long datasourceId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         return "datasource";
+    }
+
+    @GetMapping("/datasources/{datasourceId}/edit")
+    public String editDatasource(Model model, @PathVariable Long datasourceId) {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        return "datasource_form";
     }
 }
