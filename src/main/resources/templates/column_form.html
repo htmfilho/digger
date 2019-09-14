@@ -9,16 +9,19 @@
             <h1>Column</h1>
 
             <form method="POST" th:action="@{/datasources/{id}/tables/{tableId}/columns(id=${datasource.id}, tableId=${table.id})}">
+                <input type="hidden" name="id" th:value="${column.id}"/>
+
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="database-table">Table</label>
-                            <div id="database-table" th:utext="@{{tableFriendlyName} ({tableName})(tableFriendlyName=${table.friendlyName}, tableName=${table.name})}"></div>
+                            <label for="database-table">Table</label><br>
+                            <span th:utext="${table.friendlyName}"></span> (<span th:utext="${table.name}"></span>)
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label for="table-column-name">Name</label>
+                            <input type="hidden" id="name-aux" th:value="${column.name}"/>
                             <select class="form-control" id="table-column-name" name="name">
                                 <option value="">Select...</option>
                             </select>
@@ -27,7 +30,7 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label for="friendlyName">Friendly Name</label>
-                            <input type="text" class="form-control" id="friendlyName" name="friendlyName">
+                            <input type="text" class="form-control" id="friendlyName" name="friendlyName" th:value="${column.friendlyName}">
                         </div>
                     </div>
                 </div>
@@ -58,7 +61,7 @@
 
                 <div class="form-group">
                     <label for="documentation">Documentation</label>
-                    <textarea class="form-control" id="documentation" name="documentation" rows="5"></textarea>
+                    <textarea class="form-control" id="documentation" name="documentation" rows="5" th:utext="${column.documentation}"></textarea>
                 </div>
 
                 <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">

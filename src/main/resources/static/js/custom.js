@@ -43,6 +43,44 @@ $(function() {
 var databaseTables = null;
 var tableColumns = null;
 
+function loadTableAttributes(tableName) {
+    if(tableName === "") {
+        $("#type-label").html("-");
+        $("#type").val("");
+    } else {
+        databaseTables.forEach(table => {
+            if(table.name === tableName) {
+                $("#type-label").html(table.type);
+                $("#type").val(table.type);
+            }
+        });
+    }
+}
+
+function loadColumnAttributes(columnName) {
+    if(columnName === "") {
+        $("#type-label").html("-");
+        $("#type").val("");
+        $("#size").val("");
+        $("#nullable-label").html("-");
+        $("#nullable").val("");
+        $("#default-label").html("-");
+        $("#default").val("");
+    } else {
+        tableColumns.forEach(column => {
+            if(column.name === columnName) {
+                $("#type-label").html(column.type + " ("+ column.size +")");
+                $("#type").val(column.type);
+                $("#size").val(column.size);
+                $("#nullable-label").text(column.nullable);
+                $("#nullable").val(column.nullable);
+                $("#default-label").html(column.defaultValue);
+                $("#default").val(column.defaultValue);
+            }
+        });
+    }
+}
+
 $(function() {
     if ($("#database-table-name").length != 0) {
         datasourceId = $("#datasource").val();
@@ -53,6 +91,9 @@ $(function() {
                 databaseTables.forEach(table => {
                     $("#database-table-name").append('<option value="'+ table.name +'">'+ table.name +'</option>');
                 });
+                nameAux = $("#name-aux").val();
+                $("#database-table-name").val(nameAux);
+                loadTableAttributes(nameAux);
             }
         });
     }
@@ -69,6 +110,9 @@ $(function() {
                 tableColumns.forEach(column => {
                     $("#table-column-name").append('<option value="'+ column.name +'">'+ column.name +'</option>');
                 });
+                nameAux = $("#name-aux").val();
+                $("#table-column-name").val(nameAux);
+                loadColumnAttributes(nameAux);
             }
         });
     }
@@ -76,42 +120,12 @@ $(function() {
 
 $("#database-table-name").change(function() {
     var elem = $(this);
-    if(elem.val() === "") {
-        $("#type-label").html("-");
-        $("#type").val("");
-    } else {
-        databaseTables.forEach(table => {
-            if(table.name === elem.val()) {
-                $("#type-label").html(table.type);
-                $("#type").val(table.type);
-            }
-        });
-    }
+    loadTableAttributes(elem.val());
 });
 
 $("#table-column-name").change(function() {
     var elem = $(this);
-    if(elem.val() === "") {
-        $("#type-label").html("-");
-        $("#type").val("");
-        $("#size").val("");
-        $("#nullable-label").html("-");
-        $("#nullable").val("");
-        $("#default-label").html("-");
-        $("#default").val("");
-    } else {
-        tableColumns.forEach(column => {
-            if(column.name === elem.val()) {
-                $("#type-label").html(column.type + " ("+ column.size +")");
-                $("#type").val(column.type);
-                $("#size").val(column.size);
-                $("#nullable-label").text(column.nullable);
-                $("#nullable").val(column.nullable);
-                $("#default-label").html(column.defaultValue);
-                $("#default").val(column.defaultValue);
-            }
-        });
-    }
+    loadColumnAttributes(elem.val());
 });
 
 $("#cancel").click(function() {
