@@ -12,23 +12,23 @@
                 <input type="hidden" name="id" th:value="${datasource.id}"/>
 
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" th:value="${datasource.name}">
+                    <label for="name">Name *</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${datasource.name}" required>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" name="description" th:value="${datasource.description}">
                 </div>
                 <div class="form-group">
-                    <label for="driver">Driver Class</label>
-                    <input type="text" class="form-control" id="driver" name="driver" th:value="${datasource.driver}">
+                    <label for="driver">Driver Class *</label>
+                    <input type="text" class="form-control" id="driver" name="driver" th:value="${datasource.driver}" required>
                 </div>
 
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="url">URL</label>
-                            <input type="text" class="form-control" id="url" name="url" th:value="${datasource.url}">
+                            <label for="url">URL *</label>
+                            <input type="text" class="form-control" id="url" name="url" th:value="${datasource.url}" required>
                         </div>
                     </div>
                     <div class="col-3">
