@@ -8,7 +8,7 @@
         <section>
             <h1>Table</h1>
 
-            <form method="POST" th:action="@{/datasources/{id}/tables(id=${datasource.id})}">
+            <form method="POST" th:action="@{/datasources/{datasourceId}/tables/{tableId}/columns(datasourceId=${datasource.id}, tableId=${table.id})}">
                 <div class="row">
                     <div class="col-5">
                         <div class="form-group">

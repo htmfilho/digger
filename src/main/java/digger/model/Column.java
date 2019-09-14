@@ -3,17 +3,22 @@ package digger.model;
 import javax.persistence.*;
 
 @Entity
+@javax.persistence.Table(name = "table_column")
 public class Column {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "database_table")
     private Table table;
 
     @javax.persistence.Column
     private String name;
+
+    @javax.persistence.Column(name = "friendly_name")
+    private String friendlyName;
 
     @javax.persistence.Column
     private String type;
@@ -28,7 +33,7 @@ public class Column {
     private String defaultValue;
 
     @javax.persistence.Column
-    private Integer position;
+    private String documentation;
 
     public Column() {}
 
@@ -44,12 +49,28 @@ public class Column {
         this.id = id;
     }
 
+    public Table getTable() {
+        return this.table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getFriendlyName() {
+        return this.friendlyName;
+    }
+
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
     }
 
     public String getType() {
@@ -84,11 +105,11 @@ public class Column {
         this.defaultValue = defaultValue;
     }
 
-    public Integer getPosition() {
-        return position;
+    public String getDocumentation() {
+        return this.documentation;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setDocumentation(String documentation) {
+        this.documentation = documentation;
     }
 }
