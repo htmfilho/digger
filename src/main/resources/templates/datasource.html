@@ -6,7 +6,14 @@
 
     <body>
         <section>
-            <h1>Datasource</h1>
+            <div class="row">
+                <div class="col-10">
+                    <h1>Datasource</h1>
+                </div>
+                <div class="col-2">
+                    <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true">Edit</a>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-4">

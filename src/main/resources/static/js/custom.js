@@ -113,3 +113,7 @@ $("#table-column-name").change(function(event) {
         });
     }
 });
+
+$("#cancel").click(function() {
+    window.history.back();
+});
