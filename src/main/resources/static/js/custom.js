@@ -12,8 +12,8 @@ $(function() {
 });
 
 $(function() {
-    datasourceId = $("#datasource").val();
     if ($("#datasource-tables").length != 0) {
+        datasourceId = $("#datasource").val();
         $.ajax({
             url: "/api/datasources/"+ datasourceId +"/tables/documented",
             success: function(result) {
@@ -26,9 +26,9 @@ $(function() {
 });
 
 $(function() {
-    datasourceId = $("#datasource").val();
-    tableId = $("#table").val();
     if ($("#table-columns").length != 0) {
+        datasourceId = $("#datasource").val();
+        tableId = $("#table").val();
         $.ajax({
             url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/documented",
             success: function(result) {
@@ -44,8 +44,8 @@ var databaseTables = null;
 var tableColumns = null;
 
 $(function() {
-    datasourceId = $("#datasource").val();
     if ($("#database-table-name").length != 0) {
+        datasourceId = $("#datasource").val();
         $.ajax({
             url: "/api/datasources/"+ datasourceId +"/tables",
             success: function(result) {
@@ -59,9 +59,9 @@ $(function() {
 });
 
 $(function() {
-    datasourceId = $("#datasource").val();
-    tableId = $("#table").val();
     if ($("#table-column-name").length != 0) {
+        datasourceId = $("#datasource").val();
+        tableId = $("#table").val();
         $.ajax({
             url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId + "/columns",
             success: function(result) {
@@ -74,7 +74,7 @@ $(function() {
     }
 });
 
-$("#database-table-name").change(function(event) {
+$("#database-table-name").change(function() {
     var elem = $(this);
     if(elem.val() === "") {
         $("#type-label").html("-");
@@ -89,7 +89,7 @@ $("#database-table-name").change(function(event) {
     }
 });
 
-$("#table-column-name").change(function(event) {
+$("#table-column-name").change(function() {
     var elem = $(this);
     if(elem.val() === "") {
         $("#type-label").html("-");
