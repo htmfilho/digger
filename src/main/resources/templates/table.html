@@ -42,9 +42,11 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="documentation">Documentation</label>
-                <div id="documentation" th:utext="${table.documentation}"></div>
+            <div class="card">
+                <div class="card-header"><b>Documentation</b></div>
+                <div class="card-body">
+                    <div id="documentation" class="card-text" th:utext="${table.documentation}"></div>
+                </div>
             </div>
 
             <hr>

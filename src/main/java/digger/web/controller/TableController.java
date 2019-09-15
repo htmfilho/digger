@@ -4,6 +4,8 @@ import digger.model.Datasource;
 import digger.model.Table;
 import digger.service.DatasourceService;
 import digger.service.TableService;
+import digger.web.utils.Markdown;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +39,16 @@ public class TableController {
 
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}")
     public String openTable(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("table", tableService.findById(tableId));
+        Datasource datasource = datasourceService.findById(datasourceId);
+        if(datasource == null) return "redirect:/";
+        model.addAttribute("datasource", datasource);
+
+        Table table = tableService.findById(tableId);
+        if(table == null) return "redirect:/datasources/{datasourceId}";
+        model.addAttribute("table", table);
+
+        table.setDocumentation(Markdown.toHtml(table.getDocumentation()));
+
         return "table";
     }
 

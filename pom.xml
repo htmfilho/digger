@@ -75,6 +75,13 @@
 			<artifactId>jquery</artifactId>
 			<version>3.4.1</version>
 		</dependency>
+
+		<!-- Other dependencies -->
+		<dependency>
+			<groupId>com.atlassian.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
+			<version>0.13.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

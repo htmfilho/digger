@@ -33,7 +33,6 @@ public class DatasourceService {
         } catch (SQLException se) {
             log.warn("Connection not available.");
         }
-        datasource.setAvailable(false);
         return datasource;
     }
 
@@ -46,6 +45,8 @@ public class DatasourceService {
     }
 
     Connection getConnection(Datasource datasource) throws SQLException {
+        if (datasource == null) return null;
+
         try {
             Class.forName(datasource.getDriver());
             log.info("Driver '{}' available.", datasource.getDriver());

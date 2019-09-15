@@ -37,8 +37,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="documentation">Documentation</label>
-                    <textarea class="form-control" id="documentation" name="documentation" rows="5" th:utext="${table.documentation}"></textarea>
+                    <label for="documentation">Documentation (Markdown)</label>
+                    <textarea class="form-control" id="documentation" name="documentation" rows="15" th:utext="${table.documentation}"></textarea>
                 </div>
 
                 <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">

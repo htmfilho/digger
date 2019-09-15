@@ -6,6 +6,8 @@ import digger.model.Table;
 import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
+import digger.web.utils.Markdown;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +56,9 @@ public class ColumnController {
 
         Column column = columnService.findById(columnId);
         if(column == null) return "redirect:/datasources/{datasourceId}/tables/{tableId}";
+        
+        column.setDocumentation(Markdown.toHtml(column.getDocumentation()));
+
         model.addAttribute("column", column);
 
         return "column";
