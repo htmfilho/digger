@@ -25,6 +25,9 @@ public class ColumnController {
     @Autowired
     private ColumnService columnService;
 
+    @Autowired
+    private Markdown markdown;
+
     @RequestMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
     public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
@@ -35,13 +38,15 @@ public class ColumnController {
 
     @PostMapping("/datasources/{datasourceId}/tables/{tableId}/columns")
     public String saveColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @ModelAttribute Column column) {
-        Datasource datasource = datasourceService.findById(datasourceId);
+        boolean newOne = column.getId() == null;
         Table table = tableService.findById(tableId);
         column.setTable(table);
         columnService.save(column);
-        model.addAttribute("datasource", datasource);
-        model.addAttribute("table", table);
-        return "table";
+
+        if (newOne)
+            return "redirect:/datasources/{datasourceId}/tables/{tableId}";
+        else
+            return "redirect:/datasources/{datasourceId}/tables/{tableId}/columns/" + column.getId();
     }
 
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}")
@@ -57,7 +62,7 @@ public class ColumnController {
         Column column = columnService.findById(columnId);
         if(column == null) return "redirect:/datasources/{datasourceId}/tables/{tableId}";
         
-        column.setDocumentation(Markdown.toHtml(column.getDocumentation()));
+        column.setDocumentation(markdown.toHtml(column.getDocumentation()));
 
         model.addAttribute("column", column);
 

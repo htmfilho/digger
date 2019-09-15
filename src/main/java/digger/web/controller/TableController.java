@@ -20,6 +20,9 @@ public class TableController {
     @Autowired
     private TableService tableService;
 
+    @Autowired
+    private Markdown markdown;
+
     @RequestMapping("/datasources/{datasourceId}/tables/new")
     public String newTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
@@ -33,8 +36,8 @@ public class TableController {
         Datasource datasource = datasourceService.findById(datasourceId);
         table.setDatasource(datasource);
         tableService.save(table);
-        model.addAttribute("datasource", datasource);
-        return "datasource";
+
+        return "redirect:/datasources/{datasourceId}/tables/" + table.getId();
     }
 
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}")
@@ -47,7 +50,7 @@ public class TableController {
         if(table == null) return "redirect:/datasources/{datasourceId}";
         model.addAttribute("table", table);
 
-        table.setDocumentation(Markdown.toHtml(table.getDocumentation()));
+        table.setDocumentation(markdown.toHtml(table.getDocumentation()));
 
         return "table";
     }
