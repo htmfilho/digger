@@ -35,6 +35,10 @@ public class Column {
     @javax.persistence.Column
     private String documentation;
 
+    @ManyToOne
+    @JoinColumn(name = "foreign_key")
+    private Column foreignKey;
+
     public Column() {}
 
     public Column(String name) {

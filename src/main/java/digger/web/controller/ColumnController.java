@@ -44,9 +44,18 @@ public class ColumnController {
 
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}")
     public String openColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @PathVariable Long columnId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("table", tableService.findById(tableId));
-        model.addAttribute("column", columnService.findById(columnId));
+        Datasource datasource = datasourceService.findById(datasourceId);
+        if(datasource == null) return "redirect:/";
+        model.addAttribute("datasource", datasource);
+        
+        Table table = tableService.findById(tableId);
+        if(table == null) return "redirect:/datasources/{datasourceId}";
+        model.addAttribute("table", table);
+
+        Column column = columnService.findById(columnId);
+        if(column == null) return "redirect:/datasources/{datasourceId}/tables/{tableId}";
+        model.addAttribute("column", column);
+
         return "column";
     }
 

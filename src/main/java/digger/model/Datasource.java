@@ -28,12 +28,7 @@ public class Datasource {
     @Column
     private String password;
 
-    @Transient
-    private Boolean available;
-
-    public Datasource() {
-        this.available = true;
-    }
+    public Datasource() {}
 
     public Datasource(Long id) {
         this.id = id;
@@ -93,13 +88,5 @@ public class Datasource {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
     }
 }
