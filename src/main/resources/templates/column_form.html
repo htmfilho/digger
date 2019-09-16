@@ -8,8 +8,8 @@
         <section>
             <h1>Column</h1>
 
-            <form method="POST" th:action="@{/datasources/{id}/tables/{tableId}/columns(id=${datasource.id}, tableId=${table.id})}">
-                <input type="hidden" name="id" th:value="${column.id}"/>
+            <form method="POST" th:action="@{/datasources/{datasourceId}/tables/{tableId}/columns(datasourceId=${datasource.id}, tableId=${table.id})}">
+                <input type="hidden" name="id" th:value="${column.id}" th:unless="${#lists.isEmpty(column)}"/>
 
                 <div class="row">
                     <div class="col-4">
@@ -72,7 +72,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="foreignKey">Foreign Column</label>
-                            <input type="hidden" id="foreign-column-aux" th:value="${column.foreignKey.id}"/>
+                            <input type="hidden" id="foreign-column-aux" th:value="${column.foreignKey.id}" th:unless="${#lists.isEmpty(column.foreignKey)}"/>
                             <select class="form-control" id="foreignKey" name="foreignKey">
                                 <option value="">Select...</option>
                             </select>
