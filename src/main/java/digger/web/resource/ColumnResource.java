@@ -47,4 +47,9 @@ public class ColumnResource {
         Column column = new Column(columnName);
         return columnService.getColumn(datasource, table, column);
     }
+
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/{columnid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Column> getForeignKeys(@PathVariable Long datasourceId, @PathVariable String tableId, @PathVariable String columnId) {
+        return columnService.findByForeignKey(new Column(columnId));
+    }
 }

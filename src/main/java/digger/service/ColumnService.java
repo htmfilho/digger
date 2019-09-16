@@ -74,4 +74,8 @@ public class ColumnService {
     public List<Column> findByTable(Table table) {
         return columnRepository.findByTable(table);
     }
+
+    public List<Column> findByForeignKey(Column foreignKey) {
+        return columnRepository.findByForeignKey(foreignKey);
+    }
 }

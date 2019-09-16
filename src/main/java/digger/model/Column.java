@@ -41,6 +41,10 @@ public class Column {
 
     public Column() {}
 
+    public Column(Long id) {
+        this.id = id;
+    }
+
     public Column(String name) {
         this.name = name;
     }
@@ -115,5 +119,17 @@ public class Column {
 
     public void setDocumentation(String documentation) {
         this.documentation = documentation;
+    }
+
+    public Column getForeignKey() {
+        return this.foreignKey;
+    }
+
+    public void setForeignKey(Column foreignKey) {
+        this.foreignKey = foreignKey;
+    }
+
+    public String toString() {
+        return this.name + " ("+ this.friendlyName +")";
     }
 }

@@ -80,4 +80,8 @@ public class Table {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String toString() {
+        return this.name + " ("+ this.friendlyName +")";
+    }
 }

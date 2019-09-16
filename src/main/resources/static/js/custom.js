@@ -40,6 +40,22 @@ $(function() {
     }
 });
 
+$(function() {
+    if ($("#column-references").length != 0) {
+        datasourceId = $("#datasource").val();
+        tableId = $("#table").val();
+        columnId = $("#column").val();
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/documented",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#column-references").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>'+ element.defaultValue +'</td></tr>');
+                });
+            }
+        });
+    }
+});
+
 var databaseTables = null;
 var tableColumns = null;
 
@@ -81,6 +97,21 @@ function loadColumnAttributes(columnName) {
     }
 }
 
+function loadForeignColumns(foreignTableId) {
+    datasourceId = $("#datasource").val();
+    $.ajax({
+        url: "/api/datasources/"+ datasourceId +"/tables/"+ foreignTableId +"/columns/documented",
+        success: function(result) {
+            $("#foreignKey").empty();
+            $("#foreignKey").append('<option value="">Select...</option>');
+            result.forEach(column => {
+                $("#foreignKey").append('<option value="'+ column.id +'">'+ column.name +'</option>');
+            });
+            $("#foreignKey").val($("#foreign-column-aux").val());
+        }
+    });
+}
+
 $(function() {
     if ($("#database-table-name").length != 0) {
         datasourceId = $("#datasource").val();
@@ -118,6 +149,23 @@ $(function() {
     }
 });
 
+$(function() {
+    if ($("#foreign-table").length != 0) {
+        datasourceId = $("#datasource").val();
+        foreignTableId = $("#foreign-table-aux").val();
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/documented",
+            success: function(result) {
+                result.forEach(table => {
+                    $("#foreign-table").append('<option value="'+ table.id +'">'+ table.name +'</option>');
+                });
+                $("#foreign-table").val(foreignTableId);
+                loadForeignColumns(foreignTableId);
+            }
+        });
+    }
+});
+
 $("#database-table-name").change(function() {
     var elem = $(this);
     loadTableAttributes(elem.val());
@@ -126,6 +174,12 @@ $("#database-table-name").change(function() {
 $("#table-column-name").change(function() {
     var elem = $(this);
     loadColumnAttributes(elem.val());
+});
+
+$("#foreign-table").change(function() {
+    var elem = $(this);
+    tableId = elem.val();
+    loadForeignColumns(tableId);
 });
 
 $("#cancel").click(function() {

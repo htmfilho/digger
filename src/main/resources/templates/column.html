@@ -52,12 +52,49 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="foreignTable">Foreign Table</label><br>
+                        <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}" 
+                           th:utext="${column.foreignKey.table}" id="foreign-table-link" 
+                           th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="foreignColumn">Foreign Column</label><br>
+                        <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}" 
+                           th:utext="${column.foreignKey}" id="foreign-column-link" 
+                           th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
+                    </div>
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header"><b>Documentation</b></div>
                 <div class="card-body">
                     <div id="documentation" class="card-text" th:utext="${column.documentation}"></div>
                 </div>
             </div>
+
+            <hr>
+
+            <h2>Referenced By</h2>
+
+            <input type="hidden" id="datasource" th:value="${datasource.id}">
+            <input type="hidden" id="table" th:value="${table.id}">
+            <input type="hidden" id="column" th:value="${column.id}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Friendly Name</th>
+                        <th scope="col">Nullable</th>
+                    </tr>
+                </thead>
+                <tbody id="column-references"></tbody>
+            </table>
         </section>
     </body>
 </html>

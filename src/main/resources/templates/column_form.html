@@ -59,6 +59,27 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="foreign-table">Foreign Table</label>
+                            <input type="hidden" id="foreign-table-aux" th:value="${column.foreignKey.table.id}" th:unless="${#lists.isEmpty(column.foreignKey)}"/>
+                            <select class="form-control" id="foreign-table">
+                                <option value="">Select...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="foreignKey">Foreign Column</label>
+                            <input type="hidden" id="foreign-column-aux" th:value="${column.foreignKey.id}"/>
+                            <select class="form-control" id="foreignKey" name="foreignKey">
+                                <option value="">Select...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="documentation">Documentation (Markdown)</label>
                     <textarea class="form-control" id="documentation" name="documentation" rows="15" th:utext="${column.documentation}"></textarea>
