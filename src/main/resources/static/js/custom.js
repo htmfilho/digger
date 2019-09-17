@@ -46,10 +46,10 @@ $(function() {
         tableId = $("#table").val();
         columnId = $("#column").val();
         $.ajax({
-            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/documented",
+            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/"+ columnId +"/foreignkeys",
             success: function(result) {
                 result.forEach(element => {
-                    $("#column-references").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>'+ element.defaultValue +'</td></tr>');
+                    $("#column-references").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ element.table.id +'">'+ element.table.name +'</a></td><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td></tr>');
                 });
             }
         });
