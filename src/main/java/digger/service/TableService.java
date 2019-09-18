@@ -64,6 +64,6 @@ public class TableService {
     }
 
     public List<Table> findByDatasource(Datasource datasource) {
-        return tableRepository.findByDatasource(datasource);
+        return tableRepository.findByDatasourceOrderByNameAsc(datasource);
     }
 }

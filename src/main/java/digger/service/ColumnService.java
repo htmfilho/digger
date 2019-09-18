@@ -72,7 +72,7 @@ public class ColumnService {
     }
 
     public List<Column> findByTable(Table table) {
-        return columnRepository.findByTable(table);
+        return columnRepository.findByTableOrderByNameAsc(table);
     }
 
     public List<Column> findByForeignKey(Column foreignKey) {

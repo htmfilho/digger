@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ColumnRepository extends Repository<Column, Long> {
     Column findById(Long id);
-    List<Column> findByTable(Table table);
+    List<Column> findByTableOrderByNameAsc(Table table);
     List<Column> findByForeignKey(Column foreignKey);
     void save(Column column);
 }
