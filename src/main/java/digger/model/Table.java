@@ -5,7 +5,7 @@ import javax.persistence.Column;
 
 @Entity
 @javax.persistence.Table(name = "database_table")
-public class Table {
+public class Table implements Comparable<Table> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -84,4 +84,9 @@ public class Table {
     public String toString() {
         return this.name + " ("+ this.friendlyName +")";
     }
+
+	@Override
+	public int compareTo(Table table) {
+        return this.name.compareTo(table.name);
+	}
 }

@@ -13,6 +13,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -38,8 +39,9 @@ public class TableService {
                 Table table = new Table();
                 table.setName(resultSet.getString(TABLE_NAME));
                 table.setType(resultSet.getString(TABLE_TYPE));
-                tables.add(table);
+                tables.add(table);                
             }
+            Collections.sort(tables);
         } catch (SQLException se) {
             log.warn("Connection not available.");
         }

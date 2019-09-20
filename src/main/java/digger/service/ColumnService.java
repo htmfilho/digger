@@ -15,6 +15,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -48,6 +49,7 @@ public class ColumnService {
                 column.setDefaultValue(resultSet.getString(COLUMN_DEFAULT));
                 columns.add(column);
             }
+            Collections.sort(columns);
         } catch (SQLException se) {
             log.warn("Error: {}", se.getMessage());
         }
