@@ -1,0 +1,8 @@
+<service>
+    <id>digger-service</id>
+    <name>Digger Service</name>
+    <description>Digger Windows Service</description>
+    <executable>java</executable>
+    <arguments>-jar "digger-0.2.0.jar"</arguments>
+    <logmode>rotate</logmode>
+</service>
