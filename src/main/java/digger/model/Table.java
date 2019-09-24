@@ -27,6 +27,9 @@ public class Table implements Comparable<Table> {
     @Column
     private String type;
 
+    @Column
+    private Integer totalColumns;
+
     public Table() {}
 
     public Table(String name) {
@@ -79,6 +82,14 @@ public class Table implements Comparable<Table> {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Integer getTotalColumns() {
+        return this.totalColumns;
+    }
+
+    public void setTotalColumns(Integer totalColumns) {
+        this.totalColumns = totalColumns;
     }
 
     public String toString() {

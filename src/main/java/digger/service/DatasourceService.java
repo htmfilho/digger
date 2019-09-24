@@ -40,6 +40,11 @@ public class DatasourceService {
         datasourceRepository.save(datasource);
     }
 
+    public void updateTotalTables(Datasource datasource, Integer totalTables) {
+        datasource.setTotalTables(totalTables);
+        save(datasource);
+    }
+
     private boolean testConnection(Datasource datasource) throws SQLException {
         return (getConnection(datasource) != null);
     }

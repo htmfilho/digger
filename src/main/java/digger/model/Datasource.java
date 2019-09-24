@@ -28,6 +28,9 @@ public class Datasource {
     @Column
     private String password;
 
+    @Column
+    private Integer totalTables;
+
     public Datasource() {}
 
     public Datasource(Long id) {
@@ -88,5 +91,13 @@ public class Datasource {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getTotalTables() {
+        return this.totalTables;
+    }
+
+    public void setTotalTables(Integer totalTables) {
+        this.totalTables = totalTables;
     }
 }

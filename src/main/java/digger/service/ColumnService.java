@@ -33,6 +33,9 @@ public class ColumnService {
     private DatasourceService datasourceService;
 
     @Autowired
+    private TableService tableService;
+
+    @Autowired
     private ColumnRepository columnRepository;
 
     public List<Column> listColumns(Datasource datasource, Table table, String key) {
@@ -50,6 +53,7 @@ public class ColumnService {
                 columns.add(column);
             }
             Collections.sort(columns);
+            tableService.updateTotalColumns(table, columns.size());
         } catch (SQLException se) {
             log.warn("Error: {}", se.getMessage());
         }

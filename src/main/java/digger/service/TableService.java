@@ -42,6 +42,7 @@ public class TableService {
                 tables.add(table);                
             }
             Collections.sort(tables);
+            datasourceService.updateTotalTables(datasource, tables.size());
         } catch (SQLException se) {
             log.warn("Connection not available.");
         }
@@ -61,11 +62,21 @@ public class TableService {
         tableRepository.save(table);
     }
 
+    public void updateTotalColumns(Table table, Integer totalColumns) {
+        table.setTotalColumns(totalColumns);
+        save(table);
+    }
+
     public Table findById(Long id) {
         return tableRepository.findById(id);
     }
 
     public List<Table> findByDatasource(Datasource datasource) {
         return tableRepository.findByDatasourceOrderByNameAsc(datasource);
+    }
+
+    public Integer countDocumentedTables(Datasource datasource) {
+        List<Table> documentedTables = findByDatasource(datasource);
+        return documentedTables.size();
     }
 }

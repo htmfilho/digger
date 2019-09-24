@@ -2,6 +2,8 @@ package digger.web.controller;
 
 import digger.model.Datasource;
 import digger.service.DatasourceService;
+import digger.service.TableService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,9 @@ public class DatasourceController {
 
     @Autowired
     private DatasourceService datasourceService;
+
+    @Autowired
+    private TableService tableService;
 
     @RequestMapping("/datasources/new")
     public String newDatasource(Model model) {
@@ -27,7 +32,9 @@ public class DatasourceController {
 
     @GetMapping("/datasources/{datasourceId}")
     public String openDatasource(Model model, @PathVariable Long datasourceId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        Datasource datasource = datasourceService.findById(datasourceId);
+        model.addAttribute("datasource", datasource);
+        model.addAttribute("progress", (tableService.countDocumentedTables(datasource) / datasource.getTotalTables()) * 100);
         return "datasource";
     }
 

@@ -156,3 +156,23 @@ databaseChangeLog:
             constraintName: fk_column_foreign_key
             referencedColumnNames: id
             referencedTableName: table_column
+  - changeSet:
+      id: 4
+      author: htmfilho
+      changes:
+        - addColumn:
+            tableName: datasource
+            columns:
+              - column:
+                  name: total_tables
+                  type: int
+                  constraints:
+                    nullable: true
+        - addColumn:
+            tableName: database_table
+            columns:
+              - column:
+                  name: total_columns
+                  type: int
+                  constraints:
+                    nullable: true
