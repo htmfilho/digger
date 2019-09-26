@@ -34,7 +34,11 @@ public class DatasourceController {
     public String openDatasource(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
-        model.addAttribute("progress", (tableService.countDocumentedTables(datasource) / datasource.getTotalTables()) * 100);
+        if(datasource.getTotalTables() != null && datasource.getTotalTables() > 0) {
+            model.addAttribute("progress", Math.round(tableService.countDocumentedTables(datasource) / (datasource.getTotalTables() * 1.0) * 100));
+        } else {
+            model.addAttribute("progress", 0);
+        }
         return "datasource";
     }
 
