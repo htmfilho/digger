@@ -84,4 +84,16 @@ public class ColumnService {
     public List<Column> findByForeignKey(Column foreignKey) {
         return columnRepository.findByForeignKey(foreignKey);
     }
+
+    public Integer countDocumentedColumns(Table table) {
+        List<Column> documentedColumns = findByTable(table);
+        return documentedColumns.size();
+    }
+
+    public Integer calculateProgress(Table table) {
+        if(table.getTotalColumns() != null && table.getTotalColumns() > 0)
+            return Math.round(countDocumentedColumns(table) / (table.getTotalColumns() * 1.0f) * 100);
+        else
+            return 0;
+    }
 }

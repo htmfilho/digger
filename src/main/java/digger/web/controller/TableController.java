@@ -2,6 +2,7 @@ package digger.web.controller;
 
 import digger.model.Datasource;
 import digger.model.Table;
+import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 import digger.web.utils.Markdown;
@@ -19,6 +20,9 @@ public class TableController {
 
     @Autowired
     private TableService tableService;
+
+    @Autowired
+    private ColumnService columnService;
 
     @Autowired
     private Markdown markdown;
@@ -49,6 +53,8 @@ public class TableController {
         Table table = tableService.findById(tableId);
         if(table == null) return "redirect:/datasources/{datasourceId}";
         model.addAttribute("table", table);
+
+        model.addAttribute("progress", columnService.calculateProgress(table));
 
         table.setDocumentation(markdown.toHtml(table.getDocumentation()));
 

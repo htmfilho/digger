@@ -79,4 +79,11 @@ public class TableService {
         List<Table> documentedTables = findByDatasource(datasource);
         return documentedTables.size();
     }
+
+    public Integer calculateProgress(Datasource datasource) {
+        if(datasource.getTotalTables() != null && datasource.getTotalTables() > 0)
+            return Math.round(countDocumentedTables(datasource) / (datasource.getTotalTables() * 1.0f) * 100);
+        else
+            return 0;
+    }
 }
