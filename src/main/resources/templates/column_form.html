@@ -6,7 +6,7 @@
 
     <body>
         <section>
-            <h1>Column</h1>
+            <h1><i class="fas fa-columns"></i> Column</h1>
 
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables/{tableId}/columns(datasourceId=${datasource.id}, tableId=${table.id})}">
                 <input type="hidden" name="id" th:value="${column.id}" th:unless="${#lists.isEmpty(column)}"/>
@@ -88,8 +88,8 @@
                 <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">
                 <input type="hidden" name="table" id="table" th:value="${table.id}">
 
-                <button type="submit" class="btn btn-primary" id="saveTable">Save</button>
-                <button type="button" class="btn btn-secondary" id="cancel">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveTable"><i class="fas fa-save"></i> Save</button>
+                <button type="button" class="btn btn-secondary" id="cancel"><i class="far fa-window-close"></i> Cancel</button>
             </form>
         </section>
     </body>

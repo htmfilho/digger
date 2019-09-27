@@ -33,7 +33,7 @@ $(function() {
             url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/documented",
             success: function(result) {
                 result.forEach(element => {
-                    $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>'+ element.defaultValue +'</td></tr>');
+                    $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td></tr>');
                 });
             }
         });

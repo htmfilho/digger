@@ -8,7 +8,7 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}" id="table-link"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${column.friendlyName}"></li>
@@ -17,10 +17,10 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h1>Column</h1>
+                    <h1><i class="fas fa-columns"></i> Column</h1>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true">Edit</a>
+                    <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
                 </div>
             </div>
 
@@ -65,6 +65,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="foreignTable">Foreign Table</label><br>
+                        <i class="fas fa-table"></i>
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}" 
                            th:utext="${column.foreignKey.table}" id="foreign-table-link" 
                            th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
@@ -73,6 +74,7 @@
                 <div class="col-8">
                     <div class="form-group">
                         <label for="foreignColumn">Foreign Column</label><br>
+                        <i class="fas fa-key"></i> 
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}" 
                            th:utext="${column.foreignKey}" id="foreign-column-link" 
                            th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
@@ -89,7 +91,7 @@
 
             <hr>
 
-            <h2>Referenced By</h2>
+            <h2><i class="fas fa-link"></i> Referenced By</h2>
 
             <input type="hidden" id="datasource" th:value="${datasource.id}">
             <input type="hidden" id="table" th:value="${table.id}">
