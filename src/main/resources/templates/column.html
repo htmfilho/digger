@@ -6,6 +6,15 @@
 
     <body>
         <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}" id="table-link"></a></li>
+                    <li class="breadcrumb-item active" aria-current="page" th:utext="${column.friendlyName}"></li>
+                </ol>
+            </nav>
+
             <div class="row">
                 <div class="col-10">
                     <h1>Column</h1>
@@ -31,7 +40,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="table-link">Table</label><br>
-                        <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.name}" id="table-link"></a>
+                        <div id="table-link" th:text="${table.friendlyName}"></div>
                     </div>
                 </div>
             </div>
