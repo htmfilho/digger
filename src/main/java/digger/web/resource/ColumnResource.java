@@ -28,10 +28,11 @@ public class ColumnResource {
     private ColumnService columnService;
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Column> getColumns(@PathVariable Long datasourceId, @PathVariable Long tableId, @RequestParam(value = "key", defaultValue = "") String key) {
+    public List<Column> getColumns(@PathVariable Long datasourceId, @PathVariable Long tableId, 
+                                   @RequestParam(value = "key", defaultValue = "") String key, @RequestParam(value = "except", defaultValue = "") Long columnId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = tableService.findById(tableId);
-        return columnService.listColumns(datasource, table, key);
+        return columnService.listColumns(datasource, table, key, new Column(columnId));
     }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/documented", produces = MediaType.APPLICATION_JSON_VALUE)

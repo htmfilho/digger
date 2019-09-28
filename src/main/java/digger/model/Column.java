@@ -135,6 +135,18 @@ public class Column implements Comparable<Column> {
 
     @Override
     public int compareTo(Column column) {
-        return this.name.compareTo(column.getName());
+        if(this.name != null)
+            return this.name.compareTo(column.getName());
+        else
+            return -1;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        Column column = (Column) object;
+        if(this.name != null)
+            return this.name.equals(column.getName());
+        else
+            return this.id == column.getId();
     }
 }

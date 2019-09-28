@@ -134,8 +134,9 @@ $(function() {
     if ($("#table-column-name").length != 0) {
         datasourceId = $("#datasource").val();
         tableId = $("#table").val();
+        columnId = $("#id").val();
         $.ajax({
-            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId + "/columns",
+            url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId + "/columns?except=" + columnId,
             success: function(result) {
                 tableColumns = result;
                 tableColumns.forEach(column => {

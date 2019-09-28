@@ -9,7 +9,7 @@
             <h1><i class="fas fa-columns"></i> Column</h1>
 
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables/{tableId}/columns(datasourceId=${datasource.id}, tableId=${table.id})}">
-                <input type="hidden" name="id" th:value="${column.id}" th:unless="${#lists.isEmpty(column)}"/>
+                <input type="hidden" id="id" name="id" th:value="${column.id}" th:unless="${#lists.isEmpty(column)}"/>
 
                 <div class="row">
                     <div class="col-4">

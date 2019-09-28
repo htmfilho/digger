@@ -38,7 +38,7 @@ public class ColumnService {
     @Autowired
     private ColumnRepository columnRepository;
 
-    public List<Column> listColumns(Datasource datasource, Table table, String key) {
+    public List<Column> listColumns(Datasource datasource, Table table, String key, Column except) {
         List<Column> columns = new ArrayList<>();
         try (Connection connection = datasourceService.getConnection(datasource)) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -57,11 +57,20 @@ public class ColumnService {
         } catch (SQLException se) {
             log.warn("Error: {}", se.getMessage());
         }
+        return excludeDocumentedColumns(table, columns, except);
+    }
+
+    public List<Column> excludeDocumentedColumns(Table table, List<Column> columns, Column except) {
+        List<Column> documentedColumns = findByTable(table);
+        if (except != null) {
+            documentedColumns.remove(except);
+        }
+        columns.removeAll(documentedColumns);
         return columns;
     }
 
     public Column getColumn(Datasource datasource, Table table, Column column) {
-        List<Column> columns = listColumns(datasource, table, column.getName());
+        List<Column> columns = listColumns(datasource, table, column.getName(), null);
         if (columns.isEmpty()) {
             return column;
         } else {
