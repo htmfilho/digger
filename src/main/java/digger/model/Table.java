@@ -32,6 +32,10 @@ public class Table implements Comparable<Table> {
 
     public Table() {}
 
+    public Table(Long id) {
+        this.id = id;
+    }
+
     public Table(String name) {
         this.name = name;
     }
@@ -98,6 +102,18 @@ public class Table implements Comparable<Table> {
 
 	@Override
 	public int compareTo(Table table) {
-        return this.name.compareTo(table.name);
-	}
+        if(this.name != null)
+            return this.name.compareTo(table.name);
+        else
+            return -1;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        Table table = (Table) object;
+        if(this.name != null)
+            return this.name.equals(table.getName());
+        else
+            return this.id == table.getId();
+    }
 }

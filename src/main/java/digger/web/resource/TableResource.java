@@ -23,9 +23,11 @@ public class TableResource {
     private TableService tableService;
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Table> getTables(@PathVariable Long datasourceId, @RequestParam(value = "key", defaultValue = "") String key) {
+    public List<Table> getTables(@PathVariable Long datasourceId, 
+                                 @RequestParam(value = "key", defaultValue = "") String key,
+                                 @RequestParam(value = "except", defaultValue = "") Long tableId) {
         Datasource datasource = datasourceService.findById(datasourceId);
-        return tableService.listTables(datasource, key);
+        return tableService.listTables(datasource, key, new Table(tableId));
     }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/documented", produces = MediaType.APPLICATION_JSON_VALUE)

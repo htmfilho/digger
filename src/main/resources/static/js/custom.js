@@ -115,8 +115,9 @@ function loadForeignColumns(foreignTableId) {
 $(function() {
     if ($("#database-table-name").length != 0) {
         datasourceId = $("#datasource").val();
+        tableId = $("#id").val();
         $.ajax({
-            url: "/api/datasources/"+ datasourceId +"/tables",
+            url: "/api/datasources/"+ datasourceId +"/tables?except=" + tableId,
             success: function(result) {
                 databaseTables = result;
                 databaseTables.forEach(table => {

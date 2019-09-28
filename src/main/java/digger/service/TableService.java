@@ -30,7 +30,7 @@ public class TableService {
     @Autowired
     private TableRepository tableRepository;
 
-    public List<Table> listTables(Datasource datasource, String key) {
+    public List<Table> listTables(Datasource datasource, String key, Table except) {
         List<Table> tables = new ArrayList<>();
         try (Connection connection = datasourceService.getConnection(datasource)) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -46,11 +46,20 @@ public class TableService {
         } catch (SQLException se) {
             log.warn("Connection not available.");
         }
+        return excludeDocumentedTables(datasource, tables, except);
+    }
+
+    public List<Table> excludeDocumentedTables(Datasource datasource, List<Table> tables, Table except) {
+        List<Table> documentedTables = findByDatasource(datasource);
+        if (except != null) {
+            documentedTables.remove(except);
+        }
+        tables.removeAll(documentedTables);
         return tables;
     }
 
     public Table getTable(Datasource datasource, Table table) {
-        List<Table> tables = listTables(datasource, table.getName());
+        List<Table> tables = listTables(datasource, table.getName(), null);
         if (tables.isEmpty()) {
             return table;
         } else {
