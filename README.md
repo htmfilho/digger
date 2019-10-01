@@ -4,11 +4,16 @@ Use Digger to document your relational database because applications go but the 
 
 ![Screenshot](digger-screenshot.png)
 
-## Running the Application
+## Running Digger
 
 1. Download the latest release from the [release page][releases].
 2. Save the digger-<version>.jar in the folder you want to install it.
 3. Run it with the command: `$ java -jar digger-<version>.jar`
+4. Open the application by visiting the address https://localhost:8080
+ 
+## Using Digger
+
+
 
 ## Contributing to the Project
 
