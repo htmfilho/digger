@@ -28,6 +28,9 @@ public class TableService {
     private DatasourceService datasourceService;
 
     @Autowired
+    private IgnoredTableService ignoredTableService;
+
+    @Autowired
     private TableRepository tableRepository;
 
     public List<Table> listTables(Datasource datasource, String key, Table except) {
@@ -46,7 +49,9 @@ public class TableService {
         } catch (SQLException se) {
             log.warn("Connection not available.");
         }
-        return excludeDocumentedTables(datasource, tables, except);
+        tables = excludeDocumentedTables(datasource, tables, except);
+        tables = ignoredTableService.excludeIgnoredTables(datasource, tables);
+        return tables;
     }
 
     public List<Table> excludeDocumentedTables(Datasource datasource, List<Table> tables, Table except) {
