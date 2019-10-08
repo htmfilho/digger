@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hildeberto</groupId>
 	<artifactId>digger</artifactId>
-	<version>0.3.0</version>
+	<version>0.4.0</version>
 	<name>Digger</name>
 	<description>Given a datasource, allows the user to navigate in the data schema.</description>
 
