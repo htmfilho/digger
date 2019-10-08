@@ -34,7 +34,7 @@ public class TableService {
         List<Table> tables = new ArrayList<>();
         try (Connection connection = datasourceService.getConnection(datasource)) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(connection.getCatalog(), null, key + "%", null);
+            ResultSet resultSet = databaseMetaData.getTables(connection.getCatalog(), null, key == null ? key : key + "%", null);
             while (resultSet.next()) {
                 Table table = new Table();
                 table.setName(resultSet.getString(TABLE_NAME));

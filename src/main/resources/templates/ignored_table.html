@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title>Digger - Ignored Table</title>
+    </head>
+
+    <body>
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
+                    <li class="breadcrumb-item active" aria-current="page" th:utext="${ignoredTable.name}"></li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-10">
+                    <h1><i class="fas fa-table"></i> Ignored Table</h1>
+                </div>
+                <div class="col-2">
+                    <a th:href="@{/datasources/{datasourceId}/tables/ignored/{ignoredTableId}/edit(datasourceId=${datasource.id}, ignoredTableId=${ignoredTable.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <div id="name" th:utext="${ignoredTable.name}"></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="datasource">Datasource</label><br>
+                        <div id="datasource" th:utext="${datasource.name}"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

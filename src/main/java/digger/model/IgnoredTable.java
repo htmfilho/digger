@@ -58,6 +58,10 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
         this.name = name;
     }
 
+    public digger.model.Table toTable() {
+        return new digger.model.Table(this.name);
+    }
+
     public String toString() {
         return this.name;
     }

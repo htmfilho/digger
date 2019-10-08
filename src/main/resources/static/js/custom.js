@@ -26,6 +26,20 @@ $(function() {
 });
 
 $(function() {
+    if ($("#datasource-ignored-tables").length != 0) {
+        datasourceId = $("#datasource").val();
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/ignored",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#datasource-ignored-tables").append('<tr id="delete_'+ element.id +'"><td>'+ element.name +'</td><td><button type="button" class="btn btn-warning float-right" onclick="deleteIgnoredTable('+ element.id +')"><i class="far fa-trash-alt"></i></button></td></tr>');
+                });
+            }
+        });
+    }
+});
+
+$(function() {
     if ($("#table-columns").length != 0) {
         datasourceId = $("#datasource").val();
         tableId = $("#table").val();
@@ -132,6 +146,20 @@ $(function() {
 });
 
 $(function() {
+    if ($("#database-ignored-table-name").length != 0) {
+        datasourceId = $("#datasource").val();
+        $.ajax({
+            url: "/api/datasources/"+ datasourceId +"/tables/ignorable",
+            success: function(result) {
+                result.forEach(table => {
+                    $("#database-ignored-table-name").append('<option value="'+ table.name +'">'+ table.name +'</option>');
+                });
+            }
+        });
+    }
+});
+
+$(function() {
     if ($("#table-column-name").length != 0) {
         datasourceId = $("#datasource").val();
         tableId = $("#table").val();
@@ -187,3 +215,16 @@ $("#foreign-table").change(function() {
 $("#cancel").click(function() {
     window.history.back();
 });
+
+function deleteIgnoredTable(id) {
+    if (confirm("Are you sure you want to delete it?")) {
+        datasourceId = $("#datasource").val();
+        $.ajax({
+            url: '/api/datasources/'+ datasourceId +'/tables/ignored/'+ id,
+            type: 'DELETE',
+            success: function(result) {
+                $("#delete_"+ id).remove();
+            }
+        });
+    }
+}

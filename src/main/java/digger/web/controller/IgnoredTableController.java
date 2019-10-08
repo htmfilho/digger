@@ -23,7 +23,7 @@ public class IgnoredTableController {
     public String newIgnoredTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
-        model.addAttribute("table", new IgnoredTable());
+        model.addAttribute("ignoredTable", new IgnoredTable());
         return "ignored_table_form";
     }
 
@@ -33,7 +33,7 @@ public class IgnoredTableController {
         ignoredTable.setDatasource(datasource);
         ignoredTableService.save(ignoredTable);
 
-        return "redirect:/datasources/{datasourceId}/tables/ignored/" + ignoredTable.getId();
+        return "redirect:/datasources/{datasourceId}";
     }
 
     @GetMapping("/datasources/{datasourceId}/tables/ignored/{ignoredTableId}")
