@@ -27,31 +27,41 @@ public class ColumnResource {
     @Autowired
     private ColumnService columnService;
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns", 
+                produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Column> getColumns(@PathVariable Long datasourceId, @PathVariable Long tableId, 
                                    @RequestParam(value = "key", defaultValue = "") String key, 
-                                   @RequestParam(value = "except", defaultValue = "") Long columnId) {
+                                   @RequestParam(value = "except", defaultValue = "") Long except) {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = tableService.findById(tableId);
-        return columnService.listColumns(datasource, table, key, new Column(columnId));
+        Column exceptColumn = columnService.findById(except);
+        return columnService.listColumns(datasource, table, key, exceptColumn);
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/documented", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Column> getDocumentedTables(@PathVariable Long datasourceId, @PathVariable Long tableId) {
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/documented", 
+                produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Column> getDocumentedTables(@PathVariable Long datasourceId, 
+                                            @PathVariable Long tableId) {
         Table table = tableService.findById(tableId);
         return columnService.findByTable(table);
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}/columns/{columnName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Column getColumn(@PathVariable Long datasourceId, @PathVariable String tableName, @PathVariable String columnName) {
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}/columns/{columnName}", 
+                produces = MediaType.APPLICATION_JSON_VALUE)
+    public Column getColumn(@PathVariable Long datasourceId, 
+                            @PathVariable String tableName, 
+                            @PathVariable String columnName) {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = new Table(tableName);
         Column column = new Column(columnName);
         return columnService.getColumn(datasource, table, column);
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/foreignkeys", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Column> getForeignKeys(@PathVariable Long datasourceId, @PathVariable Long tableId, @PathVariable Long columnId) {
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/foreignkeys", 
+                produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Column> getForeignKeys(@PathVariable Long datasourceId, 
+                                       @PathVariable Long tableId, 
+                                       @PathVariable Long columnId) {
         return columnService.findByForeignKey(new Column(columnId));
     }
 }

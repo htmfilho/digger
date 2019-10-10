@@ -63,6 +63,7 @@ public class ColumnService {
 
     public List<Column> excludeDocumentedColumns(Table table, List<Column> columns, Column except) {
         List<Column> documentedColumns = findByTable(table);
+        // Remove except column from documentedColumns so it doesn't get removed from the list of undocumented columns.
         if (except != null) {
             documentedColumns.remove(except);
         }
