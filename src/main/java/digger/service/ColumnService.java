@@ -52,6 +52,7 @@ public class ColumnService {
                 column.setDefaultValue(resultSet.getString(COLUMN_DEFAULT));
                 columns.add(column);
             }
+            resultSet.close();
             Collections.sort(columns);
             tableService.updateTotalColumns(table, columns.size());
         } catch (SQLException se) {

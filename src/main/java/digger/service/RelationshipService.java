@@ -51,6 +51,7 @@ public class RelationshipService {
                 relationship.setName(resultSet.getString(RELATIONSHIP_NAME));
                 relationships.add(relationship);
             }
+            resultSet.close();
         } catch (SQLException se) {
             log.warn("Error: {}", se.getMessage());
         }

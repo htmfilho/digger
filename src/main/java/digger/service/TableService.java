@@ -44,6 +44,7 @@ public class TableService {
                 table.setType(resultSet.getString(TABLE_TYPE));
                 tables.add(table);                
             }
+            resultSet.close();
             Collections.sort(tables);
             datasourceService.updateTotalTables(datasource, tables.size());
         } catch (SQLException se) {
