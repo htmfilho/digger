@@ -85,7 +85,10 @@ public class ColumnService {
     }
 
     public Column findById(Long id) {
-        return columnRepository.findById(id);
+        if(id != null)
+            return columnRepository.findById(id);
+        else
+            return null;
     }
 
     public List<Column> findByTable(Table table) {

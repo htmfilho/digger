@@ -38,6 +38,12 @@ public class TableController {
     @PostMapping("/datasources/{datasourceId}/tables")
     public String saveTable(Model model, @PathVariable Long datasourceId, @ModelAttribute Table table) {
         Datasource datasource = datasourceService.findById(datasourceId);
+
+        if(table.getId() != null) {
+            Table existingTable = tableService.findById(table.getId());
+            table.setTotalColumns(existingTable.getTotalColumns());
+        }
+
         table.setDatasource(datasource);
         tableService.save(table);
 

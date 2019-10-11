@@ -26,7 +26,12 @@ public class DatasourceController {
 
     @PostMapping("/datasources")
     public String saveDatasource(@ModelAttribute Datasource datasource) {
+        if(datasource.getId() != null) {
+            Datasource existingDatasource = datasourceService.findById(datasource.getId());
+            datasource.setTotalTables(existingDatasource.getTotalTables());
+        }
         datasourceService.save(datasource);
+
         return "index";
     }
 
