@@ -28,6 +28,10 @@ public class IgnoredTableService {
         return ignoredTableRepository.findByDatasourceOrderByNameAsc(datasource);
     }
 
+    public int getTotalIgnoredTable(Datasource datasource) {
+        return findByDatasource(datasource).size();
+    }
+
     public List<Table> excludeIgnoredTables(Datasource datasource, List<Table> tables) {
         List<IgnoredTable> existingIgnoredTables = findByDatasource(datasource);
         tables.removeAll(toTableList(existingIgnoredTables));

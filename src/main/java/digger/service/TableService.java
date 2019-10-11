@@ -96,8 +96,10 @@ public class TableService {
     }
 
     public Integer calculateProgress(Datasource datasource) {
-        if(datasource.getTotalTables() != null && datasource.getTotalTables() > 0)
-            return Math.round(countDocumentedTables(datasource) / (datasource.getTotalTables() * 1.0f) * 100);
+        if(datasource.getTotalTables() != null && datasource.getTotalTables() > 0) {
+            int totalIgnoredTables = ignoredTableService.getTotalIgnoredTable(datasource);
+            return Math.round(countDocumentedTables(datasource) / ((datasource.getTotalTables() - totalIgnoredTables) * 1.0f) * 100);
+        } 
         else
             return 0;
     }
