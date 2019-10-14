@@ -211,6 +211,10 @@ $(function() {
     }
 });
 
+$(function() {
+    $("table").addClass("table");
+});
+
 $("#database-table-name").change(function() {
     var elem = $(this);
     loadTableAttributes(elem.val());

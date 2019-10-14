@@ -6,7 +6,7 @@ import digger.model.Table;
 import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
-import digger.web.utils.Markdown;
+import digger.web.utils.Asciidoc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class ColumnController {
     private ColumnService columnService;
 
     @Autowired
-    private Markdown markdown;
+    private Asciidoc asciidoc;
 
     @RequestMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
     public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
@@ -62,7 +62,7 @@ public class ColumnController {
         Column column = columnService.findById(columnId);
         if(column == null) return "redirect:/datasources/{datasourceId}/tables/{tableId}";
         
-        column.setDocumentation(markdown.toHtml(column.getDocumentation()));
+        column.setDocumentation(asciidoc.toHtml(column.getDocumentation()));
 
         model.addAttribute("column", column);
 

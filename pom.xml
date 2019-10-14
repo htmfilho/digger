@@ -78,14 +78,9 @@
 
 		<!-- Other dependencies -->
 		<dependency>
-			<groupId>com.atlassian.commonmark</groupId>
-			<artifactId>commonmark</artifactId>
-			<version>0.13.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.atlassian.commonmark</groupId>
-			<artifactId>commonmark-ext-gfm-tables</artifactId>
-			<version>0.13.0</version>
+			<groupId>org.asciidoctor</groupId>
+			<artifactId>asciidoctorj</artifactId>
+			<version>2.1.0</version> 
 		</dependency>
 	</dependencies>
 

@@ -5,7 +5,7 @@ import digger.model.Table;
 import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
-import digger.web.utils.Markdown;
+import digger.web.utils.Asciidoc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class TableController {
     private ColumnService columnService;
 
     @Autowired
-    private Markdown markdown;
+    private Asciidoc asciidoc;
 
     @RequestMapping("/datasources/{datasourceId}/tables/new")
     public String newTable(Model model, @PathVariable Long datasourceId) {
@@ -62,7 +62,7 @@ public class TableController {
 
         model.addAttribute("progress", columnService.calculateProgress(table));
 
-        table.setDocumentation(markdown.toHtml(table.getDocumentation()));
+        table.setDocumentation(asciidoc.toHtml(table.getDocumentation()));
 
         return "table";
     }
