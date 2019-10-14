@@ -21,6 +21,8 @@ Datasource is a reference to an existing database that we intend to document. A 
 [#tables]
 == Tables
 
+Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.
+
 === Documenting a Table
 
 === Editing the Documentation of a Table
