@@ -1,0 +1,43 @@
+= Digger : User Guide
+Hildeberto Mendonca <me@hildeberto.com>
+v0.4.0, 2019-10-14
+:doctype: book
+:encoding: utf-8
+:toc: left
+:toclevels: 4
+:numbered:
+
+Digger is designed to document existing databases. It is specially useful to document legacy databases, where the documentation is sparced and outdated.
+
+[#datasources]
+== Datasources
+
+Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata information.
+
+=== Creating a New Datasource
+
+=== Editing a Datasource
+
+[#tables]
+== Tables
+
+=== Documenting a Table
+
+=== Editing the Documentation of a Table
+
+[#ignored_tables]
+== Ignored Tables
+
+=== Ignoring a Table
+
+=== Removing a Table from the Ignored List
+
+[#columns]
+== Columns
+
+=== Documenting a Table Column
+
+=== Editing the Documentation of a Column
+
+=== Relationships
+
