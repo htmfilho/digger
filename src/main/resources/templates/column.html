@@ -6,15 +6,16 @@
 
     <body>
         <section>
-            <nav aria-label="breadcrumb">
+            <div><a href="http://www.hildeberto.com/digger/#column" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
+            <nav aria-label="breadcrumb">                
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}" id="table-link"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${column.friendlyName}"></li>
-                </ol>
+                </ol>                
             </nav>
-
+            
             <div class="row">
                 <div class="col-10">
                     <h1><i class="fas fa-columns"></i> Column</h1>
