@@ -33,7 +33,7 @@ public class IgnoredTableController {
         ignoredTable.setDatasource(datasource);
         ignoredTableService.save(ignoredTable);
 
-        return "redirect:/datasources/{datasourceId}";
+        return "redirect:/datasources/{datasourceId}?tab=ignored";
     }
 
     @GetMapping("/datasources/{datasourceId}/tables/ignored/{ignoredTableId}")

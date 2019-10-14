@@ -196,6 +196,15 @@ $(function() {
     }
 });
 
+/* Select a tab based on the query string parameter 'tab'. */
+$(function() {
+    urlParams = new URLSearchParams(window.location.search);
+    tab = urlParams.get('tab');
+    if(tab) {
+        $('.nav-tabs a[href="#'+ tab +'"]').tab('show');
+    }
+});
+
 $("#database-table-name").change(function() {
     var elem = $(this);
     loadTableAttributes(elem.val());
