@@ -39,6 +39,7 @@ $(function() {
     }
 });
 
+/* Load documented columns in the table page. */
 $(function() {
     if ($("#table-columns").length != 0) {
         datasourceId = $("#datasource").val();
@@ -47,7 +48,12 @@ $(function() {
             url: "/api/datasources/"+ datasourceId +"/tables/"+ tableId +"/columns/documented",
             success: function(result) {
                 result.forEach(element => {
-                    $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td></tr>');
+                    if(element.foreignKey) {
+                        $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td><a href="/datasources/'+ datasourceId +'/tables/'+ element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><i class="fas fa-key"></i></a></td></tr>');
+                    }
+                    else {
+                        $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>&nbsp;</td></tr>');
+                    }
                 });
             }
         });
