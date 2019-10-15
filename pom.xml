@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hildeberto</groupId>
 	<artifactId>digger</artifactId>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<name>Digger</name>
 	<description>Given a datasource, allows the user to navigate in the data schema.</description>
 
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>org.asciidoctor</groupId>
 			<artifactId>asciidoctorj</artifactId>
-			<version>2.1.0</version> 
+			<version>2.1.0</version>
 		</dependency>
 	</dependencies>
 
@@ -89,6 +89,22 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<requiresUnpack>
+								<dependency>
+									<groupId>org.asciidoctor</groupId>
+									<artifactId>asciidoctorj</artifactId>
+								</dependency>
+							</requiresUnpack>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
