@@ -13,7 +13,7 @@ Use Digger to document your relational database because applications go but the 
  
 ## Using Digger
 
-
+Digger is a user friendly tool and you probably can get along by simply using it. But in case you need more detailed information please read Digger's [User Guide][userguide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
 
 ## Contributing to the Project
 
@@ -61,3 +61,4 @@ Run the package to check if everything works:
     $ java -jar digger-<version>-SNAPSHOT.jar
 
 [releases]: https://github.com/htmfilho/digger/releases
+[userguide]: http://www.hildeberto.com/digger/
