@@ -68,8 +68,8 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
 
 	@Override
 	public int compareTo(IgnoredTable ignoredTable) {
-        if(this.name != null)
-            return this.name.compareTo(ignoredTable.name);
+        if(this.name != null && ignoredTable.getName() != null)
+            return this.name.trim().compareTo(ignoredTable.name.trim());
         else
             return -1;
     }
@@ -77,8 +77,8 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
     @Override
     public boolean equals(Object object) {
         IgnoredTable ignoredTable = (IgnoredTable) object;
-        if(this.name != null)
-            return this.name.equals(ignoredTable.getName());
+        if(this.name != null && ignoredTable.getName() != null)
+            return this.name.trim().equals(ignoredTable.getName().trim());
         else
             return this.id == ignoredTable.getId();
     }

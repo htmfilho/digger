@@ -135,7 +135,7 @@ public class Column implements Comparable<Column> {
 
     @Override
     public int compareTo(Column column) {
-        if(this.name != null)
+        if(this.name != null && column.getName() != null)
             return this.name.trim().compareTo(column.getName().trim());
         else
             return -1;

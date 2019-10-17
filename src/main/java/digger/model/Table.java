@@ -102,8 +102,8 @@ public class Table implements Comparable<Table> {
 
 	@Override
 	public int compareTo(Table table) {
-        if(this.name != null)
-            return this.name.compareTo(table.name);
+        if(this.name != null && table.getName() != null)
+            return this.name.trim().compareTo(table.name.trim());
         else
             return -1;
     }
