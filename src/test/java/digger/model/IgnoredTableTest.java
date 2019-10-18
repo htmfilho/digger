@@ -8,6 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class IgnoredTableTest {
 
+    @Test
+    public void toTableTest() {
+        IgnoredTable ignoredTable = new IgnoredTable("A Table");
+        Table table = ignoredTable.toTable();
+        assertThat(ignoredTable.getName()).isEqualTo(table.getName());
+    }
+
 	@Test
 	public void compareToTest() {
         IgnoredTable ignoredTableA = new IgnoredTable("IGNORED_TABLE_A    ");
