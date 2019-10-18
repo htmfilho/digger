@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/htmfilho/digger/tree/master.svg?style=svg)](https://circleci.com/gh/htmfilho/digger/tree/master)
+
 # Digger
 
 Use Digger to document your relational database because applications go but the database stays. The name "digger" is a tribute to a co-worker who never gives up when facing a challenge at work. She only rests when the problem is solved.
