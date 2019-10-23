@@ -1,4 +1,4 @@
-package digger.web.utils;
+package digger.utils;
 
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.Asciidoctor;

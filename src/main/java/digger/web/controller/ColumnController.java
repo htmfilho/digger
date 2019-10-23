@@ -6,7 +6,7 @@ import digger.model.Table;
 import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
-import digger.web.utils.Asciidoc;
+import digger.utils.Asciidoc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
