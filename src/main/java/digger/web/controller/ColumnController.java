@@ -7,6 +7,7 @@ import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 import digger.utils.Asciidoc;
+import digger.utils.Text;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class ColumnController {
     @Autowired
     private Asciidoc asciidoc;
 
+    @Autowired
+    private Text text;
+
     @RequestMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
     public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
@@ -41,6 +45,7 @@ public class ColumnController {
         boolean newOne = column.getId() == null;
         Table table = tableService.findById(tableId);
         column.setTable(table);
+        column.setFriendlyName(text.toFirstLetterUppercase(column.getFriendlyName()));
         columnService.save(column);
 
         if (newOne)

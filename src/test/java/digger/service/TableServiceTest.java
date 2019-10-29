@@ -19,7 +19,6 @@ public class TableServiceTest {
 
 	@Test
 	public void calculateProgressTest() {
-
         Datasource datasource = new Datasource();
         assertThat(tableService.calculateProgress(datasource)).isEqualTo(0);
     }

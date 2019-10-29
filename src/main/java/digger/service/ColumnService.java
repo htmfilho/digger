@@ -105,7 +105,7 @@ public class ColumnService {
     }
 
     public Integer calculateProgress(Table table) {
-        if(table.getTotalColumns() != null || table.getTotalColumns() > 0)
+        if(table.getTotalColumns() != null && table.getTotalColumns() > 0)
             return Math.round(countDocumentedColumns(table) / (table.getTotalColumns() * 1.0f) * 100);
         else
             return 0;

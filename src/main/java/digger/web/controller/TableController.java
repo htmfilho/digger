@@ -6,6 +6,7 @@ import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 import digger.utils.Asciidoc;
+import digger.utils.Text;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class TableController {
     @Autowired
     private Asciidoc asciidoc;
 
+    @Autowired
+    private Text text;
+
     @RequestMapping("/datasources/{datasourceId}/tables/new")
     public String newTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
@@ -45,6 +49,7 @@ public class TableController {
         }
 
         table.setDatasource(datasource);
+        table.setFriendlyName(text.toFirstLetterUppercase(table.getFriendlyName()));
         tableService.save(table);
 
         return "redirect:/datasources/{datasourceId}/tables/" + table.getId();
@@ -59,7 +64,7 @@ public class TableController {
         Table table = tableService.findById(tableId);
         if(table == null) return "redirect:/datasources/{datasourceId}";
         model.addAttribute("table", table);
-
+        
         model.addAttribute("progress", columnService.calculateProgress(table));
 
         table.setDocumentation(asciidoc.toHtml(table.getDocumentation()));
