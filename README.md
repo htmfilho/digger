@@ -1,7 +1,7 @@
 # Digger
 
 [![CircleCI](https://circleci.com/gh/htmfilho/digger/tree/master.svg?style=svg)](https://circleci.com/gh/htmfilho/digger/tree/master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/maintainability)](https://codeclimate.com/github/htmfilho/digger/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/maintainability)](https://codeclimate.com/github/htmfilho/digger/maintainability) [![Join the chat at https://gitter.im/database-digger/community](https://badges.gitter.im/database-digger/community.svg)](https://gitter.im/database-digger/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Use Digger to document your relational database because applications go but the database stays. The name "digger" is a tribute to a co-worker who never gives up when facing a challenge at work. She only rests when the problem is solved.
 
