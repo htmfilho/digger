@@ -30,10 +30,17 @@
                         <div id="name" th:utext="${datasource.name}"></div>
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="description">Description</label>
                         <div id="description" th:utext="${datasource.description}"></div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="description">Status</label>
+                        <div id="status" class="connected" data-toggle="tooltip" data-placement="right" title="Connected!" th:if="${datasource.status}"> <i class="fas fa-plug"></i></div>
+                        <div id="status" class="disconnected" data-toggle="tooltip" data-placement="right" title="Disconnected" th:unless="${datasource.status}"> <i class="fas fa-plug"></i></div>
                     </div>
                 </div>
             </div>

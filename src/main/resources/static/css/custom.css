@@ -12,3 +12,13 @@ label {
     margin-left: 10px;
     color: rgb(148, 148, 148);
 }
+
+.connected {
+    font-size: 22px;
+    color: #199700
+}
+
+.disconnected {
+    font-size: 22px;
+    color: #ff0000
+}

@@ -25,15 +25,7 @@ public class DatasourceService {
     }
 
     public Datasource findById(Long id) {
-        Datasource datasource = datasourceRepository.findById(id);
-        try {
-            if (testConnection(datasource)) {
-                return datasource;
-            }
-        } catch (SQLException se) {
-            log.warn("Connection not available.");
-        }
-        return datasource;
+        return datasourceRepository.findById(id);
     }
 
     public void save(Datasource datasource) {
@@ -45,7 +37,7 @@ public class DatasourceService {
         save(datasource);
     }
 
-    private boolean testConnection(Datasource datasource) throws SQLException {
+    public Boolean testConnection(Datasource datasource) throws SQLException {
         return (getConnection(datasource) != null);
     }
 

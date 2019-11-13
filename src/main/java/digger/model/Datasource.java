@@ -31,6 +31,9 @@ public class Datasource {
     @Column
     private Integer totalTables;
 
+    @Transient
+    private Boolean status;
+
     public Datasource() {}
 
     public Datasource(Long id) {
@@ -99,5 +102,13 @@ public class Datasource {
 
     public void setTotalTables(Integer totalTables) {
         this.totalTables = totalTables;
+    }
+
+    public Boolean getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

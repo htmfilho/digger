@@ -4,6 +4,8 @@ import digger.model.Datasource;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,7 @@ public class DatasourceController {
 
     @PostMapping("/datasources")
     public String saveDatasource(@ModelAttribute Datasource datasource) {
-        if(datasource.getId() != null) {
+        if (datasource.getId() != null) {
             Datasource existingDatasource = datasourceService.findById(datasource.getId());
             datasource.setTotalTables(existingDatasource.getTotalTables());
         }
@@ -38,6 +40,11 @@ public class DatasourceController {
     @GetMapping("/datasources/{datasourceId}")
     public String openDatasource(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
+        try {
+            datasource.setStatus(datasourceService.testConnection(datasource));
+        } catch (SQLException e) {
+            model.addAttribute("exception", e.getMessage());
+        }
         model.addAttribute("datasource", datasource);
         model.addAttribute("progress", tableService.calculateProgress(datasource));
         return "datasource";
