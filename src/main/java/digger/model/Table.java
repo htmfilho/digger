@@ -3,32 +3,35 @@ package digger.model;
 import javax.persistence.*;
 import javax.persistence.Column;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @javax.persistence.Table(name = "database_table")
 public class Table implements Comparable<Table> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private @Getter @Setter Long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")
-    private Datasource datasource;
+    private @Getter @Setter Datasource datasource;
 
     @Column
-    private String name;
+    private @Getter @Setter String name;
 
     @Column(name = "friendly_name")
-    private String friendlyName;
+    private @Getter @Setter String friendlyName;
 
     @Column
-    private String documentation;
+    private @Getter @Setter String documentation;
 
     @Column
-    private String type;
+    private @Getter @Setter String type;
 
     @Column
-    private Integer totalColumns;
+    private @Getter @Setter Integer totalColumns;
 
     public Table() {}
 
@@ -40,69 +43,13 @@ public class Table implements Comparable<Table> {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Datasource getDatasource() {
-        return this.datasource;
-    }
-
-    public void setDatasource(Datasource datasource) {
-        this.datasource = datasource;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFriendlyName() {
-        return this.friendlyName;
-    }
-
-    public void setFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
-    }
-
-    public String getDocumentation() {
-        return this.documentation;
-    }
-
-    public void setDocumentation(String documentation) {
-        this.documentation = documentation;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Integer getTotalColumns() {
-        return this.totalColumns;
-    }
-
-    public void setTotalColumns(Integer totalColumns) {
-        this.totalColumns = totalColumns;
-    }
-
     public String toString() {
         return this.name + " ("+ this.friendlyName +")";
     }
 
 	@Override
 	public int compareTo(Table table) {
-        if(this.name != null && table.getName() != null)
+        if(this.name != null && table.name != null)
             return this.name.trim().compareTo(table.name.trim());
         else
             return -1;
@@ -111,9 +58,9 @@ public class Table implements Comparable<Table> {
     @Override
     public boolean equals(Object object) {
         Table table = (Table) object;
-        if(this.name != null && table.getName() != null)
-            return this.name.trim().equals(table.getName().trim());
+        if(this.name != null && table.name != null)
+            return this.name.trim().equals(table.name.trim());
         else
-            return this.id == table.getId();
+            return this.id == table.id;
     }
 }

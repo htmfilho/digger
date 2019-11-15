@@ -9,20 +9,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "ignored_table")
 public class IgnoredTable implements Comparable<IgnoredTable> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private @Getter @Setter Long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")
-    private Datasource datasource;
+    private @Getter @Setter Datasource datasource;
 
     @Column
-    private String name;
+    private @Getter @Setter String name;
 
     public IgnoredTable() {}
 
@@ -31,30 +34,6 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
     }
 
     public IgnoredTable(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Datasource getDatasource() {
-        return this.datasource;
-    }
-
-    public void setDatasource(Datasource datasource) {
-        this.datasource = datasource;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -68,7 +47,7 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
 
 	@Override
 	public int compareTo(IgnoredTable ignoredTable) {
-        if(this.name != null && ignoredTable.getName() != null)
+        if(this.name != null && ignoredTable.name != null)
             return this.name.trim().compareTo(ignoredTable.name.trim());
         else
             return -1;
@@ -77,9 +56,9 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
     @Override
     public boolean equals(Object object) {
         IgnoredTable ignoredTable = (IgnoredTable) object;
-        if(this.name != null && ignoredTable.getName() != null)
-            return this.name.trim().equals(ignoredTable.getName().trim());
+        if(this.name != null && ignoredTable.name != null)
+            return this.name.trim().equals(ignoredTable.name.trim());
         else
-            return this.id == ignoredTable.getId();
+            return this.id == ignoredTable.id;
     }
 }
