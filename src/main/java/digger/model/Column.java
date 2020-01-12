@@ -141,12 +141,10 @@ public class Column implements Comparable<Column> {
             return -1;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        Column column = (Column) object;
-        if(this.name != null && column.name != null)
-            return this.name.trim().equals(column.name.trim());
+    public boolean equals(Column another) {
+        if(this.name != null && another.name != null)
+            return this.name.trim().equals(another.name.trim());
         else
-            return this.id == column.id;
+            return this.id.equals(another.id);
     }
 }
