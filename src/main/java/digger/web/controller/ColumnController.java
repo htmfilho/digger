@@ -17,20 +17,19 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ColumnController {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
+    private final ColumnService columnService;
+    private final Asciidoc asciidoc;
+    private final Text text;
 
-    @Autowired
-    private TableService tableService;
-
-    @Autowired
-    private ColumnService columnService;
-
-    @Autowired
-    private Asciidoc asciidoc;
-
-    @Autowired
-    private Text text;
+    public ColumnController(DatasourceService datasourceService, TableService tableService, ColumnService columnService, Asciidoc asciidoc, Text text) {
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+        this.columnService = columnService;
+        this.asciidoc = asciidoc;
+        this.text = text;
+    }
 
     @RequestMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
     public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {

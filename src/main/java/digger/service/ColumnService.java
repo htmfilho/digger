@@ -7,7 +7,6 @@ import digger.repository.ColumnRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -29,14 +28,15 @@ public class ColumnService {
     private static final int COLUMN_NULLABLE = 11;
     private static final int COLUMN_DEFAULT = 13;
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
+    private final ColumnRepository columnRepository;
 
-    @Autowired
-    private TableService tableService;
-
-    @Autowired
-    private ColumnRepository columnRepository;
+    public ColumnService(ColumnRepository columnRepository, DatasourceService datasourceService, TableService tableService) {
+        this.columnRepository = columnRepository;
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+    }
 
     public List<Column> listColumns(Datasource datasource, Table table, String key, Column except) {
         List<Column> columns = new ArrayList<>();

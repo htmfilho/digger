@@ -5,7 +5,6 @@ import digger.model.Table;
 import digger.repository.TableRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -24,20 +23,21 @@ public class TableService {
     private static final int TABLE_NAME = 3;
     private static final int TABLE_TYPE = 4;
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final IgnoredTableService ignoredTableService;
+    private final TableRepository tableRepository;
 
-    @Autowired
-    private IgnoredTableService ignoredTableService;
-
-    @Autowired
-    private TableRepository tableRepository;
+    public TableService(DatasourceService datasourceService, IgnoredTableService ignoredTableService, TableRepository tableRepository) {
+        this.datasourceService = datasourceService;
+        this.ignoredTableService = ignoredTableService;
+        this.tableRepository = tableRepository;
+    }
 
     public List<Table> listTables(Datasource datasource, String key, Table except) {
         List<Table> tables = new ArrayList<>();
         try (Connection connection = datasourceService.getConnection(datasource)) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet resultSet = databaseMetaData.getTables(connection.getCatalog(), null, key == null ? key : key + "%", null);
+            ResultSet resultSet = databaseMetaData.getTables(connection.getCatalog(), null, key == null ? null : key + "%", null);
             while (resultSet.next()) {
                 Table table = new Table();
                 table.setName(resultSet.getString(TABLE_NAME));

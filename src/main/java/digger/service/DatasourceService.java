@@ -4,7 +4,6 @@ import digger.model.Datasource;
 import digger.repository.DatasourceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -17,8 +16,11 @@ public class DatasourceService {
 
     private static final Logger log = LoggerFactory.getLogger(DatasourceService.class.getName());
 
-    @Autowired
-    private DatasourceRepository datasourceRepository;
+    private final DatasourceRepository datasourceRepository;
+
+    public DatasourceService(DatasourceRepository datasourceRepository) {
+        this.datasourceRepository = datasourceRepository;
+    }
 
     public List<Datasource> findAll() {
         return datasourceRepository.findAll();

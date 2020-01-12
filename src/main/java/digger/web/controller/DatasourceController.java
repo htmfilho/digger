@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class DatasourceController {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
 
-    @Autowired
-    private TableService tableService;
+    public DatasourceController(DatasourceService datasourceService, TableService tableService) {
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+    }
 
     @RequestMapping("/datasources/new")
     public String newDatasource(Model model) {

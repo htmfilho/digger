@@ -8,7 +8,6 @@ import digger.service.TableService;
 import digger.utils.Asciidoc;
 import digger.utils.Text;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,20 +15,19 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class TableController {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
+    private final ColumnService columnService;
+    private final Asciidoc asciidoc;
+    private final Text text;
 
-    @Autowired
-    private TableService tableService;
-
-    @Autowired
-    private ColumnService columnService;
-
-    @Autowired
-    private Asciidoc asciidoc;
-
-    @Autowired
-    private Text text;
+    public TableController(DatasourceService datasourceService, TableService tableService, ColumnService columnService, Asciidoc asciidoc, Text text) {
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+        this.columnService = columnService;
+        this.asciidoc = asciidoc;
+        this.text = text;
+    }
 
     @RequestMapping("/datasources/{datasourceId}/tables/new")
     public String newTable(Model model, @PathVariable Long datasourceId) {

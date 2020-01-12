@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class IgnoredTableController {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final IgnoredTableService ignoredTableService;
 
-    @Autowired
-    private IgnoredTableService ignoredTableService;
+    public IgnoredTableController(DatasourceService datasourceService, IgnoredTableService ignoredTableService) {
+        this.datasourceService = datasourceService;
+        this.ignoredTableService = ignoredTableService;
+    }
 
     @RequestMapping("/datasources/{datasourceId}/tables/ignored/new")
     public String newIgnoredTable(Model model, @PathVariable Long datasourceId) {
