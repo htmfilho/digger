@@ -107,13 +107,11 @@ public class Table implements Comparable<Table> {
         else
             return -1;
     }
-    
-    @Override
-    public boolean equals(Object object) {
-        Table table = (Table) object;
-        if(this.name != null && table.name != null)
-            return this.name.trim().equals(table.name.trim());
+
+    public boolean equals(Table another) {
+        if(this.name != null && another.name != null)
+            return this.name.trim().equals(another.name.trim());
         else
-            return this.id == table.id;
+            return this.id.equals(another.id);
     }
 }

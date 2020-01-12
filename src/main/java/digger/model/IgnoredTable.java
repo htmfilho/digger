@@ -73,13 +73,11 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
         else
             return -1;
     }
-    
-    @Override
-    public boolean equals(Object object) {
-        IgnoredTable ignoredTable = (IgnoredTable) object;
-        if(this.name != null && ignoredTable.name != null)
-            return this.name.trim().equals(ignoredTable.name.trim());
+
+    public boolean equals(IgnoredTable another) {
+        if(this.name != null && another.name != null)
+            return this.name.trim().equals(another.name.trim());
         else
-            return this.id == ignoredTable.id;
+            return this.id.equals(another.id);
     }
 }
