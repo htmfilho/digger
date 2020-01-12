@@ -9,23 +9,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "ignored_table")
 public class IgnoredTable implements Comparable<IgnoredTable> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")
-    private @Getter @Setter Datasource datasource;
+    private Datasource datasource;
 
     @Column
-    private @Getter @Setter String name;
+    private String name;
 
     public IgnoredTable() {}
 
@@ -34,6 +31,30 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
     }
 
     public IgnoredTable(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Datasource getDatasource() {
+        return datasource;
+    }
+
+    public void setDatasource(Datasource datasource) {
+        this.datasource = datasource;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 

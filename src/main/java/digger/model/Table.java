@@ -3,35 +3,32 @@ package digger.model;
 import javax.persistence.*;
 import javax.persistence.Column;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @javax.persistence.Table(name = "database_table")
 public class Table implements Comparable<Table> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private @Getter @Setter Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")
-    private @Getter @Setter Datasource datasource;
+    private Datasource datasource;
 
     @Column
-    private @Getter @Setter String name;
+    private String name;
 
     @Column(name = "friendly_name")
-    private @Getter @Setter String friendlyName;
+    private String friendlyName;
 
     @Column
-    private @Getter @Setter String documentation;
+    private String documentation;
 
     @Column
-    private @Getter @Setter String type;
+    private String type;
 
     @Column
-    private @Getter @Setter Integer totalColumns;
+    private Integer totalColumns;
 
     public Table() {}
 
@@ -41,6 +38,62 @@ public class Table implements Comparable<Table> {
 
     public Table(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Datasource getDatasource() {
+        return datasource;
+    }
+
+    public void setDatasource(Datasource datasource) {
+        this.datasource = datasource;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
+    }
+
+    public String getDocumentation() {
+        return documentation;
+    }
+
+    public void setDocumentation(String documentation) {
+        this.documentation = documentation;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getTotalColumns() {
+        return totalColumns;
+    }
+
+    public void setTotalColumns(Integer totalColumns) {
+        this.totalColumns = totalColumns;
     }
 
     public String toString() {
