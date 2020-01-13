@@ -11,8 +11,11 @@ import java.util.List;
 @RestController
 public class DatasourceResource {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+
+    public DatasourceResource(DatasourceService datasourceService) {
+        this.datasourceService = datasourceService;
+    }
 
     @GetMapping(value = "/api/datasources", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Datasource> getDatasources() {

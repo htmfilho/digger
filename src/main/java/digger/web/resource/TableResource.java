@@ -16,11 +16,13 @@ import java.util.List;
 @RestController
 public class TableResource {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
 
-    @Autowired
-    private TableService tableService;
+    public TableResource(DatasourceService datasourceService, TableService tableService) {
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+    }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Table> getTables(@PathVariable Long datasourceId, 
