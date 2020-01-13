@@ -19,14 +19,15 @@ import java.util.List;
 @RestController
 public class IgnoredTableResource {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
+    private final IgnoredTableService ignoredTableService;
 
-    @Autowired
-    private TableService tableService;
-
-    @Autowired
-    private IgnoredTableService ignoredTableService;
+    public IgnoredTableResource(DatasourceService datasourceService, TableService tableService, IgnoredTableService ignoredTableService) {
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+        this.ignoredTableService = ignoredTableService;
+    }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/ignored", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<IgnoredTable> getIgnoredTables(@PathVariable Long datasourceId) {
