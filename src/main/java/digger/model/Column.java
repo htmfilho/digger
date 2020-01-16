@@ -8,7 +8,7 @@ public class Column implements Comparable<Column> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     
     @ManyToOne
     @JoinColumn(name = "database_table")
@@ -49,11 +49,11 @@ public class Column implements Comparable<Column> {
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -145,6 +145,6 @@ public class Column implements Comparable<Column> {
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
         else
-            return this.id.equals(another.id);
+            return this.id == another.id;
     }
 }

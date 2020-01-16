@@ -15,7 +15,7 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")
@@ -34,11 +34,11 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -78,6 +78,6 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
         else
-            return this.id.equals(another.id);
+            return this.id == another.id;
     }
 }
