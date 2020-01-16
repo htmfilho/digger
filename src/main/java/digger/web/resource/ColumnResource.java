@@ -18,14 +18,15 @@ import java.util.List;
 @RestController
 public class ColumnResource {
 
-    @Autowired
-    private DatasourceService datasourceService;
+    private final DatasourceService datasourceService;
+    private final TableService tableService;
+    private final ColumnService columnService;
 
-    @Autowired
-    private TableService tableService;
-
-    @Autowired
-    private ColumnService columnService;
+    public ColumnResource(DatasourceService datasourceService, TableService tableService, ColumnService columnService) {
+        this.datasourceService = datasourceService;
+        this.tableService = tableService;
+        this.columnService = columnService;
+    }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns", 
                 produces = MediaType.APPLICATION_JSON_VALUE)
