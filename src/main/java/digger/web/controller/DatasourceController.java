@@ -6,7 +6,6 @@ import digger.service.TableService;
 
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class DatasourceController {
 
     @PostMapping("/datasources")
     public String saveDatasource(@ModelAttribute Datasource datasource) {
-        if (datasource.getId() != null) {
+        if (datasource.getId() != 0L) {
             Datasource existingDatasource = datasourceService.findById(datasource.getId());
             datasource.setTotalTables(existingDatasource.getTotalTables());
         }

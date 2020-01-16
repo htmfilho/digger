@@ -9,7 +9,6 @@ import digger.service.TableService;
 import digger.utils.Asciidoc;
 import digger.utils.Text;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +40,7 @@ public class ColumnController {
 
     @PostMapping("/datasources/{datasourceId}/tables/{tableId}/columns")
     public String saveColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @ModelAttribute Column column) {
-        boolean newOne = column.getId() == null;
+        boolean newOne = column.getId() == 0L;
         Table table = tableService.findById(tableId);
         column.setTable(table);
         column.setFriendlyName(text.toFirstLetterUppercase(column.getFriendlyName()));
