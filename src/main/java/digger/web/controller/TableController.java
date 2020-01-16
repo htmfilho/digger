@@ -41,7 +41,7 @@ public class TableController {
     public String saveTable(Model model, @PathVariable Long datasourceId, @ModelAttribute Table table) {
         Datasource datasource = datasourceService.findById(datasourceId);
 
-        if(table.getId() != null) {
+        if(table.getId() != 0L) {
             Table existingTable = tableService.findById(table.getId());
             table.setTotalColumns(existingTable.getTotalColumns());
         }
