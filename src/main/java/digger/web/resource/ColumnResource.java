@@ -6,7 +6,6 @@ import digger.model.Table;
 import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +35,7 @@ public class ColumnResource {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = tableService.findById(tableId);
         Column exceptColumn = columnService.findById(except);
-        return columnService.listColumns(datasource, table, key, exceptColumn);
+        return columnService.listUndocumentedColumns(datasource, table, key, exceptColumn);
     }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/documented", 

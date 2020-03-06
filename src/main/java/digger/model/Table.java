@@ -108,7 +108,9 @@ public class Table implements Comparable<Table> {
             return -1;
     }
 
-    public boolean equals(Table another) {
+    @Override
+    public boolean equals(Object object) {
+        Table another = (Table) object;
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
         else

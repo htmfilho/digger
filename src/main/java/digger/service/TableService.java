@@ -42,7 +42,7 @@ public class TableService {
                 Table table = new Table();
                 table.setName(resultSet.getString(TABLE_NAME));
                 table.setType(resultSet.getString(TABLE_TYPE));
-                tables.add(table);                
+                tables.add(table);
             }
             resultSet.close();
             Collections.sort(tables);
