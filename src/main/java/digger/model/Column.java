@@ -143,6 +143,10 @@ public class Column implements Comparable<Column> {
 
     @Override
     public boolean equals(Object object) {
+        if(!(object instanceof Column)) {
+            return false;
+        }
+
         Column another = (Column) object;
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());

@@ -1,5 +1,7 @@
 package digger.model;
 
+import javafx.scene.control.Tab;
+
 import javax.persistence.*;
 import javax.persistence.Column;
 
@@ -110,6 +112,10 @@ public class Table implements Comparable<Table> {
 
     @Override
     public boolean equals(Object object) {
+        if(!(object instanceof Table)) {
+            return false;
+        }
+
         Table another = (Table) object;
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
