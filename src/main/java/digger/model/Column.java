@@ -137,14 +137,16 @@ public class Column implements Comparable<Column> {
     public int compareTo(Column column) {
         if(this.name != null && column.name != null)
             return this.name.trim().compareTo(column.name.trim());
-        else
-            return -1;
+
+        return -1;
     }
 
-    public boolean equals(Column another) {
+    @Override
+    public boolean equals(Object object) {
+        Column another = (Column) object;
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
-        else
-            return this.id == another.id;
+
+        return this.id == another.id;
     }
 }
