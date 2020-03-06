@@ -1,7 +1,5 @@
 package digger.model;
 
-import javafx.scene.control.Tab;
-
 import javax.persistence.*;
 import javax.persistence.Column;
 
