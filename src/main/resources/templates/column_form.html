@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
-       <title>Digger - Column</title>
+       <title>Column - Digger</title>
     </head>
 
     <body>
@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="database-table">Table</label><br>
+                            <label>Table</label><br>
                             <span th:utext="${table.friendlyName}"></span> (<span th:utext="${table.name}"></span>)
                         </div>
                     </div>
