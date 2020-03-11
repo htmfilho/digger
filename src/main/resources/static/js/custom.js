@@ -13,12 +13,12 @@ $(function() {
 
 $(function() {
     if ($("#datasource-tables").length != 0) {
-        datasourceId = $("#datasource").val();
+        let pathname = window.location.pathname;
         $.ajax({
-            url: "/api/datasources/".concat(datasourceId, "/tables/documented"),
+            url: "/api".concat(pathname, "/tables/documented"),
             success: function(result) {
                 result.forEach(element => {
-                    $("#datasource-tables").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
+                    $("#datasource-tables").append('<tr><td><a href='+ pathname +'/tables/'+ element.id +'>'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
                 });
             }
         });
@@ -27,9 +27,9 @@ $(function() {
 
 $(function() {
     if ($("#datasource-ignored-tables").length != 0) {
-        datasourceId = $("#datasource").val();
+        let pathname = window.location.pathname;
         $.ajax({
-            url: "/api/datasources/".concat(datasourceId, "/tables/ignored"),
+            url: "/api".concat(pathname, "/tables/ignored"),
             success: function(result) {
                 result.forEach(element => {
                     $("#datasource-ignored-tables").append('<tr id="delete_'+ element.id +'"><td>'+ element.name +'</td><td><button type="button" class="btn btn-warning float-right" onclick="deleteIgnoredTable('+ element.id +')"><i class="far fa-trash-alt"></i></button></td></tr>');
@@ -42,17 +42,16 @@ $(function() {
 /* Load documented columns in the table page. */
 $(function() {
     if ($("#table-columns").length != 0) {
-        datasourceId = $("#datasource").val();
-        tableId = $("#table").val();
+        let pathname = window.location.pathname;
         $.ajax({
-            url: "/api/datasources/".concat(datasourceId, "/tables/", tableId, "/columns/documented"),
+            url: "/api".concat(pathname, "/columns/documented"),
             success: function(result) {
                 result.forEach(element => {
                     if(element.foreignKey) {
-                        $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td><a href="/datasources/'+ datasourceId +'/tables/'+ element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><i class="fas fa-key"></i></a></td></tr>');
+                        $("#table-columns").append('<tr><td><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td><a href="'+ pathname.substring(0, pathname.lastIndexOf("/") + 1) + element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><i class="fas fa-key"></i></a></td></tr>');
                     }
                     else {
-                        $("#table-columns").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>&nbsp;</td></tr>');
+                        $("#table-columns").append('<tr><td><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>&nbsp;</td></tr>');
                     }
                 });
             }
@@ -62,14 +61,12 @@ $(function() {
 
 $(function() {
     if ($("#column-references").length != 0) {
-        datasourceId = $("#datasource").val();
-        tableId = $("#table").val();
-        columnId = $("#column").val();
+        let pathname = window.location.pathname;
         $.ajax({
-            url: "/api/datasources/".concat(datasourceId, "/tables/", tableId, "/columns/", columnId, "/foreignkeys"),
+            url: "/api".concat(pathname, "/foreignkeys"),
             success: function(result) {
                 result.forEach(element => {
-                    $("#column-references").append('<tr><td><a href="/datasources/'+ datasourceId +'/tables/'+ element.table.id +'">'+ element.table.name +'</a></td><td><a href="/datasources/'+ datasourceId +'/tables/'+ tableId +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td></tr>');
+                    $("#column-references").append('<tr><td><a href="'+ pathname.match(/\Wdatasources\W[0-9]+/) +'/tables/'+ element.table.id +'">'+ element.table.name +'</a></td><td><a href="'+ pathname.match(/\Wdatasources\W[0-9]+/) +'/tables/'+ element.table.id +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td></tr>');
                 });
             }
         });
