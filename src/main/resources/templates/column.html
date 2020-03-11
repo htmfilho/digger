@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
     <head>
-       <title>Digger - Column</title>
+       <title>Column - Digger</title>
     </head>
 
     <body>
@@ -94,9 +94,6 @@
 
             <h3><i class="fas fa-link"></i> Referenced By</h3>
 
-            <input type="hidden" id="datasource" th:value="${datasource.id}">
-            <input type="hidden" id="table" th:value="${table.id}">
-            <input type="hidden" id="column" th:value="${column.id}">
             <table class="table">
                 <thead>
                     <tr>
