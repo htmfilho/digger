@@ -16,7 +16,7 @@ Use Digger to document your relational databases. It is a web application that w
  
 ## Using Digger
 
-Digger is a user friendly tool and you probably can get along by simply using it. But in case you need more detailed information please read Digger's [User Guide][userguide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
+Digger is a user friendly tool and you probably can get along by simply using it. But in case you need more detailed information please read Digger's [user guide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
 
 ## Contributing to the Project
 
@@ -60,8 +60,19 @@ If the default port `8080` is already in use, set the environment variable `SERV
 
 Run the package to check if everything works:
 
-    $ cd c:\java\apps\digger
-    $ java -jar digger-<version>-SNAPSHOT.jar
+    $ cd [your-java-projects-folder]/digger
+    $ java -jar target/digger-<version>-SNAPSHOT.jar
 
+### Documentation 
+
+There are two types of documentation: the [user guide] and the [project documentation]. To generate the user guide:
+
+    $ asciidoc docs/index.adoc
+    
+To generate the project documentation:
+
+    $ mvn site:stage -DstagingDirectory=${basedir}/docs/project
+
+[user guide]: https://www.hildeberto.com/digger/
+[project documentation]: https://www.hildeberto.com/digger/project/
 [releases]: https://github.com/htmfilho/digger/releases
-[userguide]: http://www.hildeberto.com/digger/
