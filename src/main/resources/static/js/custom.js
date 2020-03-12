@@ -73,11 +73,25 @@ $(function() {
     }
 });
 
-var databaseTables = null;
-var tableColumns = null;
+$(function() {
+    if ($("#database_ignorable_tables").length != 0) {
+        let pathname = window.location.pathname;
+        $.ajax({
+            url: "/api".concat(pathname.match(/\Wdatasources\W[0-9]+/), "/tables/ignorable"),
+            success: function(result) {
+                result.forEach(table => {
+                    $("#database_ignorable_tables").append('<tr><td><input type="checkbox" id="ignorable-'+ table.name +'" name="ignorable-'+ table.name +'" value="'+ table.name +'">&nbsp;<label for="ignorable-'+ table.name +'">'+ table.name +'</label>');
+                });
+            }
+        });
+    }
+});
+
+let databaseTables = null;
+let tableColumns = null;
 
 function loadTableAttributes(table) {
-    tableName = table.val();
+    let tableName = table.val();
     if(tableName === "") {
         $("#type-label").html("-");
         $("#type").val("");
@@ -92,7 +106,7 @@ function loadTableAttributes(table) {
 }
 
 function loadColumnAttributes(column) {
-    columnName = column.val();
+    let columnName = column.val();
     if(columnName === "") {
         $("#type-label").html("-");
         $("#type").val("");
@@ -121,7 +135,7 @@ function addOption(id, value, label) {
 }
 
 function loadForeignColumns(foreignTableId) {
-    datasourceId = $("#datasource").val();
+    let datasourceId = $("#datasource").val();
     $.ajax({
         url: "/api/datasources/".concat(datasourceId, "/tables/", foreignTableId, "/columns/documented"),
         success: function(result) {
@@ -137,8 +151,8 @@ function loadForeignColumns(foreignTableId) {
 
 $(function() {
     if ($("#database-table-name").length != 0) {
-        datasourceId = $("#datasource").val();
-        tableId = $("#id").val();
+        let datasourceId = $("#datasource").val();
+        let tableId = $("#id").val();
         $.ajax({
             url: "/api/datasources/".concat(datasourceId, "/tables?except=", tableId),
             success: function(result) {
@@ -146,7 +160,7 @@ $(function() {
                 databaseTables.forEach(table => {
                     addOption("#database-table-name", table.name, table.name);
                 });
-                nameAux = $("#name-aux").val();
+                let nameAux = $("#name-aux").val();
                 $("#database-table-name").val(nameAux);
                 loadTableAttributes($("#name-aux"));
             }
@@ -155,24 +169,10 @@ $(function() {
 });
 
 $(function() {
-    if ($("#database-ignored-table-name").length != 0) {
-        datasourceId = $("#datasource").val();
-        $.ajax({
-            url: "/api/datasources/".concat(datasourceId, "/tables/ignorable"),
-            success: function(result) {
-                result.forEach(table => {
-                    addOption("#database-ignored-table-name", table.name, table.name);
-                });
-            }
-        });
-    }
-});
-
-$(function() {
     if ($("#table-column-name").length != 0) {
-        datasourceId = $("#datasource").val();
-        tableId = $("#table").val();
-        columnId = $("#id").val();
+        let datasourceId = $("#datasource").val();
+        let tableId = $("#table").val();
+        let columnId = $("#id").val();
         $.ajax({
             url: "/api/datasources/".concat(datasourceId, "/tables/", tableId, "/columns?except=", columnId),
             success: function(result) {
@@ -180,7 +180,7 @@ $(function() {
                 tableColumns.forEach(column => {
                     addOption("#table-column-name", column.name, column.name);
                 });
-                nameAux = $("#name-aux").val();
+                let nameAux = $("#name-aux").val();
                 $("#table-column-name").val(nameAux);
                 loadColumnAttributes($("#name-aux"));
             }
@@ -190,8 +190,8 @@ $(function() {
 
 $(function() {
     if ($("#foreign-table").length != 0) {
-        datasourceId = $("#datasource").val();
-        foreignTableId = $("#foreign-table-aux").val();
+        let datasourceId = $("#datasource").val();
+        let foreignTableId = $("#foreign-table-aux").val();
         $.ajax({
             url: "/api/datasources/".concat(datasourceId, "/tables/documented"),
             success: function(result) {
@@ -207,8 +207,8 @@ $(function() {
 
 /* Select a tab based on the query string parameter 'tab'. */
 $(function() {
-    urlParams = new URLSearchParams(window.location.search);
-    tab = urlParams.get('tab');
+    let urlParams = new URLSearchParams(window.location.search);
+    let tab = urlParams.get('tab');
     if(tab) {
         $('.nav-tabs a[href="#'+ tab +'"]').tab('show');
     }
@@ -227,8 +227,8 @@ $("#table-column-name").change(function() {
 });
 
 $("#foreign-table").change(function() {
-    var elem = $(this);
-    tableId = elem.val();
+    let elem = $(this);
+    let tableId = elem.val();
     loadForeignColumns(tableId);
 });
 
@@ -238,11 +238,11 @@ $("#cancel").click(function() {
 
 function deleteIgnoredTable(id) {
     if (confirm("Are you sure you want to delete it?")) {
-        datasourceId = $("#datasource").val();
+        let datasourceId = $("#datasource").val();
         $.ajax({
             url: "/api/datasources/".concat(datasourceId, "/tables/ignored/", id),
             type: 'DELETE',
-            success: function(result) {
+            success: function() {
                 $("#delete_"+ id).remove();
             }
         });
