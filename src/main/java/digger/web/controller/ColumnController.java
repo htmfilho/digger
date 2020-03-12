@@ -57,7 +57,7 @@ public class ColumnController {
         Datasource datasource = datasourceService.findById(datasourceId);
         if(datasource == null) return "redirect:/";
         model.addAttribute("datasource", datasource);
-        
+
         Table table = tableService.findById(tableId);
         if(table == null) return "redirect:/datasources/{datasourceId}";
         model.addAttribute("table", table);
