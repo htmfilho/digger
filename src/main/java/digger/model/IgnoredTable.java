@@ -34,6 +34,11 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
         this.name = name;
     }
 
+    public IgnoredTable(String name, Datasource datasource) {
+        this.name = name;
+        this.datasource = datasource;
+    }
+
     public long getId() {
         return id;
     }

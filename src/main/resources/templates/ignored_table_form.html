@@ -8,7 +8,7 @@
         <section>
             <div><a href="http://www.hildeberto.com/digger/#new_ignored_table" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
 
-            <h1><i class="fas fa-table"></i> Ignored Table</h1>
+            <h1><i class="fas fa-table"></i> Ignoring Tables</h1>
 
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables/ignored(datasourceId=${datasource.id})}">
                 <table class="table">
@@ -16,7 +16,7 @@
                     <tr>
                         <th scope="col">
                             <input type="checkbox" id="check-all" name="check-all" value="check-all">
-                            <label for="check-all"> <b>Check All</b></label>
+                            <label for="check-all"> Check All</label>
                         </th>
                     </tr>
                     </thead>

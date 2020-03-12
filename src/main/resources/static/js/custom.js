@@ -80,7 +80,7 @@ $(function() {
             url: "/api".concat(pathname.match(/\Wdatasources\W[0-9]+/), "/tables/ignorable"),
             success: function(result) {
                 result.forEach(table => {
-                    $("#database_ignorable_tables").append('<tr><td><input type="checkbox" id="ignorable-'+ table.name +'" name="ignorable-'+ table.name +'" value="'+ table.name +'">&nbsp;<label for="ignorable-'+ table.name +'">'+ table.name +'</label>');
+                    $("#database_ignorable_tables").append('<tr><td><input type="checkbox" id="ignored-'+ table.name +'" name="ignored" value="'+ table.name +'">&nbsp;<label for="ignored-'+ table.name +'">'+ table.name +'</label>');
                 });
             }
         });
@@ -248,3 +248,18 @@ function deleteIgnoredTable(id) {
         });
     }
 }
+
+// When there is a checkbox that when checked also checks all checkboxes in the page. An example can be found in the
+// Ignored Table form.
+$("#check-all").click(function(event) {
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;
+        });
+    }
+});

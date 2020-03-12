@@ -30,10 +30,12 @@ public class IgnoredTableController {
     }
 
     @PostMapping("/datasources/{datasourceId}/tables/ignored")
-    public String saveIgnoredTable(Model model, @PathVariable Long datasourceId, @ModelAttribute IgnoredTable ignoredTable) {
+    public String saveIgnoredTable(Model model, @PathVariable Long datasourceId, @RequestParam(value = "ignored", required = false) String[] checkedValues) {
         Datasource datasource = datasourceService.findById(datasourceId);
-        ignoredTable.setDatasource(datasource);
-        ignoredTableService.save(ignoredTable);
+        for (String tableName : checkedValues) {
+            IgnoredTable ignoredTable = new IgnoredTable(tableName, datasource);
+            ignoredTableService.save(ignoredTable);
+        }
 
         return "redirect:/datasources/{datasourceId}?tab=ignored";
     }
