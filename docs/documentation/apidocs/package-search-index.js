@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"digger"},{"l":"digger.model"},{"l":"digger.model.enums"},{"l":"digger.repository"},{"l":"digger.service"},{"l":"digger.utils"},{"l":"digger.web.controller"},{"l":"digger.web.resource"}]

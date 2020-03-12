@@ -16,6 +16,53 @@
 	<name>Digger</name>
 	<description>Given a datasource, allows the user to navigate in the data schema.</description>
 
+	<organization>
+		<name>Hildeberto.com</name>
+		<url>https://github.com/htmfilho/digger</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 2.0</name>
+			<url>https://www.eclipse.org/legal/epl-2.0/</url>
+			<distribution>repo</distribution>
+			<comments>This commercially-friendly copyleft license provides the ability to commercially license binaries;
+				a modern royalty-free patent license grant; and the ability for linked works to use other licenses,
+				including commercial ones.</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>htmfilho</id>
+			<name>Hildeberto Mendonca</name>
+			<email>me@hildeberto.com</email>
+			<url>https://www.hildeberto.com</url>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>America/Toronto</timezone>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:https://github.com/htmfilho/digger.git</connection>
+		<tag>head</tag>
+		<url>https://github.com/htmfilho/digger</url>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/htmfilho/digger/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Circle CI</system>
+		<url>https://circleci.com/gh/htmfilho/digger</url>
+		<notifiers />
+	</ciManagement>
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -55,11 +102,13 @@
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<version>7.3.1.jre8-preview</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.6</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -110,4 +159,21 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<site>
+			<id>www.hildeberto.com</id>
+			<url>scp://www.yourcompany.com/www/docs/project/</url>
+		</site>
+	</distributionManagement>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

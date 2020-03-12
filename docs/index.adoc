@@ -7,7 +7,9 @@ v0.5.0, 2019-10-14
 :toclevels: 4
 :numbered:
 
-Digger is designed to document existing databases. It is specially useful to document legacy databases, where the documentation is sparced and outdated.
+Digger is designed to document existing databases. It is specially useful to document legacy databases, where the documentation is diffuse and outdated.
+
+This documentation targets application users. If you are a developer and wants to contribute to this project, you may find the https://www.hildeberto.com/digger/documentation[technical documentation] useful.
 
 [#datasource]
 == Datasource
