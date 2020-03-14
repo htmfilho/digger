@@ -8,7 +8,7 @@ public class Column implements Comparable<Column> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name = "database_table")

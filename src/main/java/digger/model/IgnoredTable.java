@@ -15,7 +15,7 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")

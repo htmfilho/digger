@@ -9,7 +9,7 @@ public class Table implements Comparable<Table> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "datasource")
