@@ -40,7 +40,7 @@ public class ColumnController {
 
     @PostMapping("/datasources/{datasourceId}/tables/{tableId}/columns")
     public String saveColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @ModelAttribute Column column) {
-        boolean newOne = column.getId() == 0L;
+        boolean newOne = column.getId() == null;
         Table table = tableService.findById(tableId);
         column.setTable(table);
         column.setFriendlyName(text.toFirstLetterUppercase(column.getFriendlyName()));

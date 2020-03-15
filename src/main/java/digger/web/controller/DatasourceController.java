@@ -27,9 +27,17 @@ public class DatasourceController {
         return "datasource_form";
     }
 
+    @RequestMapping("/datasources/{datasourceId}/copy")
+    public String copyDatasource(Model model, @PathVariable Long datasourceId) {
+        Datasource datasource = datasourceService.findById(datasourceId);
+        datasource.setId(null);
+        model.addAttribute("datasource", datasource);
+        return "datasource_form";
+    }
+
     @PostMapping("/datasources")
     public String saveDatasource(@ModelAttribute Datasource datasource) {
-        if (datasource.getId() != 0L) {
+        if (datasource.getId() != null) {
             Datasource existingDatasource = datasourceService.findById(datasource.getId());
             datasource.setTotalTables(existingDatasource.getTotalTables());
         }
