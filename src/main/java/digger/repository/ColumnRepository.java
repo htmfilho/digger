@@ -11,4 +11,5 @@ public interface ColumnRepository extends Repository<Column, Long> {
     List<Column> findByTableOrderByNameAsc(Table table);
     List<Column> findByForeignKey(Column foreignKey);
     void save(Column column);
+    void deleteById(Long id);
 }

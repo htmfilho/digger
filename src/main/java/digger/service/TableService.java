@@ -77,6 +77,10 @@ public class TableService {
         tableRepository.save(table);
     }
 
+    public void delete(Long tableId) {
+        tableRepository.deleteById(tableId);
+    }
+
     public void updateTotalColumns(Table table, Integer totalColumns) {
         table.setTotalColumns(totalColumns);
         save(table);

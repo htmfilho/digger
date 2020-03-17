@@ -40,7 +40,7 @@ public class IgnoredTableService {
         return tables;
     }
 
-    public void deleteIgnoredTable(Long ignoredTableId) {
+    public void delete(Long ignoredTableId) {
         ignoredTableRepository.deleteById(ignoredTableId);
     }
 

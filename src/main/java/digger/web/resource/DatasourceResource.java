@@ -26,4 +26,9 @@ public class DatasourceResource {
     public Datasource getDatasource(@PathVariable Long datasourceId) {
         return this.datasourceService.findById(datasourceId);
     }
+
+    @DeleteMapping("/api/datasources/{datasourceId}")
+    public void deleteDatasource(@PathVariable Long datasourceId) {
+        datasourceService.delete(datasourceId);
+    }
 }

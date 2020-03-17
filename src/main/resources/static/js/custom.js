@@ -238,12 +238,29 @@ $("#cancel").click(function() {
 
 function deleteIgnoredTable(id) {
     if (confirm("Are you sure you want to delete it?")) {
-        let datasourceId = $("#datasource").val();
+        let pathname = window.location.pathname;
         $.ajax({
-            url: "/api/datasources/".concat(datasourceId, "/tables/ignored/", id),
+            url: "/api".concat(pathname, "/tables/ignored/", id),
             type: 'DELETE',
             success: function() {
                 $("#delete_"+ id).remove();
+            }
+        });
+    }
+}
+
+function deleteElement() {
+    if (confirm("Are you sure you want to delete it?")) {
+        let pathname = window.location.pathname;
+        let apiUrl = "/api".concat(pathname);
+        let redirectUrl = pathname.substring(0, pathname.lastIndexOf("/"));
+        console.log(apiUrl);
+        console.log(redirectUrl);
+        $.ajax({
+            url: apiUrl,
+            type: 'DELETE',
+            success: function() {
+                window.location = redirectUrl;
             }
         });
     }

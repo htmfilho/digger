@@ -85,6 +85,10 @@ public class ColumnService {
         columnRepository.save(column);
     }
 
+    public void delete(Long columnId) {
+        columnRepository.deleteById(columnId);
+    }
+
     public Column findById(Long id) {
         if(id != null)
             return columnRepository.findById(id);

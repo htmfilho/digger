@@ -19,7 +19,13 @@
                     <h1><i class="fas fa-database"></i> Datasource</h1>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/datasources/{id}/edit(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="btn-group float-right" role="group">
+                        <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
+                            <a th:href="@{/datasources/{id}/edit(id=${datasource.id})}" class="dropdown-item" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
+                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><i class="far fa-trash-alt"></i> Delete</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -39,8 +45,8 @@
                 <div class="col-2">
                     <div class="form-group">
                         <label for="description">Status</label>
-                        <div id="status" class="connected" data-toggle="tooltip" data-placement="right" title="Connected!" th:if="${datasource.status}"> <i class="fas fa-plug"></i></div>
-                        <div id="status" class="disconnected" data-toggle="tooltip" data-placement="right" title="Disconnected" th:unless="${datasource.status}"> <i class="fas fa-plug"></i></div>
+                        <div class="connected" data-toggle="tooltip" data-placement="right" title="Connected!" th:if="${datasource.status}"> <i class="fas fa-plug"></i></div>
+                        <div class="disconnected" data-toggle="tooltip" data-placement="right" title="Disconnected" th:unless="${datasource.status}"> <i class="fas fa-plug"></i></div>
                     </div>
                 </div>
             </div>
@@ -88,7 +94,7 @@
                             <h3><i class="fas fa-table"></i> Tables</h3>
                         </div>
                         <div class="col-2">
-                            <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-plus-square"></i> New</a>
+                            <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" th:if="${datasource.status}"><i class="fas fa-plus-square"></i> New</a>
                         </div>
                     </div>
         

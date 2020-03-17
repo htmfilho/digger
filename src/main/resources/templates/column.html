@@ -21,7 +21,13 @@
                     <h1><i class="fas fa-columns"></i> Column</h1>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
+                    <div class="btn-group float-right" role="group">
+                        <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
+                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="dropdown-item" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
+                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><i class="far fa-trash-alt"></i> Delete</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

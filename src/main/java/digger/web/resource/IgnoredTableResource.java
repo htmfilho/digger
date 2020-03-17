@@ -7,7 +7,6 @@ import digger.service.DatasourceService;
 import digger.service.IgnoredTableService;
 import digger.service.TableService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +43,6 @@ public class IgnoredTableResource {
 
     @DeleteMapping("/api/datasources/{datasourceId}/tables/ignored/{ignoredTableId}")
     public void deleteIgnoredTable(@PathVariable Long datasourceId, @PathVariable Long ignoredTableId) {
-        ignoredTableService.deleteIgnoredTable(ignoredTableId);
-    } 
+        ignoredTableService.delete(ignoredTableId);
+    }
 }

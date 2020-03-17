@@ -21,13 +21,13 @@ public class DatasourceController {
         this.tableService = tableService;
     }
 
-    @RequestMapping("/datasources/new")
+    @GetMapping("/datasources/new")
     public String newDatasource(Model model) {
         model.addAttribute("datasource", new Datasource());
         return "datasource_form";
     }
 
-    @RequestMapping("/datasources/{datasourceId}/copy")
+    @GetMapping("/datasources/{datasourceId}/copy")
     public String copyDatasource(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         datasource.setId(null);
