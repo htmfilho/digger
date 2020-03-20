@@ -236,36 +236,6 @@ $("#cancel").click(function() {
     window.history.back();
 });
 
-function deleteIgnoredTable(id) {
-    if (confirm("Are you sure you want to delete it?")) {
-        let pathname = window.location.pathname;
-        $.ajax({
-            url: "/api".concat(pathname, "/tables/ignored/", id),
-            type: 'DELETE',
-            success: function() {
-                $("#delete_"+ id).remove();
-            }
-        });
-    }
-}
-
-function deleteElement() {
-    if (confirm("Are you sure you want to delete it?")) {
-        let pathname = window.location.pathname;
-        let apiUrl = "/api".concat(pathname);
-        let redirectUrl = pathname.substring(0, pathname.lastIndexOf("/"));
-        console.log(apiUrl);
-        console.log(redirectUrl);
-        $.ajax({
-            url: apiUrl,
-            type: 'DELETE',
-            success: function() {
-                window.location = redirectUrl;
-            }
-        });
-    }
-}
-
 // When there is a checkbox that when checked also checks all checkboxes in the page. An example can be found in the
 // Ignored Table form.
 $("#check-all").click(function(event) {
@@ -280,3 +250,45 @@ $("#check-all").click(function(event) {
         });
     }
 });
+
+function deleteIgnoredTable(id) {
+    if (confirm("Are you sure you want to delete it?")) {
+        let pathname = window.location.pathname;
+        $.ajax({
+            url: "/api".concat(pathname, "/tables/ignored/", id),
+            type: 'DELETE',
+            success: function() {
+                $("#delete_"+ id).remove();
+            }
+        });
+    }
+}
+
+function buildSuccessRedirectUrl(pathname) {
+    let redirectUrl = pathname;
+    redirectUrl = redirectUrl.substring(0, redirectUrl.lastIndexOf("/"));
+    redirectUrl = redirectUrl.substring(0, redirectUrl.lastIndexOf("/"));
+
+    if(!redirectUrl) {
+        redirectUrl = "/"
+    }
+
+    return redirectUrl;
+}
+
+function deleteElement() {
+    if (confirm("Are you sure you want to delete it?")) {
+        let pathname = window.location.pathname;
+        let apiUrl = "/api".concat(pathname);
+        let redirectUrl = buildSuccessRedirectUrl(pathname);
+        console.log(apiUrl);
+        console.log(redirectUrl);
+        $.ajax({
+            url: apiUrl,
+            type: 'DELETE',
+            success: function() {
+                window.location = redirectUrl;
+            }
+        });
+    }
+}

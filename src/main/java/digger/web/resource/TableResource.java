@@ -42,7 +42,7 @@ public class TableResource {
     }
 
     @DeleteMapping("/api/datasources/{datasourceId}/tables/{tableId}")
-    public void deleteDatasource(@PathVariable Long datasourceId, @PathVariable Long tableId) {
+    public void deleteTable(@PathVariable Long datasourceId, @PathVariable Long tableId) {
         tableService.delete(tableId);
     }
 }
