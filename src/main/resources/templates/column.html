@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
        <title>Column - Digger</title>
     </head>
@@ -11,7 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
-                    <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}" id="table-link"></a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${column.friendlyName}"></li>
                 </ol>                
             </nav>
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="type">Type</label><br>
                         <span id="type" th:utext="${column.type}"></span> 
-                        (<span id="name" th:utext="${column.size}"></span>)
+                        (<span id="size" th:utext="${column.size}"></span>)
                     </div>
                 </div>
                 <div class="col-8">
@@ -71,7 +71,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="foreignTable">Foreign Table</label><br>
+                        <label>Foreign Table</label><br>
                         <i class="fas fa-table"></i>
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}" 
                            th:utext="${column.foreignKey.table}" id="foreign-table-link" 
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-8">
                     <div class="form-group">
-                        <label for="foreignColumn">Foreign Column</label><br>
+                        <label>Foreign Column</label><br>
                         <i class="fas fa-key"></i> 
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}" 
                            th:utext="${column.foreignKey}" id="foreign-column-link" 
