@@ -41,15 +41,15 @@
                         <div class="form-group">
                             <label for="type">Type</label>
                             <div id="type-label">-</div>
-                            <input type="hidden" name="type" id="type">
-                            <input type="hidden" name="size" id="size">
+                            <input type="hidden" name="type" id="type" th:value="${column.type}">
+                            <input type="hidden" name="size" id="size" th:value="${column.size}">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label for="nullable">Nullable</label>
                             <div id="nullable-label">-</div>
-                            <input type="hidden" name="nullable" id="nullable">
+                            <input type="hidden" name="nullable" id="nullable" th:value="${column.nullable}">
                         </div>
                     </div>
                     <div class="col-4">
