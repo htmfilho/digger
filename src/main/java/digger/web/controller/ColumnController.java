@@ -9,6 +9,7 @@ import digger.service.TableService;
 import digger.utils.Asciidoc;
 import digger.utils.Text;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class ColumnController {
     private final ColumnService columnService;
     private final Asciidoc asciidoc;
     private final Text text;
+
+    @Value("${user.guide.url}")
+    private String userGuideUrl;
 
     public ColumnController(DatasourceService datasourceService, TableService tableService, ColumnService columnService, Asciidoc asciidoc, Text text) {
         this.datasourceService = datasourceService;
@@ -35,6 +39,7 @@ public class ColumnController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", new Column());
+        model.addAttribute("userGuideUrl", userGuideUrl);
         return "column_form";
     }
 
@@ -68,6 +73,7 @@ public class ColumnController {
         column.setDocumentation(asciidoc.toHtml(column.getDocumentation()));
 
         model.addAttribute("column", column);
+        model.addAttribute("userGuideUrl", userGuideUrl);
 
         return "column";
     }
@@ -77,6 +83,7 @@ public class ColumnController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", columnService.findById(columnId));
+        model.addAttribute("userGuideUrl", userGuideUrl);
         return "column_form";
     }
 }

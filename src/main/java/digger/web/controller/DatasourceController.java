@@ -6,6 +6,7 @@ import digger.service.TableService;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ public class DatasourceController {
     private final DatasourceService datasourceService;
     private final TableService tableService;
 
+    @Value("${user.guide.url}")
+    private String userGuideUrl;
+
     public DatasourceController(DatasourceService datasourceService, TableService tableService) {
         this.datasourceService = datasourceService;
         this.tableService = tableService;
@@ -24,6 +28,7 @@ public class DatasourceController {
     @GetMapping("/datasources/new")
     public String newDatasource(Model model) {
         model.addAttribute("datasource", new Datasource());
+        model.addAttribute("userGuideUrl", userGuideUrl);
         return "datasource_form";
     }
 
@@ -56,12 +61,14 @@ public class DatasourceController {
         }
         model.addAttribute("datasource", datasource);
         model.addAttribute("progress", tableService.calculateProgress(datasource));
+        model.addAttribute("userGuideUrl", userGuideUrl);
         return "datasource";
     }
 
     @GetMapping("/datasources/{datasourceId}/edit")
     public String editDatasource(Model model, @PathVariable Long datasourceId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        model.addAttribute("userGuideUrl", userGuideUrl);
         return "datasource_form";
     }
 }
