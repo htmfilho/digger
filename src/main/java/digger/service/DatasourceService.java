@@ -34,6 +34,10 @@ public class DatasourceService {
         datasourceRepository.save(datasource);
     }
 
+    public void delete(Long datasourceId) {
+        datasourceRepository.deleteById(datasourceId);
+    }
+
     public void updateTotalTables(Datasource datasource, Integer totalTables) {
         datasource.setTotalTables(totalTables);
         save(datasource);

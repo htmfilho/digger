@@ -25,16 +25,24 @@ public class DatasourceController {
         this.tableService = tableService;
     }
 
-    @RequestMapping("/datasources/new")
+    @GetMapping("/datasources/new")
     public String newDatasource(Model model) {
         model.addAttribute("datasource", new Datasource());
         model.addAttribute("userGuideUrl", userGuideUrl);
         return "datasource_form";
     }
 
+    @GetMapping("/datasources/{datasourceId}/copy")
+    public String copyDatasource(Model model, @PathVariable Long datasourceId) {
+        Datasource datasource = datasourceService.findById(datasourceId);
+        datasource.setId(null);
+        model.addAttribute("datasource", datasource);
+        return "datasource_form";
+    }
+
     @PostMapping("/datasources")
     public String saveDatasource(@ModelAttribute Datasource datasource) {
-        if (datasource.getId() != 0L) {
+        if (datasource.getId() != null) {
             Datasource existingDatasource = datasourceService.findById(datasource.getId());
             datasource.setTotalTables(existingDatasource.getTotalTables());
         }

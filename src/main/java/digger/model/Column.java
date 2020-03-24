@@ -8,7 +8,7 @@ public class Column implements Comparable<Column> {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name = "database_table")
@@ -49,16 +49,16 @@ public class Column implements Comparable<Column> {
         this.name = name;
     }
 
-    public long getId() {
-        return id;
+    public Long getId() {
+        return this.id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public Table getTable() {
-        return table;
+        return this.table;
     }
 
     public void setTable(Table table) {
@@ -66,7 +66,7 @@ public class Column implements Comparable<Column> {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -74,7 +74,7 @@ public class Column implements Comparable<Column> {
     }
 
     public String getFriendlyName() {
-        return friendlyName;
+        return this.friendlyName;
     }
 
     public void setFriendlyName(String friendlyName) {
@@ -82,7 +82,7 @@ public class Column implements Comparable<Column> {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(String type) {
@@ -90,7 +90,7 @@ public class Column implements Comparable<Column> {
     }
 
     public Integer getSize() {
-        return size;
+        return this.size;
     }
 
     public void setSize(Integer size) {
@@ -98,7 +98,7 @@ public class Column implements Comparable<Column> {
     }
 
     public Boolean getNullable() {
-        return nullable;
+        return this.nullable;
     }
 
     public void setNullable(Boolean nullable) {
@@ -106,7 +106,7 @@ public class Column implements Comparable<Column> {
     }
 
     public String getDefaultValue() {
-        return defaultValue;
+        return this.defaultValue;
     }
 
     public void setDefaultValue(String defaultValue) {
@@ -114,7 +114,7 @@ public class Column implements Comparable<Column> {
     }
 
     public String getDocumentation() {
-        return documentation;
+        return this.documentation;
     }
 
     public void setDocumentation(String documentation) {
@@ -122,11 +122,7 @@ public class Column implements Comparable<Column> {
     }
 
     public Column getForeignKey() {
-        return foreignKey;
-    }
-
-    public void setForeignKey(Column foreignKey) {
-        this.foreignKey = foreignKey;
+        return this.foreignKey;
     }
 
     public String toString() {

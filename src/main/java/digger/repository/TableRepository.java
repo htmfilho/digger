@@ -11,4 +11,5 @@ public interface TableRepository extends Repository<Table, Long> {
     List<Table> findByDatasourceOrderByNameAsc(Datasource datasource);
     Table findByName(String name);
     void save(Table table);
+    void deleteById(Long id);
 }

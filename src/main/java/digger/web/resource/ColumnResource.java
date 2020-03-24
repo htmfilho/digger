@@ -7,10 +7,7 @@ import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -63,5 +60,10 @@ public class ColumnResource {
                                        @PathVariable Long tableId, 
                                        @PathVariable Long columnId) {
         return columnService.findByForeignKey(new Column(columnId));
+    }
+
+    @DeleteMapping("/api/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}")
+    public void deleteDatasource(@PathVariable Long columnId) {
+        columnService.delete(columnId);
     }
 }
