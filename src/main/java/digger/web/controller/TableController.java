@@ -33,12 +33,12 @@ public class TableController {
         this.text = text;
     }
 
-    @RequestMapping("/datasources/{datasourceId}/tables/new")
+    @GetMapping("/datasources/{datasourceId}/tables/new")
     public String newTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
         model.addAttribute("table", new Table());
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#new_table");
         return "table_form";
     }
 
@@ -69,7 +69,7 @@ public class TableController {
         model.addAttribute("table", table);
         
         model.addAttribute("progress", columnService.calculateProgress(table));
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#table");
 
         table.setDocumentation(asciidoc.toHtml(table.getDocumentation()));
 
@@ -80,7 +80,7 @@ public class TableController {
     public String editTable(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_table");
         return "table_form";
     }
 }

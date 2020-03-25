@@ -34,12 +34,12 @@ public class ColumnController {
         this.text = text;
     }
 
-    @RequestMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
+    @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
     public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", new Column());
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#new_column");
         return "column_form";
     }
 
@@ -73,7 +73,7 @@ public class ColumnController {
         column.setDocumentation(asciidoc.toHtml(column.getDocumentation()));
 
         model.addAttribute("column", column);
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#column");
 
         return "column";
     }
@@ -83,7 +83,7 @@ public class ColumnController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", columnService.findById(columnId));
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_column");
         return "column_form";
     }
 }

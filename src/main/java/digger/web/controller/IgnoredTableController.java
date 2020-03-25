@@ -5,7 +5,6 @@ import digger.model.IgnoredTable;
 import digger.service.DatasourceService;
 import digger.service.IgnoredTableService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,12 +24,12 @@ public class IgnoredTableController {
         this.ignoredTableService = ignoredTableService;
     }
 
-    @RequestMapping("/datasources/{datasourceId}/tables/ignored/new")
+    @GetMapping("/datasources/{datasourceId}/tables/ignored/new")
     public String newIgnoredTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
         model.addAttribute("ignoredTable", new IgnoredTable());
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#new_ignored_table");
         return "ignored_table_form";
     }
 
@@ -54,7 +53,7 @@ public class IgnoredTableController {
         IgnoredTable ignoredTable = ignoredTableService.findById(ignoredTableId);
         if(ignoredTable == null) return "redirect:/datasources/{datasourceId}";
         model.addAttribute("ignoredTable", ignoredTable);
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#ignored_table");
 
         return "ignored_table";
     }
@@ -63,7 +62,7 @@ public class IgnoredTableController {
     public String editIgnoredTable(Model model, @PathVariable Long datasourceId, @PathVariable Long ignoredTableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("ignoredTable", ignoredTableService.findById(ignoredTableId));
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_ignored_table");
         return "ignored_table_form";
     }
 }

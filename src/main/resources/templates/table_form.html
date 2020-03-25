@@ -6,7 +6,7 @@
 
     <body>
         <section>
-            <div><a href="http://www.hildeberto.com/digger/#new_table" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
 
             <h1><i class="fas fa-table"></i> Table</h1>
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables(datasourceId=${datasource.id})}">
