@@ -4,12 +4,18 @@ import digger.model.Datasource;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class DatasourceController {
@@ -62,5 +68,21 @@ public class DatasourceController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("userGuideUrl", userGuideUrl + "#edit_datasource");
         return "datasource_form";
+    }
+
+    @GetMapping("/datasources/{datasourceId}/documentation")
+    public void documentDatasource(HttpServletRequest request, HttpServletResponse response, @PathVariable Long datasourceId) {
+        Datasource datasource = datasourceService.findById(datasourceId);
+        datasourceService.generatePdfDocument(datasource);
+        //Path file = //Paths.get(dataDirectory, fileName);
+        //response.setContentType("application/pdf");
+        //response.addHeader("Content-Disposition", "attachment; filename="+ datasource.getName() +".pdf");
+        /*try {
+            Files.copy(file, response.getOutputStream());
+            response.getOutputStream().flush();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }*/
     }
 }
