@@ -43,26 +43,4 @@ public class IgnoredTableController {
 
         return "redirect:/datasources/{datasourceId}?tab=ignored";
     }
-
-    @GetMapping("/datasources/{datasourceId}/tables/ignored/{ignoredTableId}")
-    public String openIgnoredTable(Model model, @PathVariable Long datasourceId, @PathVariable Long ignoredTableId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        if(datasource == null) return "redirect:/";
-        model.addAttribute("datasource", datasource);
-
-        IgnoredTable ignoredTable = ignoredTableService.findById(ignoredTableId);
-        if(ignoredTable == null) return "redirect:/datasources/{datasourceId}";
-        model.addAttribute("ignoredTable", ignoredTable);
-        model.addAttribute("userGuideUrl", userGuideUrl + "#ignored_table");
-
-        return "ignored_table";
-    }
-
-    @GetMapping("/datasources/{datasourceId}/tables/ignored/{ignoredTableId}/edit")
-    public String editIgnoredTable(Model model, @PathVariable Long datasourceId, @PathVariable Long ignoredTableId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("ignoredTable", ignoredTableService.findById(ignoredTableId));
-        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_ignored_table");
-        return "ignored_table_form";
-    }
 }

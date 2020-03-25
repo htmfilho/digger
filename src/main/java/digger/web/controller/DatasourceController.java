@@ -32,15 +32,6 @@ public class DatasourceController {
         return "datasource_form";
     }
 
-    @GetMapping("/datasources/{datasourceId}/copy")
-    public String copyDatasource(Model model, @PathVariable Long datasourceId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        datasource.setId(null);
-        model.addAttribute("datasource", datasource);
-        model.addAttribute("userGuideUrl", userGuideUrl + "#copy_datasource");
-        return "datasource_form";
-    }
-
     @PostMapping("/datasources")
     public String saveDatasource(@ModelAttribute Datasource datasource) {
         if (datasource.getId() != null) {
