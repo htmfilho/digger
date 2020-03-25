@@ -6,10 +6,10 @@
 
     <body>
         <section>
-            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${table.friendlyName}"></li>
                 </ol>
@@ -17,14 +17,14 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h1><i class="fas fa-table"></i> Table</h1>
+                    <h1><img src="/images/table.svg"> Table</h1>
                 </div>
                 <div class="col-2">
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><i class="far fa-trash-alt"></i> Delete</a>
+                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
+                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a>
                         </div>
                     </div>
                 </div>

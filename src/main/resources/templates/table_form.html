@@ -6,9 +6,9 @@
 
     <body>
         <section>
-            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
 
-            <h1><i class="fas fa-table"></i> Table</h1>
+            <h1><img src="/images/table.svg"> Table</h1>
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables(datasourceId=${datasource.id})}">
                 <input type="hidden" id="id" name="id" th:value="${table.id}"/>
 
