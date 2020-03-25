@@ -28,7 +28,7 @@ public class DatasourceController {
     @GetMapping("/datasources/new")
     public String newDatasource(Model model) {
         model.addAttribute("datasource", new Datasource());
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#new_datasource");
         return "datasource_form";
     }
 
@@ -37,6 +37,7 @@ public class DatasourceController {
         Datasource datasource = datasourceService.findById(datasourceId);
         datasource.setId(null);
         model.addAttribute("datasource", datasource);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#copy_datasource");
         return "datasource_form";
     }
 
@@ -61,14 +62,14 @@ public class DatasourceController {
         }
         model.addAttribute("datasource", datasource);
         model.addAttribute("progress", tableService.calculateProgress(datasource));
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#datasource");
         return "datasource";
     }
 
     @GetMapping("/datasources/{datasourceId}/edit")
     public String editDatasource(Model model, @PathVariable Long datasourceId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("userGuideUrl", userGuideUrl);
+        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_datasource");
         return "datasource_form";
     }
 }
