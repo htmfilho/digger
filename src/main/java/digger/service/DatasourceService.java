@@ -43,19 +43,6 @@ public class DatasourceService {
         save(datasource);
     }
 
-    public String generateDocument(Datasource datasource) {
-        String asciidoc = generateAsciidoc(datasource);
-        return generatePdfDocument(asciidoc);
-    }
-
-    private String generateAsciidoc(Datasource datasource) {
-
-    }
-
-    private String generatePdfDocument(String asciidoc) {
-
-    }
-
     public Boolean testConnection(Datasource datasource) throws SQLException {
         return (getConnection(datasource) != null);
     }

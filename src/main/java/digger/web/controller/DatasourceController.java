@@ -1,7 +1,9 @@
 package digger.web.controller;
 
+import digger.adapter.SupportedFormat;
 import digger.model.Datasource;
 import digger.service.DatasourceService;
+import digger.service.DocumentationService;
 import digger.service.TableService;
 
 import java.io.IOException;
@@ -22,13 +24,15 @@ public class DatasourceController {
 
     private final DatasourceService datasourceService;
     private final TableService tableService;
+    private final DocumentationService documentationService;
 
     @Value("${user.guide.url}")
     private String userGuideUrl;
 
-    public DatasourceController(DatasourceService datasourceService, TableService tableService) {
+    public DatasourceController(DatasourceService datasourceService, TableService tableService, DocumentationService documentationService) {
         this.datasourceService = datasourceService;
         this.tableService = tableService;
+        this.documentationService = documentationService;
     }
 
     @GetMapping("/datasources/new")
@@ -73,16 +77,17 @@ public class DatasourceController {
     @GetMapping("/datasources/{datasourceId}/documentation")
     public void documentDatasource(HttpServletRequest request, HttpServletResponse response, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
-        datasourceService.generatePdfDocument(datasource);
+        Path htmlDocument = documentationService.generateHTMLDocument(datasource, SupportedFormat.ASCIIDOC);
         //Path file = //Paths.get(dataDirectory, fileName);
-        //response.setContentType("application/pdf");
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
         //response.addHeader("Content-Disposition", "attachment; filename="+ datasource.getName() +".pdf");
-        /*try {
-            Files.copy(file, response.getOutputStream());
+        try {
+            Files.copy(htmlDocument, response.getOutputStream());
             response.getOutputStream().flush();
         }
         catch (IOException ex) {
             ex.printStackTrace();
-        }*/
+        }
     }
 }
