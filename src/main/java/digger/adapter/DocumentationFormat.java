@@ -5,12 +5,18 @@ import digger.model.Datasource;
 import digger.model.IgnoredTable;
 import digger.model.Table;
 
+import java.nio.file.Path;
+
 public interface DocumentationFormat {
-    String applyFormatToColumn(Column column);
+    String applyFormatToDatasource(Datasource datasource);
 
     String applyFormatToTable(Table table);
 
-    String applyFormatToDatasource(Datasource datasource);
+    String applyFormatToColumn(Column column);
 
     String applyFormatToIgnoredTable(IgnoredTable ignoredTable);
+
+    String generateHTMLDocument(String content);
+
+    Path generatePdfDocument(String content);
 }

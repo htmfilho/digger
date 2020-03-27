@@ -24,12 +24,12 @@ public class DocumentationService {
         this.ignoredTableService = ignoredTableService;
     }
 
-    public Path generateHTMLDocument(Datasource datasource, SupportedFormat format) {
+    public String generateHTMLDocument(Datasource datasource, SupportedFormat format) {
         String content = generateContent(datasource, format);
-        return null;
+        return format.getDocumentationFormat().generateHTMLDocument(content);
     }
 
-    public File generatePdfDocument(Datasource datasource, SupportedFormat format) {
+    public Path generatePdfDocument(Datasource datasource, SupportedFormat format) {
         String content = generateContent(datasource, format);
         return null;
     }
