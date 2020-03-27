@@ -8,14 +8,6 @@ import static org.junit.Assert.*;
 public class AsciidocFormatTest {
 
     @Test
-    public void applyFormatToColumn() {
-    }
-
-    @Test
-    public void applyFormatToTable() {
-    }
-
-    @Test
     public void applyFormatToDatasource() {
         Datasource datasource = new Datasource();
         datasource.setName("Datasource");
@@ -23,6 +15,14 @@ public class AsciidocFormatTest {
 
         String content = datasource.getFormattedDocumentation(SupportedFormat.ASCIIDOC);
         System.out.println(content);
+    }
+
+    @Test
+    public void applyFormatToTable() {
+    }
+
+    @Test
+    public void applyFormatToColumn() {
     }
 
     @Test

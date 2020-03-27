@@ -74,16 +74,31 @@ public class DatasourceController {
         return "datasource_form";
     }
 
-    @GetMapping("/datasources/{datasourceId}/documentation")
-    public void documentDatasource(HttpServletRequest request, HttpServletResponse response, @PathVariable Long datasourceId) {
+    @GetMapping("/datasources/{datasourceId}/documentation/html")
+    public void getHtmlDocument(HttpServletRequest request, HttpServletResponse response, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
-        Path htmlDocument = documentationService.generateHTMLDocument(datasource, SupportedFormat.ASCIIDOC);
+        String htmlDocument = documentationService.generateHTMLDocument(datasource, SupportedFormat.ASCIIDOC);
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            response.getOutputStream().write(htmlDocument.getBytes());
+            response.getOutputStream().flush();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @GetMapping("/datasources/{datasourceId}/documentation/pdf")
+    public void getPdfDocument(HttpServletRequest request, HttpServletResponse response, @PathVariable Long datasourceId) {
+        Datasource datasource = datasourceService.findById(datasourceId);
+        Path pdfDocument = documentationService.generatePdfDocument(datasource, SupportedFormat.ASCIIDOC);
         //Path file = //Paths.get(dataDirectory, fileName);
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         //response.addHeader("Content-Disposition", "attachment; filename="+ datasource.getName() +".pdf");
         try {
-            Files.copy(htmlDocument, response.getOutputStream());
+            Files.copy(pdfDocument, response.getOutputStream());
             response.getOutputStream().flush();
         }
         catch (IOException ex) {
