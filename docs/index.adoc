@@ -1,6 +1,6 @@
 = Digger : User Guide
 Hildeberto Mendonca <me@hildeberto.com>
-v0.5.0, 2019-10-14
+v0.5.0, 2020-03-24
 :doctype: book
 :encoding: utf-8
 :toc: left
@@ -22,6 +22,9 @@ Datasource is a reference to an existing database that we intend to document. A 
 
 [#edit_datasource]
 === Editing a Datasource
+
+[#copy_datasource]
+=== Copying a Datasource
 
 [#table]
 == Table

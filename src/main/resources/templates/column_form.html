@@ -6,7 +6,7 @@
 
     <body>
         <section>
-            <div><a href="http://www.hildeberto.com/digger/#new_column" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
 
             <h1><i class="fas fa-columns"></i> Column</h1>
 
@@ -41,15 +41,15 @@
                         <div class="form-group">
                             <label for="type">Type</label>
                             <div id="type-label">-</div>
-                            <input type="hidden" name="type" id="type">
-                            <input type="hidden" name="size" id="size">
+                            <input type="hidden" name="type" id="type" th:value="${column.type}">
+                            <input type="hidden" name="size" id="size" th:value="${column.size}">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label for="nullable">Nullable</label>
                             <div id="nullable-label">-</div>
-                            <input type="hidden" name="nullable" id="nullable">
+                            <input type="hidden" name="nullable" id="nullable" th:value="${column.nullable}">
                         </div>
                     </div>
                     <div class="col-4">

@@ -6,10 +6,10 @@
 
     <body>
         <section>
-            <div><a href="http://www.hildeberto.com/digger/#column" class="float-right help" target="_blank"><i class="far fa-question-circle"></i></a></div>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
             <nav aria-label="breadcrumb">                
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${column.friendlyName}"></li>
@@ -24,8 +24,8 @@
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="dropdown-item" role="button" aria-pressed="true"><i class="fas fa-edit"></i> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><i class="far fa-trash-alt"></i> Delete</a>
+                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
+                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a>
                         </div>
                     </div>
                 </div>
@@ -60,10 +60,16 @@
                         (<span id="size" th:utext="${column.size}"></span>)
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-4">
                     <div class="form-group">
                         <label for="defaultValue">Default Value</label>
                         <div id="defaultValue" th:utext="${column.defaultValue}"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="defaultValue">Nullable</label>
+                        <div id="nullable" th:utext="${column.nullable}"></div>
                     </div>
                 </div>
             </div>

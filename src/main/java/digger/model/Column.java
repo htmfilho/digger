@@ -97,6 +97,10 @@ public class Column implements Comparable<Column> {
         this.size = size;
     }
 
+    public Boolean getNullable() {
+        return this.nullable;
+    }
+
     public void setNullable(Boolean nullable) {
         this.nullable = nullable;
     }

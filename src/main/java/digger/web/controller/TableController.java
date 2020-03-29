@@ -8,6 +8,7 @@ import digger.service.TableService;
 import digger.utils.Asciidoc;
 import digger.utils.Text;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class TableController {
     private final Asciidoc asciidoc;
     private final Text text;
 
+    @Value("${user.guide.url}")
+    private String userGuideUrl;
+
     public TableController(DatasourceService datasourceService, TableService tableService, ColumnService columnService, Asciidoc asciidoc, Text text) {
         this.datasourceService = datasourceService;
         this.tableService = tableService;
@@ -29,11 +33,12 @@ public class TableController {
         this.text = text;
     }
 
-    @RequestMapping("/datasources/{datasourceId}/tables/new")
+    @GetMapping("/datasources/{datasourceId}/tables/new")
     public String newTable(Model model, @PathVariable Long datasourceId) {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
         model.addAttribute("table", new Table());
+        model.addAttribute("userGuideUrl", userGuideUrl + "#new_table");
         return "table_form";
     }
 
@@ -64,6 +69,7 @@ public class TableController {
         model.addAttribute("table", table);
         
         model.addAttribute("progress", columnService.calculateProgress(table));
+        model.addAttribute("userGuideUrl", userGuideUrl + "#table");
 
         table.setDocumentation(asciidoc.toHtml(table.getDocumentation()));
 
@@ -74,6 +80,7 @@ public class TableController {
     public String editTable(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
+        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_table");
         return "table_form";
     }
 }
