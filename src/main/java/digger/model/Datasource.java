@@ -1,5 +1,8 @@
 package digger.model;
 
+import digger.adapter.DocumentationFormat;
+import digger.adapter.SupportedFormat;
+
 import javax.persistence.*;
 import javax.persistence.Column;
 
@@ -110,5 +113,10 @@ public class Datasource {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getFormattedDocumentation(SupportedFormat format) {
+        DocumentationFormat documentationFormat = format.getDocumentationFormat();
+        return documentationFormat.applyFormatToDatasource(this);
     }
 }

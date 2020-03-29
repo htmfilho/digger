@@ -21,4 +21,8 @@ public class Text {
         }
         return output.toString();
     }
+
+    public String emptyIfNull(String value) {
+        return value == null ? "" : value;
+    }
 }
