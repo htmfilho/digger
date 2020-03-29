@@ -218,6 +218,12 @@ $(function() {
     $("table").addClass("table");
 });
 
+$(function() {
+    const now = new Date();
+    const year = now.getFullYear();
+    $("#current-year").html(year);
+});
+
 $("#database-table-name").change(function() {
     loadTableAttributes($(this));
 });
