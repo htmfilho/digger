@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Login - Digger</title>
+</head>
+
+<body>
+    <section>
+        <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
+
+        <h1>
+            <svg class="bi bi-lock-fill" width="40px" height="40px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <rect width="11" height="9" x="2.5" y="7" rx="2"/>
+                <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
+            </svg> Login
+        </h1>
+
+        <br>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <form method="POST" th:action="@{/login}">
+                    <div class="form-group">
+                        <label for="username"> Username</label>
+                        <input type="text" name="username" id="username" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"> Password</label>
+                        <input type="text" name="password" id="password" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="login"><i class="fas fa-save"></i> Login</button>
+                    <a class="btn btn-secondary" href="/" role="button"><i class="far fa-window-close"></i> Cancel</a>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
