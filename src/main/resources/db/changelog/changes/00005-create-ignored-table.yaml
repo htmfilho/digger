@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: htmfilho
+      changes:
+        - createTable:
+            tableName: ignored_table
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: datasource
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: datasource
+            baseTableName: ignored_table
+            constraintName: fk_datasource_ignored_table
+            referencedColumnNames: id
+            referencedTableName: datasource

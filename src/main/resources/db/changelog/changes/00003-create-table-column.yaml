@@ -1,0 +1,72 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: htmfilho
+      changes:
+        - createTable:
+            tableName: table_column
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: database_table
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: friendly_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: type
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: nullable
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: default_value
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: documentation
+                  type: clob
+                  constraints:
+                    nullable: true
+              - column:
+                  name: foreign_key
+                  type: bigint
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseColumnNames: database_table
+            baseTableName: table_column
+            constraintName: fk_table_column
+            referencedColumnNames: id
+            referencedTableName: database_table
+        - addForeignKeyConstraint:
+            baseColumnNames: foreign_key
+            baseTableName: table_column
+            constraintName: fk_column_foreign_key
+            referencedColumnNames: id
+            referencedTableName: table_column
