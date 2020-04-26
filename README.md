@@ -73,6 +73,15 @@ To generate the project documentation:
 
     $ mvn site:stage -DstagingDirectory=${basedir}/docs/project
 
+### Technologies in Use
+
+ - [Spring MVC]
+ - [Spring Security]
+ - [Thymeleaf]
+
 [user guide]: https://www.hildeberto.com/digger/
 [project documentation]: https://www.hildeberto.com/digger/project/
 [releases]: https://github.com/htmfilho/digger/releases
+[Spring MVC]: https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html
+[Spring Security]: https://spring.io/projects/spring-security
+[Thymeleaf]: http://www.thymeleaf.org
