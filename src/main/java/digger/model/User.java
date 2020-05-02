@@ -1,11 +1,24 @@
 package digger.model;
 
+import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
     private String username;
+
+    @Column
     private String password;
-    private String confirmPassword;
+
+    @Column
     private Boolean enabled;
+
+    @Transient
+    private String confirmPassword;
 
     public User() {}
 

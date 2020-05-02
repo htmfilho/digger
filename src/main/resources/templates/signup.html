@@ -16,6 +16,9 @@
         </h1>
 
         <br>
+        <p th:unless="${#thereIsNoUser}">You are the first user of Digger. The role of administrator will be automatically assigned to you.</p>
+        <p th:if="${#thereIsNoUser}">Register yourself as a reader of database documentations. Your registration is still subject of approval.</p>
+
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <form method="POST" th:action="@{/users/new}">
