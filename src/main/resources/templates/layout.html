@@ -41,6 +41,8 @@
                                     <input class="dropdown-item" type="submit" value="Logout"/>
                                 </form>
                                 <a class="dropdown-item" href="/login" th:unless="${#httpServletRequest.remoteUser}">Login</a>
+                                <div class="dropdown-divider" th:unless="${#httpServletRequest.remoteUser}"></div>
+                                <a class="dropdown-item" href="/signup" th:unless="${#httpServletRequest.remoteUser}">Sign Up</a>
                             </div>
                         </li>
                     </ul>

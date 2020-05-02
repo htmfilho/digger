@@ -18,12 +18,6 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl);
-        return "login";
-    }
-
     @GetMapping("/error")
     public String error(Model model) {
         model.addAttribute("userGuideUrl", userGuideUrl);
