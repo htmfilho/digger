@@ -21,10 +21,10 @@
 
         <div class="card" style="width: 32rem;">
             <div class="card-body">
-                <form method="POST" th:action="@{/users/new}">
+                <form method="POST" id="signupForm" th:action="@{/users/new}">
                     <div class="form-group">
                         <label for="username"> Email</label>
-                        <input type="text" name="username" id="username" class="form-control" required>
+                        <input type="email" name="username" id="username" class="form-control" required>
                     </div>
 
                     <div class="row">
