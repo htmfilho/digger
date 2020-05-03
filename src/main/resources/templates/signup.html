@@ -24,8 +24,10 @@
                 <form method="POST" id="signupForm" th:action="@{/users/new}">
                     <div class="form-group">
                         <label for="username"> Email</label>
-                        <input type="email" name="username" id="username" class="form-control" required>
+                        <input type="email" name="username" id="username" class="form-control" th:value="${user.username}" required>
                     </div>
+
+                    <p id="emailError" class="error" th:if="${emailError}" th:text="${emailError}"></p>
 
                     <div class="row">
                         <div class="col-6">
@@ -41,6 +43,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <span id="confirmPasswordError" class="error"></span>
 
                     <button type="submit" class="btn btn-primary" id="login">
                         <svg class="bi bi-person-plus-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

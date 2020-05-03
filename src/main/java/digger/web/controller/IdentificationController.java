@@ -32,6 +32,7 @@ public class IdentificationController {
 
     @GetMapping("/signup")
     public String signup(Model model) {
+        model.addAttribute("user", new User());
         model.addAttribute("userGuideUrl", userGuideUrl);
         model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
         return "signup";
@@ -39,10 +40,19 @@ public class IdentificationController {
 
     @PostMapping("/users/new")
     public String newUser(Model model, @ModelAttribute User user) {
-        if(this.userService.thereIsNoUser())
-            userService.saveAdmin(user.getUsername(), user.getPassword());
-        else
-            userService.saveReader(user.getUsername(), user.getPassword());
+        try {
+            if(this.userService.thereIsNoUser())
+                userService.saveAdmin(user.getUsername(), user.getPassword());
+            else
+                userService.saveReader(user.getUsername(), user.getPassword());
+            
+        } catch (RuntimeException re) {
+            model.addAttribute("user", user);
+            model.addAttribute("userGuideUrl", userGuideUrl);
+            model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
+            model.addAttribute("emailError", "User with email '"+ user.getUsername() +"' already exists.");
+            return "signup";
+        }
         return "redirect:/";
     }
 }

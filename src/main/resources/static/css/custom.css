@@ -22,3 +22,7 @@ label {
     font-size: 22px;
     color: #ff0000
 }
+
+.error {
+    color: #ff0000;
+}
