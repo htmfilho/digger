@@ -16,33 +16,38 @@
         </h1>
 
         <br>
-        <p th:unless="${#thereIsNoUser}">You are the first user of Digger. The role of administrator will be automatically assigned to you.</p>
-        <p th:if="${#thereIsNoUser}">Register yourself as a reader of database documentations. Your registration is still subject of approval.</p>
+        <p th:if="${thereIsNoUser} == true">You are the first user of Digger. The role of administrator will be automatically assigned to you.</p>
+        <p th:if="${thereIsNoUser} == false">Register as a reader of database documentations. Your registration is subject of approval.</p>
 
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 32rem;">
             <div class="card-body">
                 <form method="POST" th:action="@{/users/new}">
                     <div class="form-group">
-                        <label for="username"> Username</label>
-                        <input type="text" name="username" id="username" class="form-control">
+                        <label for="username"> Email</label>
+                        <input type="text" name="username" id="username" class="form-control" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password"> Password</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmPassword"> Confirm Password</label>
-                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="password"> Password</label>
+                                <input type="password" name="password" id="password" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="confirmPassword"> Confirm Password</label>
+                                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required>
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary" id="login">
-                        <svg class="bi bi-lock-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="11" height="9" x="2.5" y="7" rx="2"/>
-                            <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
+                        <svg class="bi bi-person-plus-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 100-6 3 3 0 000 6zm7.5-3a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13V5.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M13 7.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
                         </svg>
-                        Login
+                        Register
                     </button>
                     <a class="btn btn-secondary" href="/" role="button">
                         <svg class="bi bi-x-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
