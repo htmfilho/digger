@@ -50,7 +50,7 @@ public class IdentificationController {
             model.addAttribute("user", user);
             model.addAttribute("userGuideUrl", userGuideUrl);
             model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
-            model.addAttribute("emailError", "User with email '"+ user.getUsername() +"' already exists.");
+            model.addAttribute("emailError", "A user with email '"+ user.getUsername() +"' already exists.");
             return "signup";
         }
         return "redirect:/";
