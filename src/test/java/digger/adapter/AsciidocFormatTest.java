@@ -3,8 +3,6 @@ package digger.adapter;
 import digger.model.Datasource;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class AsciidocFormatTest {
 
     @Test

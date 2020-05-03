@@ -2,7 +2,6 @@ package digger.web.resource;
 
 import digger.model.Datasource;
 import digger.service.DatasourceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
