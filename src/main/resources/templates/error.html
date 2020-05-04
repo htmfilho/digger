@@ -4,9 +4,9 @@
        <title>Error - Digger</title>
     </head>
 
-    <body>
-        <section>
-            <h1>Error</h1>
-        </section>
+    <body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+        <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
+        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+        <a href="/">Back to Home Page</a>
     </body>
 </html>
