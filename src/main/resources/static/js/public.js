@@ -27,3 +27,7 @@ if(signupForm != null) {
         }
     });
 }
+
+setTimeout(function() {
+    $("#messages").fadeOut("slow");
+}, 3000);
