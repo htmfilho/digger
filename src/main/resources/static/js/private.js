@@ -39,6 +39,19 @@ $(function() {
     }
 });
 
+$(function() {
+    if ($("#users").length != 0) {
+        $.ajax({
+            url: "/admin/api/users",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#users").append('<tr><td><a href="/admin/users/'+ element.username +'">'+ element.username +'</a></td><td>'+ element.enabled +'</td></tr>');
+                });
+            }
+        });
+    }
+});
+
 /* Load documented columns in the table page. */
 $(function() {
     if ($("#table-columns").length != 0) {

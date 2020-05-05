@@ -1,6 +1,9 @@
 package digger.service;
 
 import digger.repository.UserRepository;
+
+import java.util.List;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -21,6 +24,10 @@ public class UserService {
 
     public boolean thereIsNoUser() {
         return userRepository.countAllByEnabled(true) == 0;
+    }
+
+    public List<digger.model.User> findAll() {
+        return userRepository.findAll();
     }
 
     public void saveAdmin(String username, String password) {
