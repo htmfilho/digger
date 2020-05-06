@@ -45,7 +45,7 @@ $(function() {
             url: "/admin/api/users",
             success: function(result) {
                 result.forEach(element => {
-                    $("#users").append('<tr><td><a href="/admin/users/'+ element.username +'">'+ element.username +'</a></td><td><img src="/images/'+ element.enabled +'.svg"></td></tr>');
+                    $("#users").append('<tr><td><a href="/admin/users/'+ element.username +'">'+ element.username +'</a></td><td><input type="checkbox" id="enabled-'+ element.username +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
                 });
             }
         });
@@ -281,6 +281,14 @@ function deleteIgnoredTable(id) {
             }
         });
     }
+}
+
+function enableUser(username, field) {
+    $.ajax({
+        url: "/admin/api/users",
+        type: "POST",
+        data: {username: username}
+    });
 }
 
 function buildSuccessRedirectUrl(pathname) {

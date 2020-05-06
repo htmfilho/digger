@@ -21,4 +21,10 @@ public class UserResource {
     public List<User> getUsers() {
         return this.userService.findAll();
     }
+
+    @PostMapping(value = "admin/api/users")
+    public void saveUser(@RequestParam(value = "username", defaultValue = "") String username) {
+        User user = userService.findByUsername(username);
+        userService.enableOrDisableUser(user);
+    }
 }

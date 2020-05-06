@@ -30,6 +30,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public digger.model.User findByUsername(String username) {
+        return userRepository.findById(username);
+    }
+
     public void saveAdmin(String username, String password) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = User.builder()
@@ -59,5 +63,10 @@ public class UserService {
                 .disabled(true)
                 .build();
         this.userDetailsManager.createUser(user);
+    }
+
+    public void enableOrDisableUser(digger.model.User user) {
+        user.setEnabled(!user.getEnabled());
+        userRepository.save(user);
     }
 }

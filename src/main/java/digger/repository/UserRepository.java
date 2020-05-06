@@ -9,4 +9,6 @@ import org.springframework.data.repository.Repository;
 public interface UserRepository extends Repository<User, String> {
     Long countAllByEnabled(Boolean enabled);
     List<User> findAll();
+    User findById(String username);
+    void save(User user);
 }
