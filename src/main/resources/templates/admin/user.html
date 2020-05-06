@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+       <title>User - Administration - Digger</title>
+    </head>
+
+    <body>
+        <section>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
+                    <li class="breadcrumb-item"><a href="/admin">Administration</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/users">Users</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" th:utext="${user.username}"></li>
+                </ol>
+            </nav>
+
+            <h1>User</h1>
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div id="username" th:utext="${user.username}"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="enabled">Enabled</label>
+                        <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${user.enabled})}"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
