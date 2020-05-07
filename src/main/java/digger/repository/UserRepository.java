@@ -6,9 +6,10 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-public interface UserRepository extends Repository<User, String> {
+public interface UserRepository extends Repository<User, Long> {
     Long countAllByEnabled(Boolean enabled);
     List<User> findAll();
-    User findById(String username);
+    User findById(long id);
+    User findByUsername(String username);
     void save(User user);
 }

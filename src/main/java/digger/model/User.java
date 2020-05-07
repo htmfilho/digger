@@ -9,6 +9,10 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
     private String username;
 
     @Column
@@ -22,6 +26,10 @@ public class User {
 
     public User() {}
 
+    public User(long id) {
+        this.id = id;
+    }
+
     public User(String username) {
         this.username = username;
     }
@@ -30,6 +38,14 @@ public class User {
         this.username = username;
         this.password = password;
         this.enabled = false;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

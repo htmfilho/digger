@@ -30,8 +30,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public digger.model.User findById(Long id) {
+        return userRepository.findById(id);
+    }
+
     public digger.model.User findByUsername(String username) {
-        return userRepository.findById(username);
+        return userRepository.findByUsername(username);
     }
 
     public void saveAdmin(String username, String password) {
