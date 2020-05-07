@@ -16,7 +16,7 @@ public class IdentificationController {
 
     private static final Logger log = LoggerFactory.getLogger(IdentificationController.class.getName());
 
-    private UserService userService;
+    private final UserService userService;
 
     public IdentificationController(UserService userService) {
         this.userService = userService;

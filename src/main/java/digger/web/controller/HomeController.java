@@ -11,7 +11,7 @@ import digger.service.UserService;
 @Controller
 public class HomeController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public HomeController(UserService userService) {
         this.userService = userService;

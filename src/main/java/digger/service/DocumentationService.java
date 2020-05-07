@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class DocumentationService {
 
-    private TableService tableService;
-    private ColumnService columnService;
-    private IgnoredTableService ignoredTableService;
+    private final TableService tableService;
+    private final ColumnService columnService;
+    private final IgnoredTableService ignoredTableService;
 
     public DocumentationService(TableService tableService, ColumnService columnService, IgnoredTableService ignoredTableService) {
         this.tableService = tableService;
