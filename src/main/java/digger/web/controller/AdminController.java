@@ -5,16 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import digger.model.Role;
 import digger.model.User;
+import digger.service.RoleService;
 import digger.service.UserService;
 
 @Controller
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @Value("${user.guide.url}")
@@ -32,10 +36,12 @@ public class AdminController {
         return "admin/users";
     }
 
-    @GetMapping("/admin/users/{username}")
-    public String openUser(Model model, @PathVariable String username) {
-        User user = userService.findByUsername(username);
+    @GetMapping("/admin/users/{id}")
+    public String openUser(Model model, @PathVariable Long id) {
+        User user = userService.findById(id);
+        Role role = roleService.findByUsername(user.getUsername());
         model.addAttribute("user", user);
+        model.addAttribute("role", role);
         return "admin/user";
     }
 }

@@ -19,13 +19,19 @@
             <h1>User</h1>
 
             <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <div id="username" th:utext="${user.username}"></div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="enabled">Role</label>
+                        <div id="role" th:utext="${role.authority}"></div>
+                    </div>
+                </div>
+                <div class="col-3">
                     <div class="form-group">
                         <label for="enabled">Enabled</label>
                         <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${user.enabled})}"></div>
