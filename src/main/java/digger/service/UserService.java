@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public List<digger.model.User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAllByOrderByUsernameAsc();
     }
 
     public digger.model.User findById(Long id) {

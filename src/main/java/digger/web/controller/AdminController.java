@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import digger.model.Role;
 import digger.model.User;
+import digger.model.UserDTO;
 import digger.service.RoleService;
 import digger.service.UserService;
 
@@ -40,8 +41,8 @@ public class AdminController {
     public String openUser(Model model, @PathVariable Long id) {
         User user = userService.findById(id);
         Role role = roleService.findByUsername(user.getUsername());
-        model.addAttribute("user", user);
-        model.addAttribute("role", role);
+        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role);
+        model.addAttribute("user", userDTO);
         return "admin/user";
     }
 }
