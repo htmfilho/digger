@@ -1,5 +1,7 @@
 package digger.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,5 +46,17 @@ public class AdminController {
         UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role);
         model.addAttribute("user", userDTO);
         return "admin/user";
+    }
+
+    @GetMapping("/admin/users/{id}/edit")
+    public String editUser(Model model, @PathVariable Long id) {
+        User user = userService.findById(id);
+        Role role = roleService.findByUsername(user.getUsername());
+        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role);
+        model.addAttribute("user", userDTO);
+        
+        List<Role> roles = roleService.findAllRoles();
+        model.addAttribute("roles", roles);
+        return "admin/user_form";
     }
 }
