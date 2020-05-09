@@ -3,8 +3,6 @@ package digger.service;
 import digger.model.Role;
 import digger.repository.RoleRepository;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +18,7 @@ public class RoleService {
         return this.roleRepository.findByUsername(username);
     }
 
-    public List<Role> findAllRoles() {
-        return this.roleRepository.findAll();
-    } 
+    public void save(Role role) {
+        this.roleRepository.save(role);
+    }
 }

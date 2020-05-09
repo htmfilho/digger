@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+       <title>User - Administration - Digger</title>
+    </head>
+
+    <body>
+        <section>
+            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
+                    <li class="breadcrumb-item"><a href="/admin">Administration</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/users">Users</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" th:utext="${user.username}"></li>
+                </ol>
+            </nav>
+
+            <h1>User</h1>
+
+            <form method="POST" th:action="@{/admin/users}">
+                <input type="hidden" name="id" id="id" th:value="${user.id}">
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <p th:text="${user.username}"></p>
+                    <input type="hidden" id="username" name="username" th:value="${user.username}">
+                </div>
+
+                <div class="form-group">
+                    <label for="enabled">Role</label><br>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="mainRole" id="roleAdmin" value="ROLE_ADMIN" th:field="${user.mainRole}">
+                        <span class="form-check-label">Admin</span>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="mainRole" id="roleEditor" value="ROLE_EDITOR" th:field="${user.mainRole}">
+                        <span class="form-check-label">Editor</span>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="mainRole" id="roleReader" value="ROLE_READER" th:field="${user.mainRole}">
+                        <span class="form-check-label">Reader</span>
+                    </div>
+                </div>
+
+                <div class="form-group form-check">
+                    <input class="form-check-input" type="checkbox" name="enabled" id="enabled" th:checked="${user.enabled}"/>
+                    <label class="form-check-label" for="enabled">Enabled</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="saveUser"><i class="fas fa-save"></i> Save</button>
+                <button type="button" class="btn btn-secondary" id="cancel"><i class="far fa-window-close"></i> Cancel</button>
+            </form>
+        </section>
+    </body>
+</html>

@@ -45,7 +45,7 @@ $(function() {
             url: "/admin/api/users",
             success: function(result) {
                 result.forEach(element => {
-                    $("#users").append('<tr><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole.authority +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
+                    $("#users").append('<tr><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
                 });
             }
         });

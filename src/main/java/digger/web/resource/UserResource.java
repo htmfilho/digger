@@ -29,7 +29,7 @@ public class UserResource {
         List<UserDTO> usersDTO = new ArrayList<>();
         for(User user : users) {
             Role role = roleService.findByUsername(user.getUsername());
-            UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role);
+            UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
             usersDTO.add(userDTO);
         }
         return usersDTO;

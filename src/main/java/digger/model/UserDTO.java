@@ -7,11 +7,11 @@ public class UserDTO {
     private String password;
     private String confirmPassword;
     private Boolean enabled;
-    private Role mainRole;
+    private String mainRole;
 
     public UserDTO() {}
 
-    public UserDTO(long id, String username, Boolean enabled, Role mainRole) {
+    public UserDTO(long id, String username, Boolean enabled, String mainRole) {
         this.id = id;
         this.username = username;
         this.enabled = enabled;
@@ -50,11 +50,11 @@ public class UserDTO {
         this.confirmPassword = confirmPassword;
     }
 
-    public Role getMainRole() {
+    public String getMainRole() {
         return this.mainRole;
     }
 
-    public void setMainRole(Role role) {
+    public void setMainRole(String role) {
         this.mainRole = role;
     }
 

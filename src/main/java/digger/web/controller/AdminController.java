@@ -39,24 +39,37 @@ public class AdminController {
         return "admin/users";
     }
 
+    @PostMapping("/admin/users")
+    public String saveUser(@ModelAttribute UserDTO user) {
+        User existingUser = userService.findById(user.getId());
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEnabled(user.getEnabled() != null ? user.getEnabled() : false);
+        userService.save(existingUser);
+
+        Role existingRole = roleService.findByUsername(user.getUsername());
+        existingRole.setAuthority(user.getMainRole());
+        roleService.save(existingRole);
+
+        return "redirect:/admin/users/"+ user.getId();
+    }
+
     @GetMapping("/admin/users/{id}")
     public String openUser(Model model, @PathVariable Long id) {
+        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
         User user = userService.findById(id);
         Role role = roleService.findByUsername(user.getUsername());
-        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role);
+        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
         model.addAttribute("user", userDTO);
         return "admin/user";
     }
 
     @GetMapping("/admin/users/{id}/edit")
     public String editUser(Model model, @PathVariable Long id) {
+        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
         User user = userService.findById(id);
         Role role = roleService.findByUsername(user.getUsername());
-        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role);
+        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
         model.addAttribute("user", userDTO);
-        
-        List<Role> roles = roleService.findAllRoles();
-        model.addAttribute("roles", roles);
         return "admin/user_form";
     }
 }

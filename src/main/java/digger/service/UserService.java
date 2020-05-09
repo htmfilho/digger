@@ -38,6 +38,10 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public void save(digger.model.User user) {
+        userRepository.save(user);
+    }
+
     public void saveAdmin(String username, String password) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = User.builder()
