@@ -15,8 +15,8 @@ create table if not exists authorities (
     username  varchar(100) not null,
     authority varchar(50)  not null,
     created  datetime      not null default current_timestamp,
-    constraint fk_authorities_users foreign key (username) references users (username),
+    constraint fk_authorities_users foreign key (username) references users (username) on delete cascade,
     constraint uq_username_authority unique (username, authority)
 );
 
---rollback drop table authorities; drop table users; drop table group_authorities; drop table group_members; drop table groups;
+--rollback drop table authorities; drop table users;
