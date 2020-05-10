@@ -52,16 +52,6 @@ public class UserService {
         this.userDetailsManager.createUser(user);
     }
 
-    public void saveEditor(String username, String password) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user = User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .roles("EDITOR")
-                .build();
-        this.userDetailsManager.createUser(user);
-    }
-
     public void saveReader(String username, String password) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = User.builder()
@@ -75,6 +65,12 @@ public class UserService {
 
     public void enableOrDisableUser(digger.model.User user) {
         user.setEnabled(!user.getEnabled());
+        userRepository.save(user);
+    }
+
+    public void changePassword(digger.model.User user, String newPassword) {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
 }

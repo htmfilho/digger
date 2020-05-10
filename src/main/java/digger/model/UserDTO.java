@@ -5,6 +5,7 @@ public class UserDTO {
     private Long id;
     private String username;
     private String password;
+    private String newPassword;
     private String confirmPassword;
     private Boolean enabled;
     private String mainRole;
@@ -40,6 +41,14 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNewPassword() {
+        return this.newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
     public String getConfirmPassword() {
