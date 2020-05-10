@@ -128,6 +128,10 @@ public class Column implements Comparable<Column> {
         return this.foreignKey;
     }
 
+    public void setForeignKey(Column foreignKey) {
+        this.foreignKey = foreignKey;
+    }
+
     public String toString() {
         return this.name + " ("+ this.friendlyName +")";
     }
