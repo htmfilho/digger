@@ -62,7 +62,7 @@
                         <h1>Datasources</h1>
                     </div>
                     <div class="col-2">
-                        <a href="/datasources/new" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-plus-square"></i> New</a>
+                        <a href="/datasources/new" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
                     </div>
                 </div>
     

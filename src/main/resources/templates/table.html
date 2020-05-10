@@ -20,7 +20,7 @@
                     <h1><img src="/images/table.svg"> Table</h1>
                 </div>
                 <div class="col-2">
-                    <div class="btn-group float-right" role="group">
+                    <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
                         <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
                             <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
@@ -76,7 +76,7 @@
                     <h3><i class="fas fa-columns"></i> Columns</h3>
                 </div>
                 <div class="col-2">
-                    <a th:href="@{/datasources/{id}/tables/{tableId}/columns/new(id=${datasource.id}, tableId=${table.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true"><i class="fas fa-plus-square"></i> New</a>
+                    <a th:href="@{/datasources/{id}/tables/{tableId}/columns/new(id=${datasource.id}, tableId=${table.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
                 </div>
             </div>
 
