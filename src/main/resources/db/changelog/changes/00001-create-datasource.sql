@@ -9,7 +9,7 @@ create table if not exists datasource (
     url          varchar(200) not null,
     username     varchar(50)      null,
     password     varchar(50)      null,
-    total_tables integer          null,
+    total_tables integer          null
 );
 
 --rollback drop table if exists datasource;

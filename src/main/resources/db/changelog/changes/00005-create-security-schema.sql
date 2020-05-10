@@ -1,8 +1,8 @@
 --liquibase formatted sql
 
---changeset htmfilho:6
+--changeset htmfilho:5
 create table if not exists users (
-    id       integer      primary key auto_increment,
+    id       serial       primary key,
     username varchar(100) not null,
     password varchar(100) not null,
     enabled  boolean      not null,
@@ -11,7 +11,7 @@ create table if not exists users (
 );
 
 create table if not exists authorities (
-    id        integer      primary key auto_increment,
+    id        serial       primary key,
     username  varchar(100) not null,
     authority varchar(50)  not null,
     created  datetime      not null default current_timestamp,
