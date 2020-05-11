@@ -3,30 +3,21 @@
 [![CircleCI](https://circleci.com/gh/htmfilho/digger/tree/master.svg?style=svg)](https://circleci.com/gh/htmfilho/digger/tree/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/maintainability)](https://codeclimate.com/github/htmfilho/digger/maintainability) [![Join the chat at https://gitter.im/database-digger/community](https://badges.gitter.im/database-digger/community.svg)](https://gitter.im/database-digger/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Use Digger to document your relational databases. It is a web application that works like a supporting tool for DBAs and Developers, making sure data is well understood before developing software to maintain it. Everybody in the organization can contribute to the knowledge base and make the documentation of large databases in record time possible.
+Use Digger to document your relational databases. It is a web application that works like a supporting tool for DBAs and Developers, making sure data is well understood. Everybody in the organization can contribute to the knowledge base.
 
 ![Screenshot](digger-screenshot.png)
 
-## Running Digger
+## Installing and Running Digger
 
-1. Download the latest release from the [release page][releases].
-2. Save the digger-<version>.jar in the folder you want to install it.
-3. Run it with the command: `$ java -jar digger-<version>.jar`
-4. Open the application by visiting the address https://localhost:8080
+1. Download the latest zip file from the [release page][releases].
+2. Save the digger-<version>.zip in the folder you want to install it.
+3. Change the configuration files in the folder `/config` according to your environment.
+4. Run the application with the command: `$ java -jar digger-<version>.jar`
+5. Open the application by visiting the address https://localhost:8080 .
  
 ## Using Digger
 
-Digger is a user friendly tool and you probably can get along by simply using it. But in case you need more detailed information please read Digger's [user guide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
-
-Create the database and the necessary permissions:
-
-    $ createdb digger
-    $ createuser digger_usr -P
-    $ psql -d digger
-      # grant connect on database digger to digger_usr;
-      # revoke connect on database digger from public;
-      # alter user digger_usr createdb;
-      # \q
+Digger is a user friendly tool and you probably can get along with it by simply using its features. But in case you need more detailed information please read Digger's [user guide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
 
 ## Contributing to the Project
 
@@ -42,7 +33,7 @@ We assume your development environment is configured with:
 
 ### Local Environment Setup
 
-We favor the use of the command line to setup the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:
+We favor the use of the command line to set up the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:
 
     $ cd [your-java-projects-folder]
     $ git clone https://github.com/htmfilho/digger.git
