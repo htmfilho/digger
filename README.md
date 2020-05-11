@@ -18,6 +18,16 @@ Use Digger to document your relational databases. It is a web application that w
 
 Digger is a user friendly tool and you probably can get along by simply using it. But in case you need more detailed information please read Digger's [user guide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
 
+Create the database and the necessary permissions:
+
+    $ createdb digger
+    $ createuser digger_usr -P
+    $ psql -d digger
+      # grant connect on database digger to digger_usr;
+      # revoke connect on database digger from public;
+      # alter user digger_usr createdb;
+      # \q
+
 ## Contributing to the Project
 
 Follow these instructions if you want to contribute to Digger.
