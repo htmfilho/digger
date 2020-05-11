@@ -24,8 +24,6 @@
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
                             <a th:href="@{/datasources/{id}/edit(id=${datasource.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
                             <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a>
-                            <div class="dropdown-divider"></div>
-                            <a th:href="@{/datasources/{id}/documentation/html(id=${datasource.id})}" target="_blank" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/html.svg"> Doc in HTML</a>
                         </div>
                     </div>
                 </div>
