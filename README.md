@@ -7,82 +7,25 @@ Use Digger to document your relational databases. It is a web application that w
 
 ![Screenshot](digger-screenshot.png)
 
-## Installing and Running Digger
+## Documentation 
 
-1. Download the latest zip file from the [release page][releases].
-2. Save the digger-<version>.zip in the folder you want to install it.
-3. Change the configuration files in the folder `/config` according to your environment.
-4. Run the application with the command: `$ java -jar digger-<version>.jar`
-5. Open the application by visiting the address https://localhost:8080 .
- 
-## Using Digger
+To learn how to install, configure and use Digger, please follow the [User Guide].
 
-Digger is a user friendly tool and you probably can get along with it by simply using its features. But in case you need more detailed information please read Digger's [user guide]. It also provides contextual guidance when you click on the help button on the top right of the user interface.
+## License
 
-## Contributing to the Project
+[GPL] - GNU GENERAL PUBLIC LICENSE Version 3
 
-Follow these instructions if you want to contribute to Digger.
+Copyright (C) 2019-2020 Hildeberto Mendonca
 
-### Assumptions
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-We assume your development environment is configured with:
- 
- - **Java 8+**: you can perform the commands `java` and `javac` in your terminal
- - **Maven 3**: you can perform the command `mvn` in your terminal
- - **Git**: you can perform the command `git` in your terminal
-
-### Local Environment Setup
-
-We favor the use of the command line to set up the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:
-
-    $ cd [your-java-projects-folder]
-    $ git clone https://github.com/htmfilho/digger.git
-
-It creates the folder `digger` that contains the entire source code of the application. Execute the following Maven command to build, test, and run the application:
-
-    $ cd digger
-    $ mvn spring-boot:run
-
-Visit the local address http://localhost:8080/ to use the application. To stop it, type `Ctrl+C` on the terminal. 
-
-### Development Experience
-
-Your changes to Java files take effect as soon as you save them. Spring DevTools makes sure they are compiled and deployed automatically, so you don't have to do it yourself.
-
-### Deployment
-
-Create a deployment package using Maven:
-
-    $ mvn clean package
-
-It creates a Java standalone application package in the folder `target`.
-
-If the default port `8080` is already in use, set the environment variable `SERVER_PORT` to `8081`.
-
-Run the package to check if everything works:
-
-    $ cd [your-java-projects-folder]/digger
-    $ java -jar target/digger-<version>-SNAPSHOT.jar
-
-### Documentation 
-
-There are two types of documentation: the [user guide] and the [project documentation]. To generate the user guide:
-
-    $ asciidoc docs/index.adoc
-    
-To generate the project documentation:
-
-    $ mvn site:stage -DstagingDirectory=${basedir}/docs/project
-
-### Technologies in Use
-
- - [Spring MVC]
- - [Spring Security]
- - [Thymeleaf]
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+[GNU General Public License][GPL] for more details.
 
 [user guide]: https://www.hildeberto.com/digger/
-[project documentation]: https://www.hildeberto.com/digger/project/
-[releases]: https://github.com/htmfilho/digger/releases
-[Spring MVC]: https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html
-[Spring Security]: https://spring.io/projects/spring-security
-[Thymeleaf]: http://www.thymeleaf.org
+[GPL]: https://github.com/htmfilho/digger/blob/master/LICENSE
