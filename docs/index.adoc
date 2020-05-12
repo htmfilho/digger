@@ -7,7 +7,7 @@ v1.0.0, 2020-05-11
 :toclevels: 4
 :numbered:
 
-After decades of software development, I realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
+After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
 
 Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an unfragmented and up-to-date documentation they could rely on.
 
@@ -48,8 +48,6 @@ Restart the application to take the new configuration into account:
     $ java -jar digger-1.0.0.jar
 
 Then, refresh the page http://localhost:8080.
-
-NOTE: Please, make the database choice as early as possible because there is no mechanism in place to export data from the embedded database to a PostgreSQL one.
 
 == Security
 

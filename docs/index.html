@@ -443,34 +443,43 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 0.5.0,</span>
-<span id="revdate">2019-10-14</span>
+<span id="revnumber">version 1.0.0,</span>
+<span id="revdate">2020-05-11</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#datasource">1. Datasource</a>
+<li><a href="#_installation">1. Installation</a></li>
+<li><a href="#_security">2. Security</a>
 <ul class="sectlevel2">
-<li><a href="#new_datasource">1.1. Creating a New Datasource</a></li>
-<li><a href="#edit_datasource">1.2. Editing a Datasource</a></li>
+<li><a href="#_signing_up">2.1. Signing Up</a></li>
+<li><a href="#_login">2.2. Login</a></li>
+<li><a href="#_assigning_roles">2.3. Assigning Roles</a></li>
 </ul>
 </li>
-<li><a href="#table">2. Table</a>
+<li><a href="#datasource">3. Datasource</a>
 <ul class="sectlevel2">
-<li><a href="#new_table">2.1. Documenting a Table</a></li>
-<li><a href="#edit_table">2.2. Editing the Documentation of a Table</a></li>
+<li><a href="#new_datasource">3.1. Creating a New Datasource</a></li>
+<li><a href="#edit_datasource">3.2. Editing a Datasource</a></li>
+<li><a href="#copy_datasource">3.3. Copying a Datasource</a></li>
 </ul>
 </li>
-<li><a href="#ignored_table">3. Ignored Table</a>
+<li><a href="#table">4. Table</a>
 <ul class="sectlevel2">
-<li><a href="#new_ignored_table">3.1. Ignoring a Table</a></li>
-<li><a href="#remove_ignored_table">3.2. Removing a Table from the Ignored List</a></li>
+<li><a href="#new_table">4.1. Documenting a Table</a></li>
+<li><a href="#edit_table">4.2. Editing the Documentation of a Table</a></li>
 </ul>
 </li>
-<li><a href="#column">4. Column</a>
+<li><a href="#ignored_table">5. Ignored Table</a>
 <ul class="sectlevel2">
-<li><a href="#new_column">4.1. Documenting a Table Column</a></li>
-<li><a href="#edit_column">4.2. Editing the Documentation of a Column</a></li>
+<li><a href="#new_ignored_table">5.1. Ignoring a Table</a></li>
+<li><a href="#remove_ignored_table">5.2. Removing a Table from the Ignored List</a></li>
+</ul>
+</li>
+<li><a href="#column">6. Column</a>
+<ul class="sectlevel2">
+<li><a href="#new_column">6.1. Documenting a Table Column</a></li>
+<li><a href="#edit_column">6.2. Editing the Documentation of a Column</a></li>
 </ul>
 </li>
 </ul>
@@ -480,7 +489,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Digger is designed to document existing databases. It is specially useful to document legacy databases, where the documentation is diffuse and outdated.</p>
+<p>After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.</p>
+</div>
+<div class="paragraph">
+<p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an unfragmented and up-to-date documentation they could rely on.</p>
+</div>
+<div class="paragraph">
+<p>This is exactly the purpose of Digger, <strong>a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization</strong>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -497,59 +512,141 @@ This documentation helps people to use this application. If you are a developer 
 </div>
 </div>
 <div class="sect1">
-<h2 id="datasource">1. Datasource</h2>
+<h2 id="_installation">1. Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.</p>
+</div>
+<div class="paragraph">
+<p>The first step is to download the installation file from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where we want to install it. This is a compressed zip format with the naming convension: digger-&lt;version&gt;.zip. For example: digger-1.0.0.zip. Once extracted, the following file structure is created:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>digger-1.0.0.jar
+config/application.properties
+config/application-embedded.properties
+config/application-server.properties</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run Digger with its default configuration, go to the terminal and execute:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cd &lt;path-to-digger-folder&gt;
+$ java -jar digger-1.0.0.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>10 seconds later, visit the address <a href="http://localhost:8080" class="bare">http://localhost:8080</a> to use Digger with its embedded database. The folder <code>data</code> is automatically created during the initialization, side by side with the <code>config</code> folder. The embedded database is robust enough to support any reasonable volume of data, but it won&#8217;t scale to support multiple concurrent connections. For that, we may need a database like PostgreSQL to handle larger demand for information. To switch to PostgreSQL, stop the application using the [Ctrl+C] shortcut, open the configuration file <code>application.properties</code>, and change the following entry to <code>server</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spring.profiles.active=server</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then open the file <code>application-server.properties</code> and inform the following connection parameters to connect to PostgreSQL:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/digger
+spring.datasource.username=digger_usr
+spring.datasource.password=secret</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Restart the application to take the new configuration into account:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ java -jar digger-1.0.0.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then, refresh the page <a href="http://localhost:8080" class="bare">http://localhost:8080</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security">2. Security</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application and the access of the other users.</p>
+</div>
+<div class="sect2">
+<h3 id="_signing_up">2.1. Signing Up</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_login">2.2. Login</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_assigning_roles">2.3. Assigning Roles</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="datasource">3. Datasource</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata information.</p>
 </div>
 <div class="sect2">
-<h3 id="new_datasource">1.1. Creating a New Datasource</h3>
+<h3 id="new_datasource">3.1. Creating a New Datasource</h3>
 
 </div>
 <div class="sect2">
-<h3 id="edit_datasource">1.2. Editing a Datasource</h3>
+<h3 id="edit_datasource">3.2. Editing a Datasource</h3>
+
+</div>
+<div class="sect2">
+<h3 id="copy_datasource">3.3. Copying a Datasource</h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="table">2. Table</h2>
+<h2 id="table">4. Table</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.</p>
 </div>
 <div class="sect2">
-<h3 id="new_table">2.1. Documenting a Table</h3>
+<h3 id="new_table">4.1. Documenting a Table</h3>
 
 </div>
 <div class="sect2">
-<h3 id="edit_table">2.2. Editing the Documentation of a Table</h3>
-
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="ignored_table">3. Ignored Table</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="new_ignored_table">3.1. Ignoring a Table</h3>
-
-</div>
-<div class="sect2">
-<h3 id="remove_ignored_table">3.2. Removing a Table from the Ignored List</h3>
+<h3 id="edit_table">4.2. Editing the Documentation of a Table</h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="column">4. Column</h2>
+<h2 id="ignored_table">5. Ignored Table</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="new_column">4.1. Documenting a Table Column</h3>
+<h3 id="new_ignored_table">5.1. Ignoring a Table</h3>
 
 </div>
 <div class="sect2">
-<h3 id="edit_column">4.2. Editing the Documentation of a Column</h3>
+<h3 id="remove_ignored_table">5.2. Removing a Table from the Ignored List</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="column">6. Column</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="new_column">6.1. Documenting a Table Column</h3>
+
+</div>
+<div class="sect2">
+<h3 id="edit_column">6.2. Editing the Documentation of a Column</h3>
 
 </div>
 </div>
@@ -557,8 +654,8 @@ This documentation helps people to use this application. If you are a developer 
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.5.0<br>
-Last updated 2020-03-12 15:37:43 -0400
+Version 1.0.0<br>
+Last updated 2020-05-12 07:53:04 -0400
 </div>
 </div>
 </body>
