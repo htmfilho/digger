@@ -20,7 +20,7 @@ This documentation helps people to use this application. If you are a developer 
 
 Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.
 
-The first step is to download the installation file from the https://github.com/htmfilho/digger/releases[release page] and save it where we want to install it. This is a compressed zip format with the naming convension: digger-<version>.zip. For example: digger-1.0.0.zip. Once extracted, the following file structure is created:
+The first step is to download the installation file from the https://github.com/htmfilho/digger/releases[release page] and save it where we want to install it. This is a compressed zip format with the naming convention: `digger-<version>.zip`. For example: `digger-1.0.0.zip`. Once extracted, the following file structure is created:
 
     digger-1.0.0.jar
     config/application.properties
@@ -51,11 +51,12 @@ Then, refresh the page http://localhost:8080.
 
 == Security
 
-When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application and the access of the other users.
+When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including the access of other users.
 
 === Signing Up
 
 === Login
+
 
 === Assigning Roles
 
