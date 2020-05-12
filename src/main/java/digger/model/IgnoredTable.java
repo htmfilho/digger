@@ -1,8 +1,5 @@
 package digger.model;
 
-import digger.adapter.DocumentationFormat;
-import digger.adapter.SupportedFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,11 +69,6 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
 
     public String toString() {
         return this.name;
-    }
-
-    public String getFormattedDocumentation(SupportedFormat format) {
-        DocumentationFormat documentationFormat = format.getDocumentationFormat();
-        return documentationFormat.applyFormatToIgnoredTable(this);
     }
 
 	@Override

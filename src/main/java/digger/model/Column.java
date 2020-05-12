@@ -1,8 +1,5 @@
 package digger.model;
 
-import digger.adapter.DocumentationFormat;
-import digger.adapter.SupportedFormat;
-
 import javax.persistence.*;
 
 @Entity
@@ -134,11 +131,6 @@ public class Column implements Comparable<Column> {
 
     public String toString() {
         return this.name + " ("+ this.friendlyName +")";
-    }
-
-    public String getFormattedDocumentation(SupportedFormat format) {
-        DocumentationFormat documentationFormat = format.getDocumentationFormat();
-        return documentationFormat.applyFormatToColumn(this);
     }
 
     @Override
