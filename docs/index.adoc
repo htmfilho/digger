@@ -1,16 +1,65 @@
-= Digger : User Guide
+﻿= Digger : User Guide
 Hildeberto Mendonca <me@hildeberto.com>
-v0.5.0, 2020-03-24
+v1.0.0, 2020-05-11
 :doctype: book
 :encoding: utf-8
 :toc: left
 :toclevels: 4
 :numbered:
 
-Digger is designed to document existing databases. It is specially useful to document legacy databases, where the documentation is diffuse and outdated.
+After decades of software development, I realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
+
+Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an unfragmented and up-to-date documentation they could rely on.
+
+This is exactly the purpose of Digger, **a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization**.
 
 [NOTE]
 This documentation helps people to use this application. If you are a developer and wants to contribute to this project, you may find the https://www.hildeberto.com/digger/project[project documentation] useful.
+
+== Installation
+
+Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.
+
+The first step is to download the installation file from the https://github.com/htmfilho/digger/releases[release page] and save it where we want to install it. This is a compressed zip format with the naming convension: digger-<version>.zip. For example: digger-1.0.0.zip. Once extracted, the following file structure is created:
+
+    digger-1.0.0.jar
+    config/application.properties
+    config/application-embedded.properties
+    config/application-server.properties
+
+To run Digger with its default configuration, go to the terminal and execute:
+
+    $ cd <path-to-digger-folder>
+    $ java -jar digger-1.0.0.jar
+
+10 seconds later, visit the address http://localhost:8080 to use Digger with its embedded database. The folder `data` is automatically created during the initialization, side by side with the `config` folder. The embedded database is robust enough to support any reasonable volume of data, but it won't scale to support multiple concurrent connections. For that, we may need a database like PostgreSQL to handle larger demand for information. To switch to PostgreSQL, stop the application using the [Ctrl+C] shortcut, open the configuration file `application.properties`, and change the following entry to `server`:
+
+    spring.profiles.active=server
+
+Then open the file `application-server.properties` and inform the following connection parameters to connect to PostgreSQL:
+
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.datasource.url=jdbc:postgresql://localhost:5432/digger
+    spring.datasource.username=digger_usr
+    spring.datasource.password=secret
+
+Restart the application to take the new configuration into account:
+
+    $ java -jar digger-1.0.0.jar
+
+Then, refresh the page http://localhost:8080.
+
+NOTE: Please, make the database choice as early as possible because there is no mechanism in place to export data from the embedded database to a PostgreSQL one.
+
+== Security
+
+When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application and the access of the other users.
+
+=== Signing Up
+
+=== Login
+
+=== Assigning Roles
 
 [#datasource]
 == Datasource
