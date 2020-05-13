@@ -1,11 +1,9 @@
 package digger.model;
 
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 public class ColumnTest {
 
 	@Test
@@ -32,8 +30,8 @@ public class ColumnTest {
 
         assertThat(columnA.equals(columnAA)).isTrue();
 
-        Column column1 = new Column(1l);
-        Column column2 = new Column(2l);
+        Column column1 = new Column(1L);
+        Column column2 = new Column(2L);
 
         assertThat(column1.equals(column2)).isFalse();
         assertThat(column1.equals(column1)).isTrue();

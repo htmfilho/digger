@@ -1,11 +1,9 @@
 package digger.model;
 
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 public class TableTest {
 
 	@Test
@@ -32,8 +30,8 @@ public class TableTest {
 
         assertThat(tableA.equals(tableAA)).isTrue();
 
-        Table table1 = new Table(1l);
-        Table table2 = new Table(2l);
+        Table table1 = new Table(1L);
+        Table table2 = new Table(2L);
 
         assertThat(table1.equals(table2)).isFalse();
         assertThat(table1.equals(table1)).isTrue();

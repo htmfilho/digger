@@ -1,12 +1,24 @@
 package digger.model;
 
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 public class IgnoredTableTest {
+
+    @Test
+    public void ignoredTableTest() {
+        Datasource datasource = new Datasource();
+        IgnoredTable ignoredTable = new IgnoredTable("TABLE", datasource);
+        ignoredTable.setId(30L);
+        ignoredTable.setName("VIEW");
+        ignoredTable.setDatasource(new Datasource());
+
+        assertThat(ignoredTable.getName()).isEqualTo("VIEW");
+        assertThat(ignoredTable.getDatasource()).isNotEqualTo(datasource);
+        assertThat(ignoredTable.getId()).isEqualTo(30L);
+        assertThat(ignoredTable.toString()).isEqualTo(ignoredTable.getName());
+    }
 
     @Test
     public void toTableTest() {
@@ -39,13 +51,16 @@ public class IgnoredTableTest {
 
         assertThat(ignoredTableA.equals(ignoredTableAA)).isTrue();
 
-        IgnoredTable ignoredTable1 = new IgnoredTable(1l);
-        IgnoredTable ignoredTable2 = new IgnoredTable(2l);
+        IgnoredTable ignoredTable1 = new IgnoredTable(1L);
+        IgnoredTable ignoredTable2 = new IgnoredTable(2L);
 
         assertThat(ignoredTable1.equals(ignoredTable2)).isFalse();
         assertThat(ignoredTable1.equals(ignoredTable1)).isTrue();
 
         IgnoredTable ignoredTable = new IgnoredTable();
         assertThat(ignoredTable.equals(ignoredTable)).isTrue();
+
+        Table table = new Table();
+        assertThat(ignoredTable.equals(table)).isFalse();
     }
 }

@@ -15,4 +15,12 @@ public class TextTest {
         assertThat(text.toFirstLetterUppercase("digger  is    great!")).isEqualTo("Digger Is Great!");
         assertThat(text.toFirstLetterUppercase("Digger Is Great!")).isEqualTo("Digger Is Great!");
     }
+
+    @Test
+    public void emptyIfNullTest() {
+        Text text = new Text();
+
+        assertThat(text.emptyIfNull(null)).isEqualTo("");
+        assertThat(text.emptyIfNull("Digger")).isEqualTo("Digger");
+    }
 }
