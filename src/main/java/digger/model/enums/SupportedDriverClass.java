@@ -1,7 +1,7 @@
 package digger.model.enums;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public enum SupportedDriverClass {
     H2("org.h2.Driver"),
@@ -18,11 +18,11 @@ public enum SupportedDriverClass {
         return this.driverClassName;
     }
 
-    public static Map<String, String> getMapSupportedDriverClasses() {
-        Map<String, String> supportedDriverClasses = new HashMap<>();
-        supportedDriverClasses.put(SupportedDriverClass.H2.name(), SupportedDriverClass.H2.getDriverClassName());
-        supportedDriverClasses.put(SupportedDriverClass.POSTGRES.name(), SupportedDriverClass.POSTGRES.getDriverClassName());
-        supportedDriverClasses.put(SupportedDriverClass.SQLSERVER.name(), SupportedDriverClass.SQLSERVER.getDriverClassName());
+    public static List<SupportedDriverClass> getListSupportedDriverClasses() {
+        List<SupportedDriverClass> supportedDriverClasses = new ArrayList<>(3);
+        supportedDriverClasses.add(H2);
+        supportedDriverClasses.add(POSTGRES);
+        supportedDriverClasses.add(SQLSERVER);
         return supportedDriverClasses;
     }
 }

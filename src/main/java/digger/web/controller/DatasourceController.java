@@ -1,6 +1,7 @@
 package digger.web.controller;
 
 import digger.model.Datasource;
+import digger.model.enums.SupportedDriverClass;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 
@@ -28,6 +29,7 @@ public class DatasourceController {
     @GetMapping("/datasources/new")
     public String newDatasource(Model model) {
         model.addAttribute("datasource", new Datasource());
+        model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses());
         model.addAttribute("userGuideUrl", userGuideUrl + "#new_datasource");
         return "datasource_form";
     }
@@ -60,6 +62,7 @@ public class DatasourceController {
     @GetMapping("/datasources/{datasourceId}/edit")
     public String editDatasource(Model model, @PathVariable Long datasourceId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
+        model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses());
         model.addAttribute("userGuideUrl", userGuideUrl + "#edit_datasource");
         return "datasource_form";
     }
