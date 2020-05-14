@@ -54,9 +54,7 @@ public class AdminController {
     @GetMapping("/admin/users/{id}")
     public String openUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        User user = userService.findById(id);
-        Role role = roleService.findByUsername(user.getUsername());
-        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
+        UserDTO userDTO = createUserDTO(id, userService, roleService);
         model.addAttribute("user", userDTO);
         return "admin/user";
     }
@@ -64,10 +62,14 @@ public class AdminController {
     @GetMapping("/admin/users/{id}/edit")
     public String editUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        User user = userService.findById(id);
-        Role role = roleService.findByUsername(user.getUsername());
-        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
+        UserDTO userDTO = createUserDTO(id, userService, roleService);
         model.addAttribute("user", userDTO);
         return "admin/user_form";
+    }
+
+    private UserDTO createUserDTO(Long id, UserService userService, RoleService roleService) {
+        User user = userService.findById(id);
+        Role role = roleService.findByUsername(user.getUsername());
+        return new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
     }
 }
