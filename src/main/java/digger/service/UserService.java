@@ -1,76 +1,24 @@
 package digger.service;
 
-import digger.repository.UserRepository;
-
 import java.util.List;
 
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
-import org.springframework.stereotype.Service;
+public interface UserService {
 
-@Service
-public class UserService {
+    boolean thereIsNoUser();
 
-    private final UserDetailsManager userDetailsManager;
-    private final UserRepository userRepository;
+    List<digger.model.User> findAll();
 
-    public UserService(UserDetailsManager userDetailsManager, UserRepository userRepository) {
-        this.userDetailsManager = userDetailsManager;
-        this.userRepository = userRepository;
-    }
+    digger.model.User findById(Long id);
 
-    public boolean thereIsNoUser() {
-        return userRepository.countAllByEnabled(true) == 0;
-    }
+    digger.model.User findByUsername(String username);
 
-    public List<digger.model.User> findAll() {
-        return userRepository.findAllByOrderByUsernameAsc();
-    }
+    void save(digger.model.User user);
 
-    public digger.model.User findById(Long id) {
-        return userRepository.findById(id);
-    }
+    void saveAdmin(String username, String password);
 
-    public digger.model.User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+    void saveReader(String username, String password);
 
-    public void save(digger.model.User user) {
-        userRepository.save(user);
-    }
+    void enableOrDisableUser(digger.model.User user);
 
-    public void saveAdmin(String username, String password) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user = User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .roles("ADMIN")
-                .build();
-        this.userDetailsManager.createUser(user);
-    }
-
-    public void saveReader(String username, String password) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user = User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .roles("READER")
-                .disabled(true)
-                .build();
-        this.userDetailsManager.createUser(user);
-    }
-
-    public void enableOrDisableUser(digger.model.User user) {
-        user.setEnabled(!user.getEnabled());
-        userRepository.save(user);
-    }
-
-    public void changePassword(digger.model.User user, String newPassword) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
-    }
+    void changePassword(digger.model.User user, String newPassword);
 }

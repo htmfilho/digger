@@ -1,24 +1,10 @@
 package digger.service;
 
 import digger.model.Role;
-import digger.repository.RoleRepository;
 
-import org.springframework.stereotype.Service;
+public interface RoleService {
 
-@Service
-public class RoleService {
+    Role findByUsername(String username);
 
-    private final RoleRepository roleRepository;
-
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
-    public Role findByUsername(String username) {
-        return this.roleRepository.findByUsername(username);
-    }
-
-    public void save(Role role) {
-        this.roleRepository.save(role);
-    }
+    void save(Role role);
 }

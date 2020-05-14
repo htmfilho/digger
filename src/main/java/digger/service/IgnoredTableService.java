@@ -3,52 +3,20 @@ package digger.service;
 import digger.model.Datasource;
 import digger.model.IgnoredTable;
 import digger.model.Table;
-import digger.repository.IgnoredTableRepository;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class IgnoredTableService {
+public interface IgnoredTableService {
 
-    private final IgnoredTableRepository ignoredTableRepository;
+    void save(IgnoredTable ignoredTable);
 
-    public IgnoredTableService(IgnoredTableRepository ignoredTableRepository) {
-        this.ignoredTableRepository = ignoredTableRepository;
-    }
+    IgnoredTable findById(Long id);
 
-    public void save(IgnoredTable ignoredTable) {
-        ignoredTableRepository.save(ignoredTable);
-    }
+    List<IgnoredTable> findByDatasource(Datasource datasource);
 
-    public IgnoredTable findById(Long id) {
-        return ignoredTableRepository.findById(id);
-    }
+    int getTotalIgnoredTable(Datasource datasource);
 
-    public List<IgnoredTable> findByDatasource(Datasource datasource) {
-        return ignoredTableRepository.findByDatasourceOrderByNameAsc(datasource);
-    }
+    List<Table> excludeIgnoredTables(Datasource datasource, List<Table> tables);
 
-    public int getTotalIgnoredTable(Datasource datasource) {
-        return findByDatasource(datasource).size();
-    }
-
-    public List<Table> excludeIgnoredTables(Datasource datasource, List<Table> tables) {
-        List<IgnoredTable> existingIgnoredTables = findByDatasource(datasource);
-        tables.removeAll(toTableList(existingIgnoredTables));
-        return tables;
-    }
-
-    public void delete(Long ignoredTableId) {
-        ignoredTableRepository.deleteById(ignoredTableId);
-    }
-
-    private List<Table> toTableList(List<IgnoredTable> ignoredTables) {
-        List<Table> tables = new ArrayList<>();
-        for (IgnoredTable ignoredTable: ignoredTables) {
-            tables.add(ignoredTable.toTable());
-        }
-        return tables;
-    }
+    void delete(Long ignoredTableId);
 }
