@@ -1,7 +1,9 @@
 # Digger
 
 [![CircleCI](https://circleci.com/gh/htmfilho/digger/tree/master.svg?style=svg)](https://circleci.com/gh/htmfilho/digger/tree/master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/maintainability)](https://codeclimate.com/github/htmfilho/digger/maintainability) [![Join the chat at https://gitter.im/database-digger/community](https://badges.gitter.im/database-digger/community.svg)](https://gitter.im/database-digger/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/maintainability)](https://codeclimate.com/github/htmfilho/digger/maintainability)
+[![Join the chat at https://gitter.im/database-digger/community](https://badges.gitter.im/database-digger/community.svg)](https://gitter.im/database-digger/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![CLA assistant](https://cla-assistant.io/readme/badge/htmfilho/digger)](https://cla-assistant.io/htmfilho/digger)
 
 Use Digger to document your relational databases. It is a web application that works like a supporting tool for DBAs and Developers, making sure data is well understood. Everybody in the organization can contribute to the knowledge base.
 
