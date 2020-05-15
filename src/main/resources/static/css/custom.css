@@ -7,15 +7,6 @@ label {
     font-weight: bold;
 }
 
-.help {
-    font-size: 28px;
-    margin-left: 10px;
-    color: rgb(148, 148, 148);
-}
-
-a.help:hover {
-    color: rgb(255, 255, 255);
-}
 
 .connected {
     font-size: 22px;

@@ -54,13 +54,28 @@
                                 <div class="dropdown-divider" th:unless="${#httpServletRequest.remoteUser}"></div>
                                 <a class="dropdown-item" href="/signup" th:unless="${#httpServletRequest.remoteUser}">Sign Up</a>
                             </div>
-                        </li>
-                        <div><a th:href="@{${userGuideUrl}}" class="help" target="_blank">
-                            <svg class="bi bi-question-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        </li>                        
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="input-group">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        <a th:href="@{${userGuideUrl}}" class="btn btn-link" style="color: rgb(148, 148, 148);" target="_blank">
+                            <svg class="bi bi-question-circle-fill align-top" width="23px" height="23px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM6.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z" clip-rule="evenodd"/>
                             </svg>
-                        </a></div>
-                    </ul>
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -73,7 +88,7 @@
         <br>
         <br>
         <br>
-        <footer class="navbar fixed-bottom navbar-light" style="background-color:beige">
+        <footer class="navbar fixed-bottom navbar-light bg-light">
             <div class="container">
                 <a href="https://hildeberto.com" class="nav-link" target="_blank">Copyright &copy; 2019-<span id="current-year">2020</span> Hildeberto Mendonca</a>
             </div>
