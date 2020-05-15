@@ -6,8 +6,6 @@
 
     <body>
         <section>
-            <div><a th:href="@{${userGuideUrl}}" class="float-right help" target="_blank"><img src="/images/question-circle.svg"></a></div>
-
             <h1><img src="/images/table.svg"> Table</h1>
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables(datasourceId=${datasource.id})}">
                 <input type="hidden" id="id" name="id" th:value="${table.id}"/>
