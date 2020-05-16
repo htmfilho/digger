@@ -53,7 +53,7 @@ Then, refresh the page http://localhost:8080.
 
 === Installing From the Source Code
 
-A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need https://maven.apache.org/[Maven], a traditional software lifecycle management tool for Java, and https://git-scm.com/[Git], a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.
+A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need https://maven.apache.org/[Maven], a traditional software life-cycle management tool for Java, and https://git-scm.com/[Git], a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.
 
 To start, fetch the code from GitHub:
 
@@ -76,7 +76,7 @@ If you already have Digger installed, just put the generated jar file in the sam
 
 == Security
 
-When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including the access of other users.
+When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.
 
 === Signing Up
 
@@ -84,13 +84,19 @@ TODO
 
 === Login
 
-TODO
-
-=== Assigning Roles
-
-TODO
+.Digger's Entity Relational Model
+image::images/login.png[]
 
 == Features
+
+[#admin]
+=== Administration
+
+[#admin-users]
+==== Users
+
+TODO
+
 
 TODO
 
@@ -173,7 +179,7 @@ We assume your development environment is configured with:
 
 === Local Environment Setup
 
-We favor the use of the command line to set up the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:
+We favour the use of the command line to set up the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:
 
     $ cd [your-java-projects-folder]
     $ git clone https://github.com/htmfilho/digger.git
@@ -185,9 +191,12 @@ It creates the folder `digger` that contains the entire source code of the appli
 
 Visit the local address http://localhost:8080/ to use the application. To stop it, type `Ctrl+C` on the terminal.
 
-=== Development Experience
+=== Data Model
 
-Your changes to Java files take effect as soon as you save them. Spring DevTools makes sure they are compiled and deployed automatically, so you don't have to do it yourself.
+The data managed by Digger is persisted in a relational database. If you launched Digger as is, without changing the configuration, you are using the embedded database https://www.h2database.com[H2]. If you are using the server configuration then you are using https://www.postgresql.org/[PostgreSQL]. The data is organized according to the following diagram.
+
+.Digger's Entity Relational Model
+image::images/entity-relationship-diagram.png[]
 
 === Deployment
 
@@ -203,6 +212,16 @@ Run the package to check if everything works:
 
     $ cd [your-java-projects-folder]/digger
     $ java -jar target/digger-<version>-SNAPSHOT.jar
+
+=== Test Automation
+
+Digger was initially released with very few automated tests. This is not good, but we wanted to give some use to the book https://amzn.to/3cDqTE9[Refactoring], by https://martinfowler.com[Martin Fowler]. This book explains how to refactor the code by first writing tests to ensure the refactoring won't break existing functionalities. So, our approach for testing is basically ensuring regression, increasing test coverage as the application is modified.
+
+To execute the test suite, run:
+
+    $ mvn test
+
+Only submit your pull request if these tests pass. To see the test coverage report, open the page generated at `target/site/jacoco`.
 
 === Technologies in Use
 
