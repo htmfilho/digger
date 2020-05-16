@@ -20,6 +20,8 @@ This documentation helps people to use this application. If you are a developer 
 
 Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.
 
+=== Installing From the Released File
+
 The first step is to download the installation file from the https://github.com/htmfilho/digger/releases[release page] and save it where we want to install it. This is a compressed zip format with the naming convention: `digger-<version>.zip`. For example: `digger-1.0.0.zip`. Once extracted, the following file structure is created:
 
     digger-1.0.0.jar
@@ -49,6 +51,29 @@ Restart the application to take the new configuration into account:
 
 Then, refresh the page http://localhost:8080.
 
+=== Installing From the Source Code
+
+A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need https://maven.apache.org/[Maven], a traditional software lifecycle management tool for Java, and https://git-scm.com/[Git], a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.
+
+To start, fetch the code from GitHub:
+
+    $ git clone https://github.com/htmfilho/digger.git
+
+Then build the project:
+
+    $ cd digger
+    $ mvn package
+
+All the artifacts you need are ready! The jar file is now available at `target/` and the configuration files at `config/`. All you need to do now is to put those artifacts together, moving the jar file to the root of the project, so it can "see" the configuration folder:
+
+    $ mv target/digger-1.1.0.jar digger-1.1.0.jar
+
+Then run it just like you did with the released file:
+
+    $ java -jar digger-1.1.0.jar
+
+If you already have Digger installed, just put the generated jar file in the same folder of the existing installation and remove the old jar. Execute the new jar from that point on.
+
 == Security
 
 When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including the access of other users.
@@ -72,7 +97,7 @@ TODO
 [#datasource]
 === Datasource
 
-Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata information.
+Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata from it.
 
 [#new_datasource]
 ==== Creating a New Datasource
