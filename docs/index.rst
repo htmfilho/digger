@@ -1,0 +1,186 @@
+﻿= Digger : User Guide
+Hildeberto Mendonca <me@hildeberto.com>
+v1.0.0, 2020-05-11
+:doctype: book
+:encoding: utf-8
+:toc: left
+:toclevels: 4
+:numbered:
+
+After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
+
+Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an unfragmented and up-to-date documentation they could rely on.
+
+This is exactly the purpose of Digger, **a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization**.
+
+[NOTE]
+This documentation helps people to use this application. If you are a developer and wants to contribute to this project, you may find the https://www.hildeberto.com/digger/project[project documentation] useful.
+
+== Installation
+
+Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.
+
+The first step is to download the installation file from the https://github.com/htmfilho/digger/releases[release page] and save it where we want to install it. This is a compressed zip format with the naming convention: `digger-<version>.zip`. For example: `digger-1.0.0.zip`. Once extracted, the following file structure is created:
+
+    digger-1.0.0.jar
+    config/application.properties
+    config/application-embedded.properties
+    config/application-server.properties
+
+To run Digger with its default configuration, go to the terminal and execute:
+
+    $ cd <path-to-digger-folder>
+    $ java -jar digger-1.0.0.jar
+
+10 seconds later, visit the address http://localhost:8080 to use Digger with its embedded database. The folder `data` is automatically created during the initialization, side by side with the `config` folder. The embedded database is robust enough to support any reasonable volume of data, but it won't scale to support multiple concurrent connections. For that, we may need a database like PostgreSQL to handle larger demand for information. To switch to PostgreSQL, stop the application using the [Ctrl+C] shortcut, open the configuration file `application.properties`, and change the following entry to `server`:
+
+    spring.profiles.active=server
+
+Then open the file `application-server.properties` and inform the following connection parameters to connect to PostgreSQL:
+
+    spring.datasource.driver-class-name=org.postgresql.Driver
+    spring.datasource.url=jdbc:postgresql://localhost:5432/digger
+    spring.datasource.username=digger_usr
+    spring.datasource.password=secret
+
+Restart the application to take the new configuration into account:
+
+    $ java -jar digger-1.0.0.jar
+
+Then, refresh the page http://localhost:8080.
+
+== Security
+
+When Digger starts for the first time, it forces the creation of the first user by automatically redirecting to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including the access of other users.
+
+=== Signing Up
+
+TODO
+
+=== Login
+
+TODO
+
+=== Assigning Roles
+
+TODO
+
+== Features
+
+TODO
+
+[#datasource]
+=== Datasource
+
+Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata from it.
+
+[#new_datasource]
+==== Creating a New Datasource
+
+TODO
+
+[#edit_datasource]
+==== Editing a Datasource
+
+TODO
+
+[#copy_datasource]
+==== Copying a Datasource
+
+TODO
+
+[#table]
+=== Table
+
+Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.
+
+[#new_table]
+==== Documenting a Table
+
+TODO
+
+[#edit_table]
+==== Editing the Documentation of a Table
+
+TODO
+
+[#ignored_table]
+=== Ignored Table
+
+TODO
+
+[#new_ignored_table]
+==== Ignoring a Table
+
+TODO
+
+[#remove_ignored_table]
+==== Removing a Table from the Ignored List
+
+TODO
+
+[#column]
+=== Column
+
+TODO
+
+[#new_column]
+==== Documenting a Table Column
+
+TODO
+
+[#edit_column]
+==== Editing the Documentation of a Column
+
+TODO
+
+== Contributing to the Project
+
+Follow these instructions if you want to contribute to Digger.
+
+=== Assumptions
+
+We assume your development environment is configured with:
+
+ - **Java 8+**: you can perform the commands `java` and `javac` in your terminal
+ - **Maven 3**: you can perform the command `mvn` in your terminal
+ - **Git**: you can perform the command `git` in your terminal
+
+=== Local Environment Setup
+
+We favor the use of the command line to set up the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:
+
+    $ cd [your-java-projects-folder]
+    $ git clone https://github.com/htmfilho/digger.git
+
+It creates the folder `digger` that contains the entire source code of the application. Execute the following Maven command to build, test, and run the application:
+
+    $ cd digger
+    $ mvn spring-boot:run
+
+Visit the local address http://localhost:8080/ to use the application. To stop it, type `Ctrl+C` on the terminal.
+
+=== Development Experience
+
+Your changes to Java files take effect as soon as you save them. Spring DevTools makes sure they are compiled and deployed automatically, so you don't have to do it yourself.
+
+=== Deployment
+
+Create a deployment package using Maven:
+
+    $ mvn clean package
+
+It creates a Java standalone application package in the folder `target`.
+
+If the default port `8080` is already in use, set the environment variable `SERVER_PORT` to `8081`.
+
+Run the package to check if everything works:
+
+    $ cd [your-java-projects-folder]/digger
+    $ java -jar target/digger-<version>-SNAPSHOT.jar
+
+=== Technologies in Use
+
+ - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html[Spring MVC]
+ - https://spring.io/projects/spring-security[Spring Security]
+ - http://www.thymeleaf.org[Thymeleaf]
