@@ -449,7 +449,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_installation">1. Installation</a></li>
+<li><a href="#_installation">1. Installation</a>
+<ul class="sectlevel2">
+<li><a href="#_installing_from_the_released_file">1.1. Installing From the Released File</a></li>
+<li><a href="#_installing_from_the_source_code">1.2. Installing From the Source Code</a></li>
+</ul>
+</li>
 <li><a href="#_security">2. Security</a>
 <ul class="sectlevel2">
 <li><a href="#_signing_up">2.1. Signing Up</a></li>
@@ -530,6 +535,8 @@ This documentation helps people to use this application. If you are a developer 
 <div class="paragraph">
 <p>Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.</p>
 </div>
+<div class="sect2">
+<h3 id="_installing_from_the_released_file">1.1. Installing From the Released File</h3>
 <div class="paragraph">
 <p>The first step is to download the installation file from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where we want to install it. This is a compressed zip format with the naming convention: <code>digger-&lt;version&gt;.zip</code>. For example: <code>digger-1.0.0.zip</code>. Once extracted, the following file structure is created:</p>
 </div>
@@ -581,6 +588,49 @@ spring.datasource.password=secret</pre>
 <p>Then, refresh the page <a href="http://localhost:8080" class="bare">http://localhost:8080</a>.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_installing_from_the_source_code">1.2. Installing From the Source Code</h3>
+<div class="paragraph">
+<p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need <a href="https://maven.apache.org/">Maven</a>, a traditional software lifecycle management tool for Java, and <a href="https://git-scm.com/">Git</a>, a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.</p>
+</div>
+<div class="paragraph">
+<p>To start, fetch the code from GitHub:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git clone https://github.com/htmfilho/digger.git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then build the project:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cd digger
+$ mvn package</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>All the artifacts you need are ready! The jar file is now available at <code>target/</code> and the configuration files at <code>config/</code>. All you need to do now is to put those artifacts together, moving the jar file to the root of the project, so it can "see" the configuration folder:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ mv target/digger-1.1.0.jar digger-1.1.0.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then run it just like you did with the released file:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ java -jar digger-1.1.0.jar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you already have Digger installed, just put the generated jar file in the same folder of the existing installation and remove the old jar. Execute the new jar from that point on.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_security">2. Security</h2>
@@ -617,7 +667,7 @@ spring.datasource.password=secret</pre>
 <div class="sect2">
 <h3 id="datasource">3.1. Datasource</h3>
 <div class="paragraph">
-<p>Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata information.</p>
+<p>Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata from it.</p>
 </div>
 <div class="sect3">
 <h4 id="new_datasource">3.1.1. Creating a New Datasource</h4>
@@ -797,7 +847,7 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2020-05-12 10:18:06 -0400
+Last updated 2020-05-15 23:24:11 -0400
 </div>
 </div>
 </body>
