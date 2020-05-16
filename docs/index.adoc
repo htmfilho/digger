@@ -80,11 +80,12 @@ When Digger starts for the first time, it forces the creation of the first user 
 
 === Signing Up
 
-TODO
+.User Sign Up
+image::images/signup.png[]
 
 === Login
 
-.Digger's Entity Relational Model
+.User authentication
 image::images/login.png[]
 
 == Features
@@ -92,38 +93,38 @@ image::images/login.png[]
 [#admin]
 === Administration
 
+image::images/administration.png[]
+
 [#admin-users]
 ==== Users
 
-TODO
+image::images/users.png[]
 
-
-TODO
-
-[#datasource]
-=== Datasource
+[#datasources]
+=== Datasources
 
 Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata from it.
 
-[#new_datasource]
-==== Creating a New Datasource
+image::images/datasources.png[]
 
-TODO
+[#datasource-form]
+==== Creating and Editing a New Datasource
 
-[#edit_datasource]
-==== Editing a Datasource
+image::images/datasource-form.png[]
 
-TODO
+[#datasource]
+==== A Datasource
 
-[#copy_datasource]
-==== Copying a Datasource
+image::images/datasource.png[]
 
 TODO
 
 [#table]
-=== Table
+=== Tables
 
 Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.
+
+image::images/tables.png[]
 
 [#new_table]
 ==== Documenting a Table
@@ -136,9 +137,9 @@ TODO
 TODO
 
 [#ignored_table]
-=== Ignored Table
+=== Ignored Tables
 
-TODO
+image::images/ignored-tables.png[]
 
 [#new_ignored_table]
 ==== Ignoring a Table
