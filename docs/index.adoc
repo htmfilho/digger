@@ -9,7 +9,7 @@ v1.0.0, 2020-05-11
 
 After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
 
-Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an unfragmented and up-to-date documentation they could rely on.
+Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
 
 This is exactly the purpose of Digger, **a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization**.
 
@@ -100,6 +100,10 @@ image::images/administration.png[]
 
 image::images/users.png[]
 
+===== Enabling a User
+
+===== Changing the Role of a User
+
 [#datasources]
 === Datasources
 
@@ -108,18 +112,16 @@ Datasource is a reference to an existing database that we intend to document. A 
 image::images/datasources.png[]
 
 [#datasource-form]
-==== Creating and Editing a New Datasource
+==== Creating and Editing a Datasource
 
 image::images/datasource-form.png[]
 
 [#datasource]
-==== A Datasource
+==== The Datasource
 
 image::images/datasource.png[]
 
-TODO
-
-[#table]
+[#tables]
 === Tables
 
 Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.
@@ -129,12 +131,8 @@ image::images/tables.png[]
 [#new_table]
 ==== Documenting a Table
 
-TODO
-
-[#edit_table]
-==== Editing the Documentation of a Table
-
-TODO
+[#table]
+==== The Table
 
 [#ignored_table]
 === Ignored Tables
@@ -144,27 +142,14 @@ image::images/ignored-tables.png[]
 [#new_ignored_table]
 ==== Ignoring a Table
 
-TODO
-
 [#remove_ignored_table]
-==== Removing a Table from the Ignored List
+==== Reconsidering a Table
 
-TODO
-
-[#column]
-=== Column
-
-TODO
+[#columns]
+=== Columns
 
 [#new_column]
-==== Documenting a Table Column
-
-TODO
-
-[#edit_column]
-==== Editing the Documentation of a Column
-
-TODO
+==== Documenting a Column
 
 == Contributing to the Project
 
