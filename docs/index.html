@@ -443,29 +443,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.0.0,</span>
-<span id="revdate">2020-05-11</span>
+<span id="revnumber">version 1.0.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_installation">1. Installation</a>
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_installation">2. Installation</a>
 <ul class="sectlevel2">
-<li><a href="#_installing_from_the_released_file">1.1. Installing From the Released File</a></li>
-<li><a href="#_installing_from_the_source_code">1.2. Installing From the Source Code</a></li>
+<li><a href="#_installing_from_the_released_file">2.1. Installing From the Released File</a></li>
+<li><a href="#_installing_from_the_source_code">2.2. Installing From the Source Code</a></li>
 </ul>
 </li>
-<li><a href="#_security">2. Security</a>
+<li><a href="#_security">3. Security</a>
 <ul class="sectlevel2">
-<li><a href="#_signing_up">2.1. Signing Up</a></li>
-<li><a href="#_login">2.2. Login</a></li>
+<li><a href="#_signing_up">3.1. Signing Up</a></li>
+<li><a href="#_login">3.2. Login</a></li>
 </ul>
 </li>
-<li><a href="#_features">3. Features</a>
+<li><a href="#_features">4. Features</a>
 <ul class="sectlevel2">
-<li><a href="#admin">3.1. Administration</a>
+<li><a href="#admin">4.1. Administration</a>
 <ul class="sectlevel3">
-<li><a href="#admin-users">3.1.1. Users</a>
+<li><a href="#admin-users">4.1.1. Users</a>
 <ul class="sectlevel4">
 <li><a href="#_enabling_a_user">Enabling a User</a></li>
 <li><a href="#_changing_the_role_of_a_user">Changing the Role of a User</a></li>
@@ -473,39 +473,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#datasources">3.2. Datasources</a>
+<li><a href="#datasources">4.2. Datasources</a>
 <ul class="sectlevel3">
-<li><a href="#datasource-form">3.2.1. Creating and Editing a Datasource</a></li>
-<li><a href="#datasource">3.2.2. The Datasource</a></li>
+<li><a href="#datasource-form">4.2.1. Creating and Editing a Datasource</a></li>
+<li><a href="#datasource">4.2.2. The Datasource</a></li>
 </ul>
 </li>
-<li><a href="#tables">3.3. Tables</a>
+<li><a href="#tables">4.3. Tables</a>
 <ul class="sectlevel3">
-<li><a href="#new_table">3.3.1. Documenting a Table</a></li>
-<li><a href="#table">3.3.2. The Table</a></li>
+<li><a href="#new_table">4.3.1. Documenting a Table</a></li>
+<li><a href="#table">4.3.2. The Table</a></li>
 </ul>
 </li>
-<li><a href="#ignored_table">3.4. Ignored Tables</a>
+<li><a href="#ignored_table">4.4. Ignored Tables</a>
 <ul class="sectlevel3">
-<li><a href="#new_ignored_table">3.4.1. Ignoring a Table</a></li>
-<li><a href="#remove_ignored_table">3.4.2. Reconsidering a Table</a></li>
+<li><a href="#new_ignored_table">4.4.1. Ignoring a Table</a></li>
+<li><a href="#remove_ignored_table">4.4.2. Reconsidering a Table</a></li>
 </ul>
 </li>
-<li><a href="#columns">3.5. Columns</a>
+<li><a href="#columns">4.5. Columns</a>
 <ul class="sectlevel3">
-<li><a href="#new_column">3.5.1. Documenting a Column</a></li>
+<li><a href="#new_column">4.5.1. Documenting a Column</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_contributing_to_the_project">4. Contributing to the Project</a>
+<li><a href="#_contributing_to_the_project">5. Contributing to the Project</a>
 <ul class="sectlevel2">
-<li><a href="#_assumptions">4.1. Assumptions</a></li>
-<li><a href="#_local_environment_setup">4.2. Local Environment Setup</a></li>
-<li><a href="#_data_model">4.3. Data Model</a></li>
-<li><a href="#_deployment">4.4. Deployment</a></li>
-<li><a href="#_test_automation">4.5. Test Automation</a></li>
-<li><a href="#_technologies_in_use">4.6. Technologies in Use</a></li>
+<li><a href="#_assumptions">5.1. Assumptions</a></li>
+<li><a href="#_local_environment_setup">5.2. Local Environment Setup</a></li>
+<li><a href="#_data_model">5.3. Data Model</a></li>
+<li><a href="#_deployment">5.4. Deployment</a></li>
+<li><a href="#_test_automation">5.5. Test Automation</a></li>
+<li><a href="#_technologies_in_use">5.6. Technologies in Use</a></li>
 </ul>
 </li>
 </ul>
@@ -515,13 +515,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
+<p>Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
 <p>After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.</p>
 </div>
 <div class="paragraph">
 <p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.</p>
-</div>
-<div class="paragraph">
-<p>This is exactly the purpose of Digger, <strong>a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization</strong>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -538,13 +543,13 @@ This documentation helps people to use this application. If you are a developer 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation">1. Installation</h2>
+<h2 id="_installation">2. Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.</p>
 </div>
 <div class="sect2">
-<h3 id="_installing_from_the_released_file">1.1. Installing From the Released File</h3>
+<h3 id="_installing_from_the_released_file">2.1. Installing From the Released File</h3>
 <div class="paragraph">
 <p>The first step is to download the installation file from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where we want to install it. This is a compressed zip format with the naming convention: <code>digger-&lt;version&gt;.zip</code>. For example: <code>digger-1.0.0.zip</code>. Once extracted, the following file structure is created:</p>
 </div>
@@ -597,7 +602,7 @@ spring.datasource.password=secret</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_installing_from_the_source_code">1.2. Installing From the Source Code</h3>
+<h3 id="_installing_from_the_source_code">2.2. Installing From the Source Code</h3>
 <div class="paragraph">
 <p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need <a href="https://maven.apache.org/">Maven</a>, a traditional software life-cycle management tool for Java, and <a href="https://git-scm.com/">Git</a>, a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.</p>
 </div>
@@ -641,13 +646,13 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_security">2. Security</h2>
+<h2 id="_security">3. Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.</p>
 </div>
 <div class="sect2">
-<h3 id="_signing_up">2.1. Signing Up</h3>
+<h3 id="_signing_up">3.1. Signing Up</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/signup.png" alt="signup">
@@ -656,7 +661,7 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_login">2.2. Login</h3>
+<h3 id="_login">3.2. Login</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/login.png" alt="login">
@@ -667,17 +672,17 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_features">3. Features</h2>
+<h2 id="_features">4. Features</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="admin">3.1. Administration</h3>
+<h3 id="admin">4.1. Administration</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/administration.png" alt="administration">
 </div>
 </div>
 <div class="sect3">
-<h4 id="admin-users">3.1.1. Users</h4>
+<h4 id="admin-users">4.1.1. Users</h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/users.png" alt="users">
@@ -694,7 +699,7 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="datasources">3.2. Datasources</h3>
+<h3 id="datasources">4.2. Datasources</h3>
 <div class="paragraph">
 <p>Datasource is a reference to an existing database that we intend to document. A datasource has enough information to connect to the database and extract metadata from it.</p>
 </div>
@@ -704,7 +709,7 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="datasource-form">3.2.1. Creating and Editing a Datasource</h4>
+<h4 id="datasource-form">4.2.1. Creating and Editing a Datasource</h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/datasource-form.png" alt="datasource form">
@@ -712,7 +717,7 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="datasource">3.2.2. The Datasource</h4>
+<h4 id="datasource">4.2.2. The Datasource</h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/datasource.png" alt="datasource">
@@ -721,7 +726,7 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="tables">3.3. Tables</h3>
+<h3 id="tables">4.3. Tables</h3>
 <div class="paragraph">
 <p>Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.</p>
 </div>
@@ -731,47 +736,47 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="new_table">3.3.1. Documenting a Table</h4>
+<h4 id="new_table">4.3.1. Documenting a Table</h4>
 
 </div>
 <div class="sect3">
-<h4 id="table">3.3.2. The Table</h4>
+<h4 id="table">4.3.2. The Table</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="ignored_table">3.4. Ignored Tables</h3>
+<h3 id="ignored_table">4.4. Ignored Tables</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ignored-tables.png" alt="ignored tables">
 </div>
 </div>
 <div class="sect3">
-<h4 id="new_ignored_table">3.4.1. Ignoring a Table</h4>
+<h4 id="new_ignored_table">4.4.1. Ignoring a Table</h4>
 
 </div>
 <div class="sect3">
-<h4 id="remove_ignored_table">3.4.2. Reconsidering a Table</h4>
+<h4 id="remove_ignored_table">4.4.2. Reconsidering a Table</h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="columns">3.5. Columns</h3>
+<h3 id="columns">4.5. Columns</h3>
 <div class="sect3">
-<h4 id="new_column">3.5.1. Documenting a Column</h4>
+<h4 id="new_column">4.5.1. Documenting a Column</h4>
 
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_contributing_to_the_project">4. Contributing to the Project</h2>
+<h2 id="_contributing_to_the_project">5. Contributing to the Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Follow these instructions if you want to contribute to Digger.</p>
 </div>
 <div class="sect2">
-<h3 id="_assumptions">4.1. Assumptions</h3>
+<h3 id="_assumptions">5.1. Assumptions</h3>
 <div class="paragraph">
 <p>We assume your development environment is configured with:</p>
 </div>
@@ -790,7 +795,7 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_local_environment_setup">4.2. Local Environment Setup</h3>
+<h3 id="_local_environment_setup">5.2. Local Environment Setup</h3>
 <div class="paragraph">
 <p>We favour the use of the command line to set up the local environment, so we do not depend on any other tool for this basic step. Open the Windows/Linux terminal and start by cloning the repository in your local machine:</p>
 </div>
@@ -814,7 +819,7 @@ $ mvn spring-boot:run</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_data_model">4.3. Data Model</h3>
+<h3 id="_data_model">5.3. Data Model</h3>
 <div class="paragraph">
 <p>The data managed by Digger is persisted in a relational database. If you launched Digger as is, without changing the configuration, you are using the embedded database <a href="https://www.h2database.com">H2</a>. If you are using the server configuration then you are using <a href="https://www.postgresql.org/">PostgreSQL</a>. The data is organized according to the following diagram.</p>
 </div>
@@ -826,7 +831,7 @@ $ mvn spring-boot:run</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deployment">4.4. Deployment</h3>
+<h3 id="_deployment">5.4. Deployment</h3>
 <div class="paragraph">
 <p>Create a deployment package using Maven:</p>
 </div>
@@ -852,7 +857,7 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_test_automation">4.5. Test Automation</h3>
+<h3 id="_test_automation">5.5. Test Automation</h3>
 <div class="paragraph">
 <p>Digger was initially released with very few automated tests. This is not good, but we wanted to give some use to the book <a href="https://amzn.to/3cDqTE9">Refactoring</a>, by <a href="https://martinfowler.com">Martin Fowler</a>. This book explains how to refactor the code by first writing tests to ensure the refactoring won&#8217;t break existing functionalities. So, our approach for testing is basically ensuring regression, increasing test coverage as the application is modified.</p>
 </div>
@@ -869,7 +874,7 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_technologies_in_use">4.6. Technologies in Use</h3>
+<h3 id="_technologies_in_use">5.6. Technologies in Use</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -890,7 +895,7 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2020-05-16 20:26:18 -0400
+Last updated 2020-05-16 20:32:27 -0400
 </div>
 </div>
 </body>

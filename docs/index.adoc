@@ -1,17 +1,19 @@
 ﻿= Digger : User Guide
 Hildeberto Mendonca <me@hildeberto.com>
-v1.0.0, 2020-05-11
+v1.0.0
 :doctype: book
 :encoding: utf-8
 :toc: left
 :toclevels: 4
 :numbered:
 
+Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization.
+
+== Introduction
+
 After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
 
 Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
-
-This is exactly the purpose of Digger, **a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization**.
 
 [NOTE]
 This documentation helps people to use this application. If you are a developer and wants to contribute to this project, you may find the https://www.hildeberto.com/digger/project[project documentation] useful.
