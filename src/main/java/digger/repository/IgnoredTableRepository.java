@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface IgnoredTableRepository extends Repository<IgnoredTable, Long> {
     IgnoredTable findById(Long id);
+    
     List<IgnoredTable> findByDatasourceOrderByNameAsc(Datasource datasource);
+    
     void save(IgnoredTable ignoredTable);
     void deleteById(Long id);
 }

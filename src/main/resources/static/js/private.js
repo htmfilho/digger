@@ -42,7 +42,7 @@ $(function() {
 $(function() {
     if ($("#users").length != 0) {
         $.ajax({
-            url: "/admin/api/users",
+            url: "/api/admin/users",
             success: function(result) {
                 result.forEach(element => {
                     $("#users").append('<tr><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
@@ -285,7 +285,7 @@ function deleteIgnoredTable(id) {
 
 function enableUser(username, field) {
     $.ajax({
-        url: "/admin/api/users",
+        url: "/api/admin/users",
         type: "POST",
         data: {username: username}
     });
@@ -303,10 +303,10 @@ function buildSuccessRedirectUrl(pathname) {
     return redirectUrl;
 }
 
-function deleteElement() {
+function deleteElement(prefix = "/") {
     if (confirm("Are you sure you want to delete it?")) {
         let pathname = window.location.pathname;
-        let apiUrl = "/api".concat(pathname);
+        let apiUrl = prefix.concat("api", pathname);
         let redirectUrl = buildSuccessRedirectUrl(pathname);
         console.log(apiUrl);
         console.log(redirectUrl);

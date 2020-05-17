@@ -8,15 +8,13 @@ import java.util.List;
 
 public interface IgnoredTableService {
 
-    void save(IgnoredTable ignoredTable);
-
     IgnoredTable findById(Long id);
-
-    List<IgnoredTable> findByDatasource(Datasource datasource);
 
     int getTotalIgnoredTable(Datasource datasource);
 
+    List<IgnoredTable> findByDatasource(Datasource datasource);
     List<Table> excludeIgnoredTables(Datasource datasource, List<Table> tables);
 
+    void save(IgnoredTable ignoredTable);
     void delete(Long ignoredTableId);
 }

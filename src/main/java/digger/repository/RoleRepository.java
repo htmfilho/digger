@@ -6,5 +6,6 @@ import digger.model.Role;
 
 public interface RoleRepository extends Repository<Role, Long> {
     Role findByUsername(String username);
+    
     void save(Role role);
 }

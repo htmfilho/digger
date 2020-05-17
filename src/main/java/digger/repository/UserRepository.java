@@ -8,8 +8,12 @@ import org.springframework.data.repository.Repository;
 
 public interface UserRepository extends Repository<User, Long> {
     Long countAllByEnabled(Boolean enabled);
-    List<User> findAllByOrderByUsernameAsc();
+    
     User findById(long id);
     User findByUsername(String username);
+    
+    List<User> findAllByOrderByUsernameAsc();
+
     void save(User user);
+    void deleteById(Long id);
 }

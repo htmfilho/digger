@@ -23,7 +23,7 @@ public class UserResource {
         this.roleService = roleService;
     }
 
-    @GetMapping(value = "admin/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/admin/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> getUsers() {
         List<User> users = this.userService.findAll();
         List<UserDTO> usersDTO = new ArrayList<>();
@@ -35,9 +35,14 @@ public class UserResource {
         return usersDTO;
     }
 
-    @PostMapping(value = "admin/api/users")
+    @PostMapping(value = "/api/admin/users")
     public void saveUser(@RequestParam(value = "username", defaultValue = "") String username) {
         User user = userService.findByUsername(username);
         userService.enableOrDisableUser(user);
+    }
+
+    @DeleteMapping("/api/admin/users/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        userService.delete(userId);
     }
 }

@@ -42,6 +42,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
     public void saveAdmin(String username, String password) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = org.springframework.security.core.userdetails.User.builder()
