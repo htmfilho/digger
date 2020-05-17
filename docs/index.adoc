@@ -15,9 +15,6 @@ After decades of software development, we realized that data is more valuable th
 
 Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
 
-[NOTE]
-This documentation helps people to use this application. If you are a developer and wants to contribute to this project, you may find the https://www.hildeberto.com/digger/project[project documentation] useful.
-
 == Installation
 
 Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.
@@ -78,22 +75,32 @@ If you already have Digger installed, just put the generated jar file in the sam
 
 == Security
 
-When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.
+Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of databases. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.
 
 === Signing Up
+
+When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.
 
 .User Sign Up
 image::images/signup.png[]
 
+All people signing up after the first user are disabled and assigned to the role of Reader by default. That's why the user cannot login after the sign up. The administrator must enable the user and assign him or her to the appropriate role or leave the user as reader.
+
 === Login
+
+The login tries to match the user's credentials. If the matching is successful, the user is allowed into the application to access confidential information, otherwise the user is informed that the matching was unsuccessful.
 
 .User authentication
 image::images/login.png[]
 
 == Features
 
+Digger gives you a good set of features to help you document the databases of your organization.
+
 [#admin]
 === Administration
+
+The administration is accessible via the top menu, in the "Admin" option. It allows the administrator to manage user accounts.
 
 image::images/administration.png[]
 

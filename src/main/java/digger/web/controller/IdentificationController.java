@@ -76,7 +76,7 @@ public class IdentificationController {
     }
 
     @PostMapping("/users/password")
-    public String resetPassword(Model model, Principal principal, @ModelAttribute UserDTO user) {
+    public String changePassword(Model model, Principal principal, @ModelAttribute UserDTO user) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         User existingUser = userService.findByUsername(principal.getName());
 

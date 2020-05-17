@@ -528,18 +528,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-This documentation helps people to use this application. If you are a developer and wants to contribute to this project, you may find the <a href="https://www.hildeberto.com/digger/project">project documentation</a> useful.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -649,19 +637,28 @@ $ mvn package</pre>
 <h2 id="_security">3. Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.</p>
+<p>Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of databases. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.</p>
 </div>
 <div class="sect2">
 <h3 id="_signing_up">3.1. Signing Up</h3>
+<div class="paragraph">
+<p>When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/signup.png" alt="signup">
 </div>
 <div class="title">Figure 1. User Sign Up</div>
 </div>
+<div class="paragraph">
+<p>All people signing up after the first user are disabled and assigned to the role of Reader by default. That&#8217;s why the user cannot login after the sign up. The administrator must enable the user and assign him or her to the appropriate role or leave the user as reader.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_login">3.2. Login</h3>
+<div class="paragraph">
+<p>The login tries to match the user&#8217;s credentials. If the matching is successful, the user is allowed into the application to access confidential information, otherwise the user is informed that the matching was unsuccessful.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/login.png" alt="login">
@@ -674,8 +671,14 @@ $ mvn package</pre>
 <div class="sect1">
 <h2 id="_features">4. Features</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Digger gives you a good set of features to help you document the databases of your organization.</p>
+</div>
 <div class="sect2">
 <h3 id="admin">4.1. Administration</h3>
+<div class="paragraph">
+<p>The administration is accessible via the top menu, in the "Admin" option. It allows the administrator to manage user accounts.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/administration.png" alt="administration">
@@ -895,7 +898,7 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2020-05-16 20:32:27 -0400
+Last updated 2020-05-17 14:01:37 -0400
 </div>
 </div>
 </body>
