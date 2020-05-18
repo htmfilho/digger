@@ -12,7 +12,7 @@
 	
 	<groupId>com.hildeberto</groupId>
 	<artifactId>digger</artifactId>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<name>Digger</name>
 	<description>Given a datasource, allows the user to navigate in the data schema.</description>
 
