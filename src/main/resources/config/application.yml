@@ -1,0 +1,34 @@
+# Profile
+spring:
+  application:
+    name: Digger
+  liquibase:
+    enabled: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./data/h2;MODE=PostgreSQL;AUTO_SERVER=TRUE
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+  thymeleaf:
+    cache: false
+
+# Logging
+logging:
+  level:
+    root: INFO
+    liquibase: INFO
+
+# Application
+user:
+  guide:
+    url: https://www.hildeberto.com/digger
+
+# Server
+server:
+  port: 8080
+  session:
+    timeout: 180
