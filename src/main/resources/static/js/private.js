@@ -143,25 +143,6 @@ function loadColumnAttributes(column) {
     }
 }
 
-function addOption(id, value, label) {
-    $(id).append('<option value="'+ value +'">'+ label +'</option>');
-}
-
-function loadForeignColumns(foreignTableId) {
-    let datasourceId = $("#datasource").val();
-    $.ajax({
-        url: "/api/datasources/".concat(datasourceId, "/tables/", foreignTableId, "/columns/documented"),
-        success: function(result) {
-            $("#foreignKey").empty();
-            $("#foreignKey").append('<option value="">Select...</option>');
-            result.forEach(column => {
-                addOption("#foreignKey", column.id, column.name);
-            });
-            $("#foreignKey").val($("#foreign-column-aux").val());
-        }
-    });
-}
-
 $(function() {
     if ($("#database-table-name").length != 0) {
         let datasourceId = $("#datasource").val();
@@ -237,18 +218,10 @@ $(function() {
     $("#current-year").html(year);
 });
 
-$("#database-table-name").change(function() {
-    loadTableAttributes($(this));
-});
-
-$("#table-column-name").change(function() {
-    loadColumnAttributes($(this));
-});
-
-$("#foreign-table").change(function() {
-    let elem = $(this);
-    let tableId = elem.val();
-    loadForeignColumns(tableId);
+$(function() {
+    if ($("#documentation-preview").length != 0) {
+        renderAsciidoctor("documentation-preview", $("#documentation").val());
+    }
 });
 
 $("#cancel").click(function() {
@@ -269,6 +242,48 @@ $("#check-all").click(function(event) {
         });
     }
 });
+
+$("#database-table-name").change(function() {
+    loadTableAttributes($(this));
+});
+
+$("#documentation").change(function() {
+    renderAsciidoctor("documentation-preview", $(this).val());
+});
+
+$("#foreign-table").change(function() {
+    let elem = $(this);
+    let tableId = elem.val();
+    loadForeignColumns(tableId);
+});
+
+$("#table-column-name").change(function() {
+    loadColumnAttributes($(this));
+});
+
+function renderAsciidoctor(element, content) {
+    var asciidoctor = Asciidoctor();
+    $("#"+ element).html(asciidoctor.convert(content));
+}
+
+function addOption(id, value, label) {
+    $(id).append('<option value="'+ value +'">'+ label +'</option>');
+}
+
+function loadForeignColumns(foreignTableId) {
+    let datasourceId = $("#datasource").val();
+    $.ajax({
+        url: "/api/datasources/".concat(datasourceId, "/tables/", foreignTableId, "/columns/documented"),
+        success: function(result) {
+            $("#foreignKey").empty();
+            $("#foreignKey").append('<option value="">Select...</option>');
+            result.forEach(column => {
+                addOption("#foreignKey", column.id, column.name);
+            });
+            $("#foreignKey").val($("#foreign-column-aux").val());
+        }
+    });
+}
 
 function deleteIgnoredTable(id) {
     if (confirm("Are you sure you want to delete it?")) {

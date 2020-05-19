@@ -35,13 +35,31 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="documentation">Documentation (<a href="https://asciidoctor.org/docs/asciidoc-writers-guide/" target="_blank">Asciidoc</a>)</label>
-                    <textarea class="form-control" id="documentation" name="documentation" rows="15" th:utext="${table.documentation}"></textarea>
+                <label for="documentation">Documentation (<a href="https://asciidoctor.org/docs/asciidoc-writers-guide/" target="_blank">Asciidoc</a>)</label>
+
+                <ul class="nav nav-tabs" id="docTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="edit-tab" data-toggle="tab" href="#editor" role="tab" aria-controls="editor">Edit</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview">Preview</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="docTabContent">
+                    <div class="tab-pane fade show active" id="editor" role="tabpanel" aris-labelledby="edit-tab">
+                        <br>
+                        <textarea class="form-control" id="documentation" name="documentation" rows="15" th:utext="${table.documentation}"></textarea>
+                    </div>
+                    <div class="tab-pane fade" id="preview" role="tabpanel" aria-labelledby="preview-tab">
+                        <br>
+                        <div id="documentation-preview" class="documentation"></div>
+                    </div>
                 </div>
 
                 <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">
 
+                <br>
                 <button type="submit" class="btn btn-primary" id="saveTable"><i class="fas fa-save"></i> Save</button>
                 <button type="button" class="btn btn-secondary" id="cancel"><i class="far fa-window-close"></i> Cancel</button>
             </form>

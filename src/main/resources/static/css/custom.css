@@ -27,6 +27,12 @@ a.help:hover {
     color: #ff0000
 }
 
+.documentation {
+    border: 1px solid rgb(204, 204, 204);
+    padding: 5px 5px 5px 10px;
+    border-radius: 3px;
+}
+
 .error {
     color: #ff0000;
 }
