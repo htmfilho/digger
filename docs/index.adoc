@@ -123,7 +123,11 @@ image::images/datasources.png[]
 [#datasource-form]
 ==== Creating and Editing a Datasource
 
+To create a new datasource, click on the *New* button on the top right of the list of datasources. It opens the datasource form, where you can give a *Name* to the datasource, give more details about it in the *Description*, and inform the connection attributes. The *Driver Class* dropdown field offers a list limited to the currently supported database engines. Each driver requires a different URL format, so when a driver is selected, its corresponding URL template appears below the *URL* field for reference. Finally, inform a valid *Username* and *Password* with at least _Read_ privileges to the database. Click on *Save* to register the information or *Cancel* to go back to the datasource list.
+
 image::images/datasource-form.png[]
+
+To edit a datasource, click on it in the list. In the datasource page, click on *Options* then select *Edit*. The same form appears, but this time completely filled. Perform the intended changes and *Save*.
 
 [#datasource]
 ==== The Datasource
@@ -233,3 +237,25 @@ Only submit your pull request if these tests pass. To see the test coverage repo
  - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html[Spring MVC]
  - https://spring.io/projects/spring-security[Spring Security]
  - http://www.thymeleaf.org[Thymeleaf]
+
+=== Using Git
+
+==== Changing The Author To the One Recognizable by GitHub
+
+In case your default Git author is not the same as GitHub, configure the author of the repository:
+
+    $ git config user.name "John Doe"
+    $ git config user.email "john@doe.org"
+
+It can also be done to a specific commit:
+
+    $ git commit --author="John Doe <john@doe.org>"
+
+==== Changing Several Commits in Bulk
+
+If commits were done with a wrong author, use Git Rebase to fix the authors of the commits:
+
+    $ git rebase -i -p <commit-id>
+    $ git commit --amend --author="John Doe <john@doe.org>"
+    $ git rebase --continue
+    $ git push -f origin master
