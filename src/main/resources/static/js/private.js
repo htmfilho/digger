@@ -251,6 +251,24 @@ $("#documentation").change(function() {
     renderAsciidoctor("documentation-preview", $(this).val());
 });
 
+$("#driver").change(function() {
+    const driver = $(this).val();
+
+    switch(driver) {
+        case "org.h2.Driver":
+            $("#urlTemplate").text("Template: jdbc:h2:file:[path-to-file]");
+            break;
+        case "org.postgresql.Driver":
+            $("#urlTemplate").text("Template: jdbc:postgresql://[server]:[port]/[database-name]");
+            break;
+        case "com.microsoft.sqlserver.jdbc.SQLServerDriver":
+            $("#urlTemplate").text("Template: jdbc:sqlserver://[server]:[port];databaseName=[database-name]");
+            break;
+        default:
+            $("#urlTemplate").text("");
+    }
+});
+
 $("#foreign-table").change(function() {
     let elem = $(this);
     let tableId = elem.val();
