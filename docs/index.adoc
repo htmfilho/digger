@@ -1,6 +1,6 @@
 ﻿= Digger : User Guide
 Hildeberto Mendonca <me@hildeberto.com>
-v1.0.0
+v1.1.0
 :doctype: book
 :encoding: utf-8
 :toc: left
@@ -140,25 +140,35 @@ image::images/tables.png[]
 [#new_table]
 ==== Documenting a Table
 
-[#table]
-==== The Table
+image::images/table-form.png[]
 
-[#ignored_table]
+[#table]
+==== A Table
+
+image::images/table.png[]
+
+[#ignored_tables]
 === Ignored Tables
 
 image::images/ignored-tables.png[]
 
-[#new_ignored_table]
-==== Ignoring a Table
+[#new_ignored_tables]
+==== Ignoring Tables
 
-[#remove_ignored_table]
-==== Reconsidering a Table
+image::images/ignoring-tables.png[]
 
 [#columns]
 === Columns
 
 [#new_column]
 ==== Documenting a Column
+
+image::images/column-form.png[]
+
+[#column]
+==== A Column
+
+image::images/column.png[]
 
 == Contributing to the Project
 
