@@ -506,6 +506,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_deployment">5.4. Deployment</a></li>
 <li><a href="#_test_automation">5.5. Test Automation</a></li>
 <li><a href="#_technologies_in_use">5.6. Technologies in Use</a></li>
+<li><a href="#_using_git">5.7. Using Git</a>
+<ul class="sectlevel3">
+<li><a href="#_changing_the_author_to_the_one_recognizable_by_github">5.7.1. Changing The Author To the One Recognizable by GitHub</a></li>
+<li><a href="#_changing_several_commits_in_bulk">5.7.2. Changing Several Commits in Bulk</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -713,10 +719,16 @@ $ mvn package</pre>
 </div>
 <div class="sect3">
 <h4 id="datasource-form">4.2.1. Creating and Editing a Datasource</h4>
+<div class="paragraph">
+<p>To create a new datasource, click on the <strong>New</strong> button on the top right of the list of datasources. It opens the datasource form, where you can give a <strong>Name</strong> to the datasource, give more details about it in the <strong>Description</strong>, and inform the connection attributes. The <strong>Driver Class</strong> dropdown field offers a list limited to the currently supported database engines. Each driver requires a different URL format, so when a driver is selected, its corresponding URL template appears below the <strong>URL</strong> field for reference. Finally, inform a valid <strong>Username</strong> and <strong>Password</strong> with at least <em>Read</em> privileges to the database. Click on <strong>Save</strong> to register the information or <strong>Cancel</strong> to go back to the datasource list.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/datasource-form.png" alt="datasource form">
 </div>
+</div>
+<div class="paragraph">
+<p>To edit a datasource, click on it in the list. In the datasource page, click on <strong>Options</strong> then select <strong>Edit</strong>. The same form appears, but this time completely filled. Perform the intended changes and <strong>Save</strong>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -912,13 +924,50 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_using_git">5.7. Using Git</h3>
+<div class="sect3">
+<h4 id="_changing_the_author_to_the_one_recognizable_by_github">5.7.1. Changing The Author To the One Recognizable by GitHub</h4>
+<div class="paragraph">
+<p>In case your default Git author is not the same as GitHub, configure the author of the repository:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git config user.name "John Doe"
+$ git config user.email "john@doe.org"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It can also be done to a specific commit:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git commit --author="John Doe &lt;john@doe.org&gt;"</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_changing_several_commits_in_bulk">5.7.2. Changing Several Commits in Bulk</h4>
+<div class="paragraph">
+<p>If commits were done with a wrong author, use Git Rebase to fix the authors of the commits:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git rebase -i -p &lt;commit-id&gt;
+$ git commit --amend --author="John Doe &lt;john@doe.org&gt;"
+$ git rebase --continue
+$ git push -f origin master</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0<br>
-Last updated 2020-05-18 23:49:21 -0400
+Last updated 2020-05-19 19:43:26 -0400
 </div>
 </div>
 </body>
