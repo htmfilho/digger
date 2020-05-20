@@ -508,8 +508,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technologies_in_use">5.6. Technologies in Use</a></li>
 <li><a href="#_using_git">5.7. Using Git</a>
 <ul class="sectlevel3">
-<li><a href="#_changing_the_author_to_the_one_recognizable_by_github">5.7.1. Changing The Author To the One Recognizable by GitHub</a></li>
+<li><a href="#_changing_the_author_to_the_one_recognizable_by_github">5.7.1. Changing The Author To The One Recognizable by GitHub</a></li>
 <li><a href="#_changing_several_commits_in_bulk">5.7.2. Changing Several Commits in Bulk</a></li>
+<li><a href="#_adding_a_file_to_the_most_recent_commit">5.7.3. Adding a File to the Most Recent Commit</a></li>
 </ul>
 </li>
 </ul>
@@ -927,7 +928,7 @@ $ java -jar target/digger-&lt;version&gt;-SNAPSHOT.jar</pre>
 <div class="sect2">
 <h3 id="_using_git">5.7. Using Git</h3>
 <div class="sect3">
-<h4 id="_changing_the_author_to_the_one_recognizable_by_github">5.7.1. Changing The Author To the One Recognizable by GitHub</h4>
+<h4 id="_changing_the_author_to_the_one_recognizable_by_github">5.7.1. Changing The Author To The One Recognizable by GitHub</h4>
 <div class="paragraph">
 <p>In case your default Git author is not the same as GitHub, configure the author of the repository:</p>
 </div>
@@ -960,6 +961,15 @@ $ git push -f origin master</pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_adding_a_file_to_the_most_recent_commit">5.7.3. Adding a File to the Most Recent Commit</h4>
+<div class="literalblock">
+<div class="content">
+<pre>$ git add missed-file.txt
+$ git commit --amend</pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -967,7 +977,7 @@ $ git push -f origin master</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0<br>
-Last updated 2020-05-19 19:43:26 -0400
+Last updated 2020-05-20 16:16:32 -0400
 </div>
 </div>
 </body>

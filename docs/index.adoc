@@ -240,7 +240,7 @@ Only submit your pull request if these tests pass. To see the test coverage repo
 
 === Using Git
 
-==== Changing The Author To the One Recognizable by GitHub
+==== Changing The Author To The One Recognizable by GitHub
 
 In case your default Git author is not the same as GitHub, configure the author of the repository:
 
@@ -259,3 +259,8 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
     $ git commit --amend --author="John Doe <john@doe.org>"
     $ git rebase --continue
     $ git push -f origin master
+
+==== Adding a File to the Most Recent Commit
+
+    $ git add missed-file.txt
+    $ git commit --amend
