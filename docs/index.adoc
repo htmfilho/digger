@@ -1,4 +1,4 @@
-﻿= Digger : User Guide
+﻿= Digger : Database Schema Documentation Tool
 Hildeberto Mendonca <me@hildeberto.com>
 v1.1.0
 :doctype: book
