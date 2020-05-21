@@ -451,7 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_introduction">1. Introduction</a></li>
 <li><a href="#_installation">2. Installation</a>
 <ul class="sectlevel2">
-<li><a href="#_installing_from_the_released_file">2.1. Installing From the Released File</a></li>
+<li><a href="#_installing_the_released_file">2.1. Installing the Released File</a></li>
 <li><a href="#_installing_from_the_source_code">2.2. Installing From the Source Code</a></li>
 </ul>
 </li>
@@ -467,7 +467,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#admin-users">4.1.1. Users</a>
 <ul class="sectlevel4">
-<li><a href="#_enabling_a_user">Enabling a User</a></li>
+<li><a href="#_enabling_and_disabling_a_user">Enabling and Disabling a User</a></li>
 <li><a href="#_changing_the_role_of_a_user">Changing the Role of a User</a></li>
 </ul>
 </li>
@@ -544,7 +544,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.</p>
 </div>
 <div class="sect2">
-<h3 id="_installing_from_the_released_file">2.1. Installing From the Released File</h3>
+<h3 id="_installing_the_released_file">2.1. Installing the Released File</h3>
 <div class="paragraph">
 <p>The first step is to download the installation file from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where we want to install it. This is a compressed zip format with the naming convention: <code>digger-&lt;version&gt;.zip</code>. For example: <code>digger-1.0.0.zip</code>. Once extracted, the following file structure is created:</p>
 </div>
@@ -699,12 +699,63 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_enabling_a_user">Enabling a User</h5>
-
+<h5 id="_enabling_and_disabling_a_user">Enabling and Disabling a User</h5>
+<div class="paragraph">
+<p>After signing up, a user doesn&#8217;t have instant access to Digger. All users are disabled by default and the administrator has to enable them. To enable a user:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>click on the "Admin" option on the top menu and select "Users" in the list</p>
+</li>
+<li>
+<p>check the users you want to enable and uncheck the ones you want to disable</p>
+</li>
+</ol>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_changing_the_role_of_a_user">Changing the Role of a User</h5>
-
+<div class="paragraph">
+<p>Digger defines 3 levels of authority represented by roles. They are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Administrator</strong>: has access to all functionalities of the system.</p>
+</li>
+<li>
+<p><strong>Editor</strong>: has rights limited to document and visualize the documentation of the schemas.</p>
+</li>
+<li>
+<p><strong>Reader</strong>: has rights limited to visualizing the documentation of the schema.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The first user of Digger is assigned to the role of Administrator and all subsequent users are assigned to the role of Reader. Only the administrator has the right to change the role of a user. To do this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click on the "Admin" option on the top menu and select "Users" in the list</p>
+</li>
+<li>
+<p>click on the user you want to change</p>
+</li>
+<li>
+<p>click on the button "Options" and select "Edit" in the list</p>
+</li>
+<li>
+<p>select the role you want for that user and save</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/user-form.png" alt="user form">
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -977,7 +1028,7 @@ $ git commit --amend</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0<br>
-Last updated 2020-05-20 16:16:32 -0400
+Last updated 2020-05-21 07:32:03 -0400
 </div>
 </div>
 </body>
