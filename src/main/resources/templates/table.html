@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
     <head>
        <title>Table - Digger</title>
     </head>
@@ -8,7 +10,7 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg" alt="house-icon"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${table.friendlyName}"></li>
                 </ol>
@@ -16,14 +18,14 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h1><img src="/images/table.svg"> Table</h1>
+                    <h1><img src="/images/table.svg" alt="table-icon"> Table</h1>
                 </div>
                 <div class="col-2">
                     <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
                         <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a>
+                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg" alt="edit-icon"> Edit</a>
+                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg" alt="trash-icon"> Delete</a>
                         </div>
                     </div>
                 </div>

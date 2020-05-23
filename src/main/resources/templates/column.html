@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
     <head>
        <title>Column - Digger</title>
     </head>
@@ -8,7 +10,7 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg" alt="house-icon"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${column.friendlyName}"></li>
@@ -24,7 +26,7 @@
                         <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
                             <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a>
+                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg" alt="trash-icon"> Delete</a>
                         </div>
                     </div>
                 </div>
