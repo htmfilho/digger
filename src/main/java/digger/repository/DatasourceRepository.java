@@ -8,7 +8,7 @@ import java.util.List;
 public interface DatasourceRepository extends Repository<Datasource, Long> {
     Datasource findById(Long id);
     
-    List<Datasource> findAll();
+    List<Datasource> findAllByOrderByName();
     
     void save(Datasource datasource);
     void deleteById(Long id);

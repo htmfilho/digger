@@ -24,7 +24,7 @@ public class DatasourceServiceImpl implements DatasourceService {
     }
 
     public List<Datasource> findAll() {
-        return datasourceRepository.findAll();
+        return datasourceRepository.findAllByOrderByName();
     }
 
     public Datasource findById(final Long id) {

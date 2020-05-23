@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface TableRepository extends Repository<Table, Long> {
     Table findById(Long id);
-    Table findByName(String name);
     
     List<Table> findByDatasourceOrderByNameAsc(Datasource datasource);
     

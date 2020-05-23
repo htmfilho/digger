@@ -33,8 +33,8 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <div id="name" th:utext="${column.name}"></div>
+                        <label for="table-link">Table</label><br>
+                        <div id="table-link"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}"></a></div>
                     </div>
                 </div>
                 <div class="col-4">
@@ -45,8 +45,8 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="table-link">Table</label><br>
-                        <div id="table-link" th:text="${table.friendlyName}"></div>
+                        <label for="name">Physical Name</label>
+                        <div id="name" th:utext="${column.name}"></div>
                     </div>
                 </div>
             </div>
