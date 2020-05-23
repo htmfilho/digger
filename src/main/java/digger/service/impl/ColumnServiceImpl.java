@@ -40,7 +40,7 @@ public class ColumnServiceImpl implements ColumnService {
         this.tableService = tableService;
     }
 
-    public List<Column> listUndocumentedColumns(Datasource datasource, Table table, String key, Column except) {
+    public List<Column> listUndocumentedColumns(final Datasource datasource, final Table table, final String key, final Column except) {
         List<Column> columns = new ArrayList<>();
         try (Connection connection = datasourceService.getConnection(datasource)) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -63,7 +63,7 @@ public class ColumnServiceImpl implements ColumnService {
         return excludeDocumentedColumns(table, columns, except);
     }
 
-    public List<Column> excludeDocumentedColumns(Table table, List<Column> columns, Column except) {
+    public List<Column> excludeDocumentedColumns(final Table table, List<Column> columns, final Column except) {
         List<Column> documentedColumns = this.findByTable(table);
         // Remove except column from documentedColumns so it doesn't get removed from the list of undocumented columns.
         if (except != null) {
@@ -74,7 +74,7 @@ public class ColumnServiceImpl implements ColumnService {
         return columns;
     }
 
-    public Column getColumn(Datasource datasource, Table table, Column column) {
+    public Column getColumn(final Datasource datasource, final Table table, final Column column) {
         List<Column> columns = listUndocumentedColumns(datasource, table, column.getName(), null);
         if (columns.isEmpty()) {
             return column;
@@ -87,31 +87,31 @@ public class ColumnServiceImpl implements ColumnService {
         columnRepository.save(column);
     }
 
-    public void delete(Long columnId) {
+    public void delete(final Long columnId) {
         columnRepository.deleteById(columnId);
     }
 
-    public Column findById(Long id) {
+    public Column findById(final Long id) {
         if(id != null)
             return columnRepository.findById(id);
         else
             return null;
     }
 
-    public List<Column> findByTable(Table table) {
+    public List<Column> findByTable(final Table table) {
         return columnRepository.findByTableOrderByNameAsc(table);
     }
 
-    public List<Column> findByForeignKey(Column foreignKey) {
+    public List<Column> findByForeignKey(final Column foreignKey) {
         return columnRepository.findByForeignKey(foreignKey);
     }
 
-    public Integer countDocumentedColumns(Table table) {
+    public Integer countDocumentedColumns(final Table table) {
         List<Column> documentedColumns = findByTable(table);
         return documentedColumns.size();
     }
 
-    public Integer calculateProgress(Table table) {
+    public Integer calculateProgress(final Table table) {
         if(table.getTotalColumns() != null && table.getTotalColumns() > 0)
             return Math.round(countDocumentedColumns(table) / (table.getTotalColumns() * 1.0f) * 100);
         else

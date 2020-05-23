@@ -36,7 +36,7 @@ public class TableServiceImpl implements TableService {
         this.tableRepository = tableRepository;
     }
 
-    public List<Table> listTables(Datasource datasource, String key, Table except) {
+    public List<Table> listTables(final Datasource datasource, final String key, final Table except) {
         List<Table> tables = new ArrayList<>();
         try (Connection connection = datasourceService.getConnection(datasource)) {
             DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -58,7 +58,7 @@ public class TableServiceImpl implements TableService {
         return tables;
     }
 
-    public List<Table> excludeDocumentedTables(Datasource datasource, List<Table> tables, Table except) {
+    public List<Table> excludeDocumentedTables(final Datasource datasource, List<Table> tables, final Table except) {
         List<Table> documentedTables = findByDatasource(datasource);
         if (except != null) {
             documentedTables.remove(except);
@@ -67,7 +67,7 @@ public class TableServiceImpl implements TableService {
         return tables;
     }
 
-    public Table getTable(Datasource datasource, Table table) {
+    public Table getTable(final Datasource datasource, final Table table) {
         List<Table> tables = listTables(datasource, table.getName(), null);
         if (tables.isEmpty()) {
             return table;
@@ -84,25 +84,25 @@ public class TableServiceImpl implements TableService {
         tableRepository.deleteById(tableId);
     }
 
-    public void updateTotalColumns(Table table, Integer totalColumns) {
+    public void updateTotalColumns(Table table, final Integer totalColumns) {
         table.setTotalColumns(totalColumns);
         save(table);
     }
 
-    public Table findById(Long id) {
+    public Table findById(final Long id) {
         return tableRepository.findById(id);
     }
 
-    public List<Table> findByDatasource(Datasource datasource) {
+    public List<Table> findByDatasource(final Datasource datasource) {
         return tableRepository.findByDatasourceOrderByNameAsc(datasource);
     }
 
-    public Integer countDocumentedTables(Datasource datasource) {
+    public Integer countDocumentedTables(final Datasource datasource) {
         List<Table> documentedTables = findByDatasource(datasource);
         return documentedTables.size();
     }
 
-    public Integer calculateProgress(Datasource datasource) {
+    public Integer calculateProgress(final Datasource datasource) {
         if(datasource.getTotalTables() != null && datasource.getTotalTables() > 0) {
             int totalIgnoredTables = ignoredTableService.getTotalIgnoredTable(datasource);
             return Math.round(countDocumentedTables(datasource) / ((datasource.getTotalTables() - totalIgnoredTables) * 1.0f) * 100);

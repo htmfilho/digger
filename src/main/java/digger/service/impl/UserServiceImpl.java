@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllByOrderByUsernameAsc();
     }
 
-    public digger.model.User findById(Long id) {
+    public digger.model.User findById(final Long id) {
         return userRepository.findById(id);
     }
 
-    public digger.model.User findByUsername(String username) {
+    public digger.model.User findByUsername(final String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    public void saveAdmin(String username, String password) {
+    public void saveAdmin(final String username, final String password) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = org.springframework.security.core.userdetails.User.builder()
                 .username(username)
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         this.userDetailsManager.createUser(user);
     }
 
-    public void saveReader(String username, String password) {
+    public void saveReader(final String username, final String password) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = org.springframework.security.core.userdetails.User.builder()
                 .username(username)

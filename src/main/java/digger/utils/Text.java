@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class Text {
 
-    public String toFirstLetterUppercase(String text) {
+    public String toFirstLetterUppercase(final String text) {
         if(text == null || text.isEmpty())
             return text;
         
-        text = text.toLowerCase();
-        String[] words = text.split("\\s+");
+        String lowerText = text.toLowerCase();
+        String[] words = lowerText.split("\\s+");
         StringBuilder output = new StringBuilder(words.length);
         String separator = "";
         for(String word : words) {

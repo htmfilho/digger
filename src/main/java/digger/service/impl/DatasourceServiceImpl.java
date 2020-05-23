@@ -27,7 +27,7 @@ public class DatasourceServiceImpl implements DatasourceService {
         return datasourceRepository.findAll();
     }
 
-    public Datasource findById(Long id) {
+    public Datasource findById(final Long id) {
         return datasourceRepository.findById(id);
     }
 
@@ -39,16 +39,16 @@ public class DatasourceServiceImpl implements DatasourceService {
         datasourceRepository.deleteById(datasourceId);
     }
 
-    public void updateTotalTables(Datasource datasource, Integer totalTables) {
+    public void updateTotalTables(Datasource datasource, final Integer totalTables) {
         datasource.setTotalTables(totalTables);
         save(datasource);
     }
 
-    public Boolean testConnection(Datasource datasource) throws SQLException {
+    public Boolean testConnection(final Datasource datasource) throws SQLException {
         return (getConnection(datasource) != null);
     }
 
-    public Connection getConnection(Datasource datasource) throws SQLException {
+    public Connection getConnection(final Datasource datasource) throws SQLException {
         if (datasource == null) return null;
 
         try {

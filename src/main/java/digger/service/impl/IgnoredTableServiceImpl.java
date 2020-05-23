@@ -23,29 +23,29 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         ignoredTableRepository.save(ignoredTable);
     }
 
-    public IgnoredTable findById(Long id) {
+    public IgnoredTable findById(final Long id) {
         return ignoredTableRepository.findById(id);
     }
 
-    public List<IgnoredTable> findByDatasource(Datasource datasource) {
+    public List<IgnoredTable> findByDatasource(final Datasource datasource) {
         return ignoredTableRepository.findByDatasourceOrderByNameAsc(datasource);
     }
 
-    public int getTotalIgnoredTable(Datasource datasource) {
+    public int getTotalIgnoredTable(final Datasource datasource) {
         return findByDatasource(datasource).size();
     }
 
-    public List<Table> excludeIgnoredTables(Datasource datasource, List<Table> tables) {
+    public List<Table> excludeIgnoredTables(final Datasource datasource, List<Table> tables) {
         List<IgnoredTable> existingIgnoredTables = findByDatasource(datasource);
         tables.removeAll(toTableList(existingIgnoredTables));
         return tables;
     }
 
-    public void delete(Long ignoredTableId) {
+    public void delete(final Long ignoredTableId) {
         ignoredTableRepository.deleteById(ignoredTableId);
     }
 
-    private List<Table> toTableList(List<IgnoredTable> ignoredTables) {
+    private List<Table> toTableList(final List<IgnoredTable> ignoredTables) {
         List<Table> tables = new ArrayList<>();
         for (IgnoredTable ignoredTable: ignoredTables) {
             tables.add(ignoredTable.toTable());

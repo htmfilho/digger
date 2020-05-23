@@ -101,7 +101,7 @@ public class Table implements Comparable<Table> {
     }
 
 	@Override
-	public int compareTo(Table table) {
+	public int compareTo(final Table table) {
         if(this.name != null && table.name != null)
             return this.name.trim().compareTo(table.name.trim());
         else
@@ -109,7 +109,7 @@ public class Table implements Comparable<Table> {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         if(!(object instanceof Table)) {
             return false;
         }

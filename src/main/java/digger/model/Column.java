@@ -134,7 +134,7 @@ public class Column implements Comparable<Column> {
     }
 
     @Override
-    public int compareTo(Column column) {
+    public int compareTo(final Column column) {
         if(this.name != null && column.name != null)
             return this.name.trim().compareTo(column.name.trim());
 
@@ -142,7 +142,7 @@ public class Column implements Comparable<Column> {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         if(!(object instanceof Column)) {
             return false;
         }

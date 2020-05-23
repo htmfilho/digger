@@ -14,7 +14,7 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public Role findByUsername(String username) {
+    public Role findByUsername(final String username) {
         return this.roleRepository.findByUsername(username);
     }
 

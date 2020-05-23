@@ -8,9 +8,9 @@ public enum SupportedDriverClass {
     POSTGRES("org.postgresql.Driver"),
     SQLSERVER("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-    private String driverClassName;
+    private final String driverClassName;
 
-    SupportedDriverClass(String driverClassName) {
+    SupportedDriverClass(final String driverClassName) {
         this.driverClassName = driverClassName;
     }
 

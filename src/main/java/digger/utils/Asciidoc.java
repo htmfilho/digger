@@ -18,7 +18,7 @@ public class Asciidoc {
         this.options = new HashMap<String, Object>();
     }
 
-    public String toHtml(String asciidoc) {
+    public String toHtml(final String asciidoc) {
         return this.asciidoctor.convert(asciidoc, this.options);
     }
 }
