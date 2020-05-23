@@ -1,25 +1,28 @@
 package digger.model;
 
-import junit.framework.TestCase;
-import org.junit.Assert;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
-public class RoleTest extends TestCase {
+public class RoleTest {
 
+    @Test
     public void testGetId() {
         Role role = new Role();
         role.setId(3942l);
-        Assert.assertEquals(3942l, role.getId());
+        assertThat(role.getId()).isEqualTo(3942l);
     }
 
+    @Test
     public void testGetUsername() {
         Role role = new Role();
         role.setUsername("johnsmith");
-        Assert.assertEquals("johnsmith", role.getUsername());
+        assertThat(role.getUsername()).isEqualTo("johnsmith");
     }
 
+    @Test
     public void testGetAuthority() {
         Role role = new Role();
         role.setAuthority("admin");
-        Assert.assertEquals("admin", role.getAuthority());
+        assertThat(role.getAuthority()).isEqualTo("admin");
     }
 }
