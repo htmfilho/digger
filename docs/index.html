@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.1.0</span>
+<span id="revnumber">version 1.2.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -451,8 +451,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_introduction">1. Introduction</a></li>
 <li><a href="#_installation">2. Installation</a>
 <ul class="sectlevel2">
-<li><a href="#_installing_the_released_file">2.1. Installing the Released File</a></li>
-<li><a href="#_installing_from_the_source_code">2.2. Installing From the Source Code</a></li>
+<li><a href="#_installing_the_released_file">2.1. Installing the Released File</a>
+<ul class="sectlevel3">
+<li><a href="#_using_the_embedded_storage">2.1.1. Using the Embedded Storage</a></li>
+<li><a href="#_using_postgresql_storage">2.1.2. Using PostgreSQL Storage</a></li>
+</ul>
+</li>
+<li><a href="#_installing_from_source">2.2. Installing From Source</a></li>
 </ul>
 </li>
 <li><a href="#_security">3. Security</a>
@@ -541,41 +546,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_installation">2. Installation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Digger is easy to install but it requires Java 8 or superior installed and configured in the environment to execute Java-based applications. The application comes with an embedded database for immediate use, but if required, the data can be kept in a PostgreSQL database server, that also needs to be installed and configured separately. These instructions are focused on the installation and configuration of Digger.</p>
+<p>Digger is easy to install but it requires Java 8+ installed and configured in the system. The application comes with an embedded database for simple use cases, but it can also be configured to store data in a PostgreSQL database server, which also has to be installed and configured separately.</p>
 </div>
 <div class="sect2">
 <h3 id="_installing_the_released_file">2.1. Installing the Released File</h3>
 <div class="paragraph">
-<p>The first step is to download the installation file from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where we want to install it. This is a compressed zip format with the naming convention: <code>digger-&lt;version&gt;.zip</code>. For example: <code>digger-1.0.0.zip</code>. Once extracted, the following file structure is created:</p>
+<p>Download Digger from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where you want to install it. That is a <code>jar</code> file with the naming convention: <code>digger-&lt;version&gt;.jar</code>. For example: <code>digger-1.2.0.jar</code>.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>digger-1.0.0.jar
-config/application.properties
-config/application-embedded.properties
-config/application-server.properties</pre>
-</div>
-</div>
+<div class="sect3">
+<h4 id="_using_the_embedded_storage">2.1.1. Using the Embedded Storage</h4>
 <div class="paragraph">
 <p>To run Digger with its default configuration, go to the terminal and execute:</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>$ cd &lt;path-to-digger-folder&gt;
-$ java -jar digger-1.0.0.jar</pre>
+$ java -jar digger-1.2.0.jar</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>10 seconds later, visit the address <a href="http://localhost:8080" class="bare">http://localhost:8080</a> to use Digger with its embedded database. The folder <code>data</code> is automatically created during the initialization, side by side with the <code>config</code> folder. The embedded database is robust enough to support any reasonable volume of data, but it won&#8217;t scale to support multiple concurrent connections. For that, we may need a database like PostgreSQL to handle larger demand for information. To switch to PostgreSQL, stop the application using the [Ctrl+C] shortcut, open the configuration file <code>application.properties</code>, and change the following entry to <code>server</code>:</p>
+<p>A few moments later, open your browser and visit the address <a href="http://localhost:8080" class="bare">http://localhost:8080</a> to use Digger with its embedded database. The folder <code>data</code> is automatically created during the initialization.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/initial-setup.png" alt="initial setup">
+</div>
+<div class="title">Figure 1. Initial Setup</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_using_postgresql_storage">2.1.2. Using PostgreSQL Storage</h4>
+<div class="paragraph">
+<p>The embedded database is robust enough to support a reasonable volume of data, but it won&#8217;t scale to support multiple concurrent users. For that, you can use PostgreSQL to handle a larger demand for information. To switch to PostgreSQL:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>stop the application using the <code>[Ctrl+C]</code> shortcut</p>
+</li>
+<li>
+<p>create a sub-directory named <code>config</code> in the same directory of the application</p>
+</li>
+<li>
+<p>download the files <a href="https://raw.githubusercontent.com/htmfilho/digger/master/config/application.properties"><code>application.properties</code></a> and <a href="https://raw.githubusercontent.com/htmfilho/digger/master/config/application-server.properties"><code>application-server.properties</code></a> and save them in the <code>config</code> folder</p>
+</li>
+<li>
+<p>open the file <code>application.properties</code> and change the following entry from <code>embedded</code> to <code>server</code>:</p>
 <div class="literalblock">
 <div class="content">
 <pre>spring.profiles.active=server</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Then open the file <code>application-server.properties</code> and inform the following connection parameters to connect to PostgreSQL:</p>
-</div>
+</li>
+<li>
+<p>Then open the file <code>application-server.properties</code> and adapt the following connection parameters to your PostgreSQL server:</p>
 <div class="literalblock">
 <div class="content">
 <pre>spring.datasource.driver-class-name=org.postgresql.Driver
@@ -584,20 +608,24 @@ spring.datasource.username=digger_usr
 spring.datasource.password=secret</pre>
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Restart the application to take the new configuration into account:</p>
-</div>
 <div class="literalblock">
 <div class="content">
-<pre>$ java -jar digger-1.0.0.jar</pre>
+<pre>$ java -jar digger-1.2.0.jar</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Then, refresh the page <a href="http://localhost:8080" class="bare">http://localhost:8080</a>.</p>
+</li>
+<li>
+<p>Finally, refresh the page <a href="http://localhost:8080" class="bare">http://localhost:8080</a></p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_installing_from_the_source_code">2.2. Installing From the Source Code</h3>
+<h3 id="_installing_from_source">2.2. Installing From Source</h3>
 <div class="paragraph">
 <p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need <a href="https://maven.apache.org/">Maven</a>, a traditional software life-cycle management tool for Java, and <a href="https://git-scm.com/">Git</a>, a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.</p>
 </div>
@@ -619,19 +647,19 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>All the artifacts you need are ready! The jar file is now available at <code>target/</code> and the configuration files at <code>config/</code>. All you need to do now is to put those artifacts together, moving the jar file to the root of the project, so it can "see" the configuration folder:</p>
+<p>All the artifacts you need are ready! The jar file is now available at <code>target/</code> and the configuration files at <code>config/</code>. You can run it using the java command:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>$ mv target/digger-1.1.0.jar digger-1.1.0.jar</pre>
+<pre>$ java -jar target/digger-1.2.0.jar</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then run it just like you did with the released file:</p>
+<p>or Maven:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>$ java -jar digger-1.1.0.jar</pre>
+<pre>$ mvn spring-boot:run</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -655,7 +683,7 @@ $ mvn package</pre>
 <div class="content">
 <img src="images/signup.png" alt="signup">
 </div>
-<div class="title">Figure 1. User Sign Up</div>
+<div class="title">Figure 2. User Sign Up</div>
 </div>
 <div class="paragraph">
 <p>All people signing up after the first user are disabled and assigned to the role of Reader by default. That&#8217;s why the user cannot login after the sign up. The administrator must enable the user and assign him or her to the appropriate role or leave the user as reader.</p>
@@ -670,7 +698,7 @@ $ mvn package</pre>
 <div class="content">
 <img src="images/login.png" alt="login">
 </div>
-<div class="title">Figure 2. User authentication</div>
+<div class="title">Figure 3. User authentication</div>
 </div>
 </div>
 </div>
@@ -914,7 +942,7 @@ $ mvn spring-boot:run</pre>
 <div class="content">
 <img src="images/entity-relationship-diagram.png" alt="entity relationship diagram">
 </div>
-<div class="title">Figure 3. Digger&#8217;s Entity Relational Model</div>
+<div class="title">Figure 4. Digger&#8217;s Entity Relational Model</div>
 </div>
 </div>
 <div class="sect2">
@@ -1027,8 +1055,8 @@ $ git commit --amend</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.1.0<br>
-Last updated 2020-05-21 07:41:29 -0400
+Version 1.2.0<br>
+Last updated 2020-05-24 09:39:15 -0400
 </div>
 </div>
 </body>
