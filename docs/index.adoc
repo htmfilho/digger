@@ -30,7 +30,7 @@ To run Digger with its default configuration, go to the terminal and execute:
     $ cd <path-to-digger-folder>
     $ java -jar digger-1.2.0.jar
 
-A few moments later, open your browser and visit the address http://localhost:8080 to use Digger with its embedded database. The folder `data` is automatically created during the initialization.
+A few moments later, open your browser and visit the address http://localhost:8080 to use Digger with its embedded database. The folder `data` is automatically created during the initialization and the sign up page below is presented by default.
 
 .Initial Setup
 image::images/initial-setup.png[]
@@ -39,7 +39,7 @@ image::images/initial-setup.png[]
 
 The embedded database is robust enough to support a reasonable volume of data, but it won't scale to support multiple concurrent users. For that, you can use PostgreSQL to handle a larger demand for information. To switch to PostgreSQL:
 
-1. stop the application using the `[Ctrl+C]` shortcut
+1. if the application is already running, stop it using `[Ctrl+C]` in the terminal
 
 2. create a sub-directory named `config` in the same directory of the application
 
@@ -49,7 +49,7 @@ The embedded database is robust enough to support a reasonable volume of data, b
 
     spring.profiles.active=server
 
-5. Then open the file `application-server.properties` and adapt the following connection parameters to your PostgreSQL server:
+5. Then open the file `application-server.properties` and change the following connection parameters to your PostgreSQL server:
 
     spring.datasource.driver-class-name=org.postgresql.Driver
     spring.datasource.url=jdbc:postgresql://localhost:5432/digger
@@ -62,9 +62,17 @@ The embedded database is robust enough to support a reasonable volume of data, b
 
 7. Finally, refresh the page http://localhost:8080
 
+Make sure the database user has full rights over Digger's database, so it can generate the schema and perform all operations.
+
 === Installing From Source
 
-A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need https://maven.apache.org/[Maven], a traditional software life-cycle management tool for Java, and https://git-scm.com/[Git], a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.
+A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from source. To do it, you need:
+
+ - https://openjdk.java.net/[JDK], a Java Development Kit to compile and run the code,
+
+ - https://maven.apache.org/[Maven], a traditional software life-cycle management tool for Java, and
+
+ - https://git-scm.com/[Git], a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.
 
 To start, fetch the code from GitHub:
 
@@ -85,9 +93,17 @@ or Maven:
 
 If you already have Digger installed, just put the generated jar file in the same folder of the existing installation and remove the old jar. Execute the new jar from that point on.
 
+You can also get all subsequent changes whenever they are available by fetching updates:
+
+    $ git pull origin master
+
+Then you can package and run it:
+
+    $ mvn clean package
+
 == Security
 
-Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of databases. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.
+Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of the schemes. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.
 
 === Signing Up
 
@@ -107,7 +123,7 @@ image::images/login.png[]
 
 == Features
 
-Digger gives you a good set of features to help you document the databases of your organization.
+Digger gives you a good set of features to help you document the database schemes of your organization.
 
 [#admin]
 === Administration
@@ -157,31 +173,41 @@ image::images/datasources.png[]
 [#datasource-form]
 ==== Creating and Editing a Datasource
 
-To create a new datasource, click on the *New* button on the top right of the list of datasources. It opens the datasource form, where you can give a *Name* to the datasource, give more details about it in the *Description*, and inform the connection attributes. The *Driver Class* dropdown field offers a list limited to the currently supported database engines. Each driver requires a different URL format, so when a driver is selected, its corresponding URL template appears below the *URL* field for reference. Finally, inform a valid *Username* and *Password* with at least _Read_ privileges to the database. Click on *Save* to register the information or *Cancel* to go back to the datasource list.
+To create a new datasource, click on the *New* button on the top right of the list of datasources. It opens the datasource form, where you can give it a *Name*, give more details about it in the *Description*, and inform the connection attributes. The *Driver Class* drop-down field offers a list of the currently supported database engines. Each driver requires a different URL format, so when a driver is selected, its corresponding URL template appears below the *URL* field for reference. Finally, inform a valid *Username* and *Password* with at least _Read_ privileges to the database. Click on *Save* to register the information or *Cancel* to go back to the datasource list.
 
 image::images/datasource-form.png[]
 
-To edit a datasource, click on it in the list. In the datasource page, click on *Options* then select *Edit*. The same form appears, but this time completely filled. Perform the intended changes and *Save*.
+To edit a datasource, click on it in the list. In the datasource page, click on the button *Options* on the top right, then select the option *Edit*. The same form appears, but this time completely filled. Make the intended changes and *Save*.
 
 [#datasource]
 ==== The Datasource
+
+The datasource page shows all information related to the datasource, as well as all possible operations such as *Edit*, *Remove*, *Add Table*, *Ignore Tables*, etc.
 
 image::images/datasource.png[]
 
 [#tables]
 === Tables
 
-Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.
+A datasource's Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives. They are listed in the datasource page, from where they can be reached and documented.
 
 image::images/tables.png[]
 
 [#new_table]
 ==== Documenting a Table
 
+To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the *New* button on the right. Filling the form by selecting the physical name of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.
+
+Click on the *Save* button to complete or *Cancel* to go back to the datasource page.
+
 image::images/table-form.png[]
+
+The *Documentation* field uses https://asciidoctor.org/docs/what-is-asciidoc/[Asciidoc] as markup language. It has a human friendly syntax to allow anybody write rich content without touching any HTML or CSS code.
 
 [#table]
 ==== A Table
+
+The table's page shows all information related to the table, including its columns. To edit a table, click on the *Options* button on the top right then select the option *Edit*. The form appears filled with the table's attributes and documentation. Make the intended changes and save, or cancel to return to the table's page.
 
 image::images/table.png[]
 

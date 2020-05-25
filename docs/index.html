@@ -565,7 +565,7 @@ $ java -jar digger-1.2.0.jar</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A few moments later, open your browser and visit the address <a href="http://localhost:8080" class="bare">http://localhost:8080</a> to use Digger with its embedded database. The folder <code>data</code> is automatically created during the initialization.</p>
+<p>A few moments later, open your browser and visit the address <a href="http://localhost:8080" class="bare">http://localhost:8080</a> to use Digger with its embedded database. The folder <code>data</code> is automatically created during the initialization and the sign up page below is presented by default.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -582,7 +582,7 @@ $ java -jar digger-1.2.0.jar</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>stop the application using the <code>[Ctrl+C]</code> shortcut</p>
+<p>if the application is already running, stop it using <code>[Ctrl+C]</code> in the terminal</p>
 </li>
 <li>
 <p>create a sub-directory named <code>config</code> in the same directory of the application</p>
@@ -599,7 +599,7 @@ $ java -jar digger-1.2.0.jar</pre>
 </div>
 </li>
 <li>
-<p>Then open the file <code>application-server.properties</code> and adapt the following connection parameters to your PostgreSQL server:</p>
+<p>Then open the file <code>application-server.properties</code> and change the following connection parameters to your PostgreSQL server:</p>
 <div class="literalblock">
 <div class="content">
 <pre>spring.datasource.driver-class-name=org.postgresql.Driver
@@ -622,12 +622,28 @@ spring.datasource.password=secret</pre>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Make sure the database user has full rights over Digger&#8217;s database, so it can generate the schema and perform all operations.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_installing_from_source">2.2. Installing From Source</h3>
 <div class="paragraph">
-<p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from source. To do it, you basically need <a href="https://maven.apache.org/">Maven</a>, a traditional software life-cycle management tool for Java, and <a href="https://git-scm.com/">Git</a>, a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.</p>
+<p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from source. To do it, you need:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://openjdk.java.net/">JDK</a>, a Java Development Kit to compile and run the code,</p>
+</li>
+<li>
+<p><a href="https://maven.apache.org/">Maven</a>, a traditional software life-cycle management tool for Java, and</p>
+</li>
+<li>
+<p><a href="https://git-scm.com/">Git</a>, a distributed version control system. Please, visit their respective documentation and get them installed and configured in your system.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>To start, fetch the code from GitHub:</p>
@@ -665,6 +681,22 @@ $ mvn package</pre>
 <div class="paragraph">
 <p>If you already have Digger installed, just put the generated jar file in the same folder of the existing installation and remove the old jar. Execute the new jar from that point on.</p>
 </div>
+<div class="paragraph">
+<p>You can also get all subsequent changes whenever they are available by fetching updates:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git pull origin master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then you can package and run it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ mvn clean package</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -672,7 +704,7 @@ $ mvn package</pre>
 <h2 id="_security">3. Security</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of databases. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.</p>
+<p>Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of the schemes. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.</p>
 </div>
 <div class="sect2">
 <h3 id="_signing_up">3.1. Signing Up</h3>
@@ -707,7 +739,7 @@ $ mvn package</pre>
 <h2 id="_features">4. Features</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Digger gives you a good set of features to help you document the databases of your organization.</p>
+<p>Digger gives you a good set of features to help you document the database schemes of your organization.</p>
 </div>
 <div class="sect2">
 <h3 id="admin">4.1. Administration</h3>
@@ -800,7 +832,7 @@ $ mvn package</pre>
 <div class="sect3">
 <h4 id="datasource-form">4.2.1. Creating and Editing a Datasource</h4>
 <div class="paragraph">
-<p>To create a new datasource, click on the <strong>New</strong> button on the top right of the list of datasources. It opens the datasource form, where you can give a <strong>Name</strong> to the datasource, give more details about it in the <strong>Description</strong>, and inform the connection attributes. The <strong>Driver Class</strong> dropdown field offers a list limited to the currently supported database engines. Each driver requires a different URL format, so when a driver is selected, its corresponding URL template appears below the <strong>URL</strong> field for reference. Finally, inform a valid <strong>Username</strong> and <strong>Password</strong> with at least <em>Read</em> privileges to the database. Click on <strong>Save</strong> to register the information or <strong>Cancel</strong> to go back to the datasource list.</p>
+<p>To create a new datasource, click on the <strong>New</strong> button on the top right of the list of datasources. It opens the datasource form, where you can give it a <strong>Name</strong>, give more details about it in the <strong>Description</strong>, and inform the connection attributes. The <strong>Driver Class</strong> drop-down field offers a list of the currently supported database engines. Each driver requires a different URL format, so when a driver is selected, its corresponding URL template appears below the <strong>URL</strong> field for reference. Finally, inform a valid <strong>Username</strong> and <strong>Password</strong> with at least <em>Read</em> privileges to the database. Click on <strong>Save</strong> to register the information or <strong>Cancel</strong> to go back to the datasource list.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -808,11 +840,14 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>To edit a datasource, click on it in the list. In the datasource page, click on <strong>Options</strong> then select <strong>Edit</strong>. The same form appears, but this time completely filled. Perform the intended changes and <strong>Save</strong>.</p>
+<p>To edit a datasource, click on it in the list. In the datasource page, click on the button <strong>Options</strong> on the top right, then select the option <strong>Edit</strong>. The same form appears, but this time completely filled. Make the intended changes and <strong>Save</strong>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="datasource">4.2.2. The Datasource</h4>
+<div class="paragraph">
+<p>The datasource page shows all information related to the datasource, as well as all possible operations such as <strong>Edit</strong>, <strong>Remove</strong>, <strong>Add Table</strong>, <strong>Ignore Tables</strong>, etc.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/datasource.png" alt="datasource">
@@ -823,7 +858,7 @@ $ mvn package</pre>
 <div class="sect2">
 <h3 id="tables">4.3. Tables</h3>
 <div class="paragraph">
-<p>Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives.</p>
+<p>A datasource&#8217;s Table is a tabular structure used to store, organize and retrieve data. It can be a database table, a temporary table, a view, and other vendor specific alternatives. They are listed in the datasource page, from where they can be reached and documented.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -832,14 +867,26 @@ $ mvn package</pre>
 </div>
 <div class="sect3">
 <h4 id="new_table">4.3.1. Documenting a Table</h4>
+<div class="paragraph">
+<p>To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the <strong>New</strong> button on the right. Filling the form by selecting the physical name of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.</p>
+</div>
+<div class="paragraph">
+<p>Click on the <strong>Save</strong> button to complete or <strong>Cancel</strong> to go back to the datasource page.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/table-form.png" alt="table form">
 </div>
 </div>
+<div class="paragraph">
+<p>The <strong>Documentation</strong> field uses <a href="https://asciidoctor.org/docs/what-is-asciidoc/">Asciidoc</a> as markup language. It has a human friendly syntax to allow anybody write rich content without touching any HTML or CSS code.</p>
+</div>
 </div>
 <div class="sect3">
 <h4 id="table">4.3.2. A Table</h4>
+<div class="paragraph">
+<p>The table&#8217;s page shows all information related to the table, including its columns. To edit a table, click on the <strong>Options</strong> button on the top right then select the option <strong>Edit</strong>. The form appears filled with the table&#8217;s attributes and documentation. Make the intended changes and save, or cancel to return to the table&#8217;s page.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/table.png" alt="table">
@@ -1056,7 +1103,7 @@ $ git commit --amend</pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.2.0<br>
-Last updated 2020-05-24 09:39:15 -0400
+Last updated 2020-05-25 08:10:50 -0400
 </div>
 </div>
 </body>
