@@ -14,8 +14,7 @@ import java.util.List;
 
 @Service
 public class DatasourceServiceImpl implements DatasourceService {
-
-    private static final Logger log = LoggerFactory.getLogger(DatasourceServiceImpl.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DatasourceService.class);
 
     private final DatasourceRepository datasourceRepository;
 
@@ -33,15 +32,18 @@ public class DatasourceServiceImpl implements DatasourceService {
 
     public void save(Datasource datasource) {
         datasourceRepository.save(datasource);
+        logger.info("Saved datasource {}", datasource.getName());
     }
 
     public void delete(Long datasourceId) {
         datasourceRepository.deleteById(datasourceId);
+        logger.info("Deleted datasource sith id {}", datasourceId);
     }
 
     public void updateTotalTables(Datasource datasource, final Integer totalTables) {
         datasource.setTotalTables(totalTables);
         save(datasource);
+        logger.info("Updated the total number of tables of the datasource {} to {}", datasource.getName(), totalTables);
     }
 
     public Boolean testConnection(final Datasource datasource) throws SQLException {
@@ -53,14 +55,14 @@ public class DatasourceServiceImpl implements DatasourceService {
 
         try {
             Class.forName(datasource.getDriver());
-            log.info("Driver '{}' available.", datasource.getDriver());
+            logger.info("Driver '{}' available.", datasource.getDriver());
             Connection connection = DriverManager.getConnection(datasource.getUrl(), datasource.getUsername(), datasource.getPassword());
-            log.info("Connection to '{}' is successful.", datasource.getName());
+            logger.info("Connection to '{}' was successful.", datasource.getName());
             return connection;
         } catch (ClassNotFoundException cnfe) {
-            log.warn("Driver '{}' not found.", datasource.getDriver());
+            logger.warn("Driver '{}' not found.", datasource.getDriver());
         } catch (SQLException se) {
-            log.error("Error connecting to the datasource '{}'. {}", datasource.getName(), se.getMessage());
+            logger.error("Error connecting to the datasource '{}'. {}", datasource.getName(), se.getMessage());
             throw se;
         }
         return null;

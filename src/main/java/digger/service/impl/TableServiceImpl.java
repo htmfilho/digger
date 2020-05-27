@@ -20,8 +20,7 @@ import java.util.List;
 
 @Service
 public class TableServiceImpl implements TableService {
-
-    private static final Logger log = LoggerFactory.getLogger(digger.service.TableService.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(TableService.class);
 
     private static final int TABLE_NAME = 3;
     private static final int TABLE_TYPE = 4;
@@ -51,7 +50,7 @@ public class TableServiceImpl implements TableService {
             Collections.sort(tables);
             datasourceService.updateTotalTables(datasource, tables.size());
         } catch (SQLException se) {
-            log.warn("Connection not available.");
+            logger.warn("Connection not available.");
         }
         tables = excludeDocumentedTables(datasource, tables, except);
         tables = ignoredTableService.excludeIgnoredTables(datasource, tables);
@@ -78,15 +77,18 @@ public class TableServiceImpl implements TableService {
 
     public void save(Table table) {
         tableRepository.save(table);
+        logger.info("Saved table {}", table.getName());
     }
 
     public void delete(Long tableId) {
         tableRepository.deleteById(tableId);
+        logger.info("Deleted table with id {}", tableId);
     }
 
     public void updateTotalColumns(Table table, final Integer totalColumns) {
         table.setTotalColumns(totalColumns);
         save(table);
+        logger.info("Updated the number of columns of the table {} to {}", table.getName(), totalColumns);
     }
 
     public Table findById(final Long id) {
@@ -111,4 +113,3 @@ public class TableServiceImpl implements TableService {
             return 0;
     }
 }
-

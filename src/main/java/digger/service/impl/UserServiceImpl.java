@@ -3,6 +3,8 @@ package digger.service.impl;
 import digger.model.User;
 import digger.repository.UserRepository;
 import digger.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserDetailsManager userDetailsManager;
     private final UserRepository userRepository;
@@ -40,10 +43,12 @@ public class UserServiceImpl implements UserService {
 
     public void save(digger.model.User user) {
         userRepository.save(user);
+        logger.info("Saved user {}", user.getUsername());
     }
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+        logger.info("Deleted user with id {}", id);
     }
 
     public void saveAdmin(final String username, final String password) {
@@ -54,6 +59,7 @@ public class UserServiceImpl implements UserService {
                 .roles("ADMIN")
                 .build();
         this.userDetailsManager.createUser(user);
+        logger.info("Created admin user {}", username);
     }
 
     public void saveReader(final String username, final String password) {
@@ -65,16 +71,19 @@ public class UserServiceImpl implements UserService {
                 .disabled(true)
                 .build();
         this.userDetailsManager.createUser(user);
+        logger.info("Created reader user {}", username);
     }
 
     public void enableOrDisableUser(digger.model.User user) {
         user.setEnabled(!user.getEnabled());
         userRepository.save(user);
+        logger.info("User {} was {}", user.getUsername(), user.getEnabled() ? "Enabled": "Disabled");
     }
 
     public void changePassword(digger.model.User user, String newPassword) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
+        logger.info("Changed the password of the user {}", user.getUsername());
     }
 }

@@ -43,7 +43,7 @@ public class TableController {
     }
 
     @PostMapping("/datasources/{datasourceId}/tables")
-    public String saveTable(Model model, @PathVariable Long datasourceId, @ModelAttribute Table table) {
+    public String saveTable(@PathVariable Long datasourceId, @ModelAttribute Table table) {
         Datasource datasource = datasourceService.findById(datasourceId);
 
         if(table.getId() != null) {

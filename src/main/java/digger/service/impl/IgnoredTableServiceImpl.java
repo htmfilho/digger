@@ -5,6 +5,8 @@ import digger.model.IgnoredTable;
 import digger.model.Table;
 import digger.repository.IgnoredTableRepository;
 import digger.service.IgnoredTableService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @Service
 public class IgnoredTableServiceImpl implements IgnoredTableService {
+    private static final Logger logger = LoggerFactory.getLogger(IgnoredTableService.class);
 
     private final IgnoredTableRepository ignoredTableRepository;
 
@@ -21,6 +24,7 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
 
     public void save(IgnoredTable ignoredTable) {
         ignoredTableRepository.save(ignoredTable);
+        logger.info("Saved ignored table {}", ignoredTable.getName());
     }
 
     public IgnoredTable findById(final Long id) {
@@ -43,6 +47,7 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
 
     public void delete(final Long ignoredTableId) {
         ignoredTableRepository.deleteById(ignoredTableId);
+        logger.info("Deleted ignored table with id {}", ignoredTableId);
     }
 
     private List<Table> toTableList(final List<IgnoredTable> ignoredTables) {

@@ -21,8 +21,7 @@ import java.util.List;
 
 @Service
 public class ColumnServiceImpl implements ColumnService {
-
-    private static final Logger log = LoggerFactory.getLogger(ColumnServiceImpl.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ColumnService.class);
 
     private static final int COLUMN_NAME = 4;
     private static final int COLUMN_TYPE = 6;
@@ -58,13 +57,14 @@ public class ColumnServiceImpl implements ColumnService {
             Collections.sort(columns);
             tableService.updateTotalColumns(table, columns.size());
         } catch (SQLException se) {
-            log.warn("Error: {}", se.getMessage());
+            logger.warn("Error: {}", se.getMessage());
         }
         return excludeDocumentedColumns(table, columns, except);
     }
 
     public List<Column> excludeDocumentedColumns(final Table table, List<Column> columns, final Column except) {
         List<Column> documentedColumns = this.findByTable(table);
+
         // Remove except column from documentedColumns so it doesn't get removed from the list of undocumented columns.
         if (except != null) {
             documentedColumns.remove(except);
@@ -85,10 +85,12 @@ public class ColumnServiceImpl implements ColumnService {
 
     public void save(Column column) {
         columnRepository.save(column);
+        logger.info("Saved the column {}", column.getName());
     }
 
     public void delete(final Long columnId) {
         columnRepository.deleteById(columnId);
+        logger.info("Deleted the column with id {}", columnId);
     }
 
     public Column findById(final Long id) {

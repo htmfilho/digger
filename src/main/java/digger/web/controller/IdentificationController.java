@@ -19,8 +19,7 @@ import java.security.Principal;
 
 @Controller
 public class IdentificationController {
-
-    private static final Logger log = LoggerFactory.getLogger(IdentificationController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(IdentificationController.class);
 
     private final UserService userService;
 
@@ -54,7 +53,7 @@ public class IdentificationController {
             else
                 userService.saveReader(user.getUsername(), user.getPassword());
         } catch (RuntimeException re) {
-            log.error(re.getMessage(), re);
+            logger.error(re.getMessage(), re);
             model.addAttribute("user", user);
             model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
             model.addAttribute("emailError", "A user with email '"+ user.getUsername() +"' already exists.");
