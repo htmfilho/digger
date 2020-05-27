@@ -9,11 +9,15 @@ v1.2.0
 
 Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization.
 
+:sectnums!:
+
 == Introduction
 
 After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
 
 Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
+
+:sectnums:
 
 == Installation
 
@@ -100,6 +104,10 @@ You can also get all subsequent changes whenever they are available by fetching 
 Then you can package and run it:
 
     $ mvn clean package
+
+=== Configuring A Linux Service
+
+=== Configuring A Windows Service
 
 == Security
 
@@ -203,6 +211,8 @@ Click on the *Save* button to complete or *Cancel* to go back to the datasource 
 image::images/table-form.png[]
 
 The *Documentation* field uses https://asciidoctor.org/docs/what-is-asciidoc/[Asciidoc] as markup language. It has a human friendly syntax to allow anybody write rich content without touching any HTML or CSS code.
+
+Visit the Appendix A to learn everything you need to know to properly format your documentation.
 
 [#table]
 ==== A Table
@@ -344,3 +354,7 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
     $ git add missed-file.txt
     $ git commit --amend
+
+:sectnums!:
+
+== Appendix A: Asciidoc Syntax
