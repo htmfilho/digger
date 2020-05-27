@@ -234,6 +234,26 @@ image::images/column-form.png[]
 
 image::images/column.png[]
 
+=== When Things Go Wrong
+
+If you faced issues while using the above features, we are deeply sorry about that and we want to improve your experience. For that, we need your help to share information about the issue so we can effectively address that.
+
+The procedure to report a issue is simple:
+
+1. Go to the https://github.com/htmfilho/digger/issues[Issues] section on our GitHub repository and create a new issue
+
+2. Write in the *Title* a short overview of the issue
+
+3. Describe in the comments more details about the issue
+
+4. If possible, attach a screenshot if the issue is visible on the user interface
+
+5. Attach the most recent log file you can find in the folder `logs/`, which is created side by side with the `data/` and the `config/` folders
+
+6. Click on *Submit new issue* to finish
+
+We will be immediately notified and analyze the issue with the highest priority.
+
 == Contributing to the Project
 
 Follow these instructions if you want to contribute to Digger.
