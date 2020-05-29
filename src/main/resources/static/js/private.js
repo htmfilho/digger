@@ -32,7 +32,7 @@ $(function() {
             url: "/api".concat(pathname, "/columns/documented"),
             success: function(result) {
                 result.forEach(element => {
-                    $("#list-columns").append('<div class="card"><div class="card-body"><h5 class="card-title"><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.friendlyName +'</a></h5><h6 class="card-subtitle mb-2 text-muted">'+ element.name +' ('+ element.type +') '+ (element.nullable ? 'NULL': 'NOT NULL') +'</h6><p class="card-text">'+ renderAsciidoctor(element.documentation) +'</p>'+ (element.foreignKey ? '<a href="'+ pathname.substring(0, pathname.lastIndexOf("/") + 1) + element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><span class="badge badge-primary badge-pill"><i class="fas fa-key"></i></span></a>' : '') +'</div></div><p></p>');
+                    $("#list-columns").append('<div class="card"><div class="card-body"><h5 class="card-title"><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.friendlyName +'</a></h5><h6 class="card-subtitle mb-2 text-muted">'+ element.name +' ('+ element.type +') '+ (element.nullable ? 'NULL': 'NOT NULL') +'</h6><p class="card-text">'+ renderAsciidoctor(element.documentation) +'</p>'+ (element.foreignKey ? '<a href="'+ pathname.substring(0, pathname.lastIndexOf("/") + 1) + element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><span class="badge badge-info"><img src="/images/link.svg" alt="Foreign Key" data-toggle="tooltip" data-placement="right" title="Foreign Key"></span></a>' : '') +'</div></div><p></p>');
                 });
             }
         });
