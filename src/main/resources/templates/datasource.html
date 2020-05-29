@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
     <head>
        <title>Datasource - Digger</title>
     </head>
@@ -96,17 +98,8 @@
                             <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" th:if="${datasource.status}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
                         </div>
                     </div>
-        
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Friendly Name</th>
-                                <th scope="col">Type</th>
-                            </tr>
-                        </thead>
-                        <tbody id="datasource-tables"></tbody>
-                    </table>
+
+                    <div class="list-group" id="list-tables"></div>
                 </div>
                 <div class="tab-pane fade" id="ignored" role="tabpanel" aria-labelledby="ignored-tab">
                     <br>

@@ -12,13 +12,27 @@ $(function() {
 });
 
 $(function() {
-    if ($("#datasource-tables").length != 0) {
+    if ($("#list-tables").length != 0) {
         let pathname = window.location.pathname;
         $.ajax({
             url: "/api".concat(pathname, "/tables/documented"),
             success: function(result) {
                 result.forEach(element => {
-                    $("#datasource-tables").append('<tr><td><a href='+ pathname +'/tables/'+ element.id +'>'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +'</td></tr>');
+                    $("#list-tables").append('<div class="card"><div class="card-body"><h5 class="card-title"><a href="'+ pathname +'/tables/'+ element.id +'">'+ element.friendlyName +'</a></h5><h6 class="card-subtitle mb-2 text-muted">'+ element.name +' ('+ element.type +')</h6><p class="card-text">'+ renderAsciidoctor(element.documentation) +'</p></div></div><p></p>');
+                });
+            }
+        });
+    }
+});
+
+$(function() {
+    if ($("#list-columns").length != 0) {
+        let pathname = window.location.pathname;
+        $.ajax({
+            url: "/api".concat(pathname, "/columns/documented"),
+            success: function(result) {
+                result.forEach(element => {
+                    $("#list-columns").append('<div class="card"><div class="card-body"><h5 class="card-title"><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.friendlyName +'</a></h5><h6 class="card-subtitle mb-2 text-muted">'+ element.name +' ('+ element.type +') '+ (element.nullable ? 'NULL': 'NOT NULL') +'</h6><p class="card-text">'+ renderAsciidoctor(element.documentation) +'</p>'+ (element.foreignKey ? '<a href="'+ pathname.substring(0, pathname.lastIndexOf("/") + 1) + element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><span class="badge badge-primary badge-pill"><i class="fas fa-key"></i></span></a>' : '') +'</div></div><p></p>');
                 });
             }
         });
@@ -33,39 +47,6 @@ $(function() {
             success: function(result) {
                 result.forEach(element => {
                     $("#datasource-ignored-tables").append('<tr id="delete_'+ element.id +'"><td>'+ element.name +'</td><td><button type="button" class="btn btn-warning float-right" onclick="deleteIgnoredTable('+ element.id +')"><i class="far fa-trash-alt"></i></button></td></tr>');
-                });
-            }
-        });
-    }
-});
-
-$(function() {
-    if ($("#users").length != 0) {
-        $.ajax({
-            url: "/api/admin/users",
-            success: function(result) {
-                result.forEach(element => {
-                    $("#users").append('<tr><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
-                });
-            }
-        });
-    }
-});
-
-/* Load documented columns in the table page. */
-$(function() {
-    if ($("#table-columns").length != 0) {
-        let pathname = window.location.pathname;
-        $.ajax({
-            url: "/api".concat(pathname, "/columns/documented"),
-            success: function(result) {
-                result.forEach(element => {
-                    if(element.foreignKey) {
-                        $("#table-columns").append('<tr><td><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td><a href="'+ pathname.substring(0, pathname.lastIndexOf("/") + 1) + element.foreignKey.table.id +'/columns/'+ element.foreignKey.id +'"><i class="fas fa-key"></i></a></td></tr>');
-                    }
-                    else {
-                        $("#table-columns").append('<tr><td><a href="'+ pathname +'/columns/'+ element.id +'">'+ element.name +'</a></td><td>'+ element.friendlyName +'</td><td>'+ element.type +' ('+ element.size +')</td><td>'+ element.nullable +'</td><td>&nbsp;</td></tr>');
-                    }
                 });
             }
         });
@@ -94,6 +75,19 @@ $(function() {
             success: function(result) {
                 result.forEach(table => {
                     $("#database_ignorable_tables").append('<tr><td><input type="checkbox" id="ignored-'+ table.name +'" name="ignored" value="'+ table.name +'">&nbsp;<label for="ignored-'+ table.name +'">'+ table.name +'</label>');
+                });
+            }
+        });
+    }
+});
+
+$(function() {
+    if ($("#users").length != 0) {
+        $.ajax({
+            url: "/api/admin/users",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#users").append('<tr><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
                 });
             }
         });
@@ -220,7 +214,7 @@ $(function() {
 
 $(function() {
     if ($("#documentation-preview").length != 0) {
-        renderAsciidoctor("documentation-preview", $("#documentation").val());
+        $("#documentation-preview").html(renderAsciidoctor($("#documentation").val()));
     }
 });
 
@@ -248,7 +242,7 @@ $("#database-table-name").change(function() {
 });
 
 $("#documentation").change(function() {
-    renderAsciidoctor("documentation-preview", $(this).val());
+    $("#documentation-preview").html(renderAsciidoctor($(this).val()));
 });
 
 $("#driver").change(function() {
@@ -279,9 +273,9 @@ $("#table-column-name").change(function() {
     loadColumnAttributes($(this));
 });
 
-function renderAsciidoctor(element, content) {
+function renderAsciidoctor(content) {
     var asciidoctor = Asciidoctor();
-    $("#"+ element).html(asciidoctor.convert(content));
+    return asciidoctor.convert(content);
 }
 
 function addOption(id, value, label) {
