@@ -12,7 +12,7 @@ if(confirmPassword != null) {
     });
 }
 
-let signupForm = document.getElementById("signupForm");
+let signupForm = document.getElementById("userForm");
 if(signupForm != null) {
     signupForm.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -21,7 +21,7 @@ if(signupForm != null) {
         let confirmPassword = document.getElementById("confirmPassword");
     
         if (password.value === confirmPassword.value) {
-            document.getElementById("signupForm").submit();
+            document.getElementById("userForm").submit();
         } else {
             document.getElementById("confirmPasswordError").innerHTML = "<p>The password doesn't match the confirmation.</p>";
         }

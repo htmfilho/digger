@@ -17,7 +17,7 @@
 
             <h1>User</h1>
 
-            <form method="POST" th:action="@{/admin/users}">
+            <form method="POST" th:action="@{/admin/users}" id="userForm">
                 <input type="hidden" name="id" id="id" th:value="${user.id}">
                 
                 <div class="form-group">
@@ -26,28 +26,59 @@
                     <input type="hidden" id="username" name="username" th:value="${user.username}">
                 </div>
 
-                <div class="form-group">
-                    <label for="enabled">Role</label><br>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="enabled">Role</label><br>
 
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="mainRole" id="roleAdmin" value="ROLE_ADMIN" th:field="${user.mainRole}">
-                        <span class="form-check-label">Admin</span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="mainRole" id="roleAdmin" value="ROLE_ADMIN" th:field="${user.mainRole}">
+                                <span class="form-check-label">Admin</span>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="mainRole" id="roleEditor" value="ROLE_EDITOR" th:field="${user.mainRole}">
+                                <span class="form-check-label">Editor</span>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="mainRole" id="roleReader" value="ROLE_READER" th:field="${user.mainRole}">
+                                <span class="form-check-label">Reader</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="mainRole" id="roleEditor" value="ROLE_EDITOR" th:field="${user.mainRole}">
-                        <span class="form-check-label">Editor</span>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="mainRole" id="roleReader" value="ROLE_READER" th:field="${user.mainRole}">
-                        <span class="form-check-label">Reader</span>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="password">Status</label>
+                            <div class="form-group form-check">
+                                <input class="form-check-input" type="checkbox" name="enabled" id="enabled" th:checked="${user.enabled}"/>
+                                <span class="form-check-label" for="enabled">Enabled</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group form-check">
-                    <input class="form-check-input" type="checkbox" name="enabled" id="enabled" th:checked="${user.enabled}"/>
-                    <label class="form-check-label" for="enabled">Enabled</label>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Change Password</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Just fill in the fields below if you want to change the user password.</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="password"> Password</label>
+                                    <input type="password" name="password" id="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="confirmPassword"> Confirm Password</label>
+                                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <span id="confirmPasswordError" class="error"></span>
+                    </div>
                 </div>
 
+                <br>
                 <button type="submit" class="btn btn-primary" id="saveUser"><i class="fas fa-save"></i> Save</button>
                 <button type="button" class="btn btn-secondary" id="cancel"><i class="far fa-window-close"></i> Cancel</button>
             </form>

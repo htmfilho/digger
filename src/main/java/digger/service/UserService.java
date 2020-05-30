@@ -8,6 +8,7 @@ public interface UserService {
 
     digger.model.User findById(Long id);
     digger.model.User findByUsername(String username);
+    digger.model.User changePassword(digger.model.User user, String newPassword);
 
     List<digger.model.User> findAll();
 
@@ -16,5 +17,4 @@ public interface UserService {
     void saveAdmin(String username, String password);
     void saveReader(String username, String password);
     void enableOrDisableUser(digger.model.User user);
-    void changePassword(digger.model.User user, String newPassword);
 }

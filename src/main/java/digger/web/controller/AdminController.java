@@ -1,5 +1,7 @@
 package digger.web.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import digger.service.UserService;
 
 @Controller
 public class AdminController {
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     private final UserService userService;
     private final RoleService roleService;
@@ -42,6 +45,12 @@ public class AdminController {
         User existingUser = userService.findById(user.getId());
         existingUser.setUsername(user.getUsername());
         existingUser.setEnabled(user.getEnabled() != null ? user.getEnabled() : false);
+
+        if (!user.getPassword().trim().isEmpty()) {
+            existingUser = userService.changePassword(existingUser, user.getPassword());
+            logger.info("Changed the password of the user {}", existingUser.getUsername());
+        }
+
         userService.save(existingUser);
 
         Role existingRole = roleService.findByUsername(user.getUsername());

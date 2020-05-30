@@ -84,6 +84,6 @@
         <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
         <script src="/js/asciidoctor.min.js" th:if="${#httpServletRequest.remoteUser}"></script>
         <script src="/js/private.js" th:if="${#httpServletRequest.remoteUser}"></script>
-        <script src="/js/public.js" th:unless="${#httpServletRequest.remoteUser}"></script>
+        <script src="/js/common.js"></script>
     </body>
 </html>

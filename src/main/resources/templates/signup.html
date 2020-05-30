@@ -19,7 +19,7 @@
 
         <div class="card" style="width: 32rem;">
             <div class="card-body">
-                <form method="POST" id="signupForm" th:action="@{/users/new}">
+                <form method="POST" id="userForm" th:action="@{/users/new}" autocomplete="off">
                     <div class="form-group">
                         <label for="username"> Email</label>
                         <input type="email" name="username" id="username" class="form-control" th:value="${user.username}" required>

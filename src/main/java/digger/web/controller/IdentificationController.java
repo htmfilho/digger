@@ -76,11 +76,13 @@ public class IdentificationController {
 
     @PostMapping("/users/password")
     public String changePassword(Model model, Principal principal, @ModelAttribute UserDTO user) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         User existingUser = userService.findByUsername(principal.getName());
 
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-            userService.changePassword(existingUser, user.getNewPassword());
+            existingUser = userService.changePassword(existingUser, user.getNewPassword());
+            logger.info("Changed the password of the user {}", existingUser.getUsername());
+            userService.save(existingUser);
             return "redirect:/users/profile";
         }
 

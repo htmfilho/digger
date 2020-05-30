@@ -80,10 +80,9 @@ public class UserServiceImpl implements UserService {
         logger.info("User {} was {}", user.getUsername(), user.getEnabled() ? "Enabled": "Disabled");
     }
 
-    public void changePassword(digger.model.User user, String newPassword) {
+    public digger.model.User changePassword(digger.model.User user, String newPassword) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
-        logger.info("Changed the password of the user {}", user.getUsername());
+        return user;
     }
 }
