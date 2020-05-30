@@ -346,19 +346,3 @@ function deleteElement(prefix = "/") {
         });
     }
 }
-
-let changePasswordForm = document.getElementById("changePasswordForm");
-if(changePasswordForm != null) {
-    changePasswordForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let newPassword = document.getElementById("newPassword");
-        let confirmPassword = document.getElementById("confirmPassword");
-
-        if (newPassword.value === confirmPassword.value) {
-            changePasswordForm.submit();
-        } else {
-            document.getElementById("confirmPasswordError").innerHTML = "<p>The password doesn't match the confirmation.</p>";
-        }
-    });
-}

@@ -4,8 +4,8 @@ public class UserDTO {
 
     private Long id;
     private String username;
+    private String currentPassword;
     private String password;
-    private String newPassword;
     private String confirmPassword;
     private Boolean enabled;
     private String mainRole;
@@ -43,12 +43,12 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getNewPassword() {
-        return this.newPassword;
+    public String getCurrentPassword() {
+        return this.currentPassword;
     }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 
     public String getConfirmPassword() {

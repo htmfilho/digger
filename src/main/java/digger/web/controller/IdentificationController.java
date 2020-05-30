@@ -79,8 +79,8 @@ public class IdentificationController {
         User existingUser = userService.findByUsername(principal.getName());
 
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
-            existingUser = userService.changePassword(existingUser, user.getNewPassword());
+        if (passwordEncoder.matches(user.getCurrentPassword(), existingUser.getPassword())) {
+            existingUser = userService.changePassword(existingUser, user.getPassword());
             logger.info("Changed the password of the user {}", existingUser.getUsername());
             userService.save(existingUser);
             return "redirect:/users/profile";
