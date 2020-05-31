@@ -1,6 +1,6 @@
-﻿= Digger : Database Schema Documentation Tool
+﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.2.0
+v1.3.0
 :doctype: book
 :encoding: utf-8
 :toc: left
@@ -105,9 +105,38 @@ Then you can package and run it:
 
     $ mvn clean package
 
-=== Configuring A Linux Service
+=== Installing as a Local Service
 
-=== Configuring A Windows Service
+Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to start with the operating system in case the system needs to boot. Digger can be configured to start as a local service to address these cases.
+
+=== A Linux Service
+
+Create a new service file `digger.service` at `/etc/systemd/system` with the following content:
+
+[source, toml]
+----
+[Unit]
+Description = Digger - Database Schema Documentation Tool
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/digger
+User=digger
+Group=digger
+StandardOutput=syslog+console
+StandardError=syslog+console
+ExecStart=/usr/bin/java -jar /opt/digger/digger-standalone.jar
+
+[Install]
+WantedBy=multi-user.target
+----
+
+Then execute the following commands:
+
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl enable digger.service
+
+=== A Windows Service
 
 == Security
 
@@ -129,6 +158,26 @@ The login tries to match the user's credentials. If the matching is successful, 
 .User authentication
 image::images/login.png[]
 
+=== User Profile
+
+Once the login is successful, users have access to their profile by clicking on the user's menu on the top right and selecting *Profile*. This is a section that give information and some control over the user experience.
+
+.User Profile
+image::images/profile.png[]
+
+One of the capabilities available in the profile is the password change. Users are able to change their password whenever they feel it can improve their security. To change your password:
+
+1. Click on the *Change Password* button available in the profile
+
+2. fill in your current password to confirm your identity
+
+3. fill in your new password in the *New Password* and *Confirm New Password* fields
+
+4. Click on *Submit* to confirm the change or *Cancel* to return to the profile
+
+.Changing Password
+image::images/change-password.png[]
+
 == Features
 
 Digger gives you a good set of features to help you document the database schemes of your organization.
@@ -140,8 +189,12 @@ The administration is accessible via the top menu, in the "Admin" option. It all
 
 image::images/administration.png[]
 
+NOTE:: This feature is limited to administrators. Other roles won't see this option in the menu.
+
 [#admin-users]
 ==== Users
+
+Administrators need to have control over the users to ensure the confidentiality of the information managed by Digger. They can find in this section the essential to manage the users.
 
 image::images/users.png[]
 
@@ -151,6 +204,13 @@ After signing up, a user doesn't have instant access to Digger. All users are di
 
 1. click on the "Admin" option on the top menu and select "Users" in the list
 2. check the users you want to enable and uncheck the ones you want to disable
+
+===== User's Details
+
+In the *User's Details* section, the administration can see all information related to the user and related options such as *Edit* and *Delete*.
+
+.User's Details
+image::images/user.png[]
 
 ===== Changing the Role of a User
 
@@ -297,24 +357,7 @@ The data managed by Digger is persisted in a relational database. If you launche
 .Digger's Entity Relational Model
 image::images/entity-relationship-diagram.png[]
 
-=== Deployment
-
-Create a deployment package using Maven:
-
-    $ mvn clean package
-
-It creates a Java standalone application package in the folder `target`.
-
-If the default port `8080` is already in use, set the environment variable `SERVER_PORT` to `8081`.
-
-Run the package to check if everything works:
-
-    $ cd [your-java-projects-folder]/digger
-    $ java -jar target/digger-<version>-SNAPSHOT.jar
-
 === Test Automation
-
-Digger was initially released with very few automated tests. This is not good, but we wanted to give some use to the book https://amzn.to/3cDqTE9[Refactoring], by https://martinfowler.com[Martin Fowler]. This book explains how to refactor the code by first writing tests to ensure the refactoring won't break existing functionalities. So, our approach for testing is basically ensuring regression, increasing test coverage as the application is modified.
 
 To execute the test suite, run:
 
@@ -327,6 +370,8 @@ Only submit your pull request if these tests pass. To see the test coverage repo
  - https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html[Spring MVC]
  - https://spring.io/projects/spring-security[Spring Security]
  - http://www.thymeleaf.org[Thymeleaf]
+ - https://www.h2database.com[H2]
+ - https://www.postgresql.org/[PostgreSQL]
 
 === Using Git
 
