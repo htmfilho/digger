@@ -2,6 +2,8 @@ package digger.service;
 
 import java.util.List;
 
+import digger.model.enums.RoleKind;
+
 public interface UserService {
 
     boolean thereIsNoUser();
@@ -13,8 +15,9 @@ public interface UserService {
     List<digger.model.User> findAll();
 
     void save(digger.model.User user);
-    void delete(Long id);
+    void save(digger.model.User user, RoleKind roleKind);
     void saveAdmin(String username, String password);
     void saveReader(String username, String password);
     void enableOrDisableUser(digger.model.User user);
+    void delete(Long id);
 }

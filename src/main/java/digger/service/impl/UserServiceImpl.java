@@ -1,7 +1,10 @@
 package digger.service.impl;
 
+import digger.model.Role;
 import digger.model.User;
+import digger.model.enums.RoleKind;
 import digger.repository.UserRepository;
+import digger.service.RoleService;
 import digger.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +13,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,10 +23,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserDetailsManager userDetailsManager;
     private final UserRepository userRepository;
+    private final RoleService roleService;
 
-    public UserServiceImpl(UserDetailsManager userDetailsManager, UserRepository userRepository) {
+    public UserServiceImpl(UserDetailsManager userDetailsManager, UserRepository userRepository, RoleService roleService) {
         this.userDetailsManager = userDetailsManager;
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
     public boolean thereIsNoUser() {
@@ -42,6 +48,24 @@ public class UserServiceImpl implements UserService {
     }
 
     public void save(digger.model.User user) {
+        userRepository.save(user);
+        logger.info("Saved user {}", user.getUsername());
+    }
+
+    @Transactional
+    public void save(digger.model.User user, RoleKind role) {
+        // Abort if the current user is the only administrator and the role has changed.
+        Role existingRole = roleService.findByUsername(user.getUsername());
+        if(RoleKind.ROLE_ADMIN.toString().equals(existingRole.getAuthority())) {
+            long numAdmins = roleService.countAllByAuthority(RoleKind.ROLE_ADMIN.toString());
+            if (numAdmins > 1) {
+                existingRole.setAuthority(role.toString());
+                roleService.save(existingRole);
+            } else {
+                throw new RuntimeException("The only administrator cannot change its own role. Digger requires at least 2 administrators to allow this operation.");
+            }
+        }
+        
         userRepository.save(user);
         logger.info("Saved user {}", user.getUsername());
     }
