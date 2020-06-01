@@ -17,6 +17,10 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
+    public Long countAllByAuthority(String authority) {
+        return roleRepository.countAllByAuthority(authority);
+    }
+
     public Role findByUsername(final String username) {
         return this.roleRepository.findByUsername(username);
     }

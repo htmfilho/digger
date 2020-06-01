@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import digger.model.Role;
 import digger.model.User;
 import digger.model.UserDTO;
+import digger.model.enums.RoleKind;
 import digger.service.RoleService;
 import digger.service.UserService;
 
@@ -51,11 +52,9 @@ public class AdminController {
             logger.info("Changed the password of the user {}", existingUser.getUsername());
         }
 
-        userService.save(existingUser);
-
-        Role existingRole = roleService.findByUsername(user.getUsername());
-        existingRole.setAuthority(user.getMainRole());
-        roleService.save(existingRole);
+        RoleKind roleKind = RoleKind.valueOf(user.getMainRole());
+        
+        userService.save(existingUser, roleKind);
 
         return "redirect:/admin/users/"+ user.getId();
     }
