@@ -19,10 +19,10 @@
 
         <div class="card" style="width: 32rem;">
             <div class="card-body">
-                <form method="POST" id="userForm" th:action="@{/users/new}" autocomplete="off">
+                <form method="POST" id="userForm" th:action="@{/users/new}">
                     <div class="form-group">
                         <label for="username"> Email</label>
-                        <input type="email" name="username" id="username" class="form-control" th:value="${user.username}" required>
+                        <input type="email" name="username" id="username" class="form-control" autocomplete="new-password" th:value="${user.username}" required>
                     </div>
 
                     <p id="emailError" class="error" th:if="${emailError}" th:text="${emailError}"></p>
@@ -31,13 +31,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="password"> Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
+                                <input type="password" name="password" id="password" class="form-control" autocomplete="new-password" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="confirmPassword"> Confirm Password</label>
-                                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" required>
+                                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" autocomplete="new-password" required>
                                 <small id="confirmPasswordError" class="error"></small>
                             </div>
                         </div>
