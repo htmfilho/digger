@@ -274,7 +274,7 @@ $("#table-column-name").change(function() {
 });
 
 function renderAsciidoctor(content) {
-    var asciidoctor = Asciidoctor();
+    let asciidoctor = Asciidoctor();
     return asciidoctor.convert(content);
 }
 
@@ -284,6 +284,11 @@ function addOption(id, value, label) {
 
 function loadForeignColumns(foreignTableId) {
     let datasourceId = $("#datasource").val();
+
+    if(isNaN(foreignTableId)) {
+        return
+    }
+
     $.ajax({
         url: "/api/datasources/".concat(datasourceId, "/tables/", foreignTableId, "/columns/documented"),
         success: function(result) {
