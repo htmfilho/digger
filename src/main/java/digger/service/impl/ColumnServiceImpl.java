@@ -55,9 +55,11 @@ public class ColumnServiceImpl implements ColumnService {
             }
             resultSet.close();
             Collections.sort(columns);
+
+            // Side effect to improve efficiency: updates the number of columns at the moment the number of columns is known.
             tableService.updateTotalColumns(table, columns.size());
         } catch (SQLException se) {
-            logger.warn("Error: {}", se.getMessage());
+            logger.error("Error: {}", se.getMessage());
         }
         return excludeDocumentedColumns(table, columns, except);
     }
