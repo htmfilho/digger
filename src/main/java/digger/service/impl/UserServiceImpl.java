@@ -1,5 +1,6 @@
 package digger.service.impl;
 
+import digger.exception.RoleAssignmentException;
 import digger.model.Role;
 import digger.model.User;
 import digger.model.enums.RoleKind;
@@ -56,13 +57,14 @@ public class UserServiceImpl implements UserService {
     public void save(digger.model.User user, RoleKind role) {
         // Abort if the current user is the only administrator and the role has changed.
         Role existingRole = roleService.findByUsername(user.getUsername());
-        if(RoleKind.ROLE_ADMIN.toString().equals(existingRole.getAuthority())) {
+        if(RoleKind.ROLE_ADMIN.toString().equals(existingRole.getAuthority()) && !existingRole.getRoleKind().equals(role)) {
             long numAdmins = roleService.countAllByAuthority(RoleKind.ROLE_ADMIN.toString());
             if (numAdmins > 1) {
                 existingRole.setAuthority(role.toString());
                 roleService.save(existingRole);
             } else {
-                throw new RuntimeException("The only administrator cannot change its own role. Digger requires at least 2 administrators to allow this operation.");
+                throw new RoleAssignmentException("You are the only administrator and cannot change your own role. " +
+                                                  "Digger requires at least 2 administrators to allow this operation.", user);
             }
         }
         

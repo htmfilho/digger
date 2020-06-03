@@ -1,5 +1,7 @@
 package digger.model;
 
+import digger.model.enums.RoleKind;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,5 +47,20 @@ public class Role {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    public RoleKind getRoleKind() {
+        if(authority != null) {
+            return RoleKind.valueOf(this.authority);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return username.equals(role.username) && authority.equals(role.authority);
     }
 }

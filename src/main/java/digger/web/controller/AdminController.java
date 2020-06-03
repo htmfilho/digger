@@ -1,8 +1,10 @@
 package digger.web.controller;
 
+import digger.exception.RoleAssignmentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import digger.model.UserDTO;
 import digger.model.enums.RoleKind;
 import digger.service.RoleService;
 import digger.service.UserService;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminController {
@@ -42,7 +45,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/users")
-    public String saveUser(@ModelAttribute UserDTO user) {
+    public String saveUser( @ModelAttribute UserDTO user) {
         User existingUser = userService.findById(user.getId());
         existingUser.setUsername(user.getUsername());
         existingUser.setEnabled(user.getEnabled() != null ? user.getEnabled() : false);
@@ -53,7 +56,7 @@ public class AdminController {
         }
 
         RoleKind roleKind = RoleKind.valueOf(user.getMainRole());
-        
+
         userService.save(existingUser, roleKind);
 
         return "redirect:/admin/users/"+ user.getId();
@@ -62,7 +65,7 @@ public class AdminController {
     @GetMapping("/admin/users/{id}")
     public String openUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDTO userDTO = createUserDTO(id, userService, roleService);
+        UserDTO userDTO = createUserDTO(id);
         model.addAttribute("user", userDTO);
         return "admin/user";
     }
@@ -70,14 +73,25 @@ public class AdminController {
     @GetMapping("/admin/users/{id}/edit")
     public String editUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDTO userDTO = createUserDTO(id, userService, roleService);
+        UserDTO userDTO = createUserDTO(id);
         model.addAttribute("user", userDTO);
         return "admin/user_form";
     }
 
-    private UserDTO createUserDTO(Long id, UserService userService, RoleService roleService) {
+    private UserDTO createUserDTO(Long id) {
         User user = userService.findById(id);
         Role role = roleService.findByUsername(user.getUsername());
         return new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(RoleAssignmentException.class)
+    public ModelAndView handleRoleAssignmentExceptions(RoleAssignmentException rae) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/user_form");
+        modelAndView.addObject("userGuideUrl", userGuideUrl + "#admin-user");
+        modelAndView.addObject("error", rae.getMessage());
+        modelAndView.addObject("user", createUserDTO(rae.getUser().getId()));
+        return modelAndView;
     }
 }
