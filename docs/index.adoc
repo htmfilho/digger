@@ -375,6 +375,84 @@ Only submit your pull request if these tests pass. To see the test coverage repo
 
 === Using Git
 
+Git is a distributed version control system used to manage the source code of Digger. We can use apt-get to install Git:
+
+    $ sudo apt-get install git
+
+Since version 2.0, Git has adopted a new behavior to pull and push commits while in a branch. When you execute git push or git pull Git will consider pushing or pulling just for the current branch. Before, these commands would push and pull all branches. But the change to this new behavior is voluntary, not automatically imposed. So, we have to explicitly say we have to move from the old behavior to the new one. To do that, execute the following command:
+
+    $ git config --global push.default simple
+
+==== Configuring Git to Simplify Authentication
+
+For the moment, every time we push code to GitHub the prompt asks for a username and password. We can bypass this step by registering a SSH key. To do that, we first check whether there is already an existing SSH key we can reuse:
+
+    $ ls -al ~/.ssh
+
+If files with the extension .pub are listed then one of them can be reused to authenticate to GitHub. If not, then we can create one:
+
+    $ ssh-keygen -t rsa -b 4096 -C "[firstname.lastname]@domain.com"
+      Enter file in which to save the key (/Users/[user]/.ssh/id_rsa): [Press enter]
+      Enter passphrase (empty for no passphrase): [Type a passphrase]
+      Enter same passphrase again: [Type passphrase again]
+
+The next step is to add the new key - or an existing one - to the ssh-agent. This program runs the duration of a local login session, stores unencrypted keys in memory, and communicates with SSH clients using a Unix domain socket. Everyone who is able to connect to this socket also has access to the ssh-agent. First, we have to enable the ssh-agent:
+
+    $ eval "$(ssh-agent -s)"
+
+And add key to it:
+
+    $ ssh-add ~/.ssh/id_rsa
+
+The next step is to make GitHub aware of the key. For that, we have to copy the exact content of the file `id_rsa.pub` and paste into GitHub. To make no mistake about the copy, install a program called xclip:
+
+    $ sudo apt-get install xclip
+
+And then copy the content of the file `id_rsa.pub` in the clipboard:
+
+    $ xclip -sel clip < ~/.ssh/id_rsa.pub
+
+The command above is the equivalent of opening the file `~/.ssh/id_rsa.pub`, selecting the whole content and pressing `Ctrl+C`. This way, you can paste the content on GitHub when required in the next steps. On the GitHub side:
+
+1. Login at https://github.com
+
+2. In the top right corner of the page, click on the profile photo and select Settings
+
+3. In the user settings sidebar, click SSH keys
+
+4. Then click Add SSH key
+
+5. In the form, define a friendly title for the new key and paste the key in the Key field
+
+6. Click Add Key to finish with GitHub
+
+To make sure everything is working, lets test the connection:
+
+    $ ssh -T git@github.com
+      The authenticity of host 'github.com (207.97.227.239)' can't be established.
+      RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+      Are you sure you want to continue connecting (yes/no)? yes
+      _
+      Hi [username]! You've successfully authenticated, but GitHub does not
+      provide shell access.
+
+We can test the installation by cloning the Digger repository:
+
+    $ mkdir -p ~/java/projects/digger
+    $ cd ~/java/projects/digger
+    $ git clone git@github.com:htmfilho/digger.git .
+
+This configuration works only when we use a ssh connection to GitHub. To verify that, go to one of your local GitHub projects and check the url pointing to the server:
+
+    $ cd ~/java/projects/digger
+    $ git remote -v
+
+If the url starts with https:// then you are using https instead of ssh. In this case, you should change the url to the ssh one:
+
+    $ git remote set-url origin git@github.com:htmfilho/digger.git
+
+The automatic authentication should work after that.
+
 ==== Changing The Author To The One Recognizable by GitHub
 
 In case your default Git author is not the same as GitHub, configure the author of the repository:
