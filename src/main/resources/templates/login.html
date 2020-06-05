@@ -29,6 +29,8 @@
 
                     <p id="loginError" class="error" th:if="${param.error}">Invalid email and password</p>
 
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
                     <button type="submit" class="btn btn-primary" id="login">
                         <svg class="bi bi-lock-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <rect width="11" height="9" x="2.5" y="7" rx="2"/>

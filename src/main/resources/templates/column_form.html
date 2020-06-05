@@ -104,6 +104,7 @@
 
                 <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">
                 <input type="hidden" name="table" id="table" th:value="${table.id}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
                 <br>
                 <button type="submit" class="btn btn-primary" id="saveTable"><i class="fas fa-save"></i> Save</button>
