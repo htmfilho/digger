@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.3.0</span>
+<span id="revnumber">version 1.4.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -468,6 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_signing_up">2.1. Signing Up</a></li>
 <li><a href="#_login">2.2. Login</a></li>
 <li><a href="#_user_profile">2.3. User Profile</a></li>
+<li><a href="#_protection_against_csrf">2.4. Protection Against CSRF</a></li>
 </ul>
 </li>
 <li><a href="#_features">3. Features</a>
@@ -523,6 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_adding_a_file_to_the_most_recent_commit">4.6.3. Adding a File to the Most Recent Commit</a></li>
 </ul>
 </li>
+<li><a href="#_the_release_process">The Release Process</a></li>
 </ul>
 </li>
 <li><a href="#_appendix_a_asciidoc_syntax">Appendix A: Asciidoc Syntax</a></li>
@@ -819,6 +821,12 @@ $ sudo systemctl enable digger.service</pre>
 <div class="title">Figure 5. Changing Password</div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_protection_against_csrf">2.4. Protection Against CSRF</h3>
+<div class="paragraph">
+<p>CSRF stands for <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross Site Request Forgery</a>, a malicious exploit of web applications where unauthorized commands are triggered from users trusted by the application. Digger implements the measures to prevent this kind of attack.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -919,6 +927,9 @@ $ sudo systemctl enable digger.service</pre>
 <p>select the role you want for that user and save</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The only exception is when there is only one administrator and he or she tries to change his or her own role of administrator. The administrator needs to promote another user as administrator to be able to downgrade his or her own role.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1220,6 +1231,39 @@ $ git commit --amend</pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_the_release_process">The Release Process</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Update and review the documentation to make sure it covers all the recent changes in the tool.</p>
+</li>
+<li>
+<p>Increment the version number in the documentation to the version that is about to be released.</p>
+</li>
+<li>
+<p>Generate the HTML version of the documentation:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ asciidoctor docs/index.adoc</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Commit all the changes in the documentation:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ git add [list-of-modified-files]
+$ git commit -m "Updated the documentation for the release 1.3.0"</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.</p>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1231,8 +1275,8 @@ $ git commit --amend</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.3.0<br>
-Last updated 2020-05-31 11:43:47 -0400
+Version 1.4.0<br>
+Last updated 2020-06-07 10:57:41 -0400
 </div>
 </div>
 </body>
