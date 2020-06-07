@@ -425,7 +425,41 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
 5. Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.
 
+6. Push all local changes to the release branch:
 
+    $ git push origin 1.4.0
 
+7. Create a pull request to merge the release branch with the master branch, review the code to be merged and merge it.
+
+8. Create the next milestone.
+
+9. Move the unfinished work in the current milestone to the next milestone.
+
+10. Close the current milestone.
+
+11. Write the release notes.
+
+12. Generate the package:
+
+    $ mvn clean package
+
+13. Upload the package to the release page.
+
+12. Publish the release.
+
+13. Create a branch for the next release:
+
+    $ git checkout -b 1.5.0
+
+14. Increment the version number in the pom file and commit it:
+
+    $ git add pom.xml
+    $ git commit -m "Incremented release number to 1.5.0"
+
+15. Push the new branch to `origin`:
+
+    $ git push origin 1.5.0
+
+16. Announce the new release to the community and on social networks.
 
 == Appendix A: Asciidoc Syntax
