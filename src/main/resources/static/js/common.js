@@ -27,3 +27,17 @@ if(signupForm != null) {
         }
     });
 }
+
+$(function() {
+    $("table").addClass("table");
+});
+
+$(function() {
+    const now = new Date();
+    const year = now.getFullYear();
+    $("#current-year").html(year);
+});
+
+$("#cancel").click(function() {
+    window.history.back();
+});

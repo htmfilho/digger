@@ -1,3 +1,4 @@
+// index.html
 $(function() {
     if ($("#list-datasources").length != 0) {
         $.ajax({
@@ -11,6 +12,7 @@ $(function() {
     }
 });
 
+// datasource.html
 $(function() {
     if ($("#list-tables").length != 0) {
         let pathname = window.location.pathname;
@@ -25,6 +27,7 @@ $(function() {
     }
 });
 
+// table.html
 $(function() {
     if ($("#list-columns").length != 0) {
         let pathname = window.location.pathname;
@@ -39,6 +42,7 @@ $(function() {
     }
 });
 
+// datasource.html
 $(function() {
     if ($("#datasource-ignored-tables").length != 0) {
         let pathname = window.location.pathname;
@@ -53,6 +57,7 @@ $(function() {
     }
 });
 
+// column.html
 $(function() {
     if ($("#column-references").length != 0) {
         let pathname = window.location.pathname;
@@ -67,6 +72,7 @@ $(function() {
     }
 });
 
+// ignored_table_form.html
 $(function() {
     if ($("#database_ignorable_tables").length != 0) {
         let pathname = window.location.pathname;
@@ -81,6 +87,7 @@ $(function() {
     }
 });
 
+// users.html
 $(function() {
     if ($("#users").length != 0) {
         $.ajax({
@@ -137,6 +144,7 @@ function loadColumnAttributes(column) {
     }
 }
 
+// table_form.html
 $(function() {
     if ($("#database-table-name").length != 0) {
         let datasourceId = $("#datasource").val();
@@ -156,6 +164,7 @@ $(function() {
     }
 });
 
+// column_form.html
 $(function() {
     if ($("#table-column-name").length != 0) {
         let datasourceId = $("#datasource").val();
@@ -176,6 +185,7 @@ $(function() {
     }
 });
 
+// column_form.html
 $(function() {
     if ($("#foreign-table").length != 0) {
         let datasourceId = $("#datasource").val();
@@ -203,23 +213,9 @@ $(function() {
 });
 
 $(function() {
-    $("table").addClass("table");
-});
-
-$(function() {
-    const now = new Date();
-    const year = now.getFullYear();
-    $("#current-year").html(year);
-});
-
-$(function() {
     if ($("#documentation-preview").length != 0) {
         $("#documentation-preview").html(renderAsciidoctor($("#documentation").val()));
     }
-});
-
-$("#cancel").click(function() {
-    window.history.back();
 });
 
 // When there is a checkbox that when checked also checks all checkboxes in the page. An example can be found in the
@@ -237,6 +233,7 @@ $("#check-all").click(function(event) {
     }
 });
 
+// table_form.html
 $("#database-table-name").change(function() {
     loadTableAttributes($(this));
 });
@@ -245,6 +242,7 @@ $("#documentation").change(function() {
     $("#documentation-preview").html(renderAsciidoctor($(this).val()));
 });
 
+// datasource_form.html
 $("#driver").change(function() {
     const driver = $(this).val();
 
@@ -263,12 +261,14 @@ $("#driver").change(function() {
     }
 });
 
+// column_form.html
 $("#foreign-table").change(function() {
     let elem = $(this);
     let tableId = elem.val();
     loadForeignColumns(tableId);
 });
 
+// column_form.html
 $("#table-column-name").change(function() {
     loadColumnAttributes($(this));
 });
