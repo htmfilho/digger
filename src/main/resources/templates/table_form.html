@@ -8,8 +8,6 @@
         <section>
             <h1><img src="/images/table.svg"> Table</h1>
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables(datasourceId=${datasource.id})}">
-                <input type="hidden" id="id" name="id" th:value="${table.id}"/>
-
                 <div class="row">
                     <div class="col-5">
                         <div class="form-group">
@@ -57,6 +55,7 @@
                     </div>
                 </div>
 
+                <input type="hidden" id="id" name="id" th:value="${table.id}"/>
                 <input type="hidden" name="datasource" id="datasource" th:value="${datasource.id}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 

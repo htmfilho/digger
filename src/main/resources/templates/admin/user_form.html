@@ -18,8 +18,6 @@
             <h1>User</h1>
 
             <form method="POST" th:action="@{/admin/users}" id="userForm">
-                <input type="hidden" name="id" id="id" th:value="${user.id}">
-
                 <div th:if="${error}" class="alert alert-warning" role="alert" th:text="${error}"></div>
 
                 <div class="form-group">
@@ -80,6 +78,7 @@
                     </div>
                 </div>
 
+                <input type="hidden" name="id" id="id" th:value="${user.id}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
                 <br>

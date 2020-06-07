@@ -302,27 +302,6 @@ function loadForeignColumns(foreignTableId) {
     });
 }
 
-function deleteIgnoredTable(id) {
-    if (confirm("Are you sure you want to delete it?")) {
-        let pathname = window.location.pathname;
-        $.ajax({
-            url: "/api".concat(pathname, "/tables/ignored/", id),
-            type: 'DELETE',
-            success: function() {
-                $("#delete_"+ id).remove();
-            }
-        });
-    }
-}
-
-function enableUser(username, field) {
-    $.ajax({
-        url: "/api/admin/users",
-        type: "POST",
-        data: {username: username}
-    });
-}
-
 function buildSuccessRedirectUrl(pathname) {
     let redirectUrl = pathname;
     redirectUrl = redirectUrl.substring(0, redirectUrl.lastIndexOf("/"));
@@ -335,16 +314,50 @@ function buildSuccessRedirectUrl(pathname) {
     return redirectUrl;
 }
 
+function deleteIgnoredTable(id) {
+    if (confirm("Are you sure you want to delete it?")) {
+        let pathname = window.location.pathname;
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
+        $.ajax({
+            url: "/api".concat(pathname, "/tables/ignored/", id),
+            type: 'DELETE',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function() {
+                $("#delete_"+ id).remove();
+            }
+        });
+    }
+}
+
+function enableUser(username, field) {
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+    $.ajax({
+        url: "/api/admin/users",
+        type: "POST",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        data: {username: username}
+    });
+}
+
 function deleteElement(prefix = "/") {
     if (confirm("Are you sure you want to delete it?")) {
         let pathname = window.location.pathname;
         let apiUrl = prefix.concat("api", pathname);
         let redirectUrl = buildSuccessRedirectUrl(pathname);
-        console.log(apiUrl);
-        console.log(redirectUrl);
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
         $.ajax({
             url: apiUrl,
             type: 'DELETE',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
             success: function() {
                 window.location = redirectUrl;
             }
