@@ -1,6 +1,6 @@
 ﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.3.0
+v1.4.0
 :doctype: book
 :encoding: utf-8
 :toc: left
@@ -178,6 +178,10 @@ One of the capabilities available in the profile is the password change. Users a
 .Changing Password
 image::images/change-password.png[]
 
+=== Protection Against CSRF
+
+CSRF stands for https://en.wikipedia.org/wiki/Cross-site_request_forgery[Cross Site Request Forgery], a malicious exploit of web applications where unauthorized commands are triggered from users trusted by the application. Digger implements the measures to prevent this kind of attack.
+
 == Features
 
 Digger gives you a good set of features to help you document the database schemes of your organization.
@@ -228,6 +232,8 @@ The first user of Digger is assigned to the role of Administrator and all subseq
 2. click on the user you want to change
 3. click on the button "Options" and select "Edit" in the list
 4. select the role you want for that user and save
+
+The only exception is when there is only one administrator and he or she tries to change his or her own role of administrator. The administrator needs to promote another user as administrator to be able to downgrade his or her own role.
 
 image::images/user-form.png[]
 
@@ -479,5 +485,25 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
     $ git commit --amend
 
 :sectnums!:
+
+=== The Release Process
+
+1. Update and review the documentation to make sure it covers all the recent changes in the tool.
+
+2. Increment the version number in the documentation to the version that is about to be released.
+
+3. Generate the HTML version of the documentation:
+
+    $ asciidoctor docs/index.adoc
+
+4. Commit all the changes in the documentation:
+
+    $ git add [list-of-modified-files]
+    $ git commit -m "Updated the documentation for the release 1.3.0"
+
+5. Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.
+
+
+
 
 == Appendix A: Asciidoc Syntax
