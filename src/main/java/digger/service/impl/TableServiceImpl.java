@@ -67,12 +67,7 @@ public class TableServiceImpl implements TableService {
     }
 
     public Table getTable(final Datasource datasource, final Table table) {
-        List<Table> tables = listTables(datasource, table.getName(), null);
-        if (tables.isEmpty()) {
-            return table;
-        } else {
-            return tables.get(0);
-        }
+        return tableRepository.findById(table.getId());
     }
 
     public void save(Table table) {

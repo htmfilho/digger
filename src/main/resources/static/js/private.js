@@ -198,6 +198,7 @@ $(function() {
                 });
                 $("#foreign-table").val(foreignTableId);
                 loadForeignColumns(foreignTableId);
+                loadForeignTableDocumentation(foreignTableId);
             }
         });
     }
@@ -220,6 +221,7 @@ $(function() {
 
 // When there is a checkbox that when checked also checks all checkboxes in the page. An example can be found in the
 // Ignored Table form.
+// ignored_table_form.html
 $("#check-all").click(function(event) {
     if(this.checked) {
         // Iterate each checkbox
@@ -238,6 +240,8 @@ $("#database-table-name").change(function() {
     loadTableAttributes($(this));
 });
 
+// column_form.html
+// table_form.html
 $("#documentation").change(function() {
     $("#documentation-preview").html(renderAsciidoctor($(this).val()));
 });
@@ -266,6 +270,7 @@ $("#foreign-table").change(function() {
     let elem = $(this);
     let tableId = elem.val();
     loadForeignColumns(tableId);
+    loadForeignTableDocumentation(tableId);
 });
 
 // column_form.html
@@ -282,6 +287,7 @@ function addOption(id, value, label) {
     $(id).append('<option value="'+ value +'">'+ label +'</option>');
 }
 
+// column_form.html
 function loadForeignColumns(foreignTableId) {
     let datasourceId = $("#datasource").val();
 
@@ -298,6 +304,28 @@ function loadForeignColumns(foreignTableId) {
                 addOption("#foreignKey", column.id, column.name);
             });
             $("#foreignKey").val($("#foreign-column-aux").val());
+        }
+    });
+}
+
+// column_form.html
+function loadForeignTableDocumentation(foreignTableId) {
+    let datasourceId = $("#datasource").val();
+
+    if(isNaN(foreignTableId)) {
+        return
+    }
+
+    $.ajax({
+        url: "/api/datasources/".concat(datasourceId, "/tables/", foreignTableId),
+        success: function(result) {
+            $("#foreign-documentation").empty();
+            if(result.documentation) {
+                $("#foreign-documentation").html(renderAsciidoctor(result.documentation));
+                $("#foreign-documentation-colapse").collapse('show');
+            } else {
+                $("#foreign-documentation-colapse").collapse('hide');
+            }
         }
     });
 }

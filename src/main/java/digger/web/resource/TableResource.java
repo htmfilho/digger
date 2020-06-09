@@ -34,10 +34,10 @@ public class TableResource {
         return tableService.findByDatasource(datasource);
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Table getTable(@PathVariable Long datasourceId, @PathVariable String tableName) {
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Table getTable(@PathVariable Long datasourceId, @PathVariable Long tableId) {
         Datasource datasource = datasourceService.findById(datasourceId);
-        Table table = new Table(tableName);
+        Table table = new Table(tableId);
         return tableService.getTable(datasource, table);
     }
 
