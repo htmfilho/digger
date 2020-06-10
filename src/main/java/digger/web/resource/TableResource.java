@@ -1,23 +1,29 @@
 package digger.web.resource;
 
+import digger.model.Column;
 import digger.model.Datasource;
 import digger.model.Table;
+import digger.service.ColumnService;
 import digger.service.DatasourceService;
 import digger.service.TableService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @RestController
 public class TableResource {
 
     private final DatasourceService datasourceService;
     private final TableService tableService;
+    private final ColumnService columnService;
 
-    public TableResource(DatasourceService datasourceService, TableService tableService) {
+    public TableResource(DatasourceService datasourceService, TableService tableService, ColumnService columnService) {
         this.datasourceService = datasourceService;
         this.tableService = tableService;
+        this.columnService = columnService;
     }
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,6 +45,19 @@ public class TableResource {
         Datasource datasource = datasourceService.findById(datasourceId);
         Table table = new Table(tableId);
         return tableService.getTable(datasource, table);
+    }
+
+    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/foreignkeys",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<Table> getForeignKeys(@PathVariable Long datasourceId, @PathVariable Long tableId) {
+        Table table = new Table(tableId);
+        List<Column> columns = columnService.findByTable(table);
+        List<Column> foreignKeys = columnService.findByForeignKeyIn(columns);
+        Set<Table> tables = new TreeSet<>();
+        for(Column column: foreignKeys) {
+            tables.add(column.getTable());
+        }
+        return tables;
     }
 
     @DeleteMapping("/api/datasources/{datasourceId}/tables/{tableId}")
