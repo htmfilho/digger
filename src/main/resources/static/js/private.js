@@ -57,6 +57,21 @@ $(function() {
     }
 });
 
+// table.html
+$(function() {
+    if ($("#table-references").length != 0) {
+        let pathname = window.location.pathname;
+        $.ajax({
+            url: "/api".concat(pathname, "/foreignkeys"),
+            success: function(result) {
+                result.forEach(element => {
+                    $("#table-references").append('<tr><td><a href="'+ pathname.match(/\Wdatasources\W[0-9]+/) +'/tables/'+ element.id +'">'+ element.name +'</a></td><td><a href="'+ pathname.match(/\Wdatasources\W[0-9]+/) +'/tables/'+ element.id +'">'+ element.friendlyName +'</a></td></tr>');
+                });
+            }
+        });
+    }
+});
+
 // column.html
 $(function() {
     if ($("#column-references").length != 0) {

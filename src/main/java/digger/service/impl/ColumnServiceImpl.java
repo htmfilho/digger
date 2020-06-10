@@ -110,6 +110,10 @@ public class ColumnServiceImpl implements ColumnService {
         return columnRepository.findByForeignKey(foreignKey);
     }
 
+    public List<Column> findByForeignKeyIn(List<Column> columns) {
+        return columnRepository.findByForeignKeyIn(columns);
+    }
+
     public Integer countDocumentedColumns(final Table table) {
         List<Column> documentedColumns = findByTable(table);
         return documentedColumns.size();

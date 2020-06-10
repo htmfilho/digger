@@ -15,6 +15,7 @@ public interface ColumnService {
     List<Column> excludeDocumentedColumns(Table table, List<Column> columns, Column except);
     List<Column> findByTable(Table table);
     List<Column> findByForeignKey(Column foreignKey);
+    List<Column> findByForeignKeyIn(List<Column> columns);
 
     Integer countDocumentedColumns(Table table);
     Integer calculateProgress(Table table);

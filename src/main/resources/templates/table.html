@@ -72,16 +72,45 @@
 
             <hr>
 
-            <div class="row">
-                <div class="col-10">
-                    <h3><i class="fas fa-columns"></i> Columns</h3>
+            <br>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="columns-tab" data-toggle="tab" href="#columns" role="tab" aria-controls="columns" aria-selected="true">Columns</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="referencedby-tab" data-toggle="tab" href="#referencedby" role="tab" aria-controls="referencedby" aria-selected="false">Referenced By</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="tabContent">
+                <div class="tab-pane fade show active" id="columns" role="tabpanel" aria-labelledby="columns-tab">
+                    <br>
+                    <div class="row">
+                        <div class="col-10">
+                            <h3><i class="fas fa-columns"></i> Columns</h3>
+                        </div>
+                        <div class="col-2">
+                            <a th:href="@{/datasources/{id}/tables/{tableId}/columns/new(id=${datasource.id}, tableId=${table.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
+                        </div>
+                    </div>
+
+                    <div class="list-group" id="list-columns"></div>
                 </div>
-                <div class="col-2">
-                    <a th:href="@{/datasources/{id}/tables/{tableId}/columns/new(id=${datasource.id}, tableId=${table.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
+                <div class="tab-pane fade" id="referencedby" role="tabpanel" aria-labelledby="referencedby-tab">
+                    <br>
+                    <h3><i class="fas fa-link"></i> Referenced By</h3>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Table</th>
+                                <th scope="col">Friendly Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-references"></tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="list-group" id="list-columns"></div>
         </section>
     </body>
 </html>
