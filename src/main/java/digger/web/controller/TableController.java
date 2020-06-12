@@ -38,7 +38,7 @@ public class TableController {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
         model.addAttribute("table", new Table());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#new_table");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#table-form");
         return "table_form";
     }
 
@@ -80,7 +80,7 @@ public class TableController {
     public String editTable(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
-        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_table");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#table-form");
         return "table_form";
     }
 }

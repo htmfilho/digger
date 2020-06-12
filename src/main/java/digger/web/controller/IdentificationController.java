@@ -31,10 +31,11 @@ public class IdentificationController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
         if(this.userService.thereIsNoUser())
             return "redirect:/signup";
 
+        model.addAttribute("userGuideUrl", userGuideUrl + "#login");
         return "login";
     }
 
@@ -42,6 +43,7 @@ public class IdentificationController {
     public String signUp(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
+        model.addAttribute("userGuideUrl", userGuideUrl + "#signup");
         return "signup";
     }
 

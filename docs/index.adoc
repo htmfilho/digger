@@ -142,6 +142,7 @@ Then execute the following commands:
 
 Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of the schemes. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.
 
+[#signup]
 === Signing Up
 
 When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.
@@ -151,6 +152,7 @@ image::images/signup.png[]
 
 All people signing up after the first user are disabled and assigned to the role of Reader by default. That's why the user cannot login after the sign up. The administrator must enable the user and assign him or her to the appropriate role or leave the user as reader.
 
+[#login]
 === Login
 
 The login tries to match the user's credentials. If the matching is successful, the user is allowed into the application to access confidential information, otherwise the user is informed that the matching was unsuccessful.
@@ -158,12 +160,16 @@ The login tries to match the user's credentials. If the matching is successful, 
 .User authentication
 image::images/login.png[]
 
+[#profile]
 === User Profile
 
 Once the login is successful, users have access to their profile by clicking on the user's menu on the top right and selecting *Profile*. This is a section that give information and some control over the user experience.
 
 .User Profile
 image::images/profile.png[]
+
+[#change-password]
+==== Changing Password
 
 One of the capabilities available in the profile is the password change. Users are able to change their password whenever they feel it can improve their security. To change your password:
 
@@ -209,6 +215,7 @@ After signing up, a user doesn't have instant access to Digger. All users are di
 1. click on the "Admin" option on the top menu and select "Users" in the list
 2. check the users you want to enable and uncheck the ones you want to disable
 
+[#admin-user]
 ===== User's Details
 
 In the *User's Details* section, the administration can see all information related to the user and related options such as *Edit* and *Delete*.
@@ -254,7 +261,7 @@ image::images/datasource-form.png[]
 To edit a datasource, click on it in the list. In the datasource page, click on the button *Options* on the top right, then select the option *Edit*. The same form appears, but this time completely filled. Make the intended changes and *Save*.
 
 [#datasource]
-==== The Datasource
+==== A Datasource
 
 The datasource page shows all information related to the datasource, as well as all possible operations such as *Edit*, *Remove*, *Add Table*, *Ignore Tables*, etc.
 
@@ -267,7 +274,7 @@ A datasource's Table is a tabular structure used to store, organize and retrieve
 
 image::images/tables.png[]
 
-[#new_table]
+[#table-form]
 ==== Documenting a Table
 
 To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the *New* button on the right. Filling the form by selecting the physical name of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.
@@ -287,12 +294,12 @@ The table's page shows all information related to the table, including its colum
 
 image::images/table.png[]
 
-[#ignored_tables]
+[#ignored-tables]
 === Ignored Tables
 
 image::images/ignored-tables.png[]
 
-[#new_ignored_tables]
+[#ignored-tables-form]
 ==== Ignoring Tables
 
 image::images/ignoring-tables.png[]
@@ -300,7 +307,7 @@ image::images/ignoring-tables.png[]
 [#columns]
 === Columns
 
-[#new_column]
+[#column-form]
 ==== Documenting a Column
 
 image::images/column-form.png[]
@@ -541,3 +548,11 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 18. Announce the new release to the community and on social networks.
 
 == Appendix A: Asciidoc Syntax
+
+Asciidoc is a markup language in plain text that can be easily transformed into other convenient formats such as HTML, PDF, etc. When you use Asciidoc to write the database documentation, Digger has a minimal effort to provide content in other formats for your confort.
+
+=== A Paragraph
+
+The content is organized in blocks separated by empty lines. In other words, by simply putting an empty line between two sentences we get two paragraphs. Breaking the content in consecutive lines keep it within the same paragraph. If you want line breaks within a paragraph, use the `+` symbol at the end of the line.
+
+To draw attention to a paragraph, you can use `NOTE`, `TIP`, `IMPORTANT`, `CAUTION`, `WARNING`:
