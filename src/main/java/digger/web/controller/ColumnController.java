@@ -39,7 +39,7 @@ public class ColumnController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", new Column());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#new_column");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#column-form");
         return "column_form";
     }
 
@@ -83,7 +83,7 @@ public class ColumnController {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("table", tableService.findById(tableId));
         model.addAttribute("column", columnService.findById(columnId));
-        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_column");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#column-form");
         return "column_form";
     }
 }

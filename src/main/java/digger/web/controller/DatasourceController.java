@@ -30,7 +30,7 @@ public class DatasourceController {
     public String newDatasource(Model model) {
         model.addAttribute("datasource", new Datasource());
         model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#new_datasource");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#datasource-form");
         return "datasource_form";
     }
 
@@ -63,7 +63,7 @@ public class DatasourceController {
     public String editDatasource(Model model, @PathVariable Long datasourceId) {
         model.addAttribute("datasource", datasourceService.findById(datasourceId));
         model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#edit_datasource");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#datasource-form");
         return "datasource_form";
     }
 }

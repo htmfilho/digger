@@ -29,7 +29,7 @@ public class IgnoredTableController {
         Datasource datasource = datasourceService.findById(datasourceId);
         model.addAttribute("datasource", datasource);
         model.addAttribute("ignoredTable", new IgnoredTable());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#new_ignored_table");
+        model.addAttribute("userGuideUrl", userGuideUrl + "#ignored-table-form");
         return "ignored_table_form";
     }
 
