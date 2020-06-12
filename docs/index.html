@@ -465,9 +465,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_security">2. Security</a>
 <ul class="sectlevel2">
-<li><a href="#_signing_up">2.1. Signing Up</a></li>
-<li><a href="#_login">2.2. Login</a></li>
-<li><a href="#_user_profile">2.3. User Profile</a></li>
+<li><a href="#signup">2.1. Signing Up</a></li>
+<li><a href="#login">2.2. Login</a></li>
+<li><a href="#profile">2.3. User Profile</a>
+<ul class="sectlevel3">
+<li><a href="#change-password">2.3.1. Changing Password</a></li>
+</ul>
+</li>
 <li><a href="#_protection_against_csrf">2.4. Protection Against CSRF</a></li>
 </ul>
 </li>
@@ -478,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#admin-users">3.1.1. Users</a>
 <ul class="sectlevel4">
 <li><a href="#_enabling_and_disabling_a_user">Enabling and Disabling a User</a></li>
-<li><a href="#_users_details">User&#8217;s Details</a></li>
+<li><a href="#admin-user">User&#8217;s Details</a></li>
 <li><a href="#_changing_the_role_of_a_user">Changing the Role of a User</a></li>
 </ul>
 </li>
@@ -487,23 +491,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#datasources">3.2. Datasources</a>
 <ul class="sectlevel3">
 <li><a href="#datasource-form">3.2.1. Creating and Editing a Datasource</a></li>
-<li><a href="#datasource">3.2.2. The Datasource</a></li>
+<li><a href="#datasource">3.2.2. A Datasource</a></li>
 </ul>
 </li>
 <li><a href="#tables">3.3. Tables</a>
 <ul class="sectlevel3">
-<li><a href="#new_table">3.3.1. Documenting a Table</a></li>
+<li><a href="#table-form">3.3.1. Documenting a Table</a></li>
 <li><a href="#table">3.3.2. A Table</a></li>
 </ul>
 </li>
-<li><a href="#ignored_tables">3.4. Ignored Tables</a>
+<li><a href="#ignored-tables">3.4. Ignored Tables</a>
 <ul class="sectlevel3">
-<li><a href="#new_ignored_tables">3.4.1. Ignoring Tables</a></li>
+<li><a href="#ignored-tables-form">3.4.1. Ignoring Tables</a></li>
 </ul>
 </li>
 <li><a href="#columns">3.5. Columns</a>
 <ul class="sectlevel3">
-<li><a href="#new_column">3.5.1. Documenting a Column</a></li>
+<li><a href="#column-form">3.5.1. Documenting a Column</a></li>
 <li><a href="#column">3.5.2. A Column</a></li>
 </ul>
 </li>
@@ -519,15 +523,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technologies_in_use">4.5. Technologies in Use</a></li>
 <li><a href="#_using_git">4.6. Using Git</a>
 <ul class="sectlevel3">
-<li><a href="#_changing_the_author_to_the_one_recognizable_by_github">4.6.1. Changing The Author To The One Recognizable by GitHub</a></li>
-<li><a href="#_changing_several_commits_in_bulk">4.6.2. Changing Several Commits in Bulk</a></li>
-<li><a href="#_adding_a_file_to_the_most_recent_commit">4.6.3. Adding a File to the Most Recent Commit</a></li>
+<li><a href="#_configuring_git_to_simplify_authentication">4.6.1. Configuring Git to Simplify Authentication</a></li>
+<li><a href="#_changing_the_author_to_the_one_recognizable_by_github">4.6.2. Changing The Author To The One Recognizable by GitHub</a></li>
+<li><a href="#_changing_several_commits_in_bulk">4.6.3. Changing Several Commits in Bulk</a></li>
+<li><a href="#_adding_a_file_to_the_most_recent_commit">4.6.4. Adding a File to the Most Recent Commit</a></li>
 </ul>
 </li>
 <li><a href="#_the_release_process">The Release Process</a></li>
 </ul>
 </li>
-<li><a href="#_appendix_a_asciidoc_syntax">Appendix A: Asciidoc Syntax</a></li>
+<li><a href="#_appendix_a_asciidoc_syntax">Appendix A: Asciidoc Syntax</a>
+<ul class="sectlevel2">
+<li><a href="#_a_paragraph">A Paragraph</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -758,7 +767,7 @@ $ sudo systemctl enable digger.service</pre>
 <p>Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of the schemes. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.</p>
 </div>
 <div class="sect2">
-<h3 id="_signing_up">2.1. Signing Up</h3>
+<h3 id="signup">2.1. Signing Up</h3>
 <div class="paragraph">
 <p>When Digger starts for the first time, it forces the creation of the first user account by automatically redirecting the user to the Sign Up page. The role of administrator (ROLE_ADMIN) is automatically assigned to the first user, who is empowered to manage the application including other users.</p>
 </div>
@@ -773,7 +782,7 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_login">2.2. Login</h3>
+<h3 id="login">2.2. Login</h3>
 <div class="paragraph">
 <p>The login tries to match the user&#8217;s credentials. If the matching is successful, the user is allowed into the application to access confidential information, otherwise the user is informed that the matching was unsuccessful.</p>
 </div>
@@ -785,7 +794,7 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_user_profile">2.3. User Profile</h3>
+<h3 id="profile">2.3. User Profile</h3>
 <div class="paragraph">
 <p>Once the login is successful, users have access to their profile by clicking on the user&#8217;s menu on the top right and selecting <strong>Profile</strong>. This is a section that give information and some control over the user experience.</p>
 </div>
@@ -795,6 +804,8 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 <div class="title">Figure 4. User Profile</div>
 </div>
+<div class="sect3">
+<h4 id="change-password">2.3.1. Changing Password</h4>
 <div class="paragraph">
 <p>One of the capabilities available in the profile is the password change. Users are able to change their password whenever they feel it can improve their security. To change your password:</p>
 </div>
@@ -819,6 +830,7 @@ $ sudo systemctl enable digger.service</pre>
 <img src="images/change-password.png" alt="change password">
 </div>
 <div class="title">Figure 5. Changing Password</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -880,7 +892,7 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_users_details">User&#8217;s Details</h5>
+<h5 id="admin-user">User&#8217;s Details</h5>
 <div class="paragraph">
 <p>In the <strong>User&#8217;s Details</strong> section, the administration can see all information related to the user and related options such as <strong>Edit</strong> and <strong>Delete</strong>.</p>
 </div>
@@ -964,7 +976,7 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="datasource">3.2.2. The Datasource</h4>
+<h4 id="datasource">3.2.2. A Datasource</h4>
 <div class="paragraph">
 <p>The datasource page shows all information related to the datasource, as well as all possible operations such as <strong>Edit</strong>, <strong>Remove</strong>, <strong>Add Table</strong>, <strong>Ignore Tables</strong>, etc.</p>
 </div>
@@ -986,7 +998,7 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="new_table">3.3.1. Documenting a Table</h4>
+<h4 id="table-form">3.3.1. Documenting a Table</h4>
 <div class="paragraph">
 <p>To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the <strong>New</strong> button on the right. Filling the form by selecting the physical name of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.</p>
 </div>
@@ -1018,14 +1030,14 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="ignored_tables">3.4. Ignored Tables</h3>
+<h3 id="ignored-tables">3.4. Ignored Tables</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/ignored-tables.png" alt="ignored tables">
 </div>
 </div>
 <div class="sect3">
-<h4 id="new_ignored_tables">3.4.1. Ignoring Tables</h4>
+<h4 id="ignored-tables-form">3.4.1. Ignoring Tables</h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/ignoring-tables.png" alt="ignoring tables">
@@ -1036,7 +1048,7 @@ $ sudo systemctl enable digger.service</pre>
 <div class="sect2">
 <h3 id="columns">3.5. Columns</h3>
 <div class="sect3">
-<h4 id="new_column">3.5.1. Documenting a Column</h4>
+<h4 id="column-form">3.5.1. Documenting a Column</h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/column-form.png" alt="column form">
@@ -1187,8 +1199,147 @@ $ mvn spring-boot:run</pre>
 </div>
 <div class="sect2">
 <h3 id="_using_git">4.6. Using Git</h3>
+<div class="paragraph">
+<p>Git is a distributed version control system used to manage the source code of Digger. We can use apt-get to install Git:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ sudo apt-get install git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since version 2.0, Git has adopted a new behavior to pull and push commits while in a branch. When you execute git push or git pull Git will consider pushing or pulling just for the current branch. Before, these commands would push and pull all branches. But the change to this new behavior is voluntary, not automatically imposed. So, we have to explicitly say we have to move from the old behavior to the new one. To do that, execute the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git config --global push.default simple</pre>
+</div>
+</div>
 <div class="sect3">
-<h4 id="_changing_the_author_to_the_one_recognizable_by_github">4.6.1. Changing The Author To The One Recognizable by GitHub</h4>
+<h4 id="_configuring_git_to_simplify_authentication">4.6.1. Configuring Git to Simplify Authentication</h4>
+<div class="paragraph">
+<p>For the moment, every time we push code to GitHub the prompt asks for a username and password. We can bypass this step by registering a SSH key. To do that, we first check whether there is already an existing SSH key we can reuse:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ls -al ~/.ssh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If files with the extension .pub are listed then one of them can be reused to authenticate to GitHub. If not, then we can create one:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ssh-keygen -t rsa -b 4096 -C "[firstname.lastname]@domain.com"
+  Enter file in which to save the key (/Users/[user]/.ssh/id_rsa): [Press enter]
+  Enter passphrase (empty for no passphrase): [Type a passphrase]
+  Enter same passphrase again: [Type passphrase again]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next step is to add the new key - or an existing one - to the ssh-agent. This program runs the duration of a local login session, stores unencrypted keys in memory, and communicates with SSH clients using a Unix domain socket. Everyone who is able to connect to this socket also has access to the ssh-agent. First, we have to enable the ssh-agent:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ eval "$(ssh-agent -s)"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And add key to it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ssh-add ~/.ssh/id_rsa</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next step is to make GitHub aware of the key. For that, we have to copy the exact content of the file <code>id_rsa.pub</code> and paste into GitHub. To make no mistake about the copy, install a program called xclip:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ sudo apt-get install xclip</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then copy the content of the file <code>id_rsa.pub</code> in the clipboard:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The command above is the equivalent of opening the file <code>~/.ssh/id_rsa.pub</code>, selecting the whole content and pressing <code>Ctrl+C</code>. This way, you can paste the content on GitHub when required in the next steps. On the GitHub side:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login at <a href="https://github.com" class="bare">https://github.com</a></p>
+</li>
+<li>
+<p>In the top right corner of the page, click on the profile photo and select Settings</p>
+</li>
+<li>
+<p>In the user settings sidebar, click SSH keys</p>
+</li>
+<li>
+<p>Then click Add SSH key</p>
+</li>
+<li>
+<p>In the form, define a friendly title for the new key and paste the key in the Key field</p>
+</li>
+<li>
+<p>Click Add Key to finish with GitHub</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To make sure everything is working, lets test the connection:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ ssh -T git@github.com
+  The authenticity of host 'github.com (207.97.227.239)' can't be established.
+  RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+  Are you sure you want to continue connecting (yes/no)? yes
+  _
+  Hi [username]! You've successfully authenticated, but GitHub does not
+  provide shell access.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can test the installation by cloning the Digger repository:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ mkdir -p ~/java/projects/digger
+$ cd ~/java/projects/digger
+$ git clone git@github.com:htmfilho/digger.git .</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This configuration works only when we use a ssh connection to GitHub. To verify that, go to one of your local GitHub projects and check the url pointing to the server:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cd ~/java/projects/digger
+$ git remote -v</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the url starts with https:// then you are using https instead of ssh. In this case, you should change the url to the ssh one:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git remote set-url origin git@github.com:htmfilho/digger.git</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The automatic authentication should work after that.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_changing_the_author_to_the_one_recognizable_by_github">4.6.2. Changing The Author To The One Recognizable by GitHub</h4>
 <div class="paragraph">
 <p>In case your default Git author is not the same as GitHub, configure the author of the repository:</p>
 </div>
@@ -1208,7 +1359,7 @@ $ git config user.email "john@doe.org"</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_changing_several_commits_in_bulk">4.6.2. Changing Several Commits in Bulk</h4>
+<h4 id="_changing_several_commits_in_bulk">4.6.3. Changing Several Commits in Bulk</h4>
 <div class="paragraph">
 <p>If commits were done with a wrong author, use Git Rebase to fix the authors of the commits:</p>
 </div>
@@ -1222,7 +1373,7 @@ $ git push -f origin master</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_adding_a_file_to_the_most_recent_commit">4.6.3. Adding a File to the Most Recent Commit</h4>
+<h4 id="_adding_a_file_to_the_most_recent_commit">4.6.4. Adding a File to the Most Recent Commit</h4>
 <div class="literalblock">
 <div class="content">
 <pre>$ git add missed-file.txt
@@ -1261,6 +1412,71 @@ $ git commit -m "Updated the documentation for the release 1.3.0"</pre>
 <li>
 <p>Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.</p>
 </li>
+<li>
+<p>Push all local changes to the release branch:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ git push origin 1.4.0</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Create a pull request to merge the release branch with the master branch, review the code to be merged and merge it.</p>
+</li>
+<li>
+<p>Create the next milestone.</p>
+</li>
+<li>
+<p>Move the unfinished work in the current milestone to the next milestone.</p>
+</li>
+<li>
+<p>Close the current milestone.</p>
+</li>
+<li>
+<p>Write the release notes.</p>
+</li>
+<li>
+<p>Generate the package:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ mvn clean package</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Upload the package to the release page.</p>
+</li>
+<li>
+<p>Publish the release.</p>
+</li>
+<li>
+<p>Create a branch for the next release:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ git checkout -b 1.5.0</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Increment the version number in the pom file and commit it:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ git add pom.xml
+$ git commit -m "Incremented release number to 1.5.0"</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Push the new branch to <code>origin</code>:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ git push origin 1.5.0</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Announce the new release to the community and on social networks.</p>
+</li>
 </ol>
 </div>
 </div>
@@ -1269,14 +1485,25 @@ $ git commit -m "Updated the documentation for the release 1.3.0"</pre>
 <div class="sect1">
 <h2 id="_appendix_a_asciidoc_syntax">Appendix A: Asciidoc Syntax</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Asciidoc is a markup language in plain text that can be easily transformed into other convenient formats such as HTML, PDF, etc. When you use Asciidoc to write the database documentation, Digger has a minimal effort to provide content in other formats for your confort.</p>
+</div>
+<div class="sect2">
+<h3 id="_a_paragraph">A Paragraph</h3>
+<div class="paragraph">
+<p>The content is organized in blocks separated by empty lines. In other words, by simply putting an empty line between two sentences we get two paragraphs. Breaking the content in consecutive lines keep it within the same paragraph. If you want line breaks within a paragraph, use the <code>+</code> symbol at the end of the line.</p>
+</div>
+<div class="paragraph">
+<p>To draw attention to a paragraph, you can use <code>NOTE</code>, <code>TIP</code>, <code>IMPORTANT</code>, <code>CAUTION</code>, <code>WARNING</code>:</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.4.0<br>
-Last updated 2020-06-07 10:57:41 -0400
+Last updated 2020-06-12 07:49:25 -0400
 </div>
 </div>
 </body>
