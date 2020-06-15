@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.4.0</span>
+<span id="revnumber">version 1.5.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1000,7 +1000,7 @@ $ sudo systemctl enable digger.service</pre>
 <div class="sect3">
 <h4 id="table-form">3.3.1. Documenting a Table</h4>
 <div class="paragraph">
-<p>To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the <strong>New</strong> button on the right. Filling the form by selecting the physical name of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.</p>
+<p>To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the <strong>New</strong> button on the right. Fill-in the form by selecting the <strong>Physical Name</strong> of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.</p>
 </div>
 <div class="paragraph">
 <p>Click on the <strong>Save</strong> button to complete or <strong>Cancel</strong> to go back to the datasource page.</p>
@@ -1020,12 +1020,15 @@ $ sudo systemctl enable digger.service</pre>
 <div class="sect3">
 <h4 id="table">3.3.2. A Table</h4>
 <div class="paragraph">
-<p>The table&#8217;s page shows all information related to the table, including its columns. To edit a table, click on the <strong>Options</strong> button on the top right then select the option <strong>Edit</strong>. The form appears filled with the table&#8217;s attributes and documentation. Make the intended changes and save, or cancel to return to the table&#8217;s page.</p>
+<p>The table&#8217;s page shows all information related to the table, including its columns and dependencies. To edit a table, click on the <strong>Options</strong> button on the top right then select the option <strong>Edit</strong>. The form appears filled with the table&#8217;s attributes and documentation. Make the intended changes and save, or cancel to return to the table&#8217;s page.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="images/table.png" alt="table">
 </div>
+</div>
+<div class="paragraph">
+<p>The tab <strong>Referenced By</strong> shows a list of tables that have foreign keys pointing to one of more columns of the table. It is useful for understanding the impact of changing the table or its records.</p>
 </div>
 </div>
 </div>
@@ -1049,10 +1052,22 @@ $ sudo systemctl enable digger.service</pre>
 <h3 id="columns">3.5. Columns</h3>
 <div class="sect3">
 <h4 id="column-form">3.5.1. Documenting a Column</h4>
+<div class="paragraph">
+<p>To document a column of a table, go to the table that the column belongs to, go to the <strong>Columns</strong> tab and click on the <strong>New</strong> button on the right. Fill in the form by selecting the <strong>Physical Name</strong>, writing a human friendly name that is equivalent to the physical name, and verify the fields that are automatically filled.</p>
+</div>
+<div class="paragraph">
+<p>If the column is a foreign key, select the reference table and the column that the key points to. The documentation of the selection is presented right below to assist on the documentation of the current field.</p>
+</div>
+<div class="paragraph">
+<p>Finally, describe in details what the field is useful for, why it is important for the business, exceptional cases, historical decisions, etc.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/column-form.png" alt="column form">
 </div>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Save</strong> to keep the information or <strong>Cancel</strong> to go back to the table&#8217;s page.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1387,7 +1402,10 @@ $ git commit --amend</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Update and review the documentation to make sure it covers all the recent changes in the tool.</p>
+<p>Review the tickets that are going to be released.</p>
+</li>
+<li>
+<p>Review the documentation to make sure it covers all the recent changes.</p>
 </li>
 <li>
 <p>Increment the version number in the documentation to the version that is about to be released.</p>
@@ -1416,7 +1434,7 @@ $ git commit -m "Updated the documentation for the release 1.3.0"</pre>
 <p>Push all local changes to the release branch:</p>
 <div class="literalblock">
 <div class="content">
-<pre>$ git push origin 1.4.0</pre>
+<pre>$ git push origin 1.5.0</pre>
 </div>
 </div>
 </li>
@@ -1502,8 +1520,8 @@ $ git commit -m "Incremented release number to 1.5.0"</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.4.0<br>
-Last updated 2020-06-12 07:49:25 -0400
+Version 1.5.0<br>
+Last updated 2020-06-14 23:08:57 -0400
 </div>
 </div>
 </body>

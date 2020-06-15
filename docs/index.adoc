@@ -1,6 +1,6 @@
 ﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.4.0
+v1.5.0
 :doctype: book
 :encoding: utf-8
 :toc: left
@@ -277,7 +277,7 @@ image::images/tables.png[]
 [#table-form]
 ==== Documenting a Table
 
-To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the *New* button on the right. Filling the form by selecting the physical name of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.
+To document a table, go to the datadource that the table belongs to, then to the "Tables" section, and click on the *New* button on the right. Fill-in the form by selecting the *Physical Name* of the table in the dropdown, confirming the type that is automatically detected, a friendly name that is more readable than the physical mame, and write down everything you know about that table.
 
 Click on the *Save* button to complete or *Cancel* to go back to the datasource page.
 
@@ -290,9 +290,11 @@ Visit the Appendix A to learn everything you need to know to properly format you
 [#table]
 ==== A Table
 
-The table's page shows all information related to the table, including its columns. To edit a table, click on the *Options* button on the top right then select the option *Edit*. The form appears filled with the table's attributes and documentation. Make the intended changes and save, or cancel to return to the table's page.
+The table's page shows all information related to the table, including its columns and dependencies. To edit a table, click on the *Options* button on the top right then select the option *Edit*. The form appears filled with the table's attributes and documentation. Make the intended changes and save, or cancel to return to the table's page.
 
 image::images/table.png[]
+
+The tab *Referenced By* shows a list of tables that have foreign keys pointing to one of more columns of the table. It is useful for understanding the impact of changing the table or its records.
 
 [#ignored-tables]
 === Ignored Tables
@@ -310,7 +312,15 @@ image::images/ignoring-tables.png[]
 [#column-form]
 ==== Documenting a Column
 
+To document a column of a table, go to the table that the column belongs to, go to the *Columns* tab and click on the *New* button on the right. Fill in the form by selecting the *Physical Name*, writing a human friendly name that is equivalent to the physical name, and verify the fields that are automatically filled.
+
+If the column is a foreign key, select the reference table and the column that the key points to. The documentation of the selection is presented right below to assist on the documentation of the current field.
+
+Finally, describe in details what the field is useful for, why it is important for the business, exceptional cases, historical decisions, etc.
+
 image::images/column-form.png[]
+
+Click on *Save* to keep the information or *Cancel* to go back to the table's page.
 
 [#column]
 ==== A Column
@@ -495,57 +505,59 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
 === The Release Process
 
-1. Update and review the documentation to make sure it covers all the recent changes in the tool.
+1. Review the tickets that are going to be released.
 
-2. Increment the version number in the documentation to the version that is about to be released.
+2. Review the documentation to make sure it covers all the recent changes.
 
-3. Generate the HTML version of the documentation:
+3. Increment the version number in the documentation to the version that is about to be released.
+
+4. Generate the HTML version of the documentation:
 
     $ asciidoctor docs/index.adoc
 
-4. Commit all the changes in the documentation:
+5. Commit all the changes in the documentation:
 
     $ git add [list-of-modified-files]
     $ git commit -m "Updated the documentation for the release 1.3.0"
 
-5. Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.
+6. Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.
 
-6. Push all local changes to the release branch:
+7. Push all local changes to the release branch:
 
-    $ git push origin 1.4.0
+    $ git push origin 1.5.0
 
-7. Create a pull request to merge the release branch with the master branch, review the code to be merged and merge it.
+8. Create a pull request to merge the release branch with the master branch, review the code to be merged and merge it.
 
-8. Create the next milestone.
+9. Create the next milestone.
 
-9. Move the unfinished work in the current milestone to the next milestone.
+10. Move the unfinished work in the current milestone to the next milestone.
 
-10. Close the current milestone.
+11. Close the current milestone.
 
-11. Write the release notes.
+12. Write the release notes.
 
-12. Generate the package:
+13. Generate the package:
 
     $ mvn clean package
 
-13. Upload the package to the release page.
+14. Upload the package to the release page.
 
-14. Publish the release.
+15. Publish the release.
 
-15. Create a branch for the next release:
+16. Create a branch for the next release:
 
     $ git checkout -b 1.5.0
 
-16. Increment the version number in the pom file and commit it:
+17. Increment the version number in the pom file and commit it:
 
     $ git add pom.xml
     $ git commit -m "Incremented release number to 1.5.0"
 
-17. Push the new branch to `origin`:
+18. Push the new branch to `origin`:
 
     $ git push origin 1.5.0
 
-18. Announce the new release to the community and on social networks.
+19. Announce the new release to the community and on social networks.
 
 == Appendix A: Asciidoc Syntax
 
