@@ -520,7 +520,7 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
     $ git add [list-of-modified-files]
     $ git commit -m "Updated the documentation for the release 1.3.0"
 
-6. Check if there is any missing file to be committed in the project. If not, the master branch is ready to be tagged.
+6. Check if there is any missing file to be committed in the project.
 
 7. Push all local changes to the release branch:
 
