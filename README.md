@@ -5,9 +5,11 @@
 [![Join the chat at https://gitter.im/database-digger/community](https://badges.gitter.im/database-digger/community.svg)](https://gitter.im/database-digger/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![CLA assistant](https://cla-assistant.io/readme/badge/htmfilho/digger)](https://cla-assistant.io/htmfilho/digger)
 
+![Banner](theme.jpg)
+
 Use Digger to document your relational databases. It is a web application that works like a supporting tool for DBAs and Developers, making sure data is well understood. Everybody in the organization can contribute to the knowledge base.
 
-![Screenshot](digger-screenshot.png)
+![Screenshot](docs/images/table.png)
 
 ## Documentation 
 

@@ -551,7 +551,7 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 17. Increment the version number in the pom file and commit it:
 
     $ git add pom.xml
-    $ git commit -m "Incremented release number to 1.5.0"
+    $ git commit -m "Incremented version number to 1.5.0"
 
 18. Push the new branch to `origin`:
 
