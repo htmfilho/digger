@@ -2,9 +2,24 @@
 version: 2
 jobs:
   build:
+    environment:
+      CC_TEST_REPORTER_ID: 699b6b14016c608aba40eede27b18b2f5857f39f0ad580b81c6cb01d18c169e7
     docker:
       - image: circleci/openjdk:8u222-jdk
 
     steps:
       - checkout
-      - run: mvn test
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+          # Download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Run Tests
+          command: |
+            mvn test
+      - run:
+          name: Upload Test Coverage
+          command: |
+            ./cc-test-reporter upload-coverage -i target/jacoco.exec
