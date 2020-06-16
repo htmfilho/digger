@@ -21,4 +21,4 @@ jobs:
       - run:
           name: Upload Test Coverage
           command: |
-            ./cc-test-reporter upload-coverage -i target/jacoco.exec
+            cc-test-reporter upload-coverage -i target/jacoco.exec
