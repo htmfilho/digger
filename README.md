@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/htmfilho/digger/tree/master.svg?style=svg)](https://circleci.com/gh/htmfilho/digger/tree/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/maintainability)](https://codeclimate.com/github/htmfilho/digger/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d7883e061b0c699fde4f/test_coverage)](https://codeclimate.com/github/htmfilho/digger/test_coverage)
 [![Join the chat at https://gitter.im/database-digger/community](https://badges.gitter.im/database-digger/community.svg)](https://gitter.im/database-digger/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![CLA assistant](https://cla-assistant.io/readme/badge/htmfilho/digger)](https://cla-assistant.io/htmfilho/digger)
 
