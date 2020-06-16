@@ -39,24 +39,18 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
     }
 
     private String getParameters(HttpServletRequest request) {
-        StringBuffer posted = new StringBuffer();
         Enumeration<?> e = request.getParameterNames();
-        if (e != null && e.hasMoreElements()) {
-            posted.append("?");
+        if (e == null || !e.hasMoreElements()) {
+            return "";
         }
+
+        StringBuilder posted = new StringBuilder();
         while (e.hasMoreElements()) {
-            if (posted.length() > 1) {
-                posted.append("&");
-            }
+            posted.append(posted.length() > 1 ? "&" : "?");
             String curr = (String) e.nextElement();
-            posted.append(curr + "=");
-            if (curr.contains("password")
-                    || curr.contains("pass")
-                    || curr.contains("pwd")) {
-                posted.append("*****");
-            } else {
-                posted.append(request.getParameter(curr));
-            }
+            posted.append(curr);
+            posted.append("=");
+            posted.append(request.getParameter(curr));
         }
         return posted.toString();
     }
