@@ -38,9 +38,11 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         this.ignoredTableRepository = ignoredTableRepository;
     }
 
-    public void save(IgnoredTable ignoredTable) {
-        ignoredTableRepository.save(ignoredTable);
-        logger.info("Saved ignored table {}", ignoredTable.getName());
+    public void save(List<IgnoredTable> ignoredTables) {
+        for (IgnoredTable ignoredTable: ignoredTables) {
+            ignoredTableRepository.save(ignoredTable);
+            logger.info("Saved ignored table {}", ignoredTable.getName());
+        }
     }
 
     public IgnoredTable findById(final Long id) {

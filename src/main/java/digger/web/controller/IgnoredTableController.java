@@ -26,6 +26,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class IgnoredTableController {
 
@@ -52,10 +55,12 @@ public class IgnoredTableController {
     @PostMapping("/datasources/{datasourceId}/tables/ignored")
     public String saveIgnoredTable(@PathVariable Long datasourceId, @RequestParam(value = "ignored", required = false) String[] checkedValues) {
         Datasource datasource = datasourceService.findById(datasourceId);
+        List<IgnoredTable> ignoredTables = new ArrayList<>(checkedValues.length);
         for (String tableName : checkedValues) {
             IgnoredTable ignoredTable = new IgnoredTable(tableName, datasource);
-            ignoredTableService.save(ignoredTable);
+            ignoredTables.add(ignoredTable);
         }
+        ignoredTableService.save(ignoredTables);
 
         return "redirect:/datasources/{datasourceId}?tab=ignored";
     }
