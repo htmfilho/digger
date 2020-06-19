@@ -33,7 +33,6 @@ public class ColumnServiceTest {
 
 	@Test
 	public void calculateProgressTest() {
-
         Table table = new Table("TABLE_A");
         assertThat(columnService.calculateProgress(table)).isEqualTo(0);
     }
