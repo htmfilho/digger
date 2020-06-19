@@ -64,12 +64,12 @@ public class TableServiceImpl implements TableService {
             }
             resultSet.close();
             Collections.sort(tables);
-            datasourceService.updateTotalTables(datasource, tables.size());
         } catch (SQLException se) {
             logger.warn("Connection not available.");
         }
-        tables = excludeDocumentedTables(datasource, tables, except);
         tables = ignoredTableService.excludeIgnoredTables(datasource, tables);
+        datasourceService.updateTotalTables(datasource, tables.size());
+        tables = excludeDocumentedTables(datasource, tables, except);
         return tables;
     }
 
