@@ -17,7 +17,17 @@
 package digger.model.enums;
 
 public enum RoleKind {
-    ROLE_ADMIN,
-    ROLE_EDITOR,
-    ROLE_READER;
+    ROLE_ADMIN("ADMIN"),
+    ROLE_EDITOR("EDITOR"),
+    ROLE_READER("READER");
+
+    private final String name;
+
+    RoleKind(String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return this.name;
+    }
 }

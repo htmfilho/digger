@@ -36,7 +36,13 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <div id="name" th:utext="${user.firstName + ' ' + user.lastName}"></div>
+                    </div>
+                </div>
+                <div class="col-3">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <div id="username" th:utext="${user.username}"></div>
@@ -44,14 +50,14 @@
                 </div>
                 <div class="col-3">
                     <div class="form-group">
-                        <label for="enabled">Role</label>
+                        <label for="role">Role</label>
                         <div id="role" th:utext="${user.mainRole}"></div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="form-group">
                         <label for="enabled">Enabled</label>
-                        <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${user.enabled})}"></div>
+                        <div id="enabled"><img th:attr="src=@{/images/{enabled}.svg(enabled=${user.enabled})}"></div>
                     </div>
                 </div>
             </div>

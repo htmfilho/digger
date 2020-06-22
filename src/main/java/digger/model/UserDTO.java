@@ -19,6 +19,8 @@ package digger.model;
 public class UserDTO {
 
     private Long id;
+    private String firstName;
+    private String lastName;
     private String username;
     private String currentPassword;
     private String password;
@@ -26,10 +28,13 @@ public class UserDTO {
     private Boolean enabled;
     private String mainRole;
 
+    // This empty constructor is used by String to unserialize data from the user interface.
     public UserDTO() {}
 
-    public UserDTO(long id, String username, Boolean enabled, String mainRole) {
+    public UserDTO(long id, String firstName, String lastName, String username, Boolean enabled, String mainRole) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.enabled = enabled;
         this.mainRole = mainRole;
@@ -41,6 +46,22 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {

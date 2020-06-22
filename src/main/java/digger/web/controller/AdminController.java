@@ -64,6 +64,8 @@ public class AdminController {
     public String saveUser( @ModelAttribute UserDTO user) {
         User existingUser = userService.findById(user.getId());
         existingUser.setUsername(user.getUsername());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
         existingUser.setEnabled(user.getEnabled() != null ? user.getEnabled() : false);
 
         if (!user.getPassword().trim().isEmpty()) {
@@ -97,7 +99,8 @@ public class AdminController {
     private UserDTO createUserDTO(Long id) {
         User user = userService.findById(id);
         Role role = roleService.findByUsername(user.getUsername());
-        return new UserDTO(user.getId(), user.getUsername(), user.getEnabled(), role.getAuthority());
+        return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEnabled(),
+                           role.getAuthority());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
