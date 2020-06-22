@@ -93,27 +93,32 @@ public class UserServiceImpl implements UserService {
         logger.info("Deleted user with id {}", id);
     }
 
-    public void saveAdmin(final String username, final String password) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user = org.springframework.security.core.userdetails.User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .roles("ADMIN")
-                .build();
-        this.userDetailsManager.createUser(user);
-        logger.info("Created admin user {}", username);
+    public void registerAdmin(digger.model.User user) {
+        register(user, RoleKind.ROLE_ADMIN, false);
+
+        logger.info("Created admin user {}", user.getUsername());
     }
 
-    public void saveReader(final String username, final String password) {
+    public void registerReader(digger.model.User user) {
+        register(user, RoleKind.ROLE_READER, true);
+
+        logger.info("Created reader user {}", user.getUsername());
+    }
+
+    private void register(digger.model.User user, RoleKind role, boolean disabled) {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        UserDetails user = org.springframework.security.core.userdetails.User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .roles("READER")
-                .disabled(true)
+        UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
+                .password(passwordEncoder.encode(user.getPassword()))
+                .roles(role.toString())
+                .disabled(disabled)
                 .build();
-        this.userDetailsManager.createUser(user);
-        logger.info("Created reader user {}", username);
+        this.userDetailsManager.createUser(userDetails);
+
+        digger.model.User existingUser = userRepository.findByUsername(user.getUsername());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        userRepository.save(existingUser);
     }
 
     public void enableOrDisableUser(digger.model.User user) {

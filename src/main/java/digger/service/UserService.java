@@ -32,8 +32,8 @@ public interface UserService {
 
     void save(digger.model.User user);
     void save(digger.model.User user, RoleKind roleKind);
-    void saveAdmin(String username, String password);
-    void saveReader(String username, String password);
+    void registerAdmin(digger.model.User user);
+    void registerReader(digger.model.User user);
     void enableOrDisableUser(digger.model.User user);
     void delete(Long id);
 }

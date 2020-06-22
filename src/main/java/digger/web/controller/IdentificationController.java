@@ -67,9 +67,9 @@ public class IdentificationController {
     public String newUser(Model model, @ModelAttribute User user) {
         try {
             if(this.userService.thereIsNoUser())
-                userService.saveAdmin(user.getUsername(), user.getPassword());
+                userService.registerAdmin(user);
             else
-                userService.saveReader(user.getUsername(), user.getPassword());
+                userService.registerReader(user);
         } catch (RuntimeException re) {
             logger.error(re.getMessage(), re);
             model.addAttribute("user", user);

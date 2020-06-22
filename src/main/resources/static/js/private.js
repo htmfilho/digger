@@ -109,7 +109,7 @@ $(function() {
             url: "/api/admin/users",
             success: function(result) {
                 result.forEach(element => {
-                    $("#users").append('<tr><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
+                    $("#users").append('<tr><td>'+ element.firstName +' '+ element.lastName +'</td><td><a href="/admin/users/'+ element.id +'">'+ element.username +'</a></td><td>'+ element.mainRole +'</td><td><input type="checkbox" id="enabled-'+ element.id +'" name="enabled" value="'+ element.username +'" '+ (element.enabled ? 'checked': '') +' onclick="enableUser(\''+ element.username +'\', this);"></td></tr>');
                 });
             }
         });
@@ -234,8 +234,8 @@ $(function() {
     }
 });
 
-// When there is a checkbox that when checked also checks all checkboxes in the page. An example can be found in the
-// Ignored Table form.
+// When there is a checkbox that, when checked, also checks all checkboxes in the page.
+// An example can be found in the Ignored Table form.
 // ignored_table_form.html
 $("#check-all").click(function(event) {
     if(this.checked) {
