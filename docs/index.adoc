@@ -567,20 +567,25 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
 15. Publish the release.
 
-16. Create a branch for the next release:
+16. Move to your local master branch and update it:
+
+    $ git checkout master
+    $ git pull origin master
+
+17. Create a branch for the next release:
 
     $ git checkout -b 1.5.0
 
-17. Increment the version number in the pom file and commit it:
+18. Increment the version number in the pom file and commit it:
 
     $ git add pom.xml
     $ git commit -m "Incremented version number to 1.5.0"
 
-18. Push the new branch to `origin`:
+19. Push the new branch to `origin`:
 
     $ git push origin 1.5.0
 
-19. Announce the new release to the community and on social networks.
+20. Announce the new release to the community and on social networks.
 
 == Appendix A: Asciidoc Syntax
 
