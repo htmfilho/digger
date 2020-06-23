@@ -21,17 +21,6 @@
 		<url>https://github.com/htmfilho/digger</url>
 	</organization>
 
-	<licenses>
-		<license>
-			<name>Eclipse Public License - v 2.0</name>
-			<url>https://www.eclipse.org/legal/epl-2.0/</url>
-			<distribution>repo</distribution>
-			<comments>This commercially-friendly copyleft license provides the ability to commercially license binaries;
-				a modern royalty-free patent license grant; and the ability for linked works to use other licenses,
-				including commercial ones.</comments>
-		</license>
-	</licenses>
-
 	<developers>
 		<developer>
 			<id>htmfilho</id>
