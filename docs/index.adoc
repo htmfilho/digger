@@ -585,7 +585,7 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
     $ git push origin 1.5.0
 
-20. Announce the new release to the community and on social networks.
+20. Announce the new release to the community.
 
 == Appendix A: Asciidoc Syntax
 
