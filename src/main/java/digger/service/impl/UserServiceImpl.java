@@ -70,19 +70,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void save(digger.model.User user, RoleKind role) {
+    public void save(digger.model.User user, RoleKind newRole) {
         // Abort if the current user is the only administrator and the role has changed.
-        Role existingRole = roleService.findByUsername(user.getUsername());
-        if(RoleKind.ROLE_ADMIN.toString().equals(existingRole.getAuthority()) && !existingRole.getRoleKind().equals(role)) {
-            long numAdmins = roleService.countAllByAuthority(RoleKind.ROLE_ADMIN.toString());
-            if (numAdmins > 1) {
-                existingRole.setAuthority(role.toString());
-                roleService.save(existingRole);
-            } else {
+        Role currentRole = roleService.findByUsername(user.getUsername());
+        // Check whether the current role is admin and whether the new role is different from admin.
+        if(RoleKind.ROLE_ADMIN.name().equals(currentRole.getAuthority()) && !currentRole.getRoleKind().equals(newRole)) {
+            long numAdmins = roleService.countAllByAuthority(RoleKind.ROLE_ADMIN.name());
+            // If there one or less admin, it is not ok to change the role of the current admin.
+            if (numAdmins <= 1) {
                 throw new RoleAssignmentException("You are the only administrator and cannot change your own role. " +
                                                   "Digger requires at least 2 administrators to allow this operation.", user);
             }
         }
+
+        currentRole.setAuthority(newRole.name());
+        roleService.save(currentRole);
         
         userRepository.save(user);
         logger.info("Saved user {}", user.getUsername());
