@@ -16,24 +16,25 @@
 
 package digger.service;
 
+import digger.model.User;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import digger.model.Datasource;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class TableServiceTest {
+class UserServiceTest {
 
     @Autowired
-    TableService tableService;
+    UserService userService;
 
-	@Test
-	public void calculateProgressTest() {
-        Datasource datasource = new Datasource();
-        assertThat(tableService.calculateProgress(datasource)).isEqualTo(0);
+    @Test
+    void testChangePassword() {
+        User user = new User();
+        user = userService.changePassword(user, "superSecret");
+
+        assertEquals(68, user.getPassword().length());
+        assertTrue(user.getPassword().contains("{bcrypt}$"));
     }
 }

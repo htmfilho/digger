@@ -68,8 +68,8 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         logger.info("Deleted ignored table with id {}", ignoredTableId);
     }
 
-    private List<Table> toTableList(final List<IgnoredTable> ignoredTables) {
-        List<Table> tables = new ArrayList<>();
+    public List<Table> toTableList(final List<IgnoredTable> ignoredTables) {
+        List<Table> tables = new ArrayList<>(ignoredTables.size());
         for (IgnoredTable ignoredTable: ignoredTables) {
             tables.add(ignoredTable.toTable());
         }

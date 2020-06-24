@@ -16,24 +16,30 @@
 
 package digger.service;
 
+import digger.model.IgnoredTable;
+import digger.model.Table;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import digger.model.Datasource;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class TableServiceTest {
+class IgnoredTableServiceTest {
 
     @Autowired
-    TableService tableService;
+    IgnoredTableService ignoredTableService;
 
-	@Test
-	public void calculateProgressTest() {
-        Datasource datasource = new Datasource();
-        assertThat(tableService.calculateProgress(datasource)).isEqualTo(0);
+    @Test
+    public void testToTableList() {
+        List<IgnoredTable> ignoredTables = new ArrayList<>();
+        ignoredTables.add(new IgnoredTable("BOOK"));
+        ignoredTables.add(new IgnoredTable("AUTHOR"));
+        List<Table> tables = ignoredTableService.toTableList(ignoredTables);
+        assertEquals(ignoredTables.size(), tables.size());
+        assertEquals(ignoredTables.get(0).getName(), tables.get(0).getName());
     }
 }

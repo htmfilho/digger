@@ -16,8 +16,8 @@
 
 package digger.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import digger.model.Table;
 
@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 @SpringBootTest
 public class ColumnServiceTest {
 
-    @MockBean
+    @Autowired
     ColumnService columnService;
 
 	@Test
