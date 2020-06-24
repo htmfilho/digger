@@ -33,4 +33,6 @@ public interface IgnoredTableService {
 
     void save(List<IgnoredTable> ignoredTables);
     void delete(Long ignoredTableId);
+
+    List<Table> toTableList(List<IgnoredTable> ignoredTables);
 }

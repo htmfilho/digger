@@ -17,6 +17,9 @@
 package digger.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import digger.model.enums.RoleKind;
 import org.junit.jupiter.api.Test;
 
 public class RoleTest {
@@ -38,7 +41,22 @@ public class RoleTest {
     @Test
     public void testGetAuthority() {
         Role role = new Role();
-        role.setAuthority("admin");
-        assertThat(role.getAuthority()).isEqualTo("admin");
+        role.setAuthority("role_admin");
+        assertThat(role.getAuthority()).isEqualTo("ROLE_ADMIN");
+    }
+
+    @Test
+    public void testInvalidAuthority() {
+        Role role = new Role();
+        assertThatThrownBy(() -> {
+            role.setAuthority("admin");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void testGetRoleKind() {
+        Role role = new Role();
+        role.setAuthority("ROLE_ADMIN");
+        assertThat(role.getRoleKind()).isEqualTo(RoleKind.ROLE_ADMIN);
     }
 }

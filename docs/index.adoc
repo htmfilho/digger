@@ -409,6 +409,14 @@ To execute the test suite, run:
 
     $ mvn test
 
+During development, it might be time-consuming to run the entire test suite all the time. To limit the execution to the test file you are working on, run:
+
+    $ mvn -Dtest=digger.service.IgnoredTableServiceTest test
+
+To be even more specific and run a single test, run:
+
+    $ mvn -Dtest=digger.service.UserServiceTest#testChangePassword test
+
 Only submit your pull request if these tests pass. To see the test coverage report, open the page generated at `target/site/jacoco`.
 
 === Technologies in Use

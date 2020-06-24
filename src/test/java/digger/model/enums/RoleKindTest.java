@@ -14,26 +14,18 @@
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
 
-package digger.service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import digger.model.Datasource;
-
-import static org.assertj.core.api.Assertions.assertThat;
+package digger.model.enums;
 
 import org.junit.jupiter.api.Test;
 
-@SpringBootTest
-public class TableServiceTest {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    @Autowired
-    TableService tableService;
+public class RoleKindTest {
 
-	@Test
-	public void calculateProgressTest() {
-        Datasource datasource = new Datasource();
-        assertThat(tableService.calculateProgress(datasource)).isEqualTo(0);
+    @Test
+    public void testToString() {
+        assertThat(RoleKind.ROLE_ADMIN.toString()).isEqualTo("ADMIN");
+        assertThat(RoleKind.ROLE_EDITOR.toString()).isEqualTo("EDITOR");
+        assertThat(RoleKind.ROLE_READER.toString()).isEqualTo("READER");
     }
 }

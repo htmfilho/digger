@@ -62,7 +62,10 @@ public class Role {
     }
 
     public void setAuthority(String authority) {
-        this.authority = authority;
+        if (authority != null) {
+            this.authority = authority.toUpperCase();
+            RoleKind.valueOf(this.authority);
+        }
     }
 
     public RoleKind getRoleKind() {
