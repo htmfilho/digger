@@ -1,6 +1,6 @@
 ﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.6.0
+v1.7.0
 :doctype: book
 :pdf-page-size: LETTER
 :encoding: utf-8
@@ -196,11 +196,18 @@ Digger gives you a good set of features to help you document the database scheme
 [#admin]
 === Administration
 
-The administration is accessible via the top menu, in the "Admin" option. It allows the administrator to manage user accounts.
+The administration is accessible via the top menu, in the "Admin" option. It allows the administrator to check environment configuration and manage user accounts.
 
 image::images/administration.png[]
 
 NOTE:: This feature is limited to administrators. Other roles won't see this option in the menu.
+
+[#admin-environment]
+==== Environment
+
+Sometime, the administrator needs to know how the application was configured in order to diagnose issues and properly manage it. The environment section lists the properties taken into account by the application.
+
+image::images/environment.png[]
 
 [#admin-users]
 ==== Users
