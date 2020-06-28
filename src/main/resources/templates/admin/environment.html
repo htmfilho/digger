@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+       <title>Environment - Administration - Digger</title>
+    </head>
+
+    <body>
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
+                    <li class="breadcrumb-item"><a href="/admin">Administration</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Environment</li>
+                </ol>
+            </nav>
+
+            <h1>
+                <svg class="bi bi-people-fill" width="48px" height="48px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 100-6 3 3 0 000 6zm-5.784 6A2.238 2.238 0 015 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 005 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" clip-rule="evenodd"/>
+                </svg>
+                Environment
+            </h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="2">Property</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2"><b>Application</b></td>
+                        <td>spring.application.name</td>
+                        <td><span th:text="${springApplicationName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>user.guide.url</td>
+                        <td><span th:text="${userGuideUrl}"></span></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="7"><b>Datasource</b></td>
+                        <td>spring.liquibase.enabled</td>
+                        <td><span th:text="${springLiquibaseEnabled}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.datasource.driver-class-name</td>
+                        <td><span th:text="${springDatasourceDriverClassName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.datasource.url</td>
+                        <td><span th:text="${springDatasourceUrl}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.datasource.username</td>
+                        <td><span th:text="${springDatasourceUsername}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.jpa.hibernate.ddl-auto</td>
+                        <td><span th:text="${springJpaHibernateDdlAuto}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.jpa.show-sql</td>
+                        <td><span th:text="${springJpaShowSql}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation</td>
+                        <td><span th:text="${springJpaPropertiesHibernateJdbcLobNonContextualCreation}"></span></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><b>Logging</b></td>
+                        <td>logging.file.name</td>
+                        <td><span th:text="${loggingFileName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>logging.level.root</td>
+                        <td><span th:text="${loggingLevelRoot}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>logging.level.liquibase</td>
+                        <td><span th:text="${loggingLevelLiquibase}"></span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Profile</b></td>
+                        <td>spring.profiles.active</td>
+                        <td><span th:text="${springProfilesActive}"></span></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><b>Server</b></td>
+                        <td>server.port</td>
+                        <td><span th:text="${serverPort}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>server.session.timeout</td>
+                        <td><span th:text="${serverSessionTimeout}"></span> minutes</td>
+                    </tr>
+                    <tr>
+                        <td><b>Templating</b></td>
+                        <td>spring.thymeleaf.cache</td>
+                        <td><span th:text="${springThymeleafCache}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+</html>

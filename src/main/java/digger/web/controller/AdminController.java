@@ -20,6 +20,7 @@ import digger.exception.RoleAssignmentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,16 +34,21 @@ import digger.service.RoleService;
 import digger.service.UserService;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     private final UserService userService;
     private final RoleService roleService;
+    private final Environment environment;
 
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService, Environment environment) {
         this.userService = userService;
         this.roleService = roleService;
+        this.environment = environment;
     }
 
     @Value("${user.guide.url}")
@@ -58,6 +64,35 @@ public class AdminController {
     public String listUsers(Model model) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-users");
         return "admin/users";
+    }
+
+    @GetMapping("/admin/environment")
+    public String viewEnvironment(Model model) {
+        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-environment");
+
+        model.addAttribute("springProfilesActive", environment.getProperty("spring.profiles.active"));
+
+        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
+        model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
+        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
+        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"));
+        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"));
+        model.addAttribute("springJpaPropertiesHibernateJdbcLobNonContextualCreation", environment.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
+
+        model.addAttribute("loggingLevelRoot", environment.getProperty("logging.level.root"));
+        model.addAttribute("loggingFileName", environment.getProperty("logging.file.name"));
+        model.addAttribute("loggingLevelLiquibase", environment.getProperty("logging.level.liquibase"));
+
+        model.addAttribute("springApplicationName", environment.getProperty("spring.application.name"));
+        model.addAttribute("userGuideUrl", environment.getProperty("user.guide.url"));
+
+        model.addAttribute("serverPort", environment.getProperty("server.port"));
+        model.addAttribute("serverSessionTimeout", environment.getProperty("server.session.timeout"));
+
+        model.addAttribute("springThymeleafCache", environment.getProperty("spring.thymeleaf.cache"));
+
+        return  "admin/environment";
     }
 
     @PostMapping("/admin/users")
