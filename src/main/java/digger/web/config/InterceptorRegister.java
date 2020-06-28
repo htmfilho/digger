@@ -32,6 +32,6 @@ public class InterceptorRegister implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loggerInterceptor).addPathPatterns("/admin/**", "/datasources/**", "/users/**", "/error");
+        registry.addInterceptor(loggerInterceptor).addPathPatterns("/admin/**", "/datasources/**", "/users/**", "/error", "/");
     }
 }

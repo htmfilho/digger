@@ -46,7 +46,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-            .logout().permitAll(); // https://github.com/htmfilho/digger/issues/32
+            .logout().permitAll();
     }
 
     @Bean

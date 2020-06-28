@@ -86,6 +86,10 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getFullName() {
+        return (this.firstName != null ? this.firstName : "") + (this.lastName != null ? " " + this.lastName : "");
+    }
+
     public String getUsername() {
         return username;
     }
