@@ -16,6 +16,8 @@
 
 package digger.web.interceptor;
 
+import digger.model.User;
+import digger.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
 @Component
@@ -30,11 +33,28 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
     private final static Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
+    private UserRepository userRepository;
+
+    public LoggerInterceptor(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if(request.getUserPrincipal() == null) {
+            return true;
+        }
+
         if("GET".equals(request.getMethod())) {
             logger.info("{} navigates to {}", request.getUserPrincipal().getName() , request.getRequestURI() + getParameters(request));
         }
+
+        HttpSession session = request.getSession(true);
+        if (session.getAttribute("fullName") == null) {
+            User user = userRepository.findByUsername(request.getUserPrincipal().getName());
+            session.setAttribute("fullName", user.getFullName());
+        }
+
         return true;
     }
 
