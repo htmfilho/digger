@@ -40,12 +40,7 @@
                                 </svg>
                                 Login
                             </button>
-                            <a class="btn btn-secondary" href="/" role="button">
-                                <svg class="bi bi-x-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-4.146-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708-.708L8.707 8l3.147-3.146z" clip-rule="evenodd"/>
-                                </svg>
-                                Cancel
-                            </a>
+                            <a class="btn btn-secondary" href="/" role="button"><img src="/images/cancel.svg"> Cancel</a>
                         </form>
                     </div>
                 </div>
@@ -60,10 +55,10 @@
     
                 <div class="row">
                     <div class="col-10">
-                        <h1>Datasources</h1>
+                        <h1><img src="/images/datasource.svg"> Datasources</h1>
                     </div>
                     <div class="col-2">
-                        <a href="/datasources/new" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
+                        <a href="/datasources/new" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><img src="/images/new.svg"> New</a>
                     </div>
                 </div>
     

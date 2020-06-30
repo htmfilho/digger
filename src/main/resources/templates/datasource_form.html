@@ -6,7 +6,7 @@
 
     <body>
         <section>
-            <h1><i class="fas fa-database"></i> Datasource</h1>
+            <h1><img src="/images/datasource.svg"> Datasource</h1>
 
             <form method="POST" action="/datasources">
                 <input type="hidden" name="id" th:value="${datasource.id}"/>
@@ -51,8 +51,8 @@
 
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
-                <button type="submit" class="btn btn-primary" id="saveDatasource"><i class="fas fa-save"></i> Save</button>
-                <button type="button" class="btn btn-secondary" id="cancel"><i class="far fa-window-close"></i> Cancel</button>
+                <button type="submit" class="btn btn-primary" id="saveDatasource"><img src="/images/save.svg"> Save</button>
+                <button type="button" class="btn btn-secondary" id="cancel"><img src="/images/cancel.svg"> Cancel</button>
             </form>
         </section>
     </body>

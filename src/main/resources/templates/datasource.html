@@ -17,7 +17,7 @@
 
             <div class="row">
                 <div class="col-10">
-                    <h1><i class="fas fa-database"></i> Datasource</h1>
+                    <h1><img src="/images/datasource.svg"> Datasource</h1>
                 </div>
                 <div class="col-2">
                     <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
@@ -46,8 +46,8 @@
                 <div class="col-2">
                     <div class="form-group">
                         <label for="description">Status</label>
-                        <div class="connected" data-toggle="tooltip" data-placement="right" title="Connected!" th:if="${datasource.status}"> <i class="fas fa-plug"></i></div>
-                        <div class="disconnected" data-toggle="tooltip" data-placement="right" title="Disconnected" th:unless="${datasource.status}"> <i class="fas fa-plug"></i></div>
+                        <div class="connected" data-toggle="tooltip" data-placement="right" title="Connected!" th:if="${datasource.status}"> <img src="/images/plugged.svg" alt="Plugged!"></div>
+                        <div class="disconnected" data-toggle="tooltip" data-placement="right" title="Disconnected" th:unless="${datasource.status}"> <img src="/images/unplugged.svg"></div>
                     </div>
                 </div>
             </div>
@@ -92,10 +92,10 @@
                     <br>
                     <div class="row">
                         <div class="col-10">
-                            <h3><i class="fas fa-table"></i> Tables</h3>
+                            <h3><img src="/images/table.svg"> Tables</h3>
                         </div>
                         <div class="col-2">
-                            <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" th:if="${datasource.status}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
+                            <a th:href="@{/datasources/{id}/tables/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" th:if="${datasource.status}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><img src="/images/new.svg"> New</a>
                         </div>
                     </div>
 
@@ -105,10 +105,10 @@
                     <br>
                     <div class="row">
                         <div class="col-10">
-                            <h3><i class="fas fa-table"></i> Ignored Tables</h3>
+                            <h3><img src="/images/table.svg"> Ignored Tables</h3>
                         </div>
                         <div class="col-2">
-                            <a th:href="@{/datasources/{id}/tables/ignored/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><i class="fas fa-plus-square"></i> New</a>
+                            <a th:href="@{/datasources/{id}/tables/ignored/new(id=${datasource.id})}" class="btn btn-secondary float-right" role="button" aria-pressed="true" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')"><img src="/images/new.svg"> New</a>
                         </div>
                     </div>
         
