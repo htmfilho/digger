@@ -19,7 +19,7 @@
             
             <div class="row">
                 <div class="col-10">
-                    <h1><i class="fas fa-columns"></i> Column</h1>
+                    <h1><img src="/images/column.svg"> Column</h1>
                 </div>
                 <div class="col-2">
                     <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
@@ -79,7 +79,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label>Foreign Table</label><br>
-                        <i class="fas fa-table"></i>
+                        <img src="/images/table-small.svg">
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}" 
                            th:utext="${column.foreignKey.table}" id="foreign-table-link" 
                            th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
@@ -88,7 +88,7 @@
                 <div class="col-8">
                     <div class="form-group">
                         <label>Foreign Column</label><br>
-                        <i class="fas fa-key"></i> 
+                        <img src="/images/key.svg">
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}" 
                            th:utext="${column.foreignKey}" id="foreign-column-link" 
                            th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
@@ -105,7 +105,7 @@
 
             <hr>
 
-            <h3><i class="fas fa-link"></i> Referenced By</h3>
+            <h3><img src="/images/link.svg"> Referenced By</h3>
 
             <table class="table">
                 <thead>
