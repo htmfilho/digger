@@ -117,8 +117,7 @@ public class TableServiceImpl implements TableService {
 
     public Integer calculateProgress(final Datasource datasource) {
         if(datasource.getTotalTables() != null && datasource.getTotalTables() > 0) {
-            int totalIgnoredTables = ignoredTableService.getTotalIgnoredTable(datasource);
-            return Math.round(countDocumentedTables(datasource) / ((datasource.getTotalTables() - totalIgnoredTables) * 1.0f) * 100);
+            return Math.round(countDocumentedTables(datasource) / (datasource.getTotalTables() * 1.0f) * 100);
         }
         else
             return 0;
