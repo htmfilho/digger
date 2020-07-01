@@ -14,3 +14,6 @@ os-service/digger-0.2.0.jar
 *.iml
 *.zip
 *.pdf
+*.exe
+*.jar
+*.log
