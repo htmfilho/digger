@@ -22,8 +22,14 @@ import org.junit.jupiter.api.Test;
 
 public class ColumnTest {
 
+    @Test
+    public void testToString() {
+        Column column = new Column("COLUMN_A", "Column A");
+        assertThat(column.toString()).isEqualTo(column.getName() +" ("+ column.getFriendlyName() +")");
+    }
+
 	@Test
-	public void compareToTest() {
+	public void testCompareTo() {
         Column columnA = new Column("COLUMN_A    ");
         Column columnAA = new Column("   COLUMN_A");
 
@@ -34,13 +40,14 @@ public class ColumnTest {
         assertThat(columnA.compareTo(columnB)).isEqualTo(-1);
         assertThat(columnB.compareTo(columnA)).isEqualTo(1);
 
-        Column column = new Column();
+        Column unnamedColumn = new Column();
 
-        assertThat(column.compareTo(columnA)).isEqualTo(-1);
+        assertThat(unnamedColumn.compareTo(unnamedColumn)).isEqualTo(-1);
+        assertThat(columnA.compareTo(unnamedColumn)).isEqualTo(-1);
     }
     
     @Test
-    public void equalsTest() {
+    public void testCustomEquals() {
         Column columnA = new Column("COLUMN_A   ");
         Column columnAA = new Column("  COLUMN_A");
 
@@ -54,5 +61,8 @@ public class ColumnTest {
 
         Column column = new Column();
         assertThat(column.equals(column)).isTrue();
+        assertThat(columnA.equals(column)).isTrue();
+
+        assertThat(columnA.equals(new Table())).isFalse();
     }
 }

@@ -68,6 +68,11 @@ public class Column implements Comparable<Column> {
         this.name = name;
     }
 
+    public Column(String name, String friendlyName) {
+        this.name = name;
+        this.friendlyName = friendlyName;
+    }
+
     public Column(Long id, String name, Boolean primaryKey) {
         this.id = id;
         this.name = name;
