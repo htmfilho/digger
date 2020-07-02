@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 public class IgnoredTableTest {
 
     @Test
-    public void ignoredTableTest() {
+    public void testIgnoredTable() {
         Datasource datasource = new Datasource();
         IgnoredTable ignoredTable = new IgnoredTable("TABLE", datasource);
         ignoredTable.setId(30L);
@@ -37,14 +37,14 @@ public class IgnoredTableTest {
     }
 
     @Test
-    public void toTableTest() {
+    public void testToTable() {
         IgnoredTable ignoredTable = new IgnoredTable("A Table");
         Table table = ignoredTable.toTable();
         assertThat(ignoredTable.getName()).isEqualTo(table.getName());
     }
 
 	@Test
-	public void compareToTest() {
+	public void testCompareTo() {
         IgnoredTable ignoredTableA = new IgnoredTable("IGNORED_TABLE_A    ");
         IgnoredTable ignoredTableAA = new IgnoredTable("   IGNORED_TABLE_A");
 
@@ -61,7 +61,7 @@ public class IgnoredTableTest {
     }
     
     @Test
-    public void equalsTest() {
+    public void testCustomEquals() {
         IgnoredTable ignoredTableA = new IgnoredTable("IGNORED_TABLE_A   ");
         IgnoredTable ignoredTableAA = new IgnoredTable("  IGNORED_TABLE_A");
 
