@@ -78,6 +78,12 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
+                        <label>Primary Key</label><br>
+                        <div id="primaryKey" th:utext="*{column.primaryKey}?: 'false'"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
                         <label>Foreign Table</label><br>
                         <img src="/images/table-small.svg">
                         <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}" 
@@ -85,7 +91,7 @@
                            th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-4">
                     <div class="form-group">
                         <label>Foreign Column</label><br>
                         <img src="/images/key.svg">

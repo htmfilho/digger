@@ -53,8 +53,8 @@ public class ColumnResource {
 
     @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/columns/documented", 
                 produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Column> getDocumentedTables(@PathVariable Long datasourceId, 
-                                            @PathVariable Long tableId) {
+    public List<Column> getDocumentedColumns(@PathVariable Long datasourceId,
+                                             @PathVariable Long tableId) {
         Table table = tableService.findById(tableId);
         return columnService.findByTable(table);
     }
