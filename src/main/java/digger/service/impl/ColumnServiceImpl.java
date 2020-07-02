@@ -80,6 +80,35 @@ public class ColumnServiceImpl implements ColumnService {
         return excludeDocumentedColumns(table, columns, except);
     }
 
+    public List<Column> listPrimaryKeys(final Table table) {
+        List<Column> primaryKeys = new ArrayList<>();
+        try (Connection connection = datasourceService.getConnection(table.getDatasource())) {
+            DatabaseMetaData metadata = connection.getMetaData();
+            ResultSet resultSet = metadata.getPrimaryKeys(connection.getCatalog(), null, table.getName());
+            while (resultSet.next()) {
+                Column primaryKey = new Column();
+                primaryKey.setName(resultSet.getString(COLUMN_NAME));
+                primaryKey.setType(resultSet.getString(COLUMN_TYPE));
+                primaryKeys.add(primaryKey);
+                logger.info("name: {}", primaryKey.getName());
+            }
+            resultSet.close();
+        } catch (SQLException se) {
+            logger.error("Error: {}", se.getMessage());
+        }
+        return primaryKeys;
+    }
+
+    public boolean isPrimaryKey(final Column column) {
+        List<Column> primaryKeys = listPrimaryKeys(column.getTable());
+        for(Column primaryKey : primaryKeys) {
+            if(column.equals(primaryKey)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Column> excludeDocumentedColumns(final Table table, List<Column> columns, final Column except) {
         List<Column> documentedColumns = this.findByTable(table);
 
@@ -102,6 +131,7 @@ public class ColumnServiceImpl implements ColumnService {
     }
 
     public void save(Column column) {
+        column.setPrimaryKey(isPrimaryKey(column));
         columnRepository.save(column);
         logger.info("Saved the column {}", column.getName());
     }
@@ -119,7 +149,9 @@ public class ColumnServiceImpl implements ColumnService {
     }
 
     public List<Column> findByTable(final Table table) {
-        return columnRepository.findByTableOrderByNameAsc(table);
+        List<Column> columns = columnRepository.findByTable(table);
+        Collections.sort(columns, new ColumnComparator());
+        return columns;
     }
 
     public List<Column> findByForeignKey(final Column foreignKey) {

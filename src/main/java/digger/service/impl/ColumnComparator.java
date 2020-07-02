@@ -14,21 +14,25 @@
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
 
-package digger.repository;
+package digger.service.impl;
 
 import digger.model.Column;
-import digger.model.Table;
-import org.springframework.data.repository.Repository;
 
-import java.util.List;
+import java.util.Comparator;
 
-public interface ColumnRepository extends Repository<Column, Long> {
-    Column findById(Long id);
+/**
+ * ColumnComparator is used to sort columns in a way that the primary keys always come first in the list, independent
+ * of the alphabetical order.
+ * */
+public class ColumnComparator implements Comparator<Column> {
 
-    List<Column> findByTable(Table table);
-    List<Column> findByForeignKey(Column foreignKey);
-    List<Column> findByForeignKeyIn(List<Column> columns);
-    
-    void save(Column column);
-    void deleteById(Long id);
+    public int compare(Column previous, Column next) {
+        if(next.getPrimaryKey() != null && next.getPrimaryKey())
+            return 1;
+
+        if(previous.getPrimaryKey() != null && previous.getPrimaryKey())
+            return -1;
+
+        return previous.compareTo(next);
+    }
 }

@@ -45,6 +45,9 @@ public class Column implements Comparable<Column> {
     @javax.persistence.Column
     private Boolean nullable;
 
+    @javax.persistence.Column
+    private Boolean primaryKey;
+
     @javax.persistence.Column(name = "default_value")
     private String defaultValue;
 
@@ -63,6 +66,12 @@ public class Column implements Comparable<Column> {
 
     public Column(String name) {
         this.name = name;
+    }
+
+    public Column(Long id, String name, Boolean primaryKey) {
+        this.id = id;
+        this.name = name;
+        this.primaryKey = primaryKey;
     }
 
     public Long getId() {
@@ -121,6 +130,14 @@ public class Column implements Comparable<Column> {
         this.nullable = nullable;
     }
 
+    public Boolean getPrimaryKey() {
+        return this.primaryKey;
+    }
+
+    public void setPrimaryKey(Boolean primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
     public String getDefaultValue() {
         return this.defaultValue;
     }
@@ -149,6 +166,9 @@ public class Column implements Comparable<Column> {
         return this.name + " ("+ this.friendlyName +")";
     }
 
+    /**
+     * Two columns are considered the same if they have the same physical name.
+     * */
     @Override
     public int compareTo(final Column column) {
         if(this.name != null && column.name != null)
