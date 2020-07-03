@@ -56,6 +56,11 @@ public class Table implements Comparable<Table> {
         this.name = name;
     }
 
+    public Table(String name, String friendlyName) {
+        this.name = name;
+        this.friendlyName = friendlyName;
+    }
+
     public Long getId() {
         return id;
     }

@@ -17,13 +17,20 @@
 package digger.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
 public class TableTest {
 
+    @Test
+    public void testToString() {
+        Table table = new Table("TABLE_A", "Table A");
+        assertThat(table.toString()).isEqualTo(table.getName() +" ("+ table.getFriendlyName() +")");
+    }
+
 	@Test
-	public void compareToTest() {
+	public void testCompareTo() {
         Table tableA = new Table("TABLE_A    ");
         Table tableAA = new Table("   TABLE_A");
 
@@ -37,10 +44,11 @@ public class TableTest {
         Table table = new Table();
 
         assertThat(table.compareTo(tableA)).isEqualTo(-1);
+        assertThat(tableA.compareTo(table)).isEqualTo(-1);
     }
     
     @Test
-    public void equalsTest() {
+    public void testEquals() {
         Table tableA = new Table("TABLE_A   ");
         Table tableAA = new Table("  TABLE_A");
 
@@ -52,7 +60,11 @@ public class TableTest {
         assertThat(table1.equals(table2)).isFalse();
         assertThat(table1.equals(table1)).isTrue();
 
-        Table table = new Table();
+        Table table = new Table(5L);
         assertThat(table.equals(table)).isTrue();
+        assertThat(table.equals(tableA)).isFalse();
+        assertThat(tableA.equals(table)).isFalse();
+
+        assertThat(table.equals(new Column())).isFalse();
     }
 }

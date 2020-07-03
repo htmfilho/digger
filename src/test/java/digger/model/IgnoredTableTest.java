@@ -55,9 +55,11 @@ public class IgnoredTableTest {
         assertThat(ignoredTableA.compareTo(ignoredTableB)).isEqualTo(-1);
         assertThat(ignoredTableB.compareTo(ignoredTableA)).isEqualTo(1);
 
-        IgnoredTable ignoredTable = new IgnoredTable();
+        IgnoredTable ignoredTable = new IgnoredTable(5L);
 
         assertThat(ignoredTable.compareTo(ignoredTableA)).isEqualTo(-1);
+        assertThat(ignoredTableA.compareTo(ignoredTable)).isEqualTo(-1);
+        assertThat(ignoredTable.compareTo(ignoredTable)).isEqualTo(0);
     }
     
     @Test
