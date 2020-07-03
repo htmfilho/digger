@@ -41,6 +41,11 @@ public class Role {
 
     public Role() {}
 
+    public Role(String username, String authority) {
+        this.username = username;
+        this.setAuthority(authority);
+    }
+
     public long getId() {
         return id;
     }
@@ -65,7 +70,8 @@ public class Role {
         if (authority != null) {
             this.authority = authority.toUpperCase();
             RoleKind.valueOf(this.authority);
-        }
+        } else
+            this.authority = null;
     }
 
     public RoleKind getRoleKind() {

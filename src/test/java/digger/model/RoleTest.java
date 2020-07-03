@@ -39,10 +39,14 @@ public class RoleTest {
     }
 
     @Test
-    public void testGetAuthority() {
+    public void testSetAuthority() {
         Role role = new Role();
         role.setAuthority("role_admin");
         assertThat(role.getAuthority()).isEqualTo("ROLE_ADMIN");
+
+        role = new Role();
+        role.setAuthority(null);
+        assertThat(role.getAuthority()).isNull();
     }
 
     @Test
@@ -58,5 +62,27 @@ public class RoleTest {
         Role role = new Role();
         role.setAuthority("ROLE_ADMIN");
         assertThat(role.getRoleKind()).isEqualTo(RoleKind.ROLE_ADMIN);
+
+        role.setAuthority(null);
+        assertThat(role.getRoleKind()).isNull();
+    }
+
+    @Test
+    public void testCustomEquals() {
+        Role role = new Role();
+        assertThat(role.equals(role)).isTrue();
+        assertThat(role.equals(null)).isFalse();
+        assertThat(role.equals(new User())).isFalse();
+
+        Role roleA = new Role("A", "ROLE_ADMIN");
+        Role roleB = new Role("B", "ROLE_ADMIN");
+        assertThat(roleA.equals(roleB)).isFalse();
+
+        Role roleC = new Role("B", "ROLE_EDITOR");
+        assertThat(roleA.equals(roleC)).isFalse();
+        assertThat(roleB.equals(roleC)).isFalse();
+
+        Role roleAA = new Role("A", "ROLE_ADMIN");
+        assertThat(roleA.equals(roleAA)).isTrue();
     }
 }

@@ -89,6 +89,9 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
 
 	@Override
 	public int compareTo(IgnoredTable ignoredTable) {
+        if(this.equals(ignoredTable))
+            return 0;
+
         if(this.name != null && ignoredTable.name != null)
             return this.name.trim().compareTo(ignoredTable.name.trim());
         else

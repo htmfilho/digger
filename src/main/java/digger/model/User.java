@@ -56,12 +56,6 @@ public class User {
         this.username = username;
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-        this.enabled = false;
-    }
-
     public Long getId() {
         return this.id;
     }
@@ -87,7 +81,8 @@ public class User {
     }
 
     public String getFullName() {
-        return ((this.firstName != null ? this.firstName : "") + (this.lastName != null ? " " + this.lastName : "")).trim();
+        return ((this.firstName != null ? this.firstName : "") +
+                (this.lastName != null ? " " + this.lastName : "")).trim();
     }
 
     public String getUsername() {
