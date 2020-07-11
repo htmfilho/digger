@@ -1,6 +1,6 @@
 ﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.7.0
+v1.8.0
 :doctype: book
 :pdf-page-size: LETTER
 :encoding: utf-8
@@ -16,31 +16,37 @@ Digger is a light-weight web application to centralize and share the accumulated
 
 After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
 
-Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
+Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how they are used. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
+
+Here is where Digger comes to play. It offers a new approach for database documentation. Instead of working with diagrams, scripts, and tools, Digger relies on schemes that are already materialized in the database server. Digger is known to offer great value to document older databases because they have lower probability of having up-to-date modelling and supported tools. For new databases, diagrams are useful to prevent design flaws, improve communication, and expressiveness, but as time passes and the schema goes through frequent changes, the diagram gets rapidly outdated. Here comes Digger, helping to socialize knowledge about the schema, making documentation available to a larger audience.
+
+Documenting seems to be boring and unnecessary in most cases. A clear naming convention and attention to database design rules would be self explanatory. However, some unorthodox decisions are made to improve performance and  corporate data dictionaries might be enforced, making it difficult to ensure readability. To cover these cases, documentation becomes as important as test automation, ensuring that developers always know how to use all parts the system. Digger helps to minimize the individual effort by making database documentation a collective effort.
+
+Documenting is also an intellectual exercise that leads to more knowledge and creativity. The more we write about the data the more insights we have about its use. When we make writing a collective effort, and not an individual struggle, the volume of new insights is exponentially higher. Digger estimates the collective effort to document data just like Wikipedia stimulates the collective effort to document the human knowledge.
 
 :sectnums:
 
-== Installation
+== Getting Started
 
-Digger is easy to install but it requires Java 8+ installed and configured in the system. The application comes with an embedded database for simple use cases, but it can also be configured to store data in a PostgreSQL database server, which also has to be installed and configured separately.
+Digger is easy to install as long as its requirements are already in place. It requires Java 8 or superior installed and configured in the system. The application comes with an embedded database for simple use cases, but it can also be configured to store data in a PostgreSQL database server, which also has to be installed and configured separately.
 
 === Installing the Released File
 
-Download Digger from the https://github.com/htmfilho/digger/releases[release page] and save it where you want to install it. That is a `jar` file with the naming convention: `digger-<version>.jar`. For example: `digger-1.2.0.jar`.
+A new version of Digger goes out in a weekly basis. The latest version upgrades any of the older versions, thus it is always safer to jump to the latest version because it comes with a lot of bug fixes. All versions can be found in Digger's https://github.com/htmfilho/digger/releases[release page], where you can download the latest version and install it. That is a `jar` file with the naming convention: `digger-<version>.jar`. For example: `digger-1.3.0.jar`.
 
-==== Using the Embedded Storage
+==== Standalone Installation
 
 To run Digger with its default configuration, go to the terminal and execute:
 
     $ cd <path-to-digger-folder>
-    $ java -jar digger-1.2.0.jar
+    $ java -jar digger-1.3.0.jar
 
 A few moments later, open your browser and visit the address http://localhost:8080 to use Digger with its embedded database. The folder `data` is automatically created during the initialization and the sign up page below is presented by default.
 
 .Initial Setup
 image::images/initial-setup.png[]
 
-==== Using PostgreSQL Storage
+==== Server Installation
 
 The embedded database is robust enough to support a reasonable volume of data, but it won't scale to support multiple concurrent users. For that, you can use PostgreSQL to handle a larger demand for information. To switch to PostgreSQL:
 
@@ -106,13 +112,13 @@ Then you can package and run it:
 
     $ mvn clean package
 
-=== Installing as a Local Service
+=== Installing as a Service
 
-Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to start with the operating system in case the system needs to boot. Digger can be configured to start as a local service to address these cases.
+Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to restart with the operating system in case it needs to boot. Digger can be configured to start as a local service to address these cases. This facility to run applications as a service is available in most operating systems.
 
 === A Linux Service
 
-Create a new service file `digger.service` at `/etc/systemd/system` with the following content:
+On Linux, a service for Digger is configured by creating a new service file `digger.service` at `/etc/systemd/system` with the following content:
 
 [source, toml]
 ----
@@ -138,6 +144,36 @@ Then execute the following commands:
     $ sudo systemctl enable digger.service
 
 === A Windows Service
+
+On Windows 10, a service for Digger is configured as follows:
+
+1. create a dedicated folder for the application
+
+2. download the latest version from the release page and save it in the dedicated folder.
+
+3. the downloaded file name contains the release number, but to simplify future upgrades, replace the release number by "service". For example:
+
+  digger-1.3.0.jar -> digger-service.jar
+
+4. download the Windows Service Utility, choosing the file that corresponds to your .net version. If you don't know your .net version, just peak the most recent one.
+
+5. save the file in the dedicated folder and rename it to `digger-service.exe`
+
+6. create an XML file in the same folder, name it as `digger-service.xml`, and put the following content in it:
+
+  <service>
+    <id>digger-service</id>
+    <name>Digger Service</name>
+    <description>Digger: database schema documentation.</description>
+    <executable>java</executable>
+    <arguments>-jar "digger-service.jar"</arguments>
+    <logmode>rotate</logmode>
+  </service>
+
+7. Go to the command line, navigate to the dedicated folder and execute the command:
+
+  $ digger-service.exe install
+
 
 == Security
 
@@ -302,6 +338,8 @@ Visit the Appendix A to learn everything you need to know to properly format you
 The table's page shows all information related to the table, including its columns and dependencies. To edit a table, click on the *Options* button on the top right then select the option *Edit*. The form appears filled with the table's attributes and documentation. Make the intended changes and save, or cancel to return to the table's page.
 
 image::images/table.png[]
+
+The tab *Columns* shows the list of columns, where the primary keys are on the top and the rest of the columns are sorted alphabetically. The primary key constraint of the column is detected automatically when the column is added.
 
 The tab *Referenced By* shows a list of tables that have foreign keys pointing to one of more columns of the table. It is useful for understanding the impact of changing the table or its records.
 
@@ -606,7 +644,7 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
 == Appendix A: Asciidoc Syntax
 
-Asciidoc is a markup language in plain text that can be easily transformed into other convenient formats such as HTML, PDF, etc. When you use Asciidoc to write the database documentation, Digger has a minimal effort to provide content in other formats for your confort.
+Asciidoc is a markup language in plain text that can be easily transformed into other convenient formats such as HTML, PDF, etc. When you use Asciidoc to write the database documentation, Digger has a minimal effort to provide content in other formats for your comfort.
 
 === A Paragraph
 
@@ -642,7 +680,7 @@ Examples of unacceptable behavior by participants include:
 
 Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviours that they deem inappropriate, threatening, offensive, or harmful.
 
 === Scope
 
@@ -650,7 +688,7 @@ This Code of Conduct applies both within project spaces and in public spaces whe
 
 === Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at me@hildeberto.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
+Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the project team at me@hildeberto.com. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
 Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 
@@ -844,7 +882,7 @@ You may not impose any further restrictions on the exercise of the rights grante
 A "contributor" is a copyright holder who authorizes use under this License of the Program or a work on which the Program is based. The work thus licensed is called the contributor's "contributor version".
 
 A contributor's "essential patent claims" are all patent claims owned or controlled by the contributor, whether already acquired or hereafter acquired, that would be infringed by some manner, permitted by this License, of making, using, or selling its contributor version, but do not include claims that would be infringed only as a consequence of further modification of the contributor version. For purposes of this definition, "control" includes the right to grant
-patent sublicenses in a manner consistent with the requirements of this License.
+patent sub-licenses in a manner consistent with the requirements of this License.
 
 Each contributor grants you a non-exclusive, worldwide, royalty-free patent license under the contributor's essential patent claims, to make, use, sell, offer for sale, import and otherwise run, modify and propagate the contents of its contributor version.
 

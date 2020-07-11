@@ -443,22 +443,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.7.0</span>
+<span id="revnumber">version 1.8.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_introduction">Introduction</a></li>
-<li><a href="#_installation">1. Installation</a>
+<li><a href="#_getting_started">1. Getting Started</a>
 <ul class="sectlevel2">
 <li><a href="#_installing_the_released_file">1.1. Installing the Released File</a>
 <ul class="sectlevel3">
-<li><a href="#_using_the_embedded_storage">1.1.1. Using the Embedded Storage</a></li>
-<li><a href="#_using_postgresql_storage">1.1.2. Using PostgreSQL Storage</a></li>
+<li><a href="#_standalone_installation">1.1.1. Standalone Installation</a></li>
+<li><a href="#_server_installation">1.1.2. Server Installation</a></li>
 </ul>
 </li>
 <li><a href="#_installing_from_source">1.2. Installing From Source</a></li>
-<li><a href="#_installing_as_a_local_service">1.3. Installing as a Local Service</a></li>
+<li><a href="#_installing_as_a_service">1.3. Installing as a Service</a></li>
 <li><a href="#_a_linux_service">1.4. A Linux Service</a></li>
 <li><a href="#_a_windows_service">1.5. A Windows Service</a></li>
 </ul>
@@ -571,30 +571,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.</p>
 </div>
 <div class="paragraph">
-<p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how to use them. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.</p>
+<p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how they are used. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.</p>
+</div>
+<div class="paragraph">
+<p>Here is where Digger comes to play. It offers a new approach for database documentation. Instead of working with diagrams, scripts, and tools, Digger relies on schemes that are already materialized in the database server. Digger is known to offer great value to document older databases because they have lower probability of having up-to-date modelling and supported tools. For new databases, diagrams are useful to prevent design flaws, improve communication, and expressiveness, but as time passes and the schema goes through frequent changes, the diagram gets rapidly outdated. Here comes Digger, helping to socialize knowledge about the schema, making documentation available to a larger audience.</p>
+</div>
+<div class="paragraph">
+<p>Documenting seems to be boring and unnecessary in most cases. A clear naming convention and attention to database design rules would be self explanatory. However, some unorthodox decisions are made to improve performance and  corporate data dictionaries might be enforced, making it difficult to ensure readability. To cover these cases, documentation becomes as important as test automation, ensuring that developers always know how to use all parts the system. Digger helps to minimize the individual effort by making database documentation a collective effort.</p>
+</div>
+<div class="paragraph">
+<p>Documenting is also an intellectual exercise that leads to more knowledge and creativity. The more we write about the data the more insights we have about its use. When we make writing a collective effort, and not an individual struggle, the volume of new insights is exponentially higher. Digger estimates the collective effort to document data just like Wikipedia stimulates the collective effort to document the human knowledge.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation">1. Installation</h2>
+<h2 id="_getting_started">1. Getting Started</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Digger is easy to install but it requires Java 8+ installed and configured in the system. The application comes with an embedded database for simple use cases, but it can also be configured to store data in a PostgreSQL database server, which also has to be installed and configured separately.</p>
+<p>Digger is easy to install as long as its requirements are already in place. It requires Java 8 or superior installed and configured in the system. The application comes with an embedded database for simple use cases, but it can also be configured to store data in a PostgreSQL database server, which also has to be installed and configured separately.</p>
 </div>
 <div class="sect2">
 <h3 id="_installing_the_released_file">1.1. Installing the Released File</h3>
 <div class="paragraph">
-<p>Download Digger from the <a href="https://github.com/htmfilho/digger/releases">release page</a> and save it where you want to install it. That is a <code>jar</code> file with the naming convention: <code>digger-&lt;version&gt;.jar</code>. For example: <code>digger-1.2.0.jar</code>.</p>
+<p>A new version of Digger goes out in a weekly basis. The latest version upgrades any of the older versions, thus it is always safer to jump to the latest version because it comes with a lot of bug fixes. All versions can be found in Digger&#8217;s <a href="https://github.com/htmfilho/digger/releases">release page</a>, where you can download the latest version and install it. That is a <code>jar</code> file with the naming convention: <code>digger-&lt;version&gt;.jar</code>. For example: <code>digger-1.3.0.jar</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="_using_the_embedded_storage">1.1.1. Using the Embedded Storage</h4>
+<h4 id="_standalone_installation">1.1.1. Standalone Installation</h4>
 <div class="paragraph">
 <p>To run Digger with its default configuration, go to the terminal and execute:</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>$ cd &lt;path-to-digger-folder&gt;
-$ java -jar digger-1.2.0.jar</pre>
+$ java -jar digger-1.3.0.jar</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -608,7 +617,7 @@ $ java -jar digger-1.2.0.jar</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_using_postgresql_storage">1.1.2. Using PostgreSQL Storage</h4>
+<h4 id="_server_installation">1.1.2. Server Installation</h4>
 <div class="paragraph">
 <p>The embedded database is robust enough to support a reasonable volume of data, but it won&#8217;t scale to support multiple concurrent users. For that, you can use PostgreSQL to handle a larger demand for information. To switch to PostgreSQL:</p>
 </div>
@@ -732,15 +741,15 @@ $ mvn package</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_installing_as_a_local_service">1.3. Installing as a Local Service</h3>
+<h3 id="_installing_as_a_service">1.3. Installing as a Service</h3>
 <div class="paragraph">
-<p>Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to start with the operating system in case the system needs to boot. Digger can be configured to start as a local service to address these cases.</p>
+<p>Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to restart with the operating system in case it needs to boot. Digger can be configured to start as a local service to address these cases. This facility to run applications as a service is available in most operating systems.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_a_linux_service">1.4. A Linux Service</h3>
 <div class="paragraph">
-<p>Create a new service file <code>digger.service</code> at <code>/etc/systemd/system</code> with the following content:</p>
+<p>On Linux, a service for Digger is configured by creating a new service file <code>digger.service</code> at <code>/etc/systemd/system</code> with the following content:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -772,7 +781,56 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 <div class="sect2">
 <h3 id="_a_windows_service">1.5. A Windows Service</h3>
-
+<div class="paragraph">
+<p>On Windows 10, a service for Digger is configured as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>create a dedicated folder for the application</p>
+</li>
+<li>
+<p>download the latest version from the release page and save it in the dedicated folder.</p>
+</li>
+<li>
+<p>the downloaded file name contains the release number, but to simplify future upgrades, replace the release number by "service". For example:</p>
+<div class="literalblock">
+<div class="content">
+<pre>digger-1.3.0.jar -&gt; digger-service.jar</pre>
+</div>
+</div>
+</li>
+<li>
+<p>download the Windows Service Utility, choosing the file that corresponds to your .net version. If you don&#8217;t know your .net version, just peak the most recent one.</p>
+</li>
+<li>
+<p>save the file in the dedicated folder and rename it to <code>digger-service.exe</code></p>
+</li>
+<li>
+<p>create an XML file in the same folder, name it as <code>digger-service.xml</code>, and put the following content in it:</p>
+<div class="literalblock">
+<div class="content">
+<pre>&lt;service&gt;
+  &lt;id&gt;digger-service&lt;/id&gt;
+  &lt;name&gt;Digger Service&lt;/name&gt;
+  &lt;description&gt;Digger: database schema documentation.&lt;/description&gt;
+  &lt;executable&gt;java&lt;/executable&gt;
+  &lt;arguments&gt;-jar "digger-service.jar"&lt;/arguments&gt;
+  &lt;logmode&gt;rotate&lt;/logmode&gt;
+&lt;/service&gt;</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Go to the command line, navigate to the dedicated folder and execute the command:</p>
+<div class="literalblock">
+<div class="content">
+<pre>$ digger-service.exe install</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
@@ -1053,6 +1111,9 @@ $ sudo systemctl enable digger.service</pre>
 <div class="content">
 <img src="images/table.png" alt="table">
 </div>
+</div>
+<div class="paragraph">
+<p>The tab <strong>Columns</strong> shows the list of columns, where the primary keys are on the top and the rest of the columns are sorted alphabetically. The primary key constraint of the column is detected automatically when the column is added.</p>
 </div>
 <div class="paragraph">
 <p>The tab <strong>Referenced By</strong> shows a list of tables that have foreign keys pointing to one of more columns of the table. It is useful for understanding the impact of changing the table or its records.</p>
@@ -1598,7 +1659,7 @@ $ git commit -m "Incremented version number to 1.5.0"</pre>
 <h2 id="_appendix_a_asciidoc_syntax">Appendix A: Asciidoc Syntax</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Asciidoc is a markup language in plain text that can be easily transformed into other convenient formats such as HTML, PDF, etc. When you use Asciidoc to write the database documentation, Digger has a minimal effort to provide content in other formats for your confort.</p>
+<p>Asciidoc is a markup language in plain text that can be easily transformed into other convenient formats such as HTML, PDF, etc. When you use Asciidoc to write the database documentation, Digger has a minimal effort to provide content in other formats for your comfort.</p>
 </div>
 <div class="sect2">
 <h3 id="_a_paragraph">A Paragraph</h3>
@@ -1673,7 +1734,7 @@ $ git commit -m "Incremented version number to 1.5.0"</pre>
 <p>Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.</p>
 </div>
 <div class="paragraph">
-<p>Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.</p>
+<p>Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviours that they deem inappropriate, threatening, offensive, or harmful.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1685,7 +1746,7 @@ $ git commit -m "Incremented version number to 1.5.0"</pre>
 <div class="sect2">
 <h3 id="_enforcement">Enforcement</h3>
 <div class="paragraph">
-<p>Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at <a href="mailto:me@hildeberto.com">me@hildeberto.com</a>. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.</p>
+<p>Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the project team at <a href="mailto:me@hildeberto.com">me@hildeberto.com</a>. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.</p>
 </div>
 <div class="paragraph">
 <p>Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project&#8217;s leadership.</p>
@@ -2006,7 +2067,7 @@ $ git commit -m "Incremented version number to 1.5.0"</pre>
 </div>
 <div class="paragraph">
 <p>A contributor&#8217;s "essential patent claims" are all patent claims owned or controlled by the contributor, whether already acquired or hereafter acquired, that would be infringed by some manner, permitted by this License, of making, using, or selling its contributor version, but do not include claims that would be infringed only as a consequence of further modification of the contributor version. For purposes of this definition, "control" includes the right to grant
-patent sublicenses in a manner consistent with the requirements of this License.</p>
+patent sub-licenses in a manner consistent with the requirements of this License.</p>
 </div>
 <div class="paragraph">
 <p>Each contributor grants you a non-exclusive, worldwide, royalty-free patent license under the contributor&#8217;s essential patent claims, to make, use, sell, offer for sale, import and otherwise run, modify and propagate the contents of its contributor version.</p>
@@ -2131,8 +2192,8 @@ Copyright &#169; 2019-2020 Hildeberto Mendonca</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.7.0<br>
-Last updated 2020-06-28 18:38:50 -0400
+Version 1.8.0<br>
+Last updated 2020-07-11 08:44:53 -0400
 </div>
 </div>
 </body>
