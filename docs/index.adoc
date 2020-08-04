@@ -480,10 +480,6 @@ Git is a distributed version control system used to manage the source code of Di
 
     $ sudo apt-get install git
 
-Since version 2.0, Git has adopted a new behavior to pull and push commits while in a branch. When you execute git push or git pull Git will consider pushing or pulling just for the current branch. Before, these commands would push and pull all branches. But the change to this new behavior is voluntary, not automatically imposed. So, we have to explicitly say we have to move from the old behavior to the new one. To do that, execute the following command:
-
-    $ git config --global push.default simple
-
 ==== Configuring Git to Simplify Authentication
 
 For the moment, every time we push code to GitHub the prompt asks for a username and password. We can bypass this step by registering a SSH key. To do that, we first check whether there is already an existing SSH key we can reuse:
@@ -496,6 +492,12 @@ If files with the extension .pub are listed then one of them can be reused to au
       Enter file in which to save the key (/Users/[user]/.ssh/id_rsa): [Press enter]
       Enter passphrase (empty for no passphrase): [Type a passphrase]
       Enter same passphrase again: [Type passphrase again]
+
+The generated keys need to be protected with the right permissions otherwise the access won't work:
+
+    $ chmod 700 ~/.ssh
+    $ chmod 644 ~/.ssh/id_rsa.pub
+    $ chmod 600 ~/.ssh/id_rsa
 
 The next step is to add the new key - or an existing one - to the ssh-agent. This program runs the duration of a local login session, stores unencrypted keys in memory, and communicates with SSH clients using a Unix domain socket. Everyone who is able to connect to this socket also has access to the ssh-agent. First, we have to enable the ssh-agent:
 
