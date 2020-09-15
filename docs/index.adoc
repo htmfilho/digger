@@ -580,6 +580,10 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 
     $ git add missed-file.txt
     $ git commit --amend
+    
+==== Undo the Most Recent Commit
+
+    $ git reset HEAD~
 
 ==== Remove a File From the Repository Without Deleting It
 
