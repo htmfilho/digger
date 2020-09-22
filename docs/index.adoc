@@ -89,7 +89,9 @@ To start, fetch the code from GitHub:
 
     $ git clone https://github.com/htmfilho/digger.git
 
-Then build the project:
+`git clone` fetches the entire repository to the local machine, all commits since day 1. Every clone is a copy of the entire repo. If the server is lost, the repo can be easily recovered from the most updated copy.
+
+Build the project:
 
     $ cd digger
     $ mvn package
@@ -104,7 +106,7 @@ or Maven:
 
 If you already have Digger installed, just put the generated jar file in the same folder of the existing installation and remove the old jar. Execute the new jar from that point on.
 
-You can also get all subsequent changes whenever they are available by fetching updates:
+You can also get all subsequent changes whenever they are available by merging the remote master branch into the local master branch:
 
     $ git pull origin master
 
@@ -584,6 +586,35 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
 ==== Undo the Most Recent Commit
 
     $ git reset HEAD~
+    
+==== Undo One or More Commits Pushed to Remote
+
+Update the working branch to have it as a backup:
+
+    $ cd ~/java/projects/digger
+    $ git pull origin master
+
+Create a new clone to use as workshop:
+
+    $ cd ..
+    $ git clone git@github.com:htmfilho/digger.git digger-temp
+    $ cd digger-temp
+
+Look at the log to see the id of the latest valid commit:
+
+    $ git log
+
+Force the head of the tree to point to the latest valid commit:
+
+    $ git reset –hard 73d48037
+
+Force the new head into the remote branch (origin):
+
+    $ git push –force origin master
+
+The clients that still have the old commits should update their local branches accordingly before the next push:
+
+    $ git reset –hard origin/master
 
 ==== Remove a File From the Repository Without Deleting It
 
