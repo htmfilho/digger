@@ -8,17 +8,41 @@ v1.8.0
 :toclevels: 3
 :numbered:
 
-Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization.
+> Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization."
 
 :sectnums!:
 
-== Introduction
+== Why Do We Need Digger?
 
-After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.
+After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern platform and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic over time due to the frequency of changes and the mix of technologies.
 
-Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how they are used. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.
+Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how they are used. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an defragmented and up-to-date documentation they could rely on.
 
-Here is where Digger comes to play. It offers a new approach for database documentation. Instead of working with diagrams, scripts, and tools, Digger relies on schemes that are already materialized in the database server. Digger is known to offer great value to document older databases because they have lower probability of having up-to-date modelling and supported tools. For new databases, diagrams are useful to prevent design flaws, improve communication, and expressiveness, but as time passes and the schema goes through frequent changes, the diagram gets rapidly outdated. Here comes Digger, helping to socialize knowledge about the schema, making documentation available to a larger audience.
+=== Database Documentation Approaches
+
+To address the documentation issue, we have identified approaches that projects usually follow to manage the knowledge around the database.
+
+==== Model Based
+
+The most traditional way of documenting database schemas is the relational diagram. Modelling tools such as Enterprise Architect are largely used to design the tables, views and their relationships. Those tools provide extensive support to any level of documentation and reporting capabilities. The graphical representation of the schema is useful on the design phase because it makes the data abstraction visible, helping on the discussions, refinements and identification of flaws. The creators of Digger use the relational diagram on the conception and evolution of Digger's database. Unfortunately, modelling tools are expensive, and their cost increases with the number of collaborators. To keep costs low, companies limit the use of data modelling to a few key users. The tool in its own is not enough. They need a server to synchronize and share the models. To keep the models up-to-date is also a challenge. Small changes, optimizations, temporary tables and views implemented in run-time rarely make the way back to the models. Therefore, there is clearly a gap to be bridged.
+
+==== DDL Based
+
+Another approach to document database schemas is to do it directly in the DDL script. The data definition language support comments by placing two dashes before the text to be ignored during the execution of the script. It is perfectly possible to follow this path, but not recommended. The reason is that database structures are not defined in a single script anymore. Databases now evolves gradually, with small scripts making small changes at every deployment in production. The spread of documentation in several files, some of them outdated due to subsequent changes in the same structures, makes this approach unmanageable.
+
+==== ORM Based
+
+An alternative approach would be to use object-relational models where the documentation would be written in entity classes, directly in the source code of the application. It puts the content face to face with developers, the main beneficiaries of the documentation, enables low cost collaboration and sharing among all people involved, and version controlled. However, it would make this documentation inaccessible or difficult to be consumed by other roles such as business analysts, data analysts, DBAs and other non-technical roles.
+
+=== The Digger's Approach
+
+The approach adopted by Digger is to document schemes only when they are physically present in the database. That is a pragmatic approach in the sense that time is spent on documentation only when all design decisions were already materialized. The tool uses a database connection to a up-to-date database, makes its metadata accessible, and allow users to describe the elements with content that is instantly accessible to all interested stakeholders.
+
+The weakness of the wiki based is the difficulty to see the big picture. The content is favoured over structure. Time is spent explaining the utility of the columns or why that table breaks a normal rule, but not how they look like on the types of the columns or the foreign keys, since they are already defined.
+
+This approach is complementary to the modelling. While the last focus on database design and the first on documentation.
+
+Here is where Digger comes to play. It offers a new approach for database documentation. Instead of working with diagrams, scripts, and tools, Digger relies on schemes that are already materialized in the database server. Digger offers great value on documenting older databases because they have lower probability of having up-to-date modelling and supported tools. For new databases, diagrams are useful to prevent design flaws, improve communication, and expressiveness, but as time passes, the schema goes through frequent changes, and the diagram gets rapidly outdated. Here comes Digger, helping to socialize knowledge about the schema, making documentation available to a larger audience.
 
 Documenting seems to be boring and unnecessary in most cases. A clear naming convention and attention to database design rules would be self explanatory. However, some unorthodox decisions are made to improve performance and  corporate data dictionaries might be enforced, making it difficult to ensure readability. To cover these cases, documentation becomes as important as test automation, ensuring that developers always know how to use all parts the system. Digger helps to minimize the individual effort by making database documentation a collective effort.
 
@@ -627,6 +651,25 @@ For a single directory:
     $ git rm --cached -r logs
 
 :sectnums!:
+
+==== Restore a Deleted Branch
+
+The follow commands recover a branch that was deleted locally with the command `git branch -D issue-52`. Use `reflog` to figure out the _<sha>_ of the deleted branch:
+
+    $ git reflog
+
+Take note of the _<sha>_ and jump into it:
+
+    $ git checkout -b issue-52 dc4b3ff
+
+Look at the log to see if it contains what you are looking for:
+
+    $ git log
+
+Finally, move to the master branch and merge the recovered branch into it:
+
+    $ git checkout master
+    $ git merge issue-52
 
 === The Release Process
 
