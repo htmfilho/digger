@@ -593,6 +593,18 @@ It can also be done to a specific commit:
 
     $ git commit --author="John Doe <john@doe.org>"
 
+==== Setting Pull Behaviour
+
+The `git pull` command merges the remote branch into the local branch with a merge commit, but we don't think this commit is useful. We want to make sure our commits represent changes made by developers only. So, we would like to ask you to use rebase to merge remote branches locally. You can do it at every `pull` with:
+
+    $ git pull --rebase origin master
+    
+or change a local configuration to make it the default `pull` behavior:
+
+    $ git config --local pull.rebase true
+    
+Note: you don't need to run this local configuration if you already have it globally.
+
 ==== Changing Several Commits in Bulk
 
 If commits were done with a wrong author, use Git Rebase to fix the authors of the commits:
