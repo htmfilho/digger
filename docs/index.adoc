@@ -34,7 +34,7 @@ Another approach to document database schemas is to do it directly in the DDL sc
 
 An alternative approach would be to use object-relational models where the documentation would be written in entity classes, directly in the source code of the application. It puts the content face to face with developers, the main beneficiaries of the documentation, enables low cost collaboration and sharing among all people involved, and version controlled. However, it would make this documentation inaccessible or difficult to be consumed by other roles such as business analysts, data analysts, DBAs and other non-technical roles.
 
-=== The Digger's Approach
+=== Digger's Approach
 
 The approach adopted by Digger is to document schemes only when they are physically present in the database. That is a pragmatic approach in the sense that time is spent on documentation only when all design decisions were already materialized. The tool uses a database connection to a up-to-date database, makes its metadata accessible, and allow users to describe the elements with content that is instantly accessible to all interested stakeholders.
 
@@ -56,7 +56,7 @@ Digger is easy to install as long as its requirements are already in place. It r
 
 === Installing the Released File
 
-A new version of Digger goes out in a weekly basis. The latest version upgrades any of the older versions, thus it is always safer to jump to the latest version because it comes with a lot of bug fixes. All versions can be found in Digger's https://github.com/htmfilho/digger/releases[release page], where you can download the latest version and install it. That is a `jar` file with the naming convention: `digger-<version>.jar`. For example: `digger-1.3.0.jar`.
+New versions of Digger are published in the https://github.com/htmfilho/digger/releases[release page]. If you have an old version installed you can fearlessly upgrade it to the newest version. Download the latest version - which is a `jar` file with the naming convention `digger-<version>.jar` - and go for a standalone or a server installation as explained below.
 
 ==== Standalone Installation
 
@@ -101,7 +101,7 @@ Make sure the database user has full rights over Digger's database, so it can ge
 
 === Installing From Source
 
-A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from source. To do it, you need:
+A new version of Digger is released from time to time, but if you can't wait for a feature that was just finished, then you may need to build Digger from the source. To do it, you need:
 
  - https://openjdk.java.net/[JDK], a Java Development Kit to compile and run the code,
 
@@ -142,11 +142,10 @@ Then you can package and run it:
 
 Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to restart with the operating system in case it needs to boot. Digger can be configured to start as a local service to address these cases. This facility to run applications as a service is available in most operating systems.
 
-=== A Linux Service
+==== A Linux Service
 
 On Linux, a service for Digger is configured by creating a new service file `digger.service` at `/etc/systemd/system` with the following content:
 
-[source, toml]
 ----
 [Unit]
 Description = Digger - Database Schema Documentation Tool
@@ -169,7 +168,7 @@ Then execute the following commands:
     $ sudo systemctl daemon-reload
     $ sudo systemctl enable digger.service
 
-=== A Windows Service
+==== A Windows Service
 
 On Windows 10, a service for Digger is configured as follows:
 
@@ -185,7 +184,7 @@ On Windows 10, a service for Digger is configured as follows:
 
 5. save the file in the dedicated folder and rename it to `digger-service.exe`
 
-6. create an XML file in the same folder, name it as `digger-service.xml`, and put the following content in it:
+6. create an XML file in the same folder, name it `digger-service.xml`, and put the following content in it:
 
   <service>
     <id>digger-service</id>
@@ -200,6 +199,22 @@ On Windows 10, a service for Digger is configured as follows:
 
   $ digger-service.exe install
 
+=== Creating the PostgreSQL Database
+
+==== On Linux
+
+Execute the following commands to install PostgreSQL:
+
+    $ sudo apt-get install postgresql
+    $ sudo su - postgres -c "createuser -s $USER"
+
+Then create the database for the application:
+
+    $ createdb digger
+    $ createuser digger_usr -P
+    $ psql -d digger
+      =# grant connect on database minimily to minimily;
+      =# \q
 
 == Security
 
@@ -662,8 +677,6 @@ For a single directory:
 
     $ git rm --cached -r logs
 
-:sectnums!:
-
 ==== Restore a Deleted Branch
 
 The follow commands recover a branch that was deleted locally with the command `git branch -D issue-52`. Use `reflog` to figure out the _<sha>_ of the deleted branch:
@@ -743,6 +756,8 @@ Finally, move to the master branch and merge the recovered branch into it:
     $ git push origin 1.5.0
 
 20. Announce the new release to the community.
+
+:sectnums!:
 
 == Appendix A: Asciidoc Syntax
 

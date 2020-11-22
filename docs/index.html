@@ -448,7 +448,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_why_do_we_need_digger">Why Do We Need Digger?</a>
+<ul class="sectlevel2">
+<li><a href="#_database_documentation_approaches">Database Documentation Approaches</a>
+<ul class="sectlevel3">
+<li><a href="#_model_based">Model Based</a></li>
+<li><a href="#_ddl_based">DDL Based</a></li>
+<li><a href="#_orm_based">ORM Based</a></li>
+</ul>
+</li>
+<li><a href="#_diggers_approach">Digger&#8217;s Approach</a></li>
+</ul>
+</li>
 <li><a href="#_getting_started">1. Getting Started</a>
 <ul class="sectlevel2">
 <li><a href="#_installing_the_released_file">1.1. Installing the Released File</a>
@@ -458,9 +469,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_installing_from_source">1.2. Installing From Source</a></li>
-<li><a href="#_installing_as_a_service">1.3. Installing as a Service</a></li>
-<li><a href="#_a_linux_service">1.4. A Linux Service</a></li>
-<li><a href="#_a_windows_service">1.5. A Windows Service</a></li>
+<li><a href="#_installing_as_a_service">1.3. Installing as a Service</a>
+<ul class="sectlevel3">
+<li><a href="#_a_linux_service">1.3.1. A Linux Service</a></li>
+<li><a href="#_a_windows_service">1.3.2. A Windows Service</a></li>
+</ul>
+</li>
+<li><a href="#_creating_the_postgresql_database">1.4. Creating the PostgreSQL Database</a>
+<ul class="sectlevel3">
+<li><a href="#_on_linux">1.4.1. On Linux</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_security">2. Security</a>
@@ -522,9 +541,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_changing_the_author_to_the_one_recognizable_by_github">4.6.2. Changing The Author To The One Recognizable by GitHub</a></li>
 <li><a href="#_changing_several_commits_in_bulk">4.6.3. Changing Several Commits in Bulk</a></li>
 <li><a href="#_adding_a_file_to_the_most_recent_commit">4.6.4. Adding a File to the Most Recent Commit</a></li>
+<li><a href="#_undo_the_most_recent_commit">4.6.5. Undo the Most Recent Commit</a></li>
+<li><a href="#_undo_one_or_more_commits_pushed_to_remote">4.6.6. Undo One or More Commits Pushed to Remote</a></li>
+<li><a href="#_remove_a_file_from_the_repository_without_deleting_it">4.6.7. Remove a File From the Repository Without Deleting It</a></li>
+<li><a href="#_restore_a_deleted_branch">4.6.8. Restore a Deleted Branch</a></li>
 </ul>
 </li>
-<li><a href="#_the_release_process">The Release Process</a></li>
+<li><a href="#_the_release_process">4.7. The Release Process</a></li>
 </ul>
 </li>
 <li><a href="#_appendix_a_asciidoc_syntax">Appendix A: Asciidoc Syntax</a>
@@ -559,28 +582,68 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
 <div class="paragraph">
-<p>Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization.</p>
+<p>Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization."</p>
+</div>
+</blockquote>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_introduction">Introduction</h2>
+<h2 id="_why_do_we_need_digger">Why Do We Need Digger?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern technology and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic than databases.</p>
+<p>After decades of software development, we realized that data is more valuable than software. An application is more likely to be rewritten in a modern platform and continue pointing to an existing database than an existing application be modified to access data from a different database. Of course both cases exist, but applications tend to become more chaotic over time due to the frequency of changes and the mix of technologies.</p>
 </div>
 <div class="paragraph">
-<p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how they are used. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had a defragmented and up-to-date documentation they could rely on.</p>
+<p>Even with a longer time span, databases are rarely documented. Often, developers have to read the code to understand the meaning of tables, views, columns, and how they are used. It is not rare to find columns and tables that are not referenced at all, but we never know whether they are still in use by an obscure trigger, stored procedure or third-part application. If at least they had an defragmented and up-to-date documentation they could rely on.</p>
+</div>
+<div class="sect2">
+<h3 id="_database_documentation_approaches">Database Documentation Approaches</h3>
+<div class="paragraph">
+<p>To address the documentation issue, we have identified approaches that projects usually follow to manage the knowledge around the database.</p>
+</div>
+<div class="sect3">
+<h4 id="_model_based">Model Based</h4>
+<div class="paragraph">
+<p>The most traditional way of documenting database schemas is the relational diagram. Modelling tools such as Enterprise Architect are largely used to design the tables, views and their relationships. Those tools provide extensive support to any level of documentation and reporting capabilities. The graphical representation of the schema is useful on the design phase because it makes the data abstraction visible, helping on the discussions, refinements and identification of flaws. The creators of Digger use the relational diagram on the conception and evolution of Digger&#8217;s database. Unfortunately, modelling tools are expensive, and their cost increases with the number of collaborators. To keep costs low, companies limit the use of data modelling to a few key users. The tool in its own is not enough. They need a server to synchronize and share the models. To keep the models up-to-date is also a challenge. Small changes, optimizations, temporary tables and views implemented in run-time rarely make the way back to the models. Therefore, there is clearly a gap to be bridged.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ddl_based">DDL Based</h4>
+<div class="paragraph">
+<p>Another approach to document database schemas is to do it directly in the DDL script. The data definition language support comments by placing two dashes before the text to be ignored during the execution of the script. It is perfectly possible to follow this path, but not recommended. The reason is that database structures are not defined in a single script anymore. Databases now evolves gradually, with small scripts making small changes at every deployment in production. The spread of documentation in several files, some of them outdated due to subsequent changes in the same structures, makes this approach unmanageable.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_orm_based">ORM Based</h4>
+<div class="paragraph">
+<p>An alternative approach would be to use object-relational models where the documentation would be written in entity classes, directly in the source code of the application. It puts the content face to face with developers, the main beneficiaries of the documentation, enables low cost collaboration and sharing among all people involved, and version controlled. However, it would make this documentation inaccessible or difficult to be consumed by other roles such as business analysts, data analysts, DBAs and other non-technical roles.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_diggers_approach">Digger&#8217;s Approach</h3>
+<div class="paragraph">
+<p>The approach adopted by Digger is to document schemes only when they are physically present in the database. That is a pragmatic approach in the sense that time is spent on documentation only when all design decisions were already materialized. The tool uses a database connection to a up-to-date database, makes its metadata accessible, and allow users to describe the elements with content that is instantly accessible to all interested stakeholders.</p>
 </div>
 <div class="paragraph">
-<p>Here is where Digger comes to play. It offers a new approach for database documentation. Instead of working with diagrams, scripts, and tools, Digger relies on schemes that are already materialized in the database server. Digger is known to offer great value to document older databases because they have lower probability of having up-to-date modelling and supported tools. For new databases, diagrams are useful to prevent design flaws, improve communication, and expressiveness, but as time passes and the schema goes through frequent changes, the diagram gets rapidly outdated. Here comes Digger, helping to socialize knowledge about the schema, making documentation available to a larger audience.</p>
+<p>The weakness of the wiki based is the difficulty to see the big picture. The content is favoured over structure. Time is spent explaining the utility of the columns or why that table breaks a normal rule, but not how they look like on the types of the columns or the foreign keys, since they are already defined.</p>
+</div>
+<div class="paragraph">
+<p>This approach is complementary to the modelling. While the last focus on database design and the first on documentation.</p>
+</div>
+<div class="paragraph">
+<p>Here is where Digger comes to play. It offers a new approach for database documentation. Instead of working with diagrams, scripts, and tools, Digger relies on schemes that are already materialized in the database server. Digger offers great value on documenting older databases because they have lower probability of having up-to-date modelling and supported tools. For new databases, diagrams are useful to prevent design flaws, improve communication, and expressiveness, but as time passes, the schema goes through frequent changes, and the diagram gets rapidly outdated. Here comes Digger, helping to socialize knowledge about the schema, making documentation available to a larger audience.</p>
 </div>
 <div class="paragraph">
 <p>Documenting seems to be boring and unnecessary in most cases. A clear naming convention and attention to database design rules would be self explanatory. However, some unorthodox decisions are made to improve performance and  corporate data dictionaries might be enforced, making it difficult to ensure readability. To cover these cases, documentation becomes as important as test automation, ensuring that developers always know how to use all parts the system. Digger helps to minimize the individual effort by making database documentation a collective effort.</p>
 </div>
 <div class="paragraph">
 <p>Documenting is also an intellectual exercise that leads to more knowledge and creativity. The more we write about the data the more insights we have about its use. When we make writing a collective effort, and not an individual struggle, the volume of new insights is exponentially higher. Digger estimates the collective effort to document data just like Wikipedia stimulates the collective effort to document the human knowledge.</p>
+</div>
 </div>
 </div>
 </div>
@@ -593,7 +656,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_installing_the_released_file">1.1. Installing the Released File</h3>
 <div class="paragraph">
-<p>A new version of Digger goes out in a weekly basis. The latest version upgrades any of the older versions, thus it is always safer to jump to the latest version because it comes with a lot of bug fixes. All versions can be found in Digger&#8217;s <a href="https://github.com/htmfilho/digger/releases">release page</a>, where you can download the latest version and install it. That is a <code>jar</code> file with the naming convention: <code>digger-&lt;version&gt;.jar</code>. For example: <code>digger-1.3.0.jar</code>.</p>
+<p>New versions of Digger are published in the <a href="https://github.com/htmfilho/digger/releases">release page</a>. If you have an old version installed you can fearlessly upgrade it to the newest version. Download the latest version - which is a <code>jar</code> file with the naming convention <code>digger-&lt;version&gt;.jar</code> - and go for a standalone or a server installation as explained below.</p>
 </div>
 <div class="sect3">
 <h4 id="_standalone_installation">1.1.1. Standalone Installation</h4>
@@ -672,7 +735,7 @@ spring.datasource.password=secret</pre>
 <div class="sect2">
 <h3 id="_installing_from_source">1.2. Installing From Source</h3>
 <div class="paragraph">
-<p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from source. To do it, you need:</p>
+<p>A new version of Digger is released from time to time, but if you can&#8217;t wait for a feature that was just finished, then you may need to build Digger from the source. To do it, you need:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -696,7 +759,10 @@ spring.datasource.password=secret</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then build the project:</p>
+<p><code>git clone</code> fetches the entire repository to the local machine, all commits since day 1. Every clone is a copy of the entire repo. If the server is lost, the repo can be easily recovered from the most updated copy.</p>
+</div>
+<div class="paragraph">
+<p>Build the project:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -724,7 +790,7 @@ $ mvn package</pre>
 <p>If you already have Digger installed, just put the generated jar file in the same folder of the existing installation and remove the old jar. Execute the new jar from that point on.</p>
 </div>
 <div class="paragraph">
-<p>You can also get all subsequent changes whenever they are available by fetching updates:</p>
+<p>You can also get all subsequent changes whenever they are available by merging the remote master branch into the local master branch:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -745,15 +811,14 @@ $ mvn package</pre>
 <div class="paragraph">
 <p>Sometime, we spend so much time documenting database schemes that we want Digger to be constantly available. We also want it to restart with the operating system in case it needs to boot. Digger can be configured to start as a local service to address these cases. This facility to run applications as a service is available in most operating systems.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_a_linux_service">1.4. A Linux Service</h3>
+<div class="sect3">
+<h4 id="_a_linux_service">1.3.1. A Linux Service</h4>
 <div class="paragraph">
 <p>On Linux, a service for Digger is configured by creating a new service file <code>digger.service</code> at <code>/etc/systemd/system</code> with the following content:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-toml" data-lang="toml">[Unit]
+<pre>[Unit]
 Description = Digger - Database Schema Documentation Tool
 
 [Service]
@@ -766,7 +831,7 @@ StandardError=syslog+console
 ExecStart=/usr/bin/java -jar /opt/digger/digger-standalone.jar
 
 [Install]
-WantedBy=multi-user.target</code></pre>
+WantedBy=multi-user.target</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -779,8 +844,8 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_a_windows_service">1.5. A Windows Service</h3>
+<div class="sect3">
+<h4 id="_a_windows_service">1.3.2. A Windows Service</h4>
 <div class="paragraph">
 <p>On Windows 10, a service for Digger is configured as follows:</p>
 </div>
@@ -807,7 +872,7 @@ $ sudo systemctl enable digger.service</pre>
 <p>save the file in the dedicated folder and rename it to <code>digger-service.exe</code></p>
 </li>
 <li>
-<p>create an XML file in the same folder, name it as <code>digger-service.xml</code>, and put the following content in it:</p>
+<p>create an XML file in the same folder, name it <code>digger-service.xml</code>, and put the following content in it:</p>
 <div class="literalblock">
 <div class="content">
 <pre>&lt;service&gt;
@@ -830,6 +895,34 @@ $ sudo systemctl enable digger.service</pre>
 </div>
 </li>
 </ol>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_the_postgresql_database">1.4. Creating the PostgreSQL Database</h3>
+<div class="sect3">
+<h4 id="_on_linux">1.4.1. On Linux</h4>
+<div class="paragraph">
+<p>Execute the following commands to install PostgreSQL:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ sudo apt-get install postgresql
+$ sudo su - postgres -c "createuser -s $USER"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then create the database for the application:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ createdb digger
+$ createuser digger_usr -P
+$ psql -d digger
+  =# grant connect on database minimily to minimily;
+  =# \q</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1368,14 +1461,6 @@ $ mvn spring-boot:run</pre>
 <pre>$ sudo apt-get install git</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Since version 2.0, Git has adopted a new behavior to pull and push commits while in a branch. When you execute git push or git pull Git will consider pushing or pulling just for the current branch. Before, these commands would push and pull all branches. But the change to this new behavior is voluntary, not automatically imposed. So, we have to explicitly say we have to move from the old behavior to the new one. To do that, execute the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>$ git config --global push.default simple</pre>
-</div>
-</div>
 <div class="sect3">
 <h4 id="_configuring_git_to_simplify_authentication">4.6.1. Configuring Git to Simplify Authentication</h4>
 <div class="paragraph">
@@ -1395,6 +1480,16 @@ $ mvn spring-boot:run</pre>
   Enter file in which to save the key (/Users/[user]/.ssh/id_rsa): [Press enter]
   Enter passphrase (empty for no passphrase): [Type a passphrase]
   Enter same passphrase again: [Type passphrase again]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The generated keys need to be protected with the right permissions otherwise the access won&#8217;t work:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ chmod 700 ~/.ssh
+$ chmod 644 ~/.ssh/id_rsa.pub
+$ chmod 600 ~/.ssh/id_rsa</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1542,9 +1637,126 @@ $ git commit --amend</pre>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_undo_the_most_recent_commit">4.6.5. Undo the Most Recent Commit</h4>
+<div class="literalblock">
+<div class="content">
+<pre>$ git reset HEAD~</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_undo_one_or_more_commits_pushed_to_remote">4.6.6. Undo One or More Commits Pushed to Remote</h4>
+<div class="paragraph">
+<p>Update the working branch to have it as a backup:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cd ~/java/projects/digger
+$ git pull origin master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a new clone to use as workshop:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ cd ..
+$ git clone git@github.com:htmfilho/digger.git digger-temp
+$ cd digger-temp</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Look at the log to see the id of the latest valid commit:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git log</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Force the head of the tree to point to the latest valid commit:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git reset –hard 73d48037</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Force the new head into the remote branch (origin):</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git push –force origin master</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The clients that still have the old commits should update their local branches accordingly before the next push:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git reset –hard origin/master</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_remove_a_file_from_the_repository_without_deleting_it">4.6.7. Remove a File From the Repository Without Deleting It</h4>
+<div class="paragraph">
+<p>For a single file:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git rm --cached mylogfile.log</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a single directory:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git rm --cached -r logs</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_restore_a_deleted_branch">4.6.8. Restore a Deleted Branch</h4>
+<div class="paragraph">
+<p>The follow commands recover a branch that was deleted locally with the command <code>git branch -D issue-52</code>. Use <code>reflog</code> to figure out the <em>&lt;sha&gt;</em> of the deleted branch:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git reflog</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take note of the <em>&lt;sha&gt;</em> and jump into it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git checkout -b issue-52 dc4b3ff</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Look at the log to see if it contains what you are looking for:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git log</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, move to the master branch and merge the recovered branch into it:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git checkout master
+$ git merge issue-52</pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_the_release_process">The Release Process</h3>
+<h3 id="_the_release_process">4.7. The Release Process</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2193,7 +2405,7 @@ Copyright &#169; 2019-2020 Hildeberto Mendonca</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.8.0<br>
-Last updated 2020-07-11 08:44:53 -0400
+Last updated 2020-11-21 19:40:47 -0500
 </div>
 </div>
 </body>
