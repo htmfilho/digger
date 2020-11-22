@@ -213,7 +213,7 @@ Then create the database for the application:
     $ createdb digger
     $ createuser digger_usr -P
     $ psql -d digger
-      =# grant connect on database minimily to minimily;
+      =# grant connect on database digger to digger_usr;
       =# \q
 
 == Security
