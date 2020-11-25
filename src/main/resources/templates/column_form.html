@@ -50,9 +50,10 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="default">Default Value</label>
-                            <div id="default-label">-</div>
-                            <input type="hidden" name="defaultValue" id="default">
+                            <label for="sensitive">Sensitive</label>
+                            <div>
+                                <input type="checkbox" id="sensitive" name="sensitive" th:checked="${column.sensitive}">
+                            </div>
                         </div>
                     </div>
                 </div>

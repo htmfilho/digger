@@ -64,7 +64,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="defaultValue">Nullable</label>
-                        <div id="nullable" th:utext="${column.nullable}"></div>
+                        <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${column.nullable})}"></div>
                     </div>
                 </div>
                 <div class="col-4">
@@ -78,29 +78,44 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label>Primary Key</label><br>
-                        <div id="primaryKey" th:utext="*{column.primaryKey}?: 'false'"></div>
+                        <label>Primary Key</label>
+                        <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${column.primaryKey})}"></div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-8">
                     <div class="form-group">
-                        <label>Foreign Table</label><br>
-                        <img src="/images/table-small.svg">
-                        <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}" 
-                           th:utext="${column.foreignKey.table}" id="foreign-table-link" 
-                           th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <label>Foreign Column</label><br>
-                        <img src="/images/key.svg">
-                        <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}" 
-                           th:utext="${column.foreignKey}" id="foreign-column-link" 
-                           th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
+                        <label>Sensitive</label><br>
+                        <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${column.sensitive})}"></div>
                     </div>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-header"><b>Foreign Reference</b></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Table</label><br>
+                                <img src="/images/table-small.svg">
+                                <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}"
+                                   th:utext="${column.foreignKey.table}" id="foreign-table-link"
+                                   th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Column</label><br>
+                                <img src="/images/key.svg">
+                                <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}"
+                                   th:utext="${column.foreignKey}" id="foreign-column-link"
+                                   th:unless="${#lists.isEmpty(column.foreignKey)}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
 
             <div class="card">
                 <div class="card-header"><b>Documentation</b></div>

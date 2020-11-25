@@ -48,6 +48,9 @@ public class Column implements Comparable<Column> {
     @javax.persistence.Column
     private Boolean primaryKey;
 
+    @javax.persistence.Column
+    private Boolean sensitive;
+
     @javax.persistence.Column(name = "default_value")
     private String defaultValue;
 
@@ -141,6 +144,14 @@ public class Column implements Comparable<Column> {
 
     public void setPrimaryKey(Boolean primaryKey) {
         this.primaryKey = primaryKey;
+    }
+
+    public Boolean getSensitive() {
+        return this.sensitive;
+    }
+
+    public void setSensitive(Boolean sensitive) {
+        this.sensitive = sensitive;
     }
 
     public String getDefaultValue() {
