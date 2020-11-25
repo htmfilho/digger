@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.8.0</span>
+<span id="revnumber">version 1.9.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -920,7 +920,7 @@ $ sudo su - postgres -c "createuser -s $USER"</pre>
 <pre>$ createdb digger
 $ createuser digger_usr -P
 $ psql -d digger
-  =# grant connect on database minimily to minimily;
+  =# grant connect on database digger to digger_usr;
   =# \q</pre>
 </div>
 </div>
@@ -1264,6 +1264,9 @@ $ psql -d digger
 </div>
 <div class="paragraph">
 <p>If the column is a foreign key, select the reference table and the column that the key points to. The documentation of the selection is presented right below to assist on the documentation of the current field.</p>
+</div>
+<div class="paragraph">
+<p>Many nations are implementing laws to protect data of their citizens. These data sit in databases fenced by applications that try to ensure their protection, specially values that are considered sensitive, such names, emails, phones, addresses and everything else that can be used to identify people. Check the field <strong>Sensitive</strong> to explicitly document the columns that contain sensitive data so developers are twice as careful while manipulating them.</p>
 </div>
 <div class="paragraph">
 <p>Finally, describe in details what the field is useful for, why it is important for the business, exceptional cases, historical decisions, etc.</p>
@@ -2427,8 +2430,8 @@ Copyright &#169; 2019-2020 Hildeberto Mendonca</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.8.0<br>
-Last updated 2020-11-21 19:46:27 -0500
+Version 1.9.0<br>
+Last updated 2020-11-25 09:34:15 -0500
 </div>
 </div>
 </body>

@@ -1,6 +1,6 @@
 ﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.8.0
+v1.9.0
 :doctype: book
 :pdf-page-size: LETTER
 :encoding: utf-8
@@ -417,6 +417,8 @@ Columns are certainly the most important elements to be documented. They are lar
 To document a column of a table, go to the table that the column belongs to, go to the *Columns* tab and click on the *New* button on the right. Fill in the form by selecting the *Physical Name*, writing a human friendly name that is equivalent to the physical name, and verify the fields that are automatically filled.
 
 If the column is a foreign key, select the reference table and the column that the key points to. The documentation of the selection is presented right below to assist on the documentation of the current field.
+
+Many nations are implementing laws to protect data of their citizens. These data sit in databases fenced by applications that try to ensure their protection, specially values that are considered sensitive, such names, emails, phones, addresses and everything else that can be used to identify people. Check the field *Sensitive* to explicitly document the columns that contain sensitive data so developers are twice as careful while manipulating them.
 
 Finally, describe in details what the field is useful for, why it is important for the business, exceptional cases, historical decisions, etc.
 
