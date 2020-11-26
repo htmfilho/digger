@@ -139,6 +139,9 @@ public class Column implements Comparable<Column> {
     }
 
     public Boolean getPrimaryKey() {
+        if(this.primaryKey == null)
+            return false;
+
         return this.primaryKey;
     }
 
@@ -147,6 +150,9 @@ public class Column implements Comparable<Column> {
     }
 
     public Boolean getSensitive() {
+        if (this.sensitive == null)
+            return false;
+
         return this.sensitive;
     }
 
