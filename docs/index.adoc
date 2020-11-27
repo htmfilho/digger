@@ -622,6 +622,12 @@ or change a local configuration to make it the default `pull` behavior:
     
 Note: you don't need to run this local configuration if you already have it globally.
 
+==== Pruning Deleted Remote Branches
+
+When branches are removed from origin, this change is not automatically reflected in the local clone when doing a git pull or git fetch. To have deleted remote branches automatically pruned from the local repo, set the following config:
+
+    $ git config --global fetch.prune true
+
 ==== Changing Several Commits in Bulk
 
 If commits were done with a wrong author, use Git Rebase to fix the authors of the commits:
