@@ -874,7 +874,7 @@ To do so, attach the following notices to the program. It is safest to attach th
 
 ====
 Digger +
-Copyright (C) 2019-2020 Hildeberto Mendonca
+Copyright (C) 2019-2021 Hildeberto Mendonca
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -889,7 +889,7 @@ If the program does terminal interaction, make it output a short notice like thi
 
 ====
 Digger +
-Copyright (C) 2019-2020 Hildeberto Mendonca
+Copyright (C) 2019-2021 Hildeberto Mendonca
 
 This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'. This is free software, and you are welcome to redistribute it under certain conditions; type `show c' for details.
 ====
