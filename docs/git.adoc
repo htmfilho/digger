@@ -118,6 +118,8 @@ If commits were done with a wrong author, use Git Rebase to fix the authors of t
     $ git rebase --continue
     $ git push -f origin master
 
+The rebase starts from the commit after the informed `<commit-id>`. It wouldn't work if the rebase needs to consider the very first commit. To include the first commit, start an interactive rebase of all commits using `git rebase -i --root`.
+
 ==== Change the Most Recent Commit Message
 
 The command below will open the text editor where we can change the commit message:
