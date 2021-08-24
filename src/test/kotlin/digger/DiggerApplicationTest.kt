@@ -14,15 +14,16 @@
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
 
-package digger;
+package digger
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootApplication
-public class DiggerApplication {
+@SpringBootTest
+class DiggerApplicationTest {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DiggerApplication.class, args);
+    @Test
+    fun mainTest() {
+        main(arrayOf("--spring.main.web-environment=false"))
     }
 }
