@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Hildeberto Mendonca</span><br>
 <span id="email" class="email"><a href="mailto:me@hildeberto.com">me@hildeberto.com</a></span><br>
-<span id="revnumber">version 1.9.0</span>
+<span id="revnumber">version 1.9.1</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -542,11 +542,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_setting_pull_behaviour">4.6.3. Setting Pull Behaviour</a></li>
 <li><a href="#_pruning_deleted_remote_branches">4.6.4. Pruning Deleted Remote Branches</a></li>
 <li><a href="#_changing_several_commits_in_bulk">4.6.5. Changing Several Commits in Bulk</a></li>
-<li><a href="#_adding_a_file_to_the_most_recent_commit">4.6.6. Adding a File to the Most Recent Commit</a></li>
-<li><a href="#_undo_the_most_recent_commit">4.6.7. Undo the Most Recent Commit</a></li>
-<li><a href="#_undo_one_or_more_commits_pushed_to_remote">4.6.8. Undo One or More Commits Pushed to Remote</a></li>
-<li><a href="#_remove_a_file_from_the_repository_without_deleting_it">4.6.9. Remove a File From the Repository Without Deleting It</a></li>
-<li><a href="#_restore_a_deleted_branch">4.6.10. Restore a Deleted Branch</a></li>
+<li><a href="#_change_the_most_recent_commit_message">4.6.6. Change the Most Recent Commit Message</a></li>
+<li><a href="#_adding_a_file_to_the_most_recent_commit">4.6.7. Adding a File to the Most Recent Commit</a></li>
+<li><a href="#_undo_the_most_recent_commit">4.6.8. Undo the Most Recent Commit</a></li>
+<li><a href="#_undo_one_or_more_commits_pushed_to_remote">4.6.9. Undo One or More Commits Pushed to Remote</a></li>
+<li><a href="#_remove_a_file_from_the_repository_without_deleting_it">4.6.10. Remove a File From the Repository Without Deleting It</a></li>
+<li><a href="#_restore_a_deleted_branch">4.6.11. Restore a Deleted Branch</a></li>
 </ul>
 </li>
 <li><a href="#_the_release_process">4.7. The Release Process</a></li>
@@ -1665,9 +1666,23 @@ $ git rebase --continue
 $ git push -f origin master</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The rebase starts from the commit after the informed <code>&lt;commit-id&gt;</code>. It wouldn&#8217;t work if the rebase needs to consider the very first commit. To include the first commit, start an interactive rebase of all commits using <code>git rebase -i --root</code>.</p>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_adding_a_file_to_the_most_recent_commit">4.6.6. Adding a File to the Most Recent Commit</h4>
+<h4 id="_change_the_most_recent_commit_message">4.6.6. Change the Most Recent Commit Message</h4>
+<div class="paragraph">
+<p>The command below will open the text editor where we can change the commit message:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ git commit --amend</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_adding_a_file_to_the_most_recent_commit">4.6.7. Adding a File to the Most Recent Commit</h4>
 <div class="literalblock">
 <div class="content">
 <pre>$ git add missed-file.txt
@@ -1676,7 +1691,7 @@ $ git commit --amend</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_undo_the_most_recent_commit">4.6.7. Undo the Most Recent Commit</h4>
+<h4 id="_undo_the_most_recent_commit">4.6.8. Undo the Most Recent Commit</h4>
 <div class="literalblock">
 <div class="content">
 <pre>$ git reset HEAD~</pre>
@@ -1684,7 +1699,7 @@ $ git commit --amend</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_undo_one_or_more_commits_pushed_to_remote">4.6.8. Undo One or More Commits Pushed to Remote</h4>
+<h4 id="_undo_one_or_more_commits_pushed_to_remote">4.6.9. Undo One or More Commits Pushed to Remote</h4>
 <div class="paragraph">
 <p>Update the working branch to have it as a backup:</p>
 </div>
@@ -1738,7 +1753,7 @@ $ cd digger-temp</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_remove_a_file_from_the_repository_without_deleting_it">4.6.9. Remove a File From the Repository Without Deleting It</h4>
+<h4 id="_remove_a_file_from_the_repository_without_deleting_it">4.6.10. Remove a File From the Repository Without Deleting It</h4>
 <div class="paragraph">
 <p>For a single file:</p>
 </div>
@@ -1757,7 +1772,7 @@ $ cd digger-temp</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_restore_a_deleted_branch">4.6.10. Restore a Deleted Branch</h4>
+<h4 id="_restore_a_deleted_branch">4.6.11. Restore a Deleted Branch</h4>
 <div class="paragraph">
 <p>The follow commands recover a branch that was deleted locally with the command <code>git branch -D issue-52</code>. Use <code>reflog</code> to figure out the <em>&lt;sha&gt;</em> of the deleted branch:</p>
 </div>
@@ -2442,8 +2457,8 @@ Copyright &#169; 2019-2021 Hildeberto Mendonca</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.9.0<br>
-Last updated 2021-02-05 08:52:00 -0500
+Version 1.9.1<br>
+Last updated 2021-12-19 09:39:27 -0500
 </div>
 </div>
 </body>
