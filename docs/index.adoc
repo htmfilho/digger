@@ -487,7 +487,9 @@ Where `test` is the name of the profile.
 
 === Data Model
 
-The data managed by Digger is persisted in a relational database. If you launched Digger as is, without changing the configuration, you are using the embedded database https://www.h2database.com[H2]. If you are using the server configuration then you are using https://www.postgresql.org/[PostgreSQL]. The data is organized according to the following diagram.
+The data managed by Digger is persisted in a relational database. If you launched Digger as is, without changing the configuration, you are using the embedded database https://www.h2database.com[H2]. If you are using the server configuration then you are using https://www.postgresql.org/[PostgreSQL]. We do not recommend using the embedded H2 database in production. We normally use it for automated tests and evaluation only.
+
+The data is organized according to the following diagram.
 
 .Digger's Entity Relational Model
 image::images/entity-relationship-diagram.png[]
