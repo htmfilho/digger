@@ -1393,7 +1393,10 @@ $ mvn spring-boot:run</pre>
 <div class="sect2">
 <h3 id="_data_model">4.3. Data Model</h3>
 <div class="paragraph">
-<p>The data managed by Digger is persisted in a relational database. If you launched Digger as is, without changing the configuration, you are using the embedded database <a href="https://www.h2database.com">H2</a>. If you are using the server configuration then you are using <a href="https://www.postgresql.org/">PostgreSQL</a>. The data is organized according to the following diagram.</p>
+<p>The data managed by Digger is persisted in a relational database. If you launched Digger as is, without changing the configuration, you are using the embedded database <a href="https://www.h2database.com">H2</a>. If you are using the server configuration then you are using <a href="https://www.postgresql.org/">PostgreSQL</a>. We do not recommend using the embedded H2 database in production. We normally use it for automated tests and evaluation only.</p>
+</div>
+<div class="paragraph">
+<p>The data is organized according to the following diagram.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2458,7 +2461,7 @@ Copyright &#169; 2019-2021 Hildeberto Mendonca</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.9.1<br>
-Last updated 2021-12-19 09:39:27 -0500
+Last updated 2021-12-20 15:47:05 -0500
 </div>
 </div>
 </body>
