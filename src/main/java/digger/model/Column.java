@@ -17,6 +17,7 @@
 package digger.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @javax.persistence.Table(name = "table_column")
@@ -209,6 +210,6 @@ public class Column implements Comparable<Column> {
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
 
-        return this.id == another.id;
+        return Objects.equals(this.id, another.id);
     }
 }

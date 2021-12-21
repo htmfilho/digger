@@ -31,7 +31,7 @@ public class Asciidoc {
 
     public Asciidoc() {
         this.asciidoctor = Factory.create();
-        this.options = new HashMap<String, Object>();
+        this.options = new HashMap<>();
     }
 
     public String toHtml(final String asciidoc) {

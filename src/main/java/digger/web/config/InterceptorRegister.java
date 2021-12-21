@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Component
 public class InterceptorRegister implements WebMvcConfigurer {
 
-    private LoggerInterceptor loggerInterceptor;
+    private final LoggerInterceptor loggerInterceptor;
 
     public InterceptorRegister(LoggerInterceptor loggerInterceptor) {
         this.loggerInterceptor = loggerInterceptor;

@@ -28,7 +28,7 @@ public class UserDTO {
     private Boolean enabled;
     private String mainRole;
 
-    // This empty constructor is used by String to unserialize data from the user interface.
+    // This empty constructor is used by String to deserialize data from the user interface.
     public UserDTO() {}
 
     public UserDTO(long id, String firstName, String lastName, String username, Boolean enabled, String mainRole) {

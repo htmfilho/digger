@@ -20,7 +20,7 @@ import digger.model.User;
 public class RoleAssignmentException extends RuntimeException {
     
     private static final long serialVersionUID = 1L;
-    private User user;
+    private final User user;
 
     public RoleAssignmentException(String message, User user) {
         super(message);

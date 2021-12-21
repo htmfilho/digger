@@ -21,7 +21,7 @@ import digger.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,11 +29,11 @@ import javax.servlet.http.HttpSession;
 import java.util.Enumeration;
 
 @Component
-public class LoggerInterceptor extends HandlerInterceptorAdapter {
+public class LoggerInterceptor implements HandlerInterceptor {
 
     private final static Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public LoggerInterceptor(UserRepository userRepository) {
         this.userRepository = userRepository;

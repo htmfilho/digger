@@ -24,6 +24,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name = "ignored_table")
@@ -108,6 +109,6 @@ public class IgnoredTable implements Comparable<IgnoredTable> {
         if(this.name != null && another.name != null)
             return this.name.trim().equals(another.name.trim());
         else
-            return this.id == another.id;
+            return Objects.equals(this.id, another.id);
     }
 }

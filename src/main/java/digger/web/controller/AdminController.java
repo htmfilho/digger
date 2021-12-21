@@ -34,9 +34,6 @@ import digger.service.RoleService;
 import digger.service.UserService;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Controller
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
