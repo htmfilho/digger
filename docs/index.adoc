@@ -461,7 +461,7 @@ Follow these instructions if you want to contribute to Digger.
 
 We assume your development environment is configured with:
 
- - **Java 8+**: you can perform the commands `java` and `javac` in your terminal
+ - **Java 11+**: you can perform the commands `java` and `javac` in your terminal
  - **Maven 3**: you can perform the command `mvn` in your terminal
  - **Git**: you can perform the command `git` in your terminal
 
