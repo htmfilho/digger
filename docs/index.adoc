@@ -8,7 +8,7 @@ v1.9.1
 :toclevels: 3
 :numbered:
 
-> Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization."
+> Digger is a light-weight web application to centralize and share the accumulated collective knowledge about all the relational databases of the organization.
 
 :sectnums!:
 
