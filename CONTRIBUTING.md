@@ -1,6 +1,8 @@
 # How to Contribute
 
-## Did you find a bug?
+## Common Scenarions
+
+### Did you find a bug?
 
 * **Do not open up a GitHub issue if the bug is a security vulnerability**. Instead, send a direct email to me@hildeberto.com.
 
@@ -10,20 +12,20 @@
 
 * If possible, use the relevant bug report templates to create the issue.
 
-## Did you write a patch that fixes a bug?
+### Did you write a patch that fixes a bug?
 
 * Open a new GitHub pull request with the patch.
 
 * Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
 
-## Do you intend to add a new feature or change an existing one?
+### Do you intend to add a new feature or change an existing one?
 
 * Suggest your change in an enhancement issue. When you have a green light from the community, go ahead and start writing code.
 
-## Do you have questions about the source code?
+### Do you have questions about the source code?
 
 * Ask any question about how to use SpitFHIR by creating an issue and tag it with "question".
 
-## Do you want to contribute to the Rails documentation?
+### Do you want to contribute to the Rails documentation?
 
 If you tried to proceed according to the documentation and something didn't go as expected, please suggest improvements in the documentation to cover your particular use case.
