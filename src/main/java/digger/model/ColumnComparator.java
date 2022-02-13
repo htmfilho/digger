@@ -14,9 +14,7 @@
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
 
-package digger.service.impl;
-
-import digger.model.Column;
+package digger.model;
 
 import java.util.Comparator;
 

@@ -17,6 +17,7 @@
 package digger.service.impl;
 
 import digger.model.Column;
+import digger.model.ColumnComparator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -17,6 +17,7 @@
 package digger.service.impl;
 
 import digger.model.Column;
+import digger.model.ColumnComparator;
 import digger.model.Datasource;
 import digger.model.Table;
 import digger.repository.ColumnRepository;
