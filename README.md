@@ -20,7 +20,7 @@ To learn how to install, configure and use Digger, please follow the [User Guide
 
 [GPL] - GNU GENERAL PUBLIC LICENSE Version 3
 
-Copyright (C) 2019-2021 Hildeberto Mendonca
+Copyright (C) 2019-2022 Hildeberto Mendonca
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

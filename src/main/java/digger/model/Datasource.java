@@ -1,6 +1,6 @@
 /*
  * Digger
- * Copyright (C) 2019-2021 Hildeberto Mendonca
+ * Copyright (C) 2019-2022 Hildeberto Mendonca
  *
  * This program is free software: you can redistribute it and/or modify it under the terms
  * of the GNU General Public License as published by the Free Software Foundation,
@@ -23,7 +23,7 @@ import javax.persistence.Column;
 public class Datasource {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column
