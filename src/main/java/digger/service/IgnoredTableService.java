@@ -26,6 +26,8 @@ public interface IgnoredTableService {
 
     IgnoredTable findById(Long id);
 
+    Long countAll();
+
     int getTotalIgnoredTable(Datasource datasource);
 
     List<IgnoredTable> findByDatasource(Datasource datasource);

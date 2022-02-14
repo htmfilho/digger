@@ -25,6 +25,8 @@ import java.util.List;
 public interface ColumnRepository extends Repository<Column, Long> {
     Column findById(Long id);
 
+    Long count();
+
     List<Column> findByTable(Table table);
     List<Column> findByForeignKey(Column foreignKey);
     List<Column> findByForeignKeyIn(List<Column> columns);

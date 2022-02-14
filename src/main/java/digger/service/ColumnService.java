@@ -33,7 +33,9 @@ public interface ColumnService {
     List<Column> findByForeignKey(Column foreignKey);
     List<Column> findByForeignKeyIn(List<Column> columns);
 
+    Long countAll();
     Integer countDocumentedColumns(Table table);
+
     Integer calculateProgress(Table table);
 
     void save(Column column);

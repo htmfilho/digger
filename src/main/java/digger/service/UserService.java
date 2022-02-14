@@ -28,6 +28,8 @@ public interface UserService {
     digger.model.User findByUsername(String username);
     digger.model.User changePassword(digger.model.User user, String newPassword);
 
+    Long countAll();
+
     List<digger.model.User> findAll();
 
     void save(digger.model.User user);

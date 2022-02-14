@@ -63,6 +63,18 @@ public class AdminController {
         return "admin/users";
     }
 
+    @GetMapping("/admin/storage")
+    public String viewStorage(Model model) {
+        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
+        model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
+        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
+        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"));
+        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"));
+
+        return "admin/storage";
+    }
+
     @GetMapping("/admin/environment")
     public String viewEnvironment(Model model) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-environment");

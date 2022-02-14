@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.countAllByEnabled(true) == 0;
     }
 
+    public Long countAll() {
+        return userRepository.count();
+    }
+
     public List<User> findAll() {
         return userRepository.findAllByOrderByUsernameAsc();
     }

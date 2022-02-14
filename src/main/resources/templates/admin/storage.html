@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+       <title>Storage - Administration - Digger</title>
+    </head>
+
+    <body>
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg"></a></li>
+                    <li class="breadcrumb-item"><a href="/admin">Administration</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Storage</li>
+                </ol>
+            </nav>
+
+            <h1>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16">
+                    <path d="M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z"/>
+                    <path d="M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334a6.51 6.51 0 0 1-1.458.79C11.81 7.684 9.967 8 8 8c-1.966 0-3.809-.317-5.208-.876a6.508 6.508 0 0 1-1.458-.79z"/>
+                    <path d="M14.667 11.668a6.51 6.51 0 0 1-1.458.789c-1.4.56-3.242.876-5.21.876-1.966 0-3.809-.316-5.208-.876a6.51 6.51 0 0 1-1.458-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667v-1.665z"/>
+                </svg>
+                Storage
+            </h1>
+
+            <br>
+            <h2>Properties</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Property</th>
+                        <th scope="col">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>spring.liquibase.enabled</td>
+                        <td><span th:text="${springLiquibaseEnabled}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.datasource.driver-class-name</td>
+                        <td><span th:text="${springDatasourceDriverClassName}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.datasource.url</td>
+                        <td><span th:text="${springDatasourceUrl}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.datasource.username</td>
+                        <td><span th:text="${springDatasourceUsername}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.jpa.hibernate.ddl-auto</td>
+                        <td><span th:text="${springJpaHibernateDdlAuto}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>spring.jpa.show-sql</td>
+                        <td><span th:text="${springJpaShowSql}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Tables</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Records</th>
+                    </tr>
+                </thead>
+                <tbody id="storage-table"></tbody>
+            </table>
+
+            <br>
+            <a href="/api/admin/storage/backup" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-arrow-down-fill" viewBox="0 0 16 16">
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8 5a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5A.5.5 0 0 1 8 5z"/>
+                </svg> Backup</a>
+            <a href="/api/admin/storage/restore" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-arrow-up-fill" viewBox="0 0 16 16">
+                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM7.5 6.707 6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707z"/>
+                </svg> Restore</a>
+        </section>
+    </body>
+</html>

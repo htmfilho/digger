@@ -23,6 +23,8 @@ import java.util.List;
 
 public interface DatasourceRepository extends Repository<Datasource, Long> {
     Datasource findById(Long id);
+
+    Long count();
     
     List<Datasource> findAllByOrderByName();
     

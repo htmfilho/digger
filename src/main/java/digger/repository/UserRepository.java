@@ -23,6 +23,7 @@ import java.util.List;
 import org.springframework.data.repository.Repository;
 
 public interface UserRepository extends Repository<User, Long> {
+    Long count();
     Long countAllByEnabled(Boolean enabled);
     
     User findById(long id);

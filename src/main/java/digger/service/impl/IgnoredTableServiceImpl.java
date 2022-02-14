@@ -53,6 +53,10 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         return ignoredTableRepository.findByDatasourceOrderByNameAsc(datasource);
     }
 
+    public Long countAll() {
+        return ignoredTableRepository.count();
+    }
+
     public int getTotalIgnoredTable(final Datasource datasource) {
         return findByDatasource(datasource).size();
     }

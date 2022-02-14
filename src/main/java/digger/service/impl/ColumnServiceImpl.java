@@ -142,6 +142,10 @@ public class ColumnServiceImpl implements ColumnService {
         logger.info("Deleted the column with id {}", columnId);
     }
 
+    public Long countAll() {
+        return columnRepository.count();
+    }
+
     public Column findById(final Long id) {
         if(id != null)
             return columnRepository.findById(id);

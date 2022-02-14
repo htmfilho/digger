@@ -24,6 +24,8 @@ import java.util.List;
 
 public interface TableRepository extends Repository<Table, Long> {
     Table findById(Long id);
+
+    Long count();
     
     List<Table> findByDatasourceOrderByNameAsc(Datasource datasource);
     

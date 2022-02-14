@@ -102,6 +102,20 @@ $(function() {
     }
 });
 
+// storage.html
+$(function() {
+    if ($("#storage-table").length != 0) {
+        $.ajax({
+            url: "/api/admin/storage",
+            success: function(result) {
+                result.forEach(element => {
+                    $("#storage-table").append('<tr><td>'+ element.tableName +'</td><td>'+ element.numRecords +'</td></tr>');
+                });
+            }
+        });
+    }
+});
+
 // users.html
 $(function() {
     if ($("#users").length != 0) {

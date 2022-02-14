@@ -21,6 +21,7 @@ import org.springframework.data.repository.Repository;
 import digger.model.Role;
 
 public interface RoleRepository extends Repository<Role, Long> {
+    Long count();
     Long countAllByAuthority(String authority);
     
     Role findByUsername(String username);

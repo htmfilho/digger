@@ -110,6 +110,10 @@ public class TableServiceImpl implements TableService {
         return tableRepository.findByDatasourceOrderByNameAsc(datasource);
     }
 
+    public Long countAll() {
+        return tableRepository.count();
+    }
+
     public Integer countDocumentedTables(final Datasource datasource) {
         List<Table> documentedTables = findByDatasource(datasource);
         return documentedTables.size();

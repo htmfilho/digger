@@ -38,6 +38,10 @@ public class DatasourceServiceImpl implements DatasourceService {
         this.datasourceRepository = datasourceRepository;
     }
 
+    public Long countAll() {
+        return datasourceRepository.count();
+    }
+
     public List<Datasource> findAll() {
         return datasourceRepository.findAllByOrderByName();
     }

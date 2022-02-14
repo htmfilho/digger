@@ -30,7 +30,9 @@ public interface TableService {
     List<Table> excludeDocumentedTables(Datasource datasource, List<Table> tables, Table except);
     List<Table> findByDatasource(Datasource datasource);
 
+    Long countAll();
     Integer countDocumentedTables(Datasource datasource);
+
     Integer calculateProgress(Datasource datasource);
 
     void save(Table table);

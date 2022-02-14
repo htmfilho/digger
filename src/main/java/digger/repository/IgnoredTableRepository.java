@@ -25,6 +25,8 @@ import java.util.List;
 
 public interface IgnoredTableRepository extends Repository<IgnoredTable, Long> {
     IgnoredTable findById(Long id);
+
+    Long count();
     
     List<IgnoredTable> findByDatasourceOrderByNameAsc(Datasource datasource);
     

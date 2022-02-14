@@ -19,6 +19,7 @@ package digger.service;
 import digger.model.Role;
 
 public interface RoleService {
+    Long countAll();
     Long countAllByAuthority(String authority);
     
     Role findByUsername(String username);

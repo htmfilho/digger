@@ -14,27 +14,32 @@
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
 
-package digger.service;
+package digger.model;
 
-import digger.model.Datasource;
+public class StorageDTO {
+    private String tableName;
+    private Long numRecords;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
+    public StorageDTO() {}
 
-public interface DatasourceService {
+    public StorageDTO(String tableName, Long numRecords) {
+        this.tableName = tableName;
+        this.numRecords = numRecords;
+    }
 
-    Datasource findById(Long id);
+    public String getTableName() {
+        return tableName;
+    }
 
-    Boolean testConnection(Datasource datasource) throws SQLException;
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
 
-    Connection getConnection(Datasource datasource) throws SQLException;
+    public Long getNumRecords() {
+        return numRecords;
+    }
 
-    Long countAll();
-
-    List<Datasource> findAll();
-
-    void save(Datasource datasource);
-    void delete(Long datasourceId);
-    void updateTotalTables(Datasource datasource, Integer totalTables);
+    public void setNumRecords(Long numRecords) {
+        this.numRecords = numRecords;
+    }
 }
