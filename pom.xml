@@ -14,7 +14,7 @@
 	<artifactId>digger</artifactId>
 	<version>1.9.1</version>
 	<name>Digger</name>
-	<description>Given a datasource, allows the user to navigate in the data schema.</description>
+	<description>Document your relational database because applications go, but the database stays.</description>
 
 	<organization>
 		<name>Hildeberto.com</name>
