@@ -65,6 +65,7 @@ public class AdminController {
 
     @GetMapping("/admin/storage")
     public String viewStorage(Model model) {
+        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-storage");
         model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
         model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
         model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
