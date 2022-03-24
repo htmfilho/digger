@@ -32,6 +32,7 @@ public interface ColumnService {
     List<Column> findByTable(Table table);
     List<Column> findByForeignKey(Column foreignKey);
     List<Column> findByForeignKeyIn(List<Column> columns);
+    List<String> exportToSql();
 
     Long countAll();
     Integer countDocumentedColumns(Table table);

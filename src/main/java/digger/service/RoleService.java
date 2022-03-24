@@ -18,11 +18,15 @@ package digger.service;
 
 import digger.model.Role;
 
+import java.util.List;
+
 public interface RoleService {
     Long countAll();
     Long countAllByAuthority(String authority);
     
     Role findByUsername(String username);
+
+    List<String> exportToSql();
 
     void save(Role role);
 }

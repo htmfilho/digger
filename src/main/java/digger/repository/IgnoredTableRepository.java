@@ -24,10 +24,11 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 public interface IgnoredTableRepository extends Repository<IgnoredTable, Long> {
+    Long count();
+
     IgnoredTable findById(Long id);
 
-    Long count();
-    
+    List<IgnoredTable> findAll();
     List<IgnoredTable> findByDatasourceOrderByNameAsc(Datasource datasource);
     
     void save(IgnoredTable ignoredTable);

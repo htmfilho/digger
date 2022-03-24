@@ -19,6 +19,7 @@ package digger.model;
 import javax.persistence.*;
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -35,13 +36,16 @@ public class User {
     private String lastName;
 
     @Column
+    private Boolean enabled;
+
+    @Column
+    private Date created;
+
+    @Column
     private String username;
 
     @Column
     private String password;
-
-    @Column
-    private Boolean enabled;
 
     @Transient
     private String confirmPassword;
@@ -107,5 +111,13 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

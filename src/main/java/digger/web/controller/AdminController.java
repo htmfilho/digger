@@ -17,11 +17,14 @@
 package digger.web.controller;
 
 import digger.exception.RoleAssignmentException;
+import digger.service.AdminService;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,17 +37,25 @@ import digger.service.RoleService;
 import digger.service.UserService;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
 @Controller
 public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     private final UserService userService;
     private final RoleService roleService;
+    private final AdminService adminService;
     private final Environment environment;
 
-    public AdminController(UserService userService, RoleService roleService, Environment environment) {
+    public AdminController(UserService userService, RoleService roleService, AdminService adminService, Environment environment) {
         this.userService = userService;
         this.roleService = roleService;
+        this.adminService = adminService;
         this.environment = environment;
     }
 
@@ -66,14 +77,26 @@ public class AdminController {
     @GetMapping("/admin/storage")
     public String viewStorage(Model model) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-storage");
-        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
-        model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
-        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
-        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"));
-        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
-        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"));
+        addDatasourceAttributes(model);
 
         return "admin/storage";
+    }
+
+    @GetMapping("/admin/storage/backup")
+    public void downloadBackup(HttpServletResponse response) throws IOException {
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        response.setHeader("Content-disposition", "attachment; filename=digger-backup.sql");
+
+        List<String> sqlStatements = adminService.exportToSql();
+        StringBuilder sqlBackup = new StringBuilder();
+        for (String sqlStatement: sqlStatements) {
+            sqlBackup.append(sqlStatement);
+            sqlBackup.append("\n");
+        }
+
+        InputStream is = new ByteArrayInputStream(sqlBackup.toString().getBytes());
+        IOUtils.copy(is, response.getOutputStream());
+        response.flushBuffer();
     }
 
     @GetMapping("/admin/environment")
@@ -81,13 +104,7 @@ public class AdminController {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-environment");
 
         model.addAttribute("springProfilesActive", environment.getProperty("spring.profiles.active"));
-
-        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
-        model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
-        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
-        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"));
-        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
-        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"));
+        addDatasourceAttributes(model);
         model.addAttribute("springJpaPropertiesHibernateJdbcLobNonContextualCreation", environment.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
 
         model.addAttribute("loggingLevelRoot", environment.getProperty("logging.level.root"));
@@ -103,6 +120,15 @@ public class AdminController {
         model.addAttribute("springThymeleafCache", environment.getProperty("spring.thymeleaf.cache"));
 
         return  "admin/environment";
+    }
+
+    private void addDatasourceAttributes(Model model) {
+        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
+        model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
+        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
+        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"));
+        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"));
     }
 
     @PostMapping("/admin/users")

@@ -23,6 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RoleServiceImpl implements RoleService {
     private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
@@ -48,5 +51,26 @@ public class RoleServiceImpl implements RoleService {
     public void save(Role role) {
         this.roleRepository.save(role);
         logger.info("Assigned role {} to user {}", role.getAuthority(), role.getUsername());
+    }
+
+    public List<String> exportToSql() {
+        List<String> sqlStatements = new ArrayList<>();
+
+        List<Role> allRoles = roleRepository.findAll();
+        for (Role role: allRoles) {
+            StringBuilder sqlStatement = new StringBuilder();
+            sqlStatement.append("insert into authorities (id, username, authority, created) values (");
+            sqlStatement.append(role.getId());
+            sqlStatement.append(",'");
+            sqlStatement.append(role.getUsername());
+            sqlStatement.append("','");
+            sqlStatement.append(role.getAuthority());
+            sqlStatement.append("','");
+            sqlStatement.append(role.getCreated());
+            sqlStatement.append("');");
+            sqlStatements.add(sqlStatement.toString());
+        }
+        sqlStatements.add("\n");
+        return sqlStatements;
     }
 }

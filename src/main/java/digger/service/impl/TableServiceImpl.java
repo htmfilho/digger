@@ -126,4 +126,31 @@ public class TableServiceImpl implements TableService {
         else
             return 0;
     }
+
+    public List<String> exportToSql() {
+        List<String> sqlStatements = new ArrayList<>();
+
+        List<Table> allTables = tableRepository.findAll();
+        for (Table table: allTables) {
+            StringBuilder sqlStatement = new StringBuilder();
+            sqlStatement.append("insert into database_table (id, datasource, name, friendly_name, type, documentation, total_columns) values (");
+            sqlStatement.append(table.getId());
+            sqlStatement.append(",");
+            sqlStatement.append(table.getDatasource().getId());
+            sqlStatement.append(",'");
+            sqlStatement.append(table.getName());
+            sqlStatement.append("','");
+            sqlStatement.append(table.getFriendlyName());
+            sqlStatement.append("','");
+            sqlStatement.append(table.getType());
+            sqlStatement.append("','");
+            sqlStatement.append(table.getDocumentation());
+            sqlStatement.append("',");
+            sqlStatement.append(table.getTotalColumns());
+            sqlStatement.append(");");
+            sqlStatements.add(sqlStatement.toString());
+        }
+        sqlStatements.add("\n");
+        return sqlStatements;
+    }
 }

@@ -79,4 +79,23 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         }
         return tables;
     }
+
+    public List<String> exportToSql() {
+        List<String> sqlStatements = new ArrayList<>();
+
+        List<IgnoredTable> allIgnoredTables = ignoredTableRepository.findAll();
+        for (IgnoredTable ignoredTable: allIgnoredTables) {
+            StringBuilder sqlStatement = new StringBuilder();
+            sqlStatement.append("insert into ignored_table (id, datasource, name) values (");
+            sqlStatement.append(ignoredTable.getId());
+            sqlStatement.append(",");
+            sqlStatement.append(ignoredTable.getDatasource().getId());
+            sqlStatement.append(",'");
+            sqlStatement.append(ignoredTable.getName());
+            sqlStatement.append("');");
+            sqlStatements.add(sqlStatement.toString());
+        }
+        sqlStatements.add("\n");
+        return sqlStatements;
+    }
 }

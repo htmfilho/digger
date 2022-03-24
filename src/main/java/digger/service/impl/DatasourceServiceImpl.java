@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -86,5 +87,34 @@ public class DatasourceServiceImpl implements DatasourceService {
             throw se;
         }
         return null;
+    }
+
+    public List<String> exportToSql() {
+        List<String> sqlStatements = new ArrayList<>();
+
+        List<Datasource> allDatasources = datasourceRepository.findAll();
+        for (Datasource datasource: allDatasources) {
+            StringBuilder sqlStatement = new StringBuilder();
+            sqlStatement.append("insert into datasource (id, name, description, driver, url, username, password, total_tables) values (");
+            sqlStatement.append(datasource.getId());
+            sqlStatement.append(",'");
+            sqlStatement.append(datasource.getName());
+            sqlStatement.append("','");
+            sqlStatement.append(datasource.getDescription());
+            sqlStatement.append("','");
+            sqlStatement.append(datasource.getDriver());
+            sqlStatement.append("','");
+            sqlStatement.append(datasource.getUrl());
+            sqlStatement.append("','");
+            sqlStatement.append(datasource.getUsername());
+            sqlStatement.append("','");
+            sqlStatement.append(datasource.getPassword());
+            sqlStatement.append("',");
+            sqlStatement.append(datasource.getTotalTables());
+            sqlStatement.append(");");
+            sqlStatements.add(sqlStatement.toString());
+        }
+        sqlStatements.add("\n");
+        return sqlStatements;
     }
 }

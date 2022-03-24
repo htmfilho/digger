@@ -32,6 +32,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -137,5 +138,32 @@ public class UserServiceImpl implements UserService {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         user.setPassword(passwordEncoder.encode(newPassword));
         return user;
+    }
+
+    public List<String> exportToSql() {
+        List<String> sqlStatements = new ArrayList<>();
+
+        List<User> allUsers = userRepository.findAll();
+        for (User user: allUsers) {
+            StringBuilder sqlStatement = new StringBuilder();
+            sqlStatement.append("insert into users (id, username, password, enabled, created, first_name, last_name) values (");
+            sqlStatement.append(user.getId());
+            sqlStatement.append(",'");
+            sqlStatement.append(user.getUsername());
+            sqlStatement.append("','");
+            sqlStatement.append(user.getPassword());
+            sqlStatement.append("', ");
+            sqlStatement.append(user.getEnabled());
+            sqlStatement.append(",'");
+            sqlStatement.append(user.getCreated());
+            sqlStatement.append("','");
+            sqlStatement.append(user.getFirstName());
+            sqlStatement.append("','");
+            sqlStatement.append(user.getLastName());
+            sqlStatement.append("');");
+            sqlStatements.add(sqlStatement.toString());
+        }
+        sqlStatements.add("\n");
+        return sqlStatements;
     }
 }

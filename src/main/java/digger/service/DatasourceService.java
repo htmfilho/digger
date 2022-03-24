@@ -33,6 +33,7 @@ public interface DatasourceService {
     Long countAll();
 
     List<Datasource> findAll();
+    List<String> exportToSql();
 
     void save(Datasource datasource);
     void delete(Long datasourceId);

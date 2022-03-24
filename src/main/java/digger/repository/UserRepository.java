@@ -28,7 +28,8 @@ public interface UserRepository extends Repository<User, Long> {
     
     User findById(long id);
     User findByUsername(String username);
-    
+
+    List<User> findAll();
     List<User> findAllByOrderByUsernameAsc();
 
     void save(User user);

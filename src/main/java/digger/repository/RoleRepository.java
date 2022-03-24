@@ -20,11 +20,15 @@ import org.springframework.data.repository.Repository;
 
 import digger.model.Role;
 
+import java.util.List;
+
 public interface RoleRepository extends Repository<Role, Long> {
     Long count();
     Long countAllByAuthority(String authority);
     
     Role findByUsername(String username);
+
+    List<Role> findAll();
     
     void save(Role role);
 }

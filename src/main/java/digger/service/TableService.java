@@ -29,6 +29,7 @@ public interface TableService {
     List<Table> listTables(Datasource datasource, String key, Table except);
     List<Table> excludeDocumentedTables(Datasource datasource, List<Table> tables, Table except);
     List<Table> findByDatasource(Datasource datasource);
+    List<String> exportToSql();
 
     Long countAll();
     Integer countDocumentedTables(Datasource datasource);

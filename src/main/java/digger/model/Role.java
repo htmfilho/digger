@@ -24,6 +24,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "authorities")
@@ -38,6 +39,9 @@ public class Role {
 
     @Column
     private String authority;
+
+    @Column
+    private Date created;
 
     public Role() {}
 
@@ -79,6 +83,14 @@ public class Role {
             return RoleKind.valueOf(this.authority);
         }
         return null;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
     @Override

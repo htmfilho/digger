@@ -23,10 +23,11 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 public interface TableRepository extends Repository<Table, Long> {
+    Long count();
+
     Table findById(Long id);
 
-    Long count();
-    
+    List<Table> findAll();
     List<Table> findByDatasourceOrderByNameAsc(Datasource datasource);
     
     void save(Table table);

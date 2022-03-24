@@ -178,4 +178,41 @@ public class ColumnServiceImpl implements ColumnService {
         else
             return 0;
     }
+
+    public List<String> exportToSql() {
+        List<String> sqlStatements = new ArrayList<>();
+
+        List<Column> allColumns = columnRepository.findAll();
+        for (Column column: allColumns) {
+            StringBuilder sqlStatement = new StringBuilder();
+            sqlStatement.append("insert into table_column (id, database_table, name, friendly_name, type, size, nullable, default_value, documentation, foreign_key, primary_key, sensitive) values (");
+            sqlStatement.append(column.getId());
+            sqlStatement.append(",");
+            sqlStatement.append(column.getTable().getId());
+            sqlStatement.append(",'");
+            sqlStatement.append(column.getName());
+            sqlStatement.append("','");
+            sqlStatement.append(column.getFriendlyName());
+            sqlStatement.append("','");
+            sqlStatement.append(column.getType());
+            sqlStatement.append("',");
+            sqlStatement.append(column.getSize());
+            sqlStatement.append(",");
+            sqlStatement.append(column.getNullable());
+            sqlStatement.append(",'");
+            sqlStatement.append(column.getDefaultValue());
+            sqlStatement.append("','");
+            sqlStatement.append(column.getDocumentation());
+            sqlStatement.append("',");
+            sqlStatement.append(column.getForeignKey());
+            sqlStatement.append(",");
+            sqlStatement.append(column.getPrimaryKey());
+            sqlStatement.append(",");
+            sqlStatement.append(column.getSensitive());
+            sqlStatement.append(");");
+            sqlStatements.add(sqlStatement.toString());
+        }
+        sqlStatements.add("\n");
+        return sqlStatements;
+    }
 }

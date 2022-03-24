@@ -18,25 +18,6 @@ package digger.service;
 
 import java.util.List;
 
-import digger.model.enums.RoleKind;
-
-public interface UserService {
-
-    boolean thereIsNoUser();
-
-    digger.model.User findById(Long id);
-    digger.model.User findByUsername(String username);
-    digger.model.User changePassword(digger.model.User user, String newPassword);
-
-    Long countAll();
-
-    List<digger.model.User> findAll();
-    List<String> exportToSql();
-
-    void save(digger.model.User user);
-    void save(digger.model.User user, RoleKind roleKind);
-    void registerAdmin(digger.model.User user);
-    void registerReader(digger.model.User user);
-    void enableOrDisableUser(digger.model.User user);
-    void delete(Long id);
+public interface AdminService {
+     List<String> exportToSql();
 }

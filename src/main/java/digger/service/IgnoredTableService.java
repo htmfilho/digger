@@ -32,6 +32,7 @@ public interface IgnoredTableService {
 
     List<IgnoredTable> findByDatasource(Datasource datasource);
     List<Table> excludeIgnoredTables(Datasource datasource, List<Table> tables);
+    List<String> exportToSql();
 
     void save(List<IgnoredTable> ignoredTables);
     void delete(Long ignoredTableId);
