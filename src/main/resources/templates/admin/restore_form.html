@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>User - Administration - Digger</title>
+</head>
+
+<body>
+<section>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg" alt="Home"></a></li>
+            <li class="breadcrumb-item"><a href="/admin">Administration</a></li>
+            <li class="breadcrumb-item"><a href="/admin/users">Storage</a></li>
+            <li class="breadcrumb-item">Restore</li>
+        </ol>
+    </nav>
+
+    <h1>Data Restore</h1>
+
+    <form method="POST" th:action="@{/admin/storage/restore}" id="restoreForm" enctype="multipart/form-data">
+        <div th:if="${error}" class="alert alert-warning" role="alert" th:text="${error}"></div>
+
+        <br>
+        <div class="form-group">
+            <label for="backupFile">Backup File</label>
+            <input type="file" name="backupFile" id="backupFile" class="form-control" accept=".sql" required>
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-primary" id="saveUser"><img src="/images/save.svg"> Restore</button>
+        <a class="btn btn-secondary" id="cancel" href="/admin/storage"><img src="/images/cancel.svg"> Cancel</a>
+    </form>
+</section>
+</body>
+</html>

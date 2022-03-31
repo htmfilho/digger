@@ -24,6 +24,11 @@
             </h1>
 
             <br>
+            <div th:if="${message}">
+                <h5 th:text="${message}" class="info"/>
+            </div>
+
+            <br>
             <h2>Properties</h2>
 
             <table class="table">

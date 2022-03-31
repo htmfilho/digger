@@ -35,7 +35,9 @@ import digger.model.UserDTO;
 import digger.model.enums.RoleKind;
 import digger.service.RoleService;
 import digger.service.UserService;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -97,6 +99,22 @@ public class AdminController {
         InputStream is = new ByteArrayInputStream(sqlBackup.toString().getBytes());
         IOUtils.copy(is, response.getOutputStream());
         response.flushBuffer();
+    }
+
+    @GetMapping("/admin/storage/restore")
+    public String restoreBackup(Model model) {
+        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-storage");
+        addDatasourceAttributes(model);
+
+        return "admin/restore_form";
+    }
+
+    @PostMapping("/admin/storage/restore")
+    public String restoreBackupFile(@RequestParam("backupFile") MultipartFile backupFile, RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("message", "The backup file " + backupFile.getOriginalFilename() + " was successfully restored.");
+
+        return "redirect:/admin/storage";
     }
 
     @GetMapping("/admin/environment")
