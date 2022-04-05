@@ -27,7 +27,7 @@ public interface ColumnRepository extends Repository<Column, Long> {
 
     Column findById(Long id);
 
-    List<Column> findAll();
+    List<Column> findAllByOrderByForeignKeyAsc();
     List<Column> findByTable(Table table);
     List<Column> findByForeignKey(Column foreignKey);
     List<Column> findByForeignKeyIn(List<Column> columns);
