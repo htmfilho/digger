@@ -40,9 +40,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -112,9 +111,19 @@ public class AdminController {
     @PostMapping("/admin/storage/restore")
     public String restoreBackupFile(@RequestParam("backupFile") MultipartFile backupFile, RedirectAttributes redirectAttributes) {
 
+        InputStream inputStream = null;
+        try {
+            inputStream = backupFile.getInputStream();
+            new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines()
+                    .forEach(adminService::runSql);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         redirectAttributes.addFlashAttribute("message", "The backup file " + backupFile.getOriginalFilename() + " was successfully restored.");
 
-        return "redirect:/admin/storage";
+        return "redirect:/";
     }
 
     @GetMapping("/admin/environment")

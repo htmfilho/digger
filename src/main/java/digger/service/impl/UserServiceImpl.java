@@ -23,6 +23,7 @@ import digger.model.enums.RoleKind;
 import digger.repository.UserRepository;
 import digger.service.RoleService;
 import digger.service.UserService;
+import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -147,20 +148,13 @@ public class UserServiceImpl implements UserService {
         for (User user: allUsers) {
             StringBuilder sqlStatement = new StringBuilder();
             sqlStatement.append("insert into users (id, username, password, enabled, created, first_name, last_name) values (");
-            sqlStatement.append(user.getId());
-            sqlStatement.append(",'");
-            sqlStatement.append(user.getUsername());
-            sqlStatement.append("','");
-            sqlStatement.append(user.getPassword());
-            sqlStatement.append("', ");
-            sqlStatement.append(user.getEnabled());
-            sqlStatement.append(",'");
-            sqlStatement.append(user.getCreated());
-            sqlStatement.append("','");
-            sqlStatement.append(user.getFirstName());
-            sqlStatement.append("','");
-            sqlStatement.append(user.getLastName());
-            sqlStatement.append("');");
+            sqlStatement.append(SqlHelper.fieldToSql(user.getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(user.getUsername(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(user.getPassword(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(user.getEnabled(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(user.getCreated(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(user.getFirstName(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(user.getLastName(), ");"));
             sqlStatements.add(sqlStatement.toString());
         }
         sqlStatements.add("\n");

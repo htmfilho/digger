@@ -21,6 +21,7 @@ import digger.model.IgnoredTable;
 import digger.model.Table;
 import digger.repository.IgnoredTableRepository;
 import digger.service.IgnoredTableService;
+import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -87,12 +88,9 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         for (IgnoredTable ignoredTable: allIgnoredTables) {
             StringBuilder sqlStatement = new StringBuilder();
             sqlStatement.append("insert into ignored_table (id, datasource, name) values (");
-            sqlStatement.append(ignoredTable.getId());
-            sqlStatement.append(",");
-            sqlStatement.append(ignoredTable.getDatasource().getId());
-            sqlStatement.append(",'");
-            sqlStatement.append(ignoredTable.getName());
-            sqlStatement.append("');");
+            sqlStatement.append(SqlHelper.fieldToSql(ignoredTable.getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(ignoredTable.getDatasource().getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(ignoredTable.getName(), ");"));
             sqlStatements.add(sqlStatement.toString());
         }
         sqlStatements.add("\n");

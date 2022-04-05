@@ -22,6 +22,7 @@ import digger.repository.TableRepository;
 import digger.service.DatasourceService;
 import digger.service.IgnoredTableService;
 import digger.service.TableService;
+import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -134,20 +135,13 @@ public class TableServiceImpl implements TableService {
         for (Table table: allTables) {
             StringBuilder sqlStatement = new StringBuilder();
             sqlStatement.append("insert into database_table (id, datasource, name, friendly_name, type, documentation, total_columns) values (");
-            sqlStatement.append(table.getId());
-            sqlStatement.append(",");
-            sqlStatement.append(table.getDatasource().getId());
-            sqlStatement.append(",'");
-            sqlStatement.append(table.getName());
-            sqlStatement.append("','");
-            sqlStatement.append(table.getFriendlyName());
-            sqlStatement.append("','");
-            sqlStatement.append(table.getType());
-            sqlStatement.append("','");
-            sqlStatement.append(table.getDocumentation());
-            sqlStatement.append("',");
-            sqlStatement.append(table.getTotalColumns());
-            sqlStatement.append(");");
+            sqlStatement.append(SqlHelper.fieldToSql(table.getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(table.getDatasource().getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(table.getName(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(table.getFriendlyName(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(table.getType(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(table.getDocumentation(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(table.getTotalColumns(), ");"));
             sqlStatements.add(sqlStatement.toString());
         }
         sqlStatements.add("\n");

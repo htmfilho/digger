@@ -19,6 +19,7 @@ package digger.service.impl;
 import digger.model.Datasource;
 import digger.repository.DatasourceRepository;
 import digger.service.DatasourceService;
+import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -96,22 +97,14 @@ public class DatasourceServiceImpl implements DatasourceService {
         for (Datasource datasource: allDatasources) {
             StringBuilder sqlStatement = new StringBuilder();
             sqlStatement.append("insert into datasource (id, name, description, driver, url, username, password, total_tables) values (");
-            sqlStatement.append(datasource.getId());
-            sqlStatement.append(",'");
-            sqlStatement.append(datasource.getName());
-            sqlStatement.append("','");
-            sqlStatement.append(datasource.getDescription());
-            sqlStatement.append("','");
-            sqlStatement.append(datasource.getDriver());
-            sqlStatement.append("','");
-            sqlStatement.append(datasource.getUrl());
-            sqlStatement.append("','");
-            sqlStatement.append(datasource.getUsername());
-            sqlStatement.append("','");
-            sqlStatement.append(datasource.getPassword());
-            sqlStatement.append("',");
-            sqlStatement.append(datasource.getTotalTables());
-            sqlStatement.append(");");
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getName(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getDescription(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getDriver(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getUrl(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getUsername(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getPassword(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(datasource.getTotalTables(), ");"));
             sqlStatements.add(sqlStatement.toString());
         }
         sqlStatements.add("\n");

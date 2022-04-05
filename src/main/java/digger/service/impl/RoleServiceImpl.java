@@ -19,6 +19,7 @@ package digger.service.impl;
 import digger.model.Role;
 import digger.repository.RoleRepository;
 import digger.service.RoleService;
+import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -60,14 +61,10 @@ public class RoleServiceImpl implements RoleService {
         for (Role role: allRoles) {
             StringBuilder sqlStatement = new StringBuilder();
             sqlStatement.append("insert into authorities (id, username, authority, created) values (");
-            sqlStatement.append(role.getId());
-            sqlStatement.append(",'");
-            sqlStatement.append(role.getUsername());
-            sqlStatement.append("','");
-            sqlStatement.append(role.getAuthority());
-            sqlStatement.append("','");
-            sqlStatement.append(role.getCreated());
-            sqlStatement.append("');");
+            sqlStatement.append(SqlHelper.fieldToSql(role.getId(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(role.getUsername(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(role.getAuthority(), ","));
+            sqlStatement.append(SqlHelper.fieldToSql(role.getCreated(), ");"));
             sqlStatements.add(sqlStatement.toString());
         }
         sqlStatements.add("\n");
