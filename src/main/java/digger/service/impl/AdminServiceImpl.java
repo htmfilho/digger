@@ -17,12 +17,21 @@
 package digger.service.impl;
 
 import digger.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final ColumnService columnService;
     private final DatasourceService datasourceService;
@@ -51,5 +60,14 @@ public class AdminServiceImpl implements AdminService {
         sqlStatements.addAll(ignoredTableService.exportToSql());
         sqlStatements.addAll(columnService.exportToSql());
         return sqlStatements;
+    }
+
+    @Transactional
+    public void runSql(String sql) {
+        if (sql == null || sql.isEmpty() || sql.isBlank())
+            return;
+
+        logger.info(sql);
+        entityManager.createNativeQuery(sql).executeUpdate();
     }
 }
