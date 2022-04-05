@@ -57,6 +57,7 @@
                                 <a class="dropdown-item" href="/login" th:unless="${#httpServletRequest.remoteUser}">Login</a>
                                 <div class="dropdown-divider" th:unless="${#httpServletRequest.remoteUser}"></div>
                                 <a class="dropdown-item" href="/signup" th:unless="${#httpServletRequest.remoteUser}">Sign Up</a>
+                                <a class="dropdown-item" href="/admin/storage/restore" th:unless="${#httpServletRequest.remoteUser}">Restore</a>
                             </div>
                         </li>
                         <div><a th:href="@{${userGuideUrl}}" class="help" target="_blank">

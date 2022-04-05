@@ -13,9 +13,13 @@
                         <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z" clip-rule="evenodd"/>
                     </svg> Login
                 </h1>
+
+                <br>
+                <div th:if="${message}">
+                    <h5 th:text="${message}" class="info"/>
+                </div>
         
                 <br>
-
                 <div class="card" style="width: 26rem;">
                     <div class="card-body">
                         <form method="POST" th:action="@{/login}">

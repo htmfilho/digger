@@ -20,4 +20,5 @@ import java.util.List;
 
 public interface AdminService {
      List<String> exportToSql();
+     void runSql(String sql);
 }
