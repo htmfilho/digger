@@ -5,6 +5,7 @@
 .settings/
 .vscode/
 data/
+data_2/
 logs/
 target/
 os-service/digger-windows-service.wrapper.log
