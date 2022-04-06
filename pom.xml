@@ -12,7 +12,7 @@
 	
 	<groupId>com.hildeberto</groupId>
 	<artifactId>digger</artifactId>
-	<version>1.10</version>
+	<version>1.10.1</version>
 	<name>Digger</name>
 	<description>Document your relational database because applications go, but the database stays.</description>
 
@@ -105,7 +105,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.200</version>
+			<version>2.1.210</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
