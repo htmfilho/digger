@@ -92,7 +92,7 @@ public class DatasourceServiceImpl implements DatasourceService {
 
     public List<String> exportToSql() {
         List<String> sqlStatements = new ArrayList<>();
-
+        sqlStatements.add("delete from datasource;");
         List<Datasource> allDatasources = datasourceRepository.findAll();
         for (Datasource datasource: allDatasources) {
             StringBuilder sqlStatement = new StringBuilder();

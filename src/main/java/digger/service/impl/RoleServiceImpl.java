@@ -56,7 +56,7 @@ public class RoleServiceImpl implements RoleService {
 
     public List<String> exportToSql() {
         List<String> sqlStatements = new ArrayList<>();
-
+        sqlStatements.add("delete from authorities;");
         List<Role> allRoles = roleRepository.findAll();
         for (Role role: allRoles) {
             StringBuilder sqlStatement = new StringBuilder();

@@ -130,7 +130,7 @@ public class TableServiceImpl implements TableService {
 
     public List<String> exportToSql() {
         List<String> sqlStatements = new ArrayList<>();
-
+        sqlStatements.add("delete from database_table;");
         List<Table> allTables = tableRepository.findAll();
         for (Table table: allTables) {
             StringBuilder sqlStatement = new StringBuilder();

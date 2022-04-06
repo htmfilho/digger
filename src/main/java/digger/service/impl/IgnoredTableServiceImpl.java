@@ -83,7 +83,7 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
 
     public List<String> exportToSql() {
         List<String> sqlStatements = new ArrayList<>();
-
+        sqlStatements.add("delete from ignored_table;");
         List<IgnoredTable> allIgnoredTables = ignoredTableRepository.findAll();
         for (IgnoredTable ignoredTable: allIgnoredTables) {
             StringBuilder sqlStatement = new StringBuilder();

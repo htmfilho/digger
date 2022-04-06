@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
 
     public List<String> exportToSql() {
         List<String> sqlStatements = new ArrayList<>();
-
+        sqlStatements.add("delete from users;");
         List<User> allUsers = userRepository.findAll();
         for (User user: allUsers) {
             StringBuilder sqlStatement = new StringBuilder();

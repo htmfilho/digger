@@ -182,7 +182,7 @@ public class ColumnServiceImpl implements ColumnService {
 
     public List<String> exportToSql() {
         List<String> sqlStatements = new ArrayList<>();
-
+        sqlStatements.add("delete from table_column;");
         List<Column> allColumns = columnRepository.findAllByOrderByForeignKeyAsc();
         for (Column column: allColumns) {
             StringBuilder sqlStatement = new StringBuilder();
