@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @Entity
 @javax.persistence.Table(name = "database_table")
-public class Table implements Comparable<Table> {
+public class Table implements Comparable<Table>, DocEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

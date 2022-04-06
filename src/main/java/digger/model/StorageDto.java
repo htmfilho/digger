@@ -16,13 +16,13 @@
 
 package digger.model;
 
-public class StorageDTO {
+public class StorageDto {
     private String tableName;
     private Long numRecords;
 
-    public StorageDTO() {}
+    public StorageDto() {}
 
-    public StorageDTO(String tableName, Long numRecords) {
+    public StorageDto(String tableName, Long numRecords) {
         this.tableName = tableName;
         this.numRecords = numRecords;
     }

@@ -28,11 +28,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "authorities")
-public class Role {
+public class Role implements DocEntity {
     
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column
     private String username;
@@ -50,7 +50,7 @@ public class Role {
         this.setAuthority(authority);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

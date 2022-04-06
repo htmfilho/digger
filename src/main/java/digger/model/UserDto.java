@@ -16,7 +16,7 @@
 
 package digger.model;
 
-public class UserDTO {
+public class UserDto {
 
     private Long id;
     private String firstName;
@@ -29,9 +29,9 @@ public class UserDTO {
     private String mainRole;
 
     // This empty constructor is used by String to deserialize data from the user interface.
-    public UserDTO() {}
+    public UserDto() {}
 
-    public UserDTO(long id, String firstName, String lastName, String username, Boolean enabled, String mainRole) {
+    public UserDto(long id, String firstName, String lastName, String username, Boolean enabled, String mainRole) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

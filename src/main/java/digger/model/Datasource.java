@@ -20,7 +20,7 @@ import javax.persistence.*;
 import javax.persistence.Column;
 
 @Entity
-public class Datasource {
+public class Datasource implements DocEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 
 import digger.model.Role;
 import digger.model.User;
-import digger.model.UserDTO;
+import digger.model.UserDto;
 import digger.model.enums.RoleKind;
 import digger.service.RoleService;
 import digger.service.UserService;
@@ -158,7 +158,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/users")
-    public String saveUser( @ModelAttribute UserDTO user) {
+    public String saveUser( @ModelAttribute UserDto user) {
         User existingUser = userService.findById(user.getId());
         existingUser.setUsername(user.getUsername());
         existingUser.setFirstName(user.getFirstName());
@@ -180,7 +180,7 @@ public class AdminController {
     @GetMapping("/admin/users/{id}")
     public String openUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDTO userDTO = createUserDTO(id);
+        UserDto userDTO = createUserDTO(id);
         model.addAttribute("user", userDTO);
         return "admin/user";
     }
@@ -188,15 +188,15 @@ public class AdminController {
     @GetMapping("/admin/users/{id}/edit")
     public String editUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDTO userDTO = createUserDTO(id);
+        UserDto userDTO = createUserDTO(id);
         model.addAttribute("user", userDTO);
         return "admin/user_form";
     }
 
-    private UserDTO createUserDTO(Long id) {
+    private UserDto createUserDTO(Long id) {
         User user = userService.findById(id);
         Role role = roleService.findByUsername(user.getUsername());
-        return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEnabled(),
+        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEnabled(),
                            role.getAuthority());
     }
 

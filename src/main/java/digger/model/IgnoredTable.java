@@ -28,7 +28,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ignored_table")
-public class IgnoredTable implements Comparable<IgnoredTable> {
+public class IgnoredTable implements Comparable<IgnoredTable>, DocEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

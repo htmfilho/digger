@@ -21,7 +21,7 @@ import java.util.Objects;
 
 @Entity
 @javax.persistence.Table(name = "table_column")
-public class Column implements Comparable<Column> {
+public class Column implements Comparable<Column>, DocEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

@@ -16,6 +16,8 @@
 
 package digger.utils;
 
+import digger.model.DocEntity;
+
 import java.util.Date;
 
 public class SqlHelper {
@@ -39,6 +41,13 @@ public class SqlHelper {
             return "null" + suffix;
 
         return field.toString() + suffix;
+    }
+
+    public static String fieldToSql(DocEntity field, String suffix) {
+        if (field == null)
+            return "null" + suffix;
+
+        return field.getId() + suffix;
     }
 
     public static String fieldToSql(String field, String suffix) {

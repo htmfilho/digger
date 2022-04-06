@@ -17,7 +17,7 @@
 package digger.web.controller;
 
 import digger.model.User;
-import digger.model.UserDTO;
+import digger.model.UserDto;
 import digger.service.UserService;
 
 import org.slf4j.Logger;
@@ -93,7 +93,7 @@ public class IdentificationController {
     }
 
     @PostMapping("/users/password")
-    public String changePassword(Model model, Principal principal, @ModelAttribute UserDTO user) {
+    public String changePassword(Model model, Principal principal, @ModelAttribute UserDto user) {
         User existingUser = userService.findByUsername(principal.getName());
 
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();

@@ -16,7 +16,7 @@
 
 package digger.web.resource;
 
-import digger.model.StorageDTO;
+import digger.model.StorageDto;
 import digger.service.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,16 +47,16 @@ public class StorageResource {
     }
 
     @GetMapping(value = "/api/admin/storage", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<StorageDTO> getStorage() {
-        List<StorageDTO> storageDTOs = new ArrayList<>(6);
+    public List<StorageDto> getStorage() {
+        List<StorageDto> storageDtos = new ArrayList<>(6);
 
-        storageDTOs.add(new StorageDTO("Column", this.columnService.countAll()));
-        storageDTOs.add(new StorageDTO("Datasource", this.datasourceService.countAll()));
-        storageDTOs.add(new StorageDTO("IgnoredTable", this.ignoredTableService.countAll()));
-        storageDTOs.add(new StorageDTO("Role", this.roleService.countAll()));
-        storageDTOs.add(new StorageDTO("Table", this.tableService.countAll()));
-        storageDTOs.add(new StorageDTO("User", this.userService.countAll()));
+        storageDtos.add(new StorageDto("Column", this.columnService.countAll()));
+        storageDtos.add(new StorageDto("Datasource", this.datasourceService.countAll()));
+        storageDtos.add(new StorageDto("IgnoredTable", this.ignoredTableService.countAll()));
+        storageDtos.add(new StorageDto("Role", this.roleService.countAll()));
+        storageDtos.add(new StorageDto("Table", this.tableService.countAll()));
+        storageDtos.add(new StorageDto("User", this.userService.countAll()));
 
-        return storageDTOs;
+        return storageDtos;
     }
 }

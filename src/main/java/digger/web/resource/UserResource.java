@@ -18,7 +18,7 @@ package digger.web.resource;
 
 import digger.model.Role;
 import digger.model.User;
-import digger.model.UserDTO;
+import digger.model.UserDto;
 import digger.service.RoleService;
 import digger.service.UserService;
 
@@ -40,12 +40,12 @@ public class UserResource {
     }
 
     @GetMapping(value = "/api/admin/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDTO> getUsers() {
+    public List<UserDto> getUsers() {
         List<User> users = this.userService.findAll();
-        List<UserDTO> usersDTO = new ArrayList<>();
+        List<UserDto> usersDTO = new ArrayList<>();
         for(User user : users) {
             Role role = roleService.findByUsername(user.getUsername());
-            UserDTO userDTO = new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(),
+            UserDto userDTO = new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(),
                                           user.getEnabled(), role.getAuthority());
             usersDTO.add(userDTO);
         }

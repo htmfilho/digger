@@ -196,10 +196,7 @@ public class ColumnServiceImpl implements ColumnService {
             sqlStatement.append(SqlHelper.fieldToSql(column.getNullable(), ","));
             sqlStatement.append(SqlHelper.fieldToSql(column.getDefaultValue(), ","));
             sqlStatement.append(SqlHelper.fieldToSql(column.getDocumentation(), ","));
-            if (column.getForeignKey() != null)
-                sqlStatement.append(SqlHelper.fieldToSql(column.getForeignKey().getId(), ","));
-            else
-                sqlStatement.append("null,");
+            sqlStatement.append(SqlHelper.fieldToSql(column.getForeignKey(), ","));
             sqlStatement.append(SqlHelper.fieldToSql(column.getPrimaryKey(), ","));
             sqlStatement.append(SqlHelper.fieldToSql(column.getSensitive(), ");"));
             sqlStatements.add(sqlStatement.toString());
