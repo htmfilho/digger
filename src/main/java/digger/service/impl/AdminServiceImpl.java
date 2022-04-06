@@ -55,6 +55,17 @@ public class AdminServiceImpl implements AdminService {
         this.userService = userService;
     }
 
+    public boolean isDatabaseEmpty() {
+        long total = userService.countAll()
+                + roleService.countAll()
+                + datasourceService.countAll()
+                + tableService.countAll()
+                + ignoredTableService.countAll()
+                + columnService.countAll();
+
+        return total == 0;
+    }
+
     public List<String> exportToSql() {
         // This sequence represents the dependencies between database tables.
         List<String> sqlStatements = userService.exportToSql();

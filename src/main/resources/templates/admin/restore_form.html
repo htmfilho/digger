@@ -9,8 +9,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg" alt="Home"></a></li>
-            <li class="breadcrumb-item"><a href="/admin">Administration</a></li>
-            <li class="breadcrumb-item"><a href="/admin/users">Storage</a></li>
+            <li class="breadcrumb-item">Administration</li>
+            <li class="breadcrumb-item">Storage</li>
             <li class="breadcrumb-item">Restore</li>
         </ol>
     </nav>
@@ -19,16 +19,17 @@
 
     <form method="POST" th:action="@{/admin/storage/restore}" id="restoreForm" enctype="multipart/form-data">
         <div th:if="${error}" class="alert alert-warning" role="alert" th:text="${error}"></div>
+        <div th:unless="${isDatabaseEmpty}" class="alert alert-warning" role="alert">The database is not empty. Backup cannot be restored.</div>
 
         <br>
-        <div class="form-group">
+        <div class="form-group" th:if="${isDatabaseEmpty}">
             <label for="backupFile">Backup File</label>
             <input type="file" name="backupFile" id="backupFile" class="form-control" accept=".sql" required>
         </div>
 
         <br>
-        <button type="submit" class="btn btn-primary" id="saveUser"><img src="/images/save.svg"> Restore</button>
-        <a class="btn btn-secondary" id="cancel" href="/admin/storage"><img src="/images/cancel.svg"> Cancel</a>
+        <button type="submit" class="btn btn-primary" th:if="${isDatabaseEmpty}" id="saveUser"><img src="/images/save.svg"> Restore</button>
+        <a class="btn btn-secondary" id="cancel" href="/"><img src="/images/cancel.svg"> Cancel</a>
     </form>
 </section>
 </body>

@@ -103,18 +103,25 @@ public class AdminController {
     @GetMapping("/admin/storage/restore")
     public String restoreBackup(Model model) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-storage");
+        model.addAttribute("isDatabaseEmpty", adminService.isDatabaseEmpty());
         addDatasourceAttributes(model);
 
         return "admin/restore_form";
     }
 
     @PostMapping("/admin/storage/restore")
-    public String restoreBackupFile(@RequestParam("backupFile") MultipartFile backupFile, RedirectAttributes redirectAttributes) {
+    public String restoreBackupFile(@RequestParam("backupFile") MultipartFile backupFile, Model model, RedirectAttributes redirectAttributes) {
+        if(!adminService.isDatabaseEmpty()) {
+            model.addAttribute("error", "The database is not empty");
+            return "/admin/storage/restore";
+        }
 
         try {
             adminService.restoreBackup(backupFile.getInputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "/admin/storage/restore";
         }
 
         redirectAttributes.addFlashAttribute("message", "The backup file " + backupFile.getOriginalFilename() + " was successfully restored.");

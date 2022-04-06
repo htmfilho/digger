@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public interface AdminService {
+     boolean isDatabaseEmpty();
      List<String> exportToSql();
      void restoreBackup(InputStream inputStream);
 }
