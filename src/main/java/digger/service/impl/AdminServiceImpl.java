@@ -24,6 +24,10 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -63,7 +67,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Transactional
-    public void runSql(String sql) {
+    public void restoreBackup(InputStream inputStream) {
+        new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .forEach(this::runSql);
+    }
+
+    private void runSql(String sql) {
         if (sql == null || sql.isEmpty() || sql.isBlank())
             return;
 

@@ -112,10 +112,7 @@ public class AdminController {
     public String restoreBackupFile(@RequestParam("backupFile") MultipartFile backupFile, RedirectAttributes redirectAttributes) {
 
         try {
-            InputStream inputStream = backupFile.getInputStream();
-            new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                    .lines()
-                    .forEach(adminService::runSql);
+            adminService.restoreBackup(backupFile.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -180,7 +177,7 @@ public class AdminController {
     @GetMapping("/admin/users/{id}")
     public String openUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDto userDTO = createUserDTO(id);
+        UserDto userDTO = createUserDto(id);
         model.addAttribute("user", userDTO);
         return "admin/user";
     }
@@ -188,16 +185,9 @@ public class AdminController {
     @GetMapping("/admin/users/{id}/edit")
     public String editUser(Model model, @PathVariable Long id) {
         model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDto userDTO = createUserDTO(id);
+        UserDto userDTO = createUserDto(id);
         model.addAttribute("user", userDTO);
         return "admin/user_form";
-    }
-
-    private UserDto createUserDTO(Long id) {
-        User user = userService.findById(id);
-        Role role = roleService.findByUsername(user.getUsername());
-        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEnabled(),
-                           role.getAuthority());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -207,7 +197,14 @@ public class AdminController {
         modelAndView.setViewName("admin/user_form");
         modelAndView.addObject("userGuideUrl", userGuideUrl + "#admin-user");
         modelAndView.addObject("error", rae.getMessage());
-        modelAndView.addObject("user", createUserDTO(rae.getUser().getId()));
+        modelAndView.addObject("user", createUserDto(rae.getUser().getId()));
         return modelAndView;
+    }
+
+    private UserDto createUserDto(Long id) {
+        User user = userService.findById(id);
+        Role role = roleService.findByUsername(user.getUsername());
+        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEnabled(),
+                role.getAuthority());
     }
 }

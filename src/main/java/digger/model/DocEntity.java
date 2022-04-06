@@ -14,12 +14,8 @@
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
 
-package digger.service;
+package digger.model;
 
-import java.io.InputStream;
-import java.util.List;
-
-public interface AdminService {
-     List<String> exportToSql();
-     void restoreBackup(InputStream inputStream);
+public interface DocEntity {
+    Long getId();
 }
