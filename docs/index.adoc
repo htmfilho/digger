@@ -1,6 +1,6 @@
 ﻿= Digger : Documenting Database Schemes
 Hildeberto Mendonca <me@hildeberto.com>
-v1.9.1
+v1.10.0
 :doctype: book
 :pdf-page-size: LETTER
 :encoding: utf-8
