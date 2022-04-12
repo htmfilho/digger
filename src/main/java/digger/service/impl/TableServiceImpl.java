@@ -133,16 +133,15 @@ public class TableServiceImpl implements TableService {
         sqlStatements.add("delete from database_table;");
         List<Table> allTables = tableRepository.findAll();
         for (Table table: allTables) {
-            StringBuilder sqlStatement = new StringBuilder();
-            sqlStatement.append("insert into database_table (id, datasource, name, friendly_name, type, documentation, total_columns) values (");
-            sqlStatement.append(SqlHelper.fieldToSql(table.getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(table.getDatasource().getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(table.getName(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(table.getFriendlyName(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(table.getType(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(table.getDocumentation(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(table.getTotalColumns(), ");"));
-            sqlStatements.add(sqlStatement.toString());
+            String sqlStatement = "insert into database_table (id, datasource, name, friendly_name, type, documentation, total_columns) values (" +
+                    SqlHelper.fieldToSql(table.getId(), ",") +
+                    SqlHelper.fieldToSql(table.getDatasource().getId(), ",") +
+                    SqlHelper.fieldToSql(table.getName(), ",") +
+                    SqlHelper.fieldToSql(table.getFriendlyName(), ",") +
+                    SqlHelper.fieldToSql(table.getType(), ",") +
+                    SqlHelper.fieldToSql(table.getDocumentation(), ",") +
+                    SqlHelper.fieldToSql(table.getTotalColumns(), ");");
+            sqlStatements.add(sqlStatement);
         }
         sqlStatements.add("\n");
         return sqlStatements;

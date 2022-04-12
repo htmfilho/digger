@@ -156,7 +156,7 @@ public class ColumnServiceImpl implements ColumnService {
 
     public List<Column> findByTable(final Table table) {
         List<Column> columns = columnRepository.findByTable(table);
-        Collections.sort(columns, new ColumnComparator());
+        columns.sort(new ColumnComparator());
         return columns;
     }
 
@@ -185,21 +185,20 @@ public class ColumnServiceImpl implements ColumnService {
         sqlStatements.add("delete from table_column;");
         List<Column> allColumns = columnRepository.findAllByOrderByForeignKeyAsc();
         for (Column column: allColumns) {
-            StringBuilder sqlStatement = new StringBuilder();
-            sqlStatement.append("insert into table_column (id, database_table, name, friendly_name, type, size, nullable, default_value, documentation, foreign_key, primary_key, sensitive) values (");
-            sqlStatement.append(SqlHelper.fieldToSql(column.getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getTable().getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getName(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getFriendlyName(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getType(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getSize(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getNullable(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getDefaultValue(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getDocumentation(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getForeignKey(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getPrimaryKey(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(column.getSensitive(), ");"));
-            sqlStatements.add(sqlStatement.toString());
+            String sqlStatement = "insert into table_column (id, database_table, name, friendly_name, type, size, nullable, default_value, documentation, foreign_key, primary_key, sensitive) values (" +
+                    SqlHelper.fieldToSql(column.getId(), ",") +
+                    SqlHelper.fieldToSql(column.getTable().getId(), ",") +
+                    SqlHelper.fieldToSql(column.getName(), ",") +
+                    SqlHelper.fieldToSql(column.getFriendlyName(), ",") +
+                    SqlHelper.fieldToSql(column.getType(), ",") +
+                    SqlHelper.fieldToSql(column.getSize(), ",") +
+                    SqlHelper.fieldToSql(column.getNullable(), ",") +
+                    SqlHelper.fieldToSql(column.getDefaultValue(), ",") +
+                    SqlHelper.fieldToSql(column.getDocumentation(), ",") +
+                    SqlHelper.fieldToSql(column.getForeignKey(), ",") +
+                    SqlHelper.fieldToSql(column.getPrimaryKey(), ",") +
+                    SqlHelper.fieldToSql(column.getSensitive(), ");");
+            sqlStatements.add(sqlStatement);
         }
         sqlStatements.add("\n");
         return sqlStatements;

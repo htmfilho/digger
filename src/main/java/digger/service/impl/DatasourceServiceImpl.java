@@ -95,17 +95,16 @@ public class DatasourceServiceImpl implements DatasourceService {
         sqlStatements.add("delete from datasource;");
         List<Datasource> allDatasources = datasourceRepository.findAll();
         for (Datasource datasource: allDatasources) {
-            StringBuilder sqlStatement = new StringBuilder();
-            sqlStatement.append("insert into datasource (id, name, description, driver, url, username, password, total_tables) values (");
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getName(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getDescription(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getDriver(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getUrl(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getUsername(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getPassword(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(datasource.getTotalTables(), ");"));
-            sqlStatements.add(sqlStatement.toString());
+            String sqlStatement = "insert into datasource (id, name, description, driver, url, username, password, total_tables) values (" +
+                    SqlHelper.fieldToSql(datasource.getId(), ",") +
+                    SqlHelper.fieldToSql(datasource.getName(), ",") +
+                    SqlHelper.fieldToSql(datasource.getDescription(), ",") +
+                    SqlHelper.fieldToSql(datasource.getDriver(), ",") +
+                    SqlHelper.fieldToSql(datasource.getUrl(), ",") +
+                    SqlHelper.fieldToSql(datasource.getUsername(), ",") +
+                    SqlHelper.fieldToSql(datasource.getPassword(), ",") +
+                    SqlHelper.fieldToSql(datasource.getTotalTables(), ");");
+            sqlStatements.add(sqlStatement);
         }
         sqlStatements.add("\n");
         return sqlStatements;

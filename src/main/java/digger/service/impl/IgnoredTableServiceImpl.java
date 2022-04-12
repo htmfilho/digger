@@ -86,12 +86,11 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
         sqlStatements.add("delete from ignored_table;");
         List<IgnoredTable> allIgnoredTables = ignoredTableRepository.findAll();
         for (IgnoredTable ignoredTable: allIgnoredTables) {
-            StringBuilder sqlStatement = new StringBuilder();
-            sqlStatement.append("insert into ignored_table (id, datasource, name) values (");
-            sqlStatement.append(SqlHelper.fieldToSql(ignoredTable.getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(ignoredTable.getDatasource().getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(ignoredTable.getName(), ");"));
-            sqlStatements.add(sqlStatement.toString());
+            String sqlStatement = "insert into ignored_table (id, datasource, name) values (" +
+                    SqlHelper.fieldToSql(ignoredTable.getId(), ",") +
+                    SqlHelper.fieldToSql(ignoredTable.getDatasource().getId(), ",") +
+                    SqlHelper.fieldToSql(ignoredTable.getName(), ");");
+            sqlStatements.add(sqlStatement);
         }
         sqlStatements.add("\n");
         return sqlStatements;

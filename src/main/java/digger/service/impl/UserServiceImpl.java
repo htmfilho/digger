@@ -146,16 +146,15 @@ public class UserServiceImpl implements UserService {
         sqlStatements.add("delete from users;");
         List<User> allUsers = userRepository.findAll();
         for (User user: allUsers) {
-            StringBuilder sqlStatement = new StringBuilder();
-            sqlStatement.append("insert into users (id, username, password, enabled, created, first_name, last_name) values (");
-            sqlStatement.append(SqlHelper.fieldToSql(user.getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(user.getUsername(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(user.getPassword(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(user.getEnabled(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(user.getCreated(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(user.getFirstName(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(user.getLastName(), ");"));
-            sqlStatements.add(sqlStatement.toString());
+            String sqlStatement = "insert into users (id, username, password, enabled, created, first_name, last_name) values (" +
+                    SqlHelper.fieldToSql(user.getId(), ",") +
+                    SqlHelper.fieldToSql(user.getUsername(), ",") +
+                    SqlHelper.fieldToSql(user.getPassword(), ",") +
+                    SqlHelper.fieldToSql(user.getEnabled(), ",") +
+                    SqlHelper.fieldToSql(user.getCreated(), ",") +
+                    SqlHelper.fieldToSql(user.getFirstName(), ",") +
+                    SqlHelper.fieldToSql(user.getLastName(), ");");
+            sqlStatements.add(sqlStatement);
         }
         sqlStatements.add("\n");
         return sqlStatements;

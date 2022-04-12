@@ -59,13 +59,12 @@ public class RoleServiceImpl implements RoleService {
         sqlStatements.add("delete from authorities;");
         List<Role> allRoles = roleRepository.findAll();
         for (Role role: allRoles) {
-            StringBuilder sqlStatement = new StringBuilder();
-            sqlStatement.append("insert into authorities (id, username, authority, created) values (");
-            sqlStatement.append(SqlHelper.fieldToSql(role.getId(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(role.getUsername(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(role.getAuthority(), ","));
-            sqlStatement.append(SqlHelper.fieldToSql(role.getCreated(), ");"));
-            sqlStatements.add(sqlStatement.toString());
+            String sqlStatement = "insert into authorities (id, username, authority, created) values (" +
+                    SqlHelper.fieldToSql(role.getId(), ",") +
+                    SqlHelper.fieldToSql(role.getUsername(), ",") +
+                    SqlHelper.fieldToSql(role.getAuthority(), ",") +
+                    SqlHelper.fieldToSql(role.getCreated(), ");");
+            sqlStatements.add(sqlStatement);
         }
         sqlStatements.add("\n");
         return sqlStatements;
