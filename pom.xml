@@ -12,7 +12,7 @@
 	
 	<groupId>com.hildeberto</groupId>
 	<artifactId>digger</artifactId>
-	<version>1.10.1</version>
+	<version>1.10.2</version>
 	<name>Digger</name>
 	<description>Document your relational database because applications go, but the database stays.</description>
 
