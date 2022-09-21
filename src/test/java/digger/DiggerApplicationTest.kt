@@ -13,15 +13,20 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger
 
-package digger;
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootTest
+class DiggerApplicationTest {
 
-@SpringBootApplication
-public class DiggerApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(DiggerApplication.class, args);
+    @Test
+    fun testMain() {
+        main(
+            arrayOf(
+                "--spring.main.web-environment=false"
+            )
+        )
     }
 }

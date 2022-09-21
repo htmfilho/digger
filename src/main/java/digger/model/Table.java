@@ -21,7 +21,7 @@ import javax.persistence.Column;
 import java.util.Objects;
 
 @Entity
-@javax.persistence.Table(name = "database_table")
+@javax.persistence.Table(name = "database_table") 
 public class Table implements Comparable<Table>, DocEntity {
 
     @Id

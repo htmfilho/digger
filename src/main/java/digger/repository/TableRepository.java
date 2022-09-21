@@ -18,8 +18,11 @@ package digger.repository;
 
 import digger.model.Datasource;
 import digger.model.Table;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface TableRepository extends Repository<Table, Long> {
@@ -29,6 +32,9 @@ public interface TableRepository extends Repository<Table, Long> {
 
     List<Table> findAll();
     List<Table> findByDatasourceOrderByNameAsc(Datasource datasource);
+
+    @Query(value = "select database_table_id_seq.nextval from dual", nativeQuery = true)
+    BigDecimal getNextVal();
     
     void save(Table table);
     void deleteById(Long id);

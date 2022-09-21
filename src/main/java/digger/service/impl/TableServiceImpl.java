@@ -25,6 +25,7 @@ import digger.service.TableService;
 import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
@@ -88,7 +89,12 @@ public class TableServiceImpl implements TableService {
     }
 
     public void save(Table table) {
-        tableRepository.save(table);
+        try {
+            tableRepository.save(table);
+        } catch (DataIntegrityViolationException dive) {
+            tableRepository.getNextVal();
+            save(table);
+        }
         logger.info("Saved table {}", table.getName());
     }
 
