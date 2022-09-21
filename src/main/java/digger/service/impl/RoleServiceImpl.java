@@ -22,8 +22,10 @@ import digger.service.RoleService;
 import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public void save(Role role) {
-        this.roleRepository.save(role);
+        try {
+            this.roleRepository.save(role);
+        } catch (DataIntegrityViolationException dive) {
+            BigDecimal seq = roleRepository.getSequenceNextVal();
+            logger.warn("Role sequence out of sync. Incrementing sequence to: {}", seq);
+            save(role);
+        }
         logger.info("Assigned role {} to user {}", role.getAuthority(), role.getUsername());
     }
 

@@ -33,8 +33,8 @@ public interface TableRepository extends Repository<Table, Long> {
     List<Table> findAll();
     List<Table> findByDatasourceOrderByNameAsc(Datasource datasource);
 
-    @Query(value = "select database_table_id_seq.nextval from dual", nativeQuery = true)
-    BigDecimal getNextVal();
+    @Query(value = "select nextval('database_table_id_seq')", nativeQuery = true)
+    BigDecimal getSequenceNextVal();
     
     void save(Table table);
     void deleteById(Long id);

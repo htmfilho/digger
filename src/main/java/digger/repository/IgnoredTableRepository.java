@@ -19,14 +19,19 @@ package digger.repository;
 import digger.model.Datasource;
 import digger.model.IgnoredTable;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface IgnoredTableRepository extends Repository<IgnoredTable, Long> {
     Long count();
 
     IgnoredTable findById(Long id);
+
+    @Query(value = "select nextval('ignored_table_id_seq')", nativeQuery = true)
+    BigDecimal getSequenceNextVal();
 
     List<IgnoredTable> findAll();
     List<IgnoredTable> findByDatasourceOrderByNameAsc(Datasource datasource);

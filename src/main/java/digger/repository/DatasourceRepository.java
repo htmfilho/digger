@@ -17,14 +17,20 @@
 package digger.repository;
 
 import digger.model.Datasource;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface DatasourceRepository extends Repository<Datasource, Long> {
     Long count();
 
     Datasource findById(Long id);
+
+    @Query(value = "select nextval('datasource_id_seq')", nativeQuery = true)
+    BigDecimal getSequenceNextVal();
 
     List<Datasource> findAll();
     List<Datasource> findAllByOrderByName();

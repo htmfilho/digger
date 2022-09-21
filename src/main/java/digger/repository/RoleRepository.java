@@ -16,15 +16,20 @@
 
 package digger.repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import digger.model.Role;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface RoleRepository extends Repository<Role, Long> {
     Long count();
     Long countAllByAuthority(String authority);
+
+    @Query(value = "select nextval('authorities_id_seq')", nativeQuery = true)
+    BigDecimal getSequenceNextVal();
     
     Role findByUsername(String username);
 

@@ -18,8 +18,10 @@ package digger.repository;
 
 import digger.model.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 public interface UserRepository extends Repository<User, Long> {
@@ -28,6 +30,9 @@ public interface UserRepository extends Repository<User, Long> {
     
     User findById(long id);
     User findByUsername(String username);
+
+    @Query(value = "select nextval('user_id_seq')", nativeQuery = true)
+    BigDecimal getSequenceNextVal();
 
     List<User> findAll();
     List<User> findAllByOrderByUsernameAsc();

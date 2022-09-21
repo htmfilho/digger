@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -92,7 +93,8 @@ public class TableServiceImpl implements TableService {
         try {
             tableRepository.save(table);
         } catch (DataIntegrityViolationException dive) {
-            tableRepository.getNextVal();
+            BigDecimal seq = tableRepository.getSequenceNextVal();
+            logger.warn("Table sequence out of sync. Incrementing sequence to: {}", seq);
             save(table);
         }
         logger.info("Saved table {}", table.getName());

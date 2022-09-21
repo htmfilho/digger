@@ -27,8 +27,10 @@ import digger.service.TableService;
 import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -134,7 +136,13 @@ public class ColumnServiceImpl implements ColumnService {
 
     public void save(Column column) {
         column.setPrimaryKey(isPrimaryKey(column));
-        columnRepository.save(column);
+        try {
+            columnRepository.save(column);
+        } catch (DataIntegrityViolationException dive) {
+            BigDecimal seq = columnRepository.getSequenceNextVal();
+            logger.warn("Column sequence out of sync. Incrementing sequence to: {}", seq);
+            save(column);
+        }
         logger.info("Saved the column {}", column.getName());
     }
 

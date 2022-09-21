@@ -22,8 +22,10 @@ import digger.service.DatasourceService;
 import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -53,7 +55,13 @@ public class DatasourceServiceImpl implements DatasourceService {
     }
 
     public void save(Datasource datasource) {
-        datasourceRepository.save(datasource);
+        try {
+            datasourceRepository.save(datasource);
+        } catch (DataIntegrityViolationException dive) {
+            BigDecimal seq = datasourceRepository.getSequenceNextVal();
+            logger.warn("Datasource sequence out of sync. Incrementing sequence to: {}", seq);
+            save(datasource);
+        }
         logger.info("Saved datasource {}", datasource.getName());
     }
 

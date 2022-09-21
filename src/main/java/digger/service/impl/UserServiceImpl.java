@@ -26,6 +26,7 @@ import digger.service.UserService;
 import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +34,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +73,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public void save(digger.model.User user) {
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException dive) {
+            BigDecimal seq = userRepository.getSequenceNextVal();
+            logger.warn("User sequence out of sync. Incrementing sequence to: {}", seq);
+            save(user);
+        }
         logger.info("Saved user {}", user.getUsername());
     }
 

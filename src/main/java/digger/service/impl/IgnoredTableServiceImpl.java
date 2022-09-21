@@ -24,8 +24,10 @@ import digger.service.IgnoredTableService;
 import digger.utils.SqlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +42,15 @@ public class IgnoredTableServiceImpl implements IgnoredTableService {
     }
 
     public void save(List<IgnoredTable> ignoredTables) {
-        for (IgnoredTable ignoredTable: ignoredTables) {
-            ignoredTableRepository.save(ignoredTable);
-            logger.info("Saved ignored table {}", ignoredTable.getName());
+        try {
+            for (IgnoredTable ignoredTable: ignoredTables) {
+                ignoredTableRepository.save(ignoredTable);
+                logger.info("Saved ignored table {}", ignoredTable.getName());
+            }
+        } catch (DataIntegrityViolationException dive) {
+            BigDecimal seq = ignoredTableRepository.getSequenceNextVal();
+            logger.warn("IgnoredTable sequence out of sync. Incrementing sequence to: {}", seq);
+            save(ignoredTables);
         }
     }
 

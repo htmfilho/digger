@@ -18,14 +18,20 @@ package digger.repository;
 
 import digger.model.Column;
 import digger.model.Table;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ColumnRepository extends Repository<Column, Long> {
     Long count();
 
     Column findById(Long id);
+
+    @Query(value = "select nextval('table_column_id_seq')", nativeQuery = true)
+    BigDecimal getSequenceNextVal();
 
     List<Column> findAllByOrderByForeignKeyAsc();
     List<Column> findByTable(Table table);
