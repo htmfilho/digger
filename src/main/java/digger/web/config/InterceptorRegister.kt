@@ -13,25 +13,17 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.config
 
-package digger.web.config;
-
-import digger.web.interceptor.LoggerInterceptor;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import digger.web.interceptor.LoggerInterceptor
+import org.springframework.stereotype.Component
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Component
-public class InterceptorRegister implements WebMvcConfigurer {
-
-    private final LoggerInterceptor loggerInterceptor;
-
-    public InterceptorRegister(LoggerInterceptor loggerInterceptor) {
-        this.loggerInterceptor = loggerInterceptor;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loggerInterceptor).addPathPatterns("/admin/**", "/datasources/**", "/users/**", "/error", "/");
+class InterceptorRegister(private val loggerInterceptor: LoggerInterceptor) : WebMvcConfigurer {
+    override fun addInterceptors(registry: InterceptorRegistry) {
+        registry.addInterceptor(loggerInterceptor)
+            .addPathPatterns("/admin/**", "/datasources/**", "/users/**", "/error", "/")
     }
 }
