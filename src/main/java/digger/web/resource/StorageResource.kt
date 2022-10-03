@@ -13,50 +13,36 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.resource
 
-package digger.web.resource;
-
-import digger.model.StorageDto;
-import digger.service.*;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
+import digger.model.StorageDto
+import digger.service.*
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-public class StorageResource {
-
-    private final ColumnService columnService;
-    private final DatasourceService datasourceService;
-    private final IgnoredTableService ignoredTableService;
-    private final RoleService roleService;
-    private final TableService tableService;
-    private final UserService userService;
-
-    public StorageResource(ColumnService columnService, DatasourceService datasourceService,
-                           IgnoredTableService ignoredTableService, RoleService roleService, TableService tableService,
-                           UserService userService) {
-        this.columnService = columnService;
-        this.datasourceService = datasourceService;
-        this.ignoredTableService = ignoredTableService;
-        this.roleService = roleService;
-        this.tableService = tableService;
-        this.userService = userService;
-    }
-
-    @GetMapping(value = "/api/admin/storage", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<StorageDto> getStorage() {
-        List<StorageDto> storageDtos = new ArrayList<>(6);
-
-        storageDtos.add(new StorageDto("Column", this.columnService.countAll()));
-        storageDtos.add(new StorageDto("Datasource", this.datasourceService.countAll()));
-        storageDtos.add(new StorageDto("IgnoredTable", this.ignoredTableService.countAll()));
-        storageDtos.add(new StorageDto("Role", this.roleService.countAll()));
-        storageDtos.add(new StorageDto("Table", this.tableService.countAll()));
-        storageDtos.add(new StorageDto("User", this.userService.countAll()));
-
-        return storageDtos;
-    }
+class StorageResource(
+    private val columnService: ColumnService,
+    private val datasourceService: DatasourceService,
+    private val ignoredTableService: IgnoredTableService,
+    private val roleService: RoleService,
+    private val tableService: TableService,
+    private val userService: UserService
+) {
+    @get:GetMapping(
+        value = ["/api/admin/storage"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    val storage: List<StorageDto>
+        get() {
+            val storageDtos: MutableList<StorageDto> = ArrayList(6)
+            storageDtos.add(StorageDto("Column", columnService.countAll()))
+            storageDtos.add(StorageDto("Datasource", datasourceService.countAll()))
+            storageDtos.add(StorageDto("IgnoredTable", ignoredTableService.countAll()))
+            storageDtos.add(StorageDto("Role", roleService.countAll()))
+            storageDtos.add(StorageDto("Table", tableService.countAll()))
+            storageDtos.add(StorageDto("User", userService.countAll()))
+            return storageDtos
+        }
 }

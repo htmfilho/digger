@@ -13,71 +13,68 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.resource
 
-package digger.web.resource;
-
-import digger.model.Column;
-import digger.model.Datasource;
-import digger.model.Table;
-import digger.service.ColumnService;
-import digger.service.DatasourceService;
-import digger.service.TableService;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import digger.model.Table
+import digger.service.ColumnService
+import digger.service.DatasourceService
+import digger.service.TableService
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
-public class TableResource {
-
-    private final DatasourceService datasourceService;
-    private final TableService tableService;
-    private final ColumnService columnService;
-
-    public TableResource(DatasourceService datasourceService, TableService tableService, ColumnService columnService) {
-        this.datasourceService = datasourceService;
-        this.tableService = tableService;
-        this.columnService = columnService;
+class TableResource(
+    private val datasourceService: DatasourceService,
+    private val tableService: TableService,
+    private val columnService: ColumnService
+) {
+    @GetMapping(value = ["/api/datasources/{datasourceId}/tables"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getTables(
+        @PathVariable datasourceId: Long?,
+        @RequestParam(value = "key", defaultValue = "") key: String?,
+        @RequestParam(value = "except", defaultValue = "") tableId: Long?
+    ): List<Table> {
+        val datasource = datasourceService.findById(datasourceId)
+        return tableService.listTables(datasource, key, Table(tableId))
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Table> getTables(@PathVariable Long datasourceId, 
-                                 @RequestParam(value = "key", defaultValue = "") String key,
-                                 @RequestParam(value = "except", defaultValue = "") Long tableId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        return tableService.listTables(datasource, key, new Table(tableId));
+    @GetMapping(
+        value = ["/api/datasources/{datasourceId}/tables/documented"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun getDocumentedTables(@PathVariable datasourceId: Long?): List<Table> {
+        val datasource = datasourceService.findById(datasourceId)
+        return tableService.findByDatasource(datasource)
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/documented", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Table> getDocumentedTables(@PathVariable Long datasourceId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        return tableService.findByDatasource(datasource);
+    @GetMapping(
+        value = ["/api/datasources/{datasourceId}/tables/{tableId}"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun getTable(@PathVariable datasourceId: Long?, @PathVariable tableId: Long?): Table {
+        val datasource = datasourceService.findById(datasourceId)
+        val table = Table(tableId)
+        return tableService.getTable(datasource, table)
     }
 
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Table getTable(@PathVariable Long datasourceId, @PathVariable Long tableId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        Table table = new Table(tableId);
-        return tableService.getTable(datasource, table);
-    }
-
-    @GetMapping(value = "/api/datasources/{datasourceId}/tables/{tableId}/foreignkeys",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<Table> getForeignKeys(@PathVariable Long datasourceId, @PathVariable Long tableId) {
-        Table table = new Table(tableId);
-        List<Column> columns = columnService.findByTable(table);
-        List<Column> foreignKeys = columnService.findByForeignKeyIn(columns);
-        Set<Table> tables = new TreeSet<>();
-        for(Column column: foreignKeys) {
-            tables.add(column.getTable());
+    @GetMapping(
+        value = ["/api/datasources/{datasourceId}/tables/{tableId}/foreignkeys"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun getForeignKeys(@PathVariable datasourceId: Long?, @PathVariable tableId: Long?): Set<Table> {
+        val table = Table(tableId)
+        val columns = columnService.findByTable(table)
+        val foreignKeys = columnService.findByForeignKeyIn(columns)
+        val tables: MutableSet<Table> = TreeSet()
+        for (column in foreignKeys) {
+            tables.add(column.table)
         }
-        return tables;
+        return tables
     }
 
     @DeleteMapping("/api/datasources/{datasourceId}/tables/{tableId}")
-    public void deleteTable(@PathVariable Long datasourceId, @PathVariable Long tableId) {
-        tableService.delete(tableId);
+    fun deleteTable(@PathVariable datasourceId: Long?, @PathVariable tableId: Long?) {
+        tableService.delete(tableId)
     }
 }

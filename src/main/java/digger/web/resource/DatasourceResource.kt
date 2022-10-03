@@ -13,37 +13,32 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.resource
 
-package digger.web.resource;
-
-import digger.model.Datasource;
-import digger.service.DatasourceService;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import digger.model.Datasource
+import digger.service.DatasourceService
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-public class DatasourceResource {
+class DatasourceResource(private val datasourceService: DatasourceService) {
+    @get:GetMapping(
+        value = ["/api/datasources"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    val datasources: List<Datasource>
+        get() = datasourceService.findAll()
 
-    private final DatasourceService datasourceService;
-
-    public DatasourceResource(DatasourceService datasourceService) {
-        this.datasourceService = datasourceService;
-    }
-
-    @GetMapping(value = "/api/datasources", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Datasource> getDatasources() {
-        return this.datasourceService.findAll();
-    }
-
-    @GetMapping(value = "/api/datasources/{datasourceId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Datasource getDatasource(@PathVariable Long datasourceId) {
-        return this.datasourceService.findById(datasourceId);
+    @GetMapping(value = ["/api/datasources/{datasourceId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getDatasource(@PathVariable datasourceId: Long?): Datasource {
+        return datasourceService.findById(datasourceId)
     }
 
     @DeleteMapping("/api/datasources/{datasourceId}")
-    public void deleteDatasource(@PathVariable Long datasourceId) {
-        datasourceService.delete(datasourceId);
+    fun deleteDatasource(@PathVariable datasourceId: Long?) {
+        datasourceService.delete(datasourceId)
     }
 }

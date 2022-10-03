@@ -13,53 +13,43 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.resource
 
-package digger.web.resource;
-
-import digger.model.Role;
-import digger.model.User;
-import digger.model.UserDto;
-import digger.service.RoleService;
-import digger.service.UserService;
-
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import digger.model.UserDto
+import digger.service.RoleService
+import digger.service.UserService
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
 
 @RestController
-public class UserResource {
-
-    private final UserService userService;
-    private final RoleService roleService;
-
-    public UserResource(UserService userService, RoleService roleService) {
-        this.userService = userService;
-        this.roleService = roleService;
-    }
-
-    @GetMapping(value = "/api/admin/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDto> getUsers() {
-        List<User> users = this.userService.findAll();
-        List<UserDto> usersDTO = new ArrayList<>();
-        for(User user : users) {
-            Role role = roleService.findByUsername(user.getUsername());
-            UserDto userDTO = new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(),
-                                          user.getEnabled(), role.getAuthority());
-            usersDTO.add(userDTO);
+class UserResource(private val userService: UserService, private val roleService: RoleService) {
+    @get:GetMapping(
+        value = ["/api/admin/users"],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    val users: List<UserDto>
+        get() {
+            val users = userService.findAll()
+            val usersDTO: MutableList<UserDto> = ArrayList()
+            for (user in users) {
+                val role = roleService.findByUsername(user.username)
+                val userDTO = UserDto(
+                    user.id, user.firstName, user.lastName, user.username,
+                    user.enabled, role.authority
+                )
+                usersDTO.add(userDTO)
+            }
+            return usersDTO
         }
-        return usersDTO;
-    }
 
-    @PostMapping(value = "/api/admin/users")
-    public void saveUser(@RequestParam(value = "username", defaultValue = "") String username) {
-        User user = userService.findByUsername(username);
-        userService.enableOrDisableUser(user);
+    @PostMapping(value = ["/api/admin/users"])
+    fun saveUser(@RequestParam(value = "username", defaultValue = "") username: String?) {
+        val user = userService.findByUsername(username)
+        userService.enableOrDisableUser(user)
     }
 
     @DeleteMapping("/api/admin/users/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
-        userService.delete(userId);
+    fun deleteUser(@PathVariable userId: Long?) {
+        userService.delete(userId)
     }
 }
