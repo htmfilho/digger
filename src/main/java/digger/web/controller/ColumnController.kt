@@ -13,95 +13,84 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.controller
 
-package digger.web.controller;
-
-import digger.model.Column;
-import digger.model.Datasource;
-import digger.model.Table;
-import digger.service.ColumnService;
-import digger.service.DatasourceService;
-import digger.service.TableService;
-import digger.utils.Asciidoc;
-import digger.utils.Text;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import digger.model.Column
+import digger.service.ColumnService
+import digger.service.DatasourceService
+import digger.service.TableService
+import digger.utils.Asciidoc
+import digger.utils.Text
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
-public class ColumnController {
-
-    private final DatasourceService datasourceService;
-    private final TableService tableService;
-    private final ColumnService columnService;
-    private final Asciidoc asciidoc;
-    private final Text text;
-
-    @Value("${user.guide.url}")
-    private String userGuideUrl;
-
-    public ColumnController(DatasourceService datasourceService, TableService tableService, ColumnService columnService, Asciidoc asciidoc, Text text) {
-        this.datasourceService = datasourceService;
-        this.tableService = tableService;
-        this.columnService = columnService;
-        this.asciidoc = asciidoc;
-        this.text = text;
-    }
-
+class ColumnController(
+    private val datasourceService: DatasourceService,
+    private val tableService: TableService,
+    private val columnService: ColumnService,
+    private val asciidoc: Asciidoc,
+    private val text: Text
+) {
+    @Value("\${user.guide.url}")
+    private val userGuideUrl: String? = null
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/new")
-    public String newColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("table", tableService.findById(tableId));
-        model.addAttribute("column", new Column());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#column-form");
-        return "column_form";
+    fun newColumn(model: Model, @PathVariable datasourceId: Long?, @PathVariable tableId: Long?): String {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId))
+        model.addAttribute("table", tableService.findById(tableId))
+        model.addAttribute("column", Column())
+        model.addAttribute("userGuideUrl", "$userGuideUrl#column-form")
+        return "column_form"
     }
 
     @PostMapping("/datasources/{datasourceId}/tables/{tableId}/columns")
-    public String saveColumn(@PathVariable Long datasourceId, @PathVariable Long tableId, @ModelAttribute Column column) {
-        boolean newOne = column.getId() == null;
-
-        Table table = tableService.findById(tableId);
-
-        column.setTable(table);
-        column.setFriendlyName(text.toFirstLetterUppercase(column.getFriendlyName()));
-        columnService.save(column);
-
-        if (newOne)
-            return "redirect:/datasources/{datasourceId}/tables/{tableId}";
-        else
-            return "redirect:/datasources/{datasourceId}/tables/{tableId}/columns/" + column.getId();
+    fun saveColumn(
+        @PathVariable datasourceId: Long?,
+        @PathVariable tableId: Long?,
+        @ModelAttribute column: Column
+    ): String {
+        val newOne = column.id == null
+        val table = tableService.findById(tableId)
+        column.table = table
+        column.friendlyName = text.toFirstLetterUppercase(column.friendlyName)
+        columnService.save(column)
+        return if (newOne) "redirect:/datasources/{datasourceId}/tables/{tableId}" else "redirect:/datasources/{datasourceId}/tables/{tableId}/columns/" + column.id
     }
 
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}")
-    public String openColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @PathVariable Long columnId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
-        if(datasource == null) return "redirect:/";
-        model.addAttribute("datasource", datasource);
-
-        Table table = tableService.findById(tableId);
-        if(table == null) return "redirect:/datasources/{datasourceId}";
-        model.addAttribute("table", table);
-
-        Column column = columnService.findById(columnId);
-        if(column == null) return "redirect:/datasources/{datasourceId}/tables/{tableId}";
-        
-        column.setDocumentation(asciidoc.toHtml(column.getDocumentation()));
-
-        model.addAttribute("column", column);
-        model.addAttribute("userGuideUrl", userGuideUrl + "#column");
-
-        return "column";
+    fun openColumn(
+        model: Model,
+        @PathVariable datasourceId: Long?,
+        @PathVariable tableId: Long?,
+        @PathVariable columnId: Long?
+    ): String {
+        val datasource = datasourceService.findById(datasourceId) ?: return "redirect:/"
+        model.addAttribute("datasource", datasource)
+        val table = tableService.findById(tableId) ?: return "redirect:/datasources/{datasourceId}"
+        model.addAttribute("table", table)
+        val column = columnService.findById(columnId) ?: return "redirect:/datasources/{datasourceId}/tables/{tableId}"
+        column.documentation = asciidoc.toHtml(column.documentation)
+        model.addAttribute("column", column)
+        model.addAttribute("userGuideUrl", "$userGuideUrl#column")
+        return "column"
     }
 
     @GetMapping("/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit")
-    public String editColumn(Model model, @PathVariable Long datasourceId, @PathVariable Long tableId, @PathVariable Long columnId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("table", tableService.findById(tableId));
-        model.addAttribute("column", columnService.findById(columnId));
-        model.addAttribute("userGuideUrl", userGuideUrl + "#column-form");
-        return "column_form";
+    fun editColumn(
+        model: Model,
+        @PathVariable datasourceId: Long?,
+        @PathVariable tableId: Long?,
+        @PathVariable columnId: Long?
+    ): String {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId))
+        model.addAttribute("table", tableService.findById(tableId))
+        model.addAttribute("column", columnService.findById(columnId))
+        model.addAttribute("userGuideUrl", "$userGuideUrl#column-form")
+        return "column_form"
     }
 }

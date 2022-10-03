@@ -13,98 +13,81 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.controller
 
-package digger.web.controller;
-
-import digger.model.User;
-import digger.model.UserDto;
-import digger.service.UserService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.security.Principal;
+import digger.model.User
+import digger.model.UserDto
+import digger.service.UserService
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.crypto.factory.PasswordEncoderFactories
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping
+import java.security.Principal
 
 @Controller
-public class IdentificationController {
-    private static final Logger logger = LoggerFactory.getLogger(IdentificationController.class);
-
-    private final UserService userService;
-
-    @Value("${user.guide.url}")
-    private String userGuideUrl;
-
-    public IdentificationController(UserService userService) {
-        this.userService = userService;
-    }
-
+class IdentificationController(private val userService: UserService) {
+    @Value("\${user.guide.url}")
+    private val userGuideUrl: String? = null
     @GetMapping("/login")
-    public String login(Model model) {
-        if(this.userService.thereIsNoUser())
-            return "redirect:/signup";
-
-        model.addAttribute("userGuideUrl", userGuideUrl + "#login");
-        return "login";
+    fun login(model: Model): String {
+        if (userService.thereIsNoUser()) return "redirect:/signup"
+        model.addAttribute("userGuideUrl", "$userGuideUrl#login")
+        return "login"
     }
 
     @GetMapping("/signup")
-    public String signUp(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#signup");
-        return "signup";
+    fun signUp(model: Model): String {
+        model.addAttribute("user", User())
+        model.addAttribute("thereIsNoUser", userService.thereIsNoUser())
+        model.addAttribute("userGuideUrl", "$userGuideUrl#signup")
+        return "signup"
     }
 
     @PostMapping("/users/new")
-    public String newUser(Model model, @ModelAttribute User user) {
+    fun newUser(model: Model, @ModelAttribute user: User): String {
         try {
-            if(this.userService.thereIsNoUser())
-                userService.registerAdmin(user);
-            else
-                userService.registerReader(user);
-        } catch (RuntimeException re) {
-            logger.error(re.getMessage(), re);
-            model.addAttribute("user", user);
-            model.addAttribute("thereIsNoUser", this.userService.thereIsNoUser());
-            model.addAttribute("emailError", "A user with email '"+ user.getUsername() +"' already exists.");
-            return "signup";
+            if (userService.thereIsNoUser()) userService.registerAdmin(user) else userService.registerReader(user)
+        } catch (re: RuntimeException) {
+            logger.error(re.message, re)
+            model.addAttribute("user", user)
+            model.addAttribute("thereIsNoUser", userService.thereIsNoUser())
+            model.addAttribute("emailError", "A user with email '" + user.username + "' already exists.")
+            return "signup"
         }
-        return "redirect:/";
+        return "redirect:/"
     }
 
     @GetMapping("/users/profile")
-    public String userProfile(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#profile");
-        return "profile";
+    fun userProfile(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#profile")
+        return "profile"
     }
 
     @GetMapping("/users/password")
-    public String changePassword(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#change-password");
-        return "change_password";
+    fun changePassword(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#change-password")
+        return "change_password"
     }
 
     @PostMapping("/users/password")
-    public String changePassword(Model model, Principal principal, @ModelAttribute UserDto user) {
-        User existingUser = userService.findByUsername(principal.getName());
-
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        if (passwordEncoder.matches(user.getCurrentPassword(), existingUser.getPassword())) {
-            existingUser = userService.changePassword(existingUser, user.getPassword());
-            logger.info("Changed the password of the user {}", existingUser.getUsername());
-            userService.save(existingUser);
-            return "redirect:/users/profile";
+    fun changePassword(model: Model, principal: Principal, @ModelAttribute user: UserDto): String {
+        var existingUser = userService.findByUsername(principal.name)
+        val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
+        if (passwordEncoder.matches(user.currentPassword, existingUser.password)) {
+            existingUser = userService.changePassword(existingUser, user.password)
+            logger.info("Changed the password of the user {}", existingUser.username)
+            userService.save(existingUser)
+            return "redirect:/users/profile"
         }
+        model.addAttribute("passwordMatchError", "Current password doesn't match.")
+        return "change_password"
+    }
 
-        model.addAttribute("passwordMatchError", "Current password doesn't match.");
-        return "change_password";
+    companion object {
+        private val logger = LoggerFactory.getLogger(IdentificationController::class.java)
     }
 }

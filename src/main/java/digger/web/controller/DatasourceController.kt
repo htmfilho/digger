@@ -13,73 +13,62 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.controller
 
-package digger.web.controller;
-
-import digger.model.Datasource;
-import digger.model.enums.SupportedDriverClass;
-import digger.service.DatasourceService;
-import digger.service.TableService;
-
-import java.sql.SQLException;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import digger.model.Datasource
+import digger.model.enums.SupportedDriverClass
+import digger.service.DatasourceService
+import digger.service.TableService
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import java.sql.SQLException
 
 @Controller
-public class DatasourceController {
-
-    private final DatasourceService datasourceService;
-    private final TableService tableService;
-
-    @Value("${user.guide.url}")
-    private String userGuideUrl;
-
-    public DatasourceController(DatasourceService datasourceService, TableService tableService) {
-        this.datasourceService = datasourceService;
-        this.tableService = tableService;
-    }
-
+class DatasourceController(private val datasourceService: DatasourceService, private val tableService: TableService) {
+    @Value("\${user.guide.url}")
+    private val userGuideUrl: String? = null
     @GetMapping("/datasources/new")
-    public String newDatasource(Model model) {
-        model.addAttribute("datasource", new Datasource());
-        model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#datasource-form");
-        return "datasource_form";
+    fun newDatasource(model: Model): String {
+        model.addAttribute("datasource", Datasource())
+        model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses())
+        model.addAttribute("userGuideUrl", "$userGuideUrl#datasource-form")
+        return "datasource_form"
     }
 
     @PostMapping("/datasources")
-    public String saveDatasource(@ModelAttribute Datasource datasource) {
-        if (datasource.getId() != null) {
-            Datasource existingDatasource = datasourceService.findById(datasource.getId());
-            datasource.setTotalTables(existingDatasource.getTotalTables());
+    fun saveDatasource(@ModelAttribute datasource: Datasource): String {
+        if (datasource.id != null) {
+            val existingDatasource = datasourceService.findById(datasource.id)
+            datasource.totalTables = existingDatasource.totalTables
         }
-        datasourceService.save(datasource);
-
-        return "index";
+        datasourceService.save(datasource)
+        return "index"
     }
 
     @GetMapping("/datasources/{datasourceId}")
-    public String openDatasource(Model model, @PathVariable Long datasourceId) {
-        Datasource datasource = datasourceService.findById(datasourceId);
+    fun openDatasource(model: Model, @PathVariable datasourceId: Long?): String {
+        val datasource = datasourceService.findById(datasourceId)
         try {
-            datasource.setStatus(datasourceService.testConnection(datasource));
-        } catch (SQLException e) {
-            model.addAttribute("exception", e.getMessage());
+            datasource.status = datasourceService.testConnection(datasource)
+        } catch (e: SQLException) {
+            model.addAttribute("exception", e.message)
         }
-        model.addAttribute("datasource", datasource);
-        model.addAttribute("progress", tableService.calculateProgress(datasource));
-        model.addAttribute("userGuideUrl", userGuideUrl + "#datasource");
-        return "datasource";
+        model.addAttribute("datasource", datasource)
+        model.addAttribute("progress", tableService.calculateProgress(datasource))
+        model.addAttribute("userGuideUrl", "$userGuideUrl#datasource")
+        return "datasource"
     }
 
     @GetMapping("/datasources/{datasourceId}/edit")
-    public String editDatasource(Model model, @PathVariable Long datasourceId) {
-        model.addAttribute("datasource", datasourceService.findById(datasourceId));
-        model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses());
-        model.addAttribute("userGuideUrl", userGuideUrl + "#datasource-form");
-        return "datasource_form";
+    fun editDatasource(model: Model, @PathVariable datasourceId: Long?): String {
+        model.addAttribute("datasource", datasourceService.findById(datasourceId))
+        model.addAttribute("supportedDriverClasses", SupportedDriverClass.getListSupportedDriverClasses())
+        model.addAttribute("userGuideUrl", "$userGuideUrl#datasource-form")
+        return "datasource_form"
     }
 }

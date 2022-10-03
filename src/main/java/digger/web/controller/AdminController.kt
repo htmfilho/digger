@@ -13,205 +13,194 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
+package digger.web.controller
 
-package digger.web.controller;
-
-import digger.exception.RoleAssignmentException;
-import digger.service.AdminService;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import digger.model.Role;
-import digger.model.User;
-import digger.model.UserDto;
-import digger.model.enums.RoleKind;
-import digger.service.RoleService;
-import digger.service.UserService;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
+import digger.exception.RoleAssignmentException
+import digger.model.UserDto
+import digger.model.enums.RoleKind
+import digger.service.AdminService
+import digger.service.RoleService
+import digger.service.UserService
+import org.apache.commons.io.IOUtils
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.env.Environment
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import org.springframework.web.servlet.ModelAndView
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import java.io.ByteArrayInputStream
+import java.io.IOException
+import java.io.InputStream
+import javax.servlet.http.HttpServletResponse
 
 @Controller
-public class AdminController {
-    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
-    private final UserService userService;
-    private final RoleService roleService;
-    private final AdminService adminService;
-    private final Environment environment;
-
-    public AdminController(UserService userService, RoleService roleService, AdminService adminService, Environment environment) {
-        this.userService = userService;
-        this.roleService = roleService;
-        this.adminService = adminService;
-        this.environment = environment;
-    }
-
-    @Value("${user.guide.url}")
-    private String userGuideUrl;
-
+class AdminController(
+    private val userService: UserService,
+    private val roleService: RoleService,
+    private val adminService: AdminService,
+    private val environment: Environment
+) {
+    @Value("\${user.guide.url}")
+    private val userGuideUrl: String? = null
     @GetMapping("/admin")
-    public String admin(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin");
-        return "admin/index";
+    fun admin(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin")
+        return "admin/index"
     }
 
     @GetMapping("/admin/users")
-    public String listUsers(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-users");
-        return "admin/users";
+    fun listUsers(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin-users")
+        return "admin/users"
     }
 
     @GetMapping("/admin/storage")
-    public String viewStorage(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-storage");
-        addDatasourceAttributes(model);
-
-        return "admin/storage";
+    fun viewStorage(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin-storage")
+        addDatasourceAttributes(model)
+        return "admin/storage"
     }
 
     @GetMapping("/admin/storage/backup")
-    public void downloadBackup(HttpServletResponse response) throws IOException {
-        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        response.setHeader("Content-disposition", "attachment; filename=digger-backup.sql");
-
-        List<String> sqlStatements = adminService.exportToSql();
-        StringBuilder sqlBackup = new StringBuilder();
-        for (String sqlStatement: sqlStatements) {
-            sqlBackup.append(sqlStatement);
-            sqlBackup.append("\n");
+    @Throws(IOException::class)
+    fun downloadBackup(response: HttpServletResponse) {
+        response.contentType = MediaType.APPLICATION_OCTET_STREAM_VALUE
+        response.setHeader("Content-disposition", "attachment; filename=digger-backup.sql")
+        val sqlStatements = adminService.exportToSql()
+        val sqlBackup = StringBuilder()
+        for (sqlStatement in sqlStatements) {
+            sqlBackup.append(sqlStatement)
+            sqlBackup.append("\n")
         }
-
-        InputStream is = new ByteArrayInputStream(sqlBackup.toString().getBytes());
-        IOUtils.copy(is, response.getOutputStream());
-        response.flushBuffer();
+        val `is`: InputStream = ByteArrayInputStream(sqlBackup.toString().toByteArray())
+        IOUtils.copy(`is`, response.outputStream)
+        response.flushBuffer()
     }
 
     @GetMapping("/admin/storage/restore")
-    public String restoreBackup(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-storage");
-        model.addAttribute("isDatabaseEmpty", adminService.isDatabaseEmpty());
-        addDatasourceAttributes(model);
-
-        return "admin/restore_form";
+    fun restoreBackup(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin-storage")
+        model.addAttribute("isDatabaseEmpty", adminService.isDatabaseEmpty)
+        addDatasourceAttributes(model)
+        return "admin/restore_form"
     }
 
     @PostMapping("/admin/storage/restore")
-    public String restoreBackupFile(@RequestParam("backupFile") MultipartFile backupFile, Model model, RedirectAttributes redirectAttributes) {
-        if(!adminService.isDatabaseEmpty()) {
-            model.addAttribute("error", "The database is not empty");
-            return "/admin/storage/restore";
+    fun restoreBackupFile(
+        @RequestParam("backupFile") backupFile: MultipartFile,
+        model: Model,
+        redirectAttributes: RedirectAttributes
+    ): String {
+        if (!adminService.isDatabaseEmpty) {
+            model.addAttribute("error", "The database is not empty")
+            return "/admin/storage/restore"
         }
-
         try {
-            adminService.restoreBackup(backupFile.getInputStream());
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            model.addAttribute("error", e.getMessage());
-            return "/admin/storage/restore";
+            adminService.restoreBackup(backupFile.inputStream)
+        } catch (e: IOException) {
+            logger.error(e.message, e)
+            model.addAttribute("error", e.message)
+            return "/admin/storage/restore"
         }
-
-        redirectAttributes.addFlashAttribute("message", "The backup file " + backupFile.getOriginalFilename() + " was successfully restored.");
-
-        return "redirect:/";
+        redirectAttributes.addFlashAttribute(
+            "message",
+            "The backup file " + backupFile.originalFilename + " was successfully restored."
+        )
+        return "redirect:/"
     }
 
     @GetMapping("/admin/environment")
-    public String viewEnvironment(Model model) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-environment");
-
-        model.addAttribute("springProfilesActive", environment.getProperty("spring.profiles.active"));
-        addDatasourceAttributes(model);
-        model.addAttribute("springJpaPropertiesHibernateJdbcLobNonContextualCreation", environment.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation"));
-
-        model.addAttribute("loggingLevelRoot", environment.getProperty("logging.level.root"));
-        model.addAttribute("loggingFileName", environment.getProperty("logging.file.name"));
-        model.addAttribute("loggingLevelLiquibase", environment.getProperty("logging.level.liquibase"));
-
-        model.addAttribute("springApplicationName", environment.getProperty("spring.application.name"));
-        model.addAttribute("userGuideUrl", environment.getProperty("user.guide.url"));
-
-        model.addAttribute("serverPort", environment.getProperty("server.port"));
-        model.addAttribute("serverSessionTimeout", environment.getProperty("server.session.timeout"));
-
-        model.addAttribute("springThymeleafCache", environment.getProperty("spring.thymeleaf.cache"));
-
-        return  "admin/environment";
+    fun viewEnvironment(model: Model): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin-environment")
+        model.addAttribute("springProfilesActive", environment.getProperty("spring.profiles.active"))
+        addDatasourceAttributes(model)
+        model.addAttribute(
+            "springJpaPropertiesHibernateJdbcLobNonContextualCreation",
+            environment.getProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation")
+        )
+        model.addAttribute("loggingLevelRoot", environment.getProperty("logging.level.root"))
+        model.addAttribute("loggingFileName", environment.getProperty("logging.file.name"))
+        model.addAttribute("loggingLevelLiquibase", environment.getProperty("logging.level.liquibase"))
+        model.addAttribute("springApplicationName", environment.getProperty("spring.application.name"))
+        model.addAttribute("userGuideUrl", environment.getProperty("user.guide.url"))
+        model.addAttribute("serverPort", environment.getProperty("server.port"))
+        model.addAttribute("serverSessionTimeout", environment.getProperty("server.session.timeout"))
+        model.addAttribute("springThymeleafCache", environment.getProperty("spring.thymeleaf.cache"))
+        return "admin/environment"
     }
 
-    private void addDatasourceAttributes(Model model) {
-        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"));
-        model.addAttribute("springDatasourceDriverClassName", environment.getProperty("spring.datasource.driver-class-name"));
-        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"));
-        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"));
-        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"));
-        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"));
+    private fun addDatasourceAttributes(model: Model) {
+        model.addAttribute("springLiquibaseEnabled", environment.getProperty("spring.liquibase.enabled"))
+        model.addAttribute(
+            "springDatasourceDriverClassName",
+            environment.getProperty("spring.datasource.driver-class-name")
+        )
+        model.addAttribute("springDatasourceUrl", environment.getProperty("spring.datasource.url"))
+        model.addAttribute("springDatasourceUsername", environment.getProperty("spring.datasource.username"))
+        model.addAttribute("springJpaHibernateDdlAuto", environment.getProperty("spring.jpa.hibernate.ddl-auto"))
+        model.addAttribute("springJpaShowSql", environment.getProperty("spring.jpa.show-sql"))
     }
 
     @PostMapping("/admin/users")
-    public String saveUser( @ModelAttribute UserDto user) {
-        User existingUser = userService.findById(user.getId());
-        existingUser.setUsername(user.getUsername());
-        existingUser.setFirstName(user.getFirstName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setEnabled(user.getEnabled() != null ? user.getEnabled() : false);
-
-        if (!user.getPassword().trim().isEmpty()) {
-            existingUser = userService.changePassword(existingUser, user.getPassword());
-            logger.info("Changed the password of the user {}", existingUser.getUsername());
+    fun saveUser(@ModelAttribute user: UserDto): String {
+        var existingUser = userService.findById(user.id)
+        existingUser.username = user.username
+        existingUser.firstName = user.firstName
+        existingUser.lastName = user.lastName
+        existingUser.enabled = if (user.enabled != null) user.enabled else false
+        if (!user.password.trim { it <= ' ' }.isEmpty()) {
+            existingUser = userService.changePassword(existingUser, user.password)
+            logger.info("Changed the password of the user {}", existingUser.username)
         }
-
-        RoleKind roleKind = RoleKind.valueOf(user.getMainRole());
-
-        userService.save(existingUser, roleKind);
-
-        return "redirect:/admin/users/"+ user.getId();
+        val roleKind = RoleKind.valueOf(user.mainRole)
+        userService.save(existingUser, roleKind)
+        return "redirect:/admin/users/" + user.id
     }
 
     @GetMapping("/admin/users/{id}")
-    public String openUser(Model model, @PathVariable Long id) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDto userDTO = createUserDto(id);
-        model.addAttribute("user", userDTO);
-        return "admin/user";
+    fun openUser(model: Model, @PathVariable id: Long): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin-user")
+        val userDTO = createUserDto(id)
+        model.addAttribute("user", userDTO)
+        return "admin/user"
     }
 
     @GetMapping("/admin/users/{id}/edit")
-    public String editUser(Model model, @PathVariable Long id) {
-        model.addAttribute("userGuideUrl", userGuideUrl + "#admin-user");
-        UserDto userDTO = createUserDto(id);
-        model.addAttribute("user", userDTO);
-        return "admin/user_form";
+    fun editUser(model: Model, @PathVariable id: Long): String {
+        model.addAttribute("userGuideUrl", "$userGuideUrl#admin-user")
+        val userDTO = createUserDto(id)
+        model.addAttribute("user", userDTO)
+        return "admin/user_form"
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(RoleAssignmentException.class)
-    public ModelAndView handleRoleAssignmentExceptions(RoleAssignmentException rae) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/user_form");
-        modelAndView.addObject("userGuideUrl", userGuideUrl + "#admin-user");
-        modelAndView.addObject("error", rae.getMessage());
-        modelAndView.addObject("user", createUserDto(rae.getUser().getId()));
-        return modelAndView;
+    @ExceptionHandler(
+        RoleAssignmentException::class
+    )
+    fun handleRoleAssignmentExceptions(rae: RoleAssignmentException): ModelAndView {
+        val modelAndView = ModelAndView()
+        modelAndView.viewName = "admin/user_form"
+        modelAndView.addObject("userGuideUrl", "$userGuideUrl#admin-user")
+        modelAndView.addObject("error", rae.message)
+        modelAndView.addObject("user", createUserDto(rae.user.id))
+        return modelAndView
     }
 
-    private UserDto createUserDto(Long id) {
-        User user = userService.findById(id);
-        Role role = roleService.findByUsername(user.getUsername());
-        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEnabled(),
-                role.getAuthority());
+    private fun createUserDto(id: Long): UserDto {
+        val user = userService.findById(id)
+        val role = roleService.findByUsername(user.username)
+        return UserDto(
+            user.id, user.firstName, user.lastName, user.username, user.enabled,
+            role.authority
+        )
+    }
+
+    companion object {
+        private val logger = LoggerFactory.getLogger(AdminController::class.java)
     }
 }
