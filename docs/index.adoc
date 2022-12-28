@@ -215,6 +215,11 @@ Then create the database for the application:
     $ psql -d digger
       =# grant connect on database digger to digger_usr;
       =# \q
+      
+If you accidentaly created the user without the `-P` argument, just drop the user and create it again:
+
+    $ dropuser digger
+    $ createuser digger_usr -P
 
 == Security
 
