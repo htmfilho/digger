@@ -937,7 +937,7 @@ $ createuser digger_usr -P</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the database was already created and the username has changed, some tables may remain under the ownership of a previous user. If you get an error like "<em>permission denied for table [table_name]</em>" then it might be the case. To address that, use the alter table statement for each impacted table:</p>
+<p>If the database was already created and the username has changed, some tables may remain under the ownership of a previous user. If you get an error like "<em>permission denied for table [table_name]</em>" then it might be the case. Use the command <code>\dt</code> to list all the tables with their ownership. For each one of the impacted tables, use the <code>alter table</code> statement:</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -2528,7 +2528,7 @@ Copyright &#169; 2019-2022 Hildeberto Mendonca</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.10.0<br>
-Last updated 2023-01-05 13:12:59 -0500
+Last updated 2023-01-05 13:22:21 -0500
 </div>
 </div>
 </body>

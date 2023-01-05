@@ -221,7 +221,7 @@ If you accidentaly created the user without the `-P` argument, just drop the use
     $ dropuser digger
     $ createuser digger_usr -P
 
-If the database was already created and the username has changed, some tables may remain under the ownership of a previous user. If you get an error like "_permission denied for table [table_name]_" then it might be the case. To address that, use the alter table statement for each impacted table:
+If the database was already created and the username has changed, some tables may remain under the ownership of a previous user. If you get an error like "_permission denied for table [table_name]_" then it might be the case. Use the command `\dt` to list all the tables with their ownership. For each one of the impacted tables, use the `alter table` statement:
 
     $ psql -d digger
       =# alter table table_name owner to digger_usr
