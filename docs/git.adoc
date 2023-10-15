@@ -74,7 +74,7 @@ This configuration works only when we use a ssh connection to GitHub. To verify 
     $ cd ~/java/projects/digger
     $ git remote -v
 
-If the url starts with https:// then you are using https instead of ssh. In this case, you should change the url to the ssh one:
+If the url starts with https:// then you are using `https` instead of `ssh`. In this case, you should change the url to the ssh one:
 
     $ git remote set-url origin git@github.com:htmfilho/digger.git
 
@@ -147,6 +147,10 @@ Create a new clone to use as workshop:
     $ cd ..
     $ git clone git@github.com:htmfilho/digger.git digger-temp
     $ cd digger-temp
+
+You can also clone a specific branch:
+
+    $ git clone --branch bugfix git@github.com:htmfilho/digger.git digger-temp
 
 Look at the log to see the id of the latest valid commit:
 
