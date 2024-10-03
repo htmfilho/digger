@@ -18,3 +18,4 @@ os-service/digger-0.2.0.jar
 *.exe
 *.jar
 *.log
+digger-backup.sql
