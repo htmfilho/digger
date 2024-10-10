@@ -22,7 +22,7 @@
         <div th:unless="${isDatabaseEmpty}" class="alert alert-warning" role="alert">The database is not empty. Backup cannot be restored.</div>
 
         <br>
-        <div class="form-group" th:if="${isDatabaseEmpty}">
+        <div class="mb-3" th:if="${isDatabaseEmpty}">
             <label for="backupFile">Backup File</label>
             <input type="file" name="backupFile" id="backupFile" class="form-control" accept=".sql" required>
         </div>

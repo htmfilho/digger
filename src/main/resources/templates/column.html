@@ -34,19 +34,19 @@
 
             <div class="row">
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="table-link">Table</label><br>
                         <div id="table-link"><a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${table.id})}" th:utext="${table.friendlyName}"></a></div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="friendly-name">Friendly Name</label>
                         <div id="friendly-name" th:utext="${column.friendlyName}"></div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="name">Physical Name</label>
                         <div id="name" th:utext="${column.name}"></div>
                     </div>
@@ -55,20 +55,20 @@
 
             <div class="row">
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="type">Type</label><br>
                         <span id="type" th:utext="${column.type}"></span> 
                         (<span id="size" th:utext="${column.size}"></span>)
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="defaultValue">Nullable</label>
                         <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${column.nullable})}"></div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="defaultValue">Default Value</label>
                         <div id="defaultValue" th:utext="${column.defaultValue}"></div>
                     </div>
@@ -77,13 +77,13 @@
 
             <div class="row">
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label>Primary Key</label>
                         <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${column.primaryKey})}"></div>
                     </div>
                 </div>
                 <div class="col-8">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label>Sensitive</label><br>
                         <div><img th:attr="src=@{/images/{enabled}.svg(enabled=${column.sensitive})}"></div>
                     </div>
@@ -95,7 +95,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label>Table</label><br>
                                 <img src="/images/table-small.svg">
                                 <a th:href="@{/datasources/{datasourceId}/tables/{tableId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id})}"
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label>Column</label><br>
                                 <img src="/images/key.svg">
                                 <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}(datasourceId=${datasource.id}, tableId=${column.foreignKey.table.id}, columnId=${column.foreignKey.id})}"

@@ -10,7 +10,7 @@
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables(datasourceId=${datasource.id})}">
                 <div class="row">
                     <div class="col-5">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="database-table-name">Physical Name *</label>
                             <input type="hidden" id="name-aux" th:value="${table.name}"/>
                             <select class="form-control" id="database-table-name" name="name" required>
@@ -19,14 +19,14 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="type">Type</label>
                             <div id="type-label">-</div>
                             <input type="hidden" name="type" id="type">
                         </div>
                     </div>
                     <div class="col-5">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="friendlyName">Friendly Name</label>
                             <input type="text" class="form-control" id="friendlyName" name="friendlyName" th:value="${table.friendlyName}">
                         </div>

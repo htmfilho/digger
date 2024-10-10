@@ -22,20 +22,20 @@
 
                 <div class="row">
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="username">Username</label>
                             <p th:text="${user.username}"></p>
                             <input type="hidden" id="username" name="username" th:value="${user.username}">
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="lastName">Last Name</label>
                             <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" class="form-control" required>
                         </div>
@@ -44,7 +44,7 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="roleAdmin">Role</label><br>
 
                             <div class="form-check form-check-inline">
@@ -62,9 +62,9 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="password">Status</label>
-                            <div class="form-group form-check">
+                            <div class="mb-3 form-check">
                                 <input class="form-check-input" type="checkbox" name="enabled" id="enabled" th:checked="${user.enabled}"/>
                                 <span class="form-check-label">Enabled</span>
                             </div>
@@ -78,13 +78,13 @@
                         <h6 class="card-subtitle mb-2 text-muted">Just fill in the fields below if you want to change the user password.</h6>
                         <div class="row">
                             <div class="col-6">
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label for="password"> Password</label>
                                     <input type="password" name="password" id="password" class="form-control">
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label for="confirmPassword"> Confirm Password</label>
                                     <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
                                     <small id="confirmPasswordError" class="error"></small>

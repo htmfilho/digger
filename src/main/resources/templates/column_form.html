@@ -11,13 +11,13 @@
             <form method="POST" th:action="@{/datasources/{datasourceId}/tables/{tableId}/columns(datasourceId=${datasource.id}, tableId=${table.id})}">
                 <div class="row">
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label>Table</label><br>
                             <span th:utext="${table.friendlyName}"></span> (<span th:utext="${table.name}"></span>)
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="table-column-name">Physical Name *</label>
                             <input type="hidden" id="name-aux" th:value="${column.name}"/>
                             <select class="form-control" id="table-column-name" name="name" required>
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="friendlyName">Friendly Name</label>
                             <input type="text" class="form-control" id="friendlyName" name="friendlyName" th:value="${column.friendlyName}">
                         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="type">Type</label>
                             <div id="type-label">-</div>
                             <input type="hidden" name="type" id="type" th:value="${column.type}">
@@ -42,14 +42,14 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="nullable">Nullable</label>
                             <div id="nullable-label">-</div>
                             <input type="hidden" name="nullable" id="nullable" th:value="${column.nullable}">
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="sensitive">Sensitive</label>
                             <div>
                                 <input type="checkbox" id="sensitive" name="sensitive" th:checked="${column.sensitive}">
@@ -65,7 +65,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label for="foreign-table">Table</label>
                                     <input type="hidden" id="foreign-table-aux" th:value="${column.foreignKey.table.id}" th:unless="${#lists.isEmpty(column.foreignKey)}"/>
                                     <select class="form-control" id="foreign-table">
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label for="foreignKey">Column</label>
                                     <input type="hidden" id="foreign-column-aux" th:value="${column.foreignKey.id}" th:unless="${#lists.isEmpty(column.foreignKey)}"/>
                                     <select class="form-control" id="foreignKey" name="foreignKey">

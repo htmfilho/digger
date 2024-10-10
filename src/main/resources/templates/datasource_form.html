@@ -11,15 +11,15 @@
             <form method="POST" action="/datasources">
                 <input type="hidden" name="id" th:value="${datasource.id}"/>
 
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="name">Name *</label>
                     <input type="text" class="form-control" id="name" name="name" th:value="${datasource.name}" required>
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" name="description" th:value="${datasource.description}">
                 </div>
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="driver">Driver Class *</label>
                     <select id="driver" name="driver" class="form-control" th:field="${datasource.driver}" required>
                         <option value="">Select...</option>
@@ -29,20 +29,20 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="url">URL *</label>
                             <input type="text" class="form-control" id="url" name="url" th:value="${datasource.url}" required>
                             <small id="urlTemplate" class="form-text text-muted"></small>
                         </div>
                     </div>
                     <div class="col-3">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="username" name="username" th:value="${datasource.username}">
                         </div>
                     </div>
                     <div class="col-3">
-                        <div class="form-group">
+                        <div class="mb-3">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" th:value="${datasource.password}">
                         </div>

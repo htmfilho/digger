@@ -32,19 +32,19 @@
 
             <div class="row">
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="name">Name</label>
                         <div id="name" th:utext="${datasource.name}"></div>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="description">Description</label>
                         <div id="description" th:utext="${datasource.description}"></div>
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="description">Status</label>
                         <div class="connected" data-toggle="tooltip" data-placement="right" title="Connected!" th:if="${datasource.status}"> <img src="/images/plugged.svg" alt="Plugged!"></div>
                         <div class="disconnected" data-toggle="tooltip" data-placement="right" title="Disconnected" th:unless="${datasource.status}"> <img src="/images/unplugged.svg"></div>
@@ -54,19 +54,19 @@
 
             <div class="row">
                 <div class="col-4">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="driver">Driver Class</label>
                         <div id="driver" th:utext="${datasource.driver}"></div>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="url">URL</label>
                         <div id="url" th:utext="${datasource.url}"></div>
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="username">Username</label>
                         <div id="username" th:utext="${datasource.username}"></div>
                     </div>

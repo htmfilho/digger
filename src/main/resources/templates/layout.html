@@ -10,7 +10,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
         <link rel="manifest" href="/images/site.webmanifest">
         <link href="https://fonts.googleapis.com/css?family=Barlow&display=swap" rel="stylesheet"> 
-        <link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}" rel="stylesheet" media="screen">
+        <link th:href="@{/webjars/bootstrap/5.0.0/css/bootstrap.min.css}" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="/css/custom.css">
 
         <title th:replace="${title}">Digger</title>
@@ -22,24 +22,23 @@
                     <img src="/images/favicon-32x32.png" width="32" height="32" class="d-inline-block align-top" alt="">
                     Digger
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
                     <ul class="navbar-nav text-right">
                         <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Administration
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <a class="dropdown-item" href="/admin/users">Users</a>
-                                <a class="dropdown-item" href="/admin/environment">Environment</a>
-                                <a class="dropdown-item" href="/admin/storage">Storage</a>
-                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                <li><a class="dropdown-item" href="/admin/users">Users</a></li>
+                                <li><a class="dropdown-item" href="/admin/environment">Environment</a></li>
+                                <li><a class="dropdown-item" href="/admin/storage">Storage</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:inline="text">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:inline="text">
                                 [[${session.fullName}]]&nbsp;&nbsp;
                                 <svg class="bi bi-people-circle" width="28px" height="28px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 008 15a6.987 6.987 0 005.468-2.63z"/>
@@ -47,24 +46,26 @@
                                     <path fill-rule="evenodd" d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8z" clip-rule="evenodd"/>
                                 </svg>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/users/profile" th:if="${#httpServletRequest.remoteUser}">Profile</a>
-                                <div class="dropdown-divider" th:if="${#httpServletRequest.remoteUser}"></div>
-                                <form class="form-inline" method="post" th:action="@{/logout}" th:if="${#httpServletRequest.remoteUser}">
+                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="/users/profile" th:if="${#httpServletRequest.remoteUser}">Profile</a></li>
+                                <li><div class="dropdown-divider" th:if="${#httpServletRequest.remoteUser}"></div></li>
+                                <li><form class="form-inline" method="post" th:action="@{/logout}" th:if="${#httpServletRequest.remoteUser}">
                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                                     <input class="dropdown-item" type="submit" value="Logout"/>
-                                </form>
-                                <a class="dropdown-item" href="/login" th:unless="${#httpServletRequest.remoteUser}">Login</a>
-                                <div class="dropdown-divider" th:unless="${#httpServletRequest.remoteUser}"></div>
-                                <a class="dropdown-item" href="/signup" th:unless="${#httpServletRequest.remoteUser}">Sign Up</a>
-                                <a class="dropdown-item" href="/admin/storage/restore" th:unless="${#httpServletRequest.remoteUser}">Restore</a>
+                                </form></li>
+                                <li><a class="dropdown-item" href="/login" th:unless="${#httpServletRequest.remoteUser}">Login</a></li>
+                                <li><div class="dropdown-divider" th:unless="${#httpServletRequest.remoteUser}"></div></li>
+                                <li><a class="dropdown-item" href="/signup" th:unless="${#httpServletRequest.remoteUser}">Sign Up</a></li>
+                                <li><a class="dropdown-item" href="/admin/storage/restore" th:unless="${#httpServletRequest.remoteUser}">Restore</a></li>
                             </div>
                         </li>
-                        <div><a th:href="@{${userGuideUrl}}" class="help" target="_blank">
+                        <li>
+                            <a th:href="@{${userGuideUrl}}" class="help" target="_blank">
                             <svg class="bi bi-question-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM6.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z" clip-rule="evenodd"/>
                             </svg>
-                        </a></div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -86,7 +87,7 @@
 
         <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.js}"></script>
-        <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/5.0.0/js/bootstrap.min.js}"></script>
         <script src="/js/asciidoctor.min.js" th:if="${#httpServletRequest.remoteUser}"></script>
         <script src="/js/common.js"></script>
         <script src="/js/private.js" th:if="${#httpServletRequest.remoteUser}"></script>
