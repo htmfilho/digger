@@ -13,7 +13,6 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
-
 package digger.service.impl;
 
 import digger.model.Column;
@@ -156,10 +155,7 @@ public class ColumnServiceImpl implements ColumnService {
     }
 
     public Column findById(final Long id) {
-        if(id != null)
-            return columnRepository.findById(id);
-        else
-            return null;
+        return columnRepository.findById(id);
     }
 
     public List<Column> findByTable(final Table table) {

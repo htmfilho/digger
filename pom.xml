@@ -10,7 +10,7 @@
 		<relativePath/>
 	</parent>
 	
-	<groupId>com.hildeberto</groupId>
+	<groupId>com.sqbrains</groupId>
 	<artifactId>digger</artifactId>
 	<version>1.10.2</version>
 	<name>Digger</name>
@@ -26,7 +26,7 @@
 			<id>htmfilho</id>
 			<name>Hildeberto Mendonca</name>
 			<email>me@hildeberto.com</email>
-			<url>https://www.hildeberto.com</url>
+			<url>https://www.sqbrains.com</url>
 			<roles>
 				<role>architect</role>
 				<role>developer</role>

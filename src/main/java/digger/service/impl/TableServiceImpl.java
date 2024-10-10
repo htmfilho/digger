@@ -13,7 +13,6 @@
  * A full copy of the GNU General Public License is available at:
  * https://github.com/htmfilho/digger/blob/master/LICENSE
  */
-
 package digger.service.impl;
 
 import digger.model.Datasource;
