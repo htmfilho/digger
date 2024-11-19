@@ -21,12 +21,12 @@
                     <h1><img src="/images/table.svg" alt="table-icon"> Table</h1>
                 </div>
                 <div class="col-2">
-                    <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
-                        <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg" alt="edit-icon"> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg" alt="trash-icon"> Delete</a>
-                        </div>
+                    <div class="dropdown float-right" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
+                        <button id="table-options" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Options</button>
+                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop">
+                            <li><a th:href="@{/datasources/{datasourceId}/tables/{tableId}/edit(datasourceId=${datasource.id}, tableId=${table.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg" alt="edit-icon"> Edit</a></li>
+                            <li><a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg" alt="trash-icon"> Delete</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
