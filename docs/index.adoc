@@ -227,6 +227,10 @@ If the database was already created and the username has changed, some tables ma
       =# alter table table_name owner to digger_usr
       =# \q
 
+To drop the database after use:
+
+    $ dropdb digger
+
 == Security
 
 Digger ensures that only authorized people in the organization are allowed to document and to access the documentation of the schemes. Users are managed by the application and their passwords are strongly encrypted in the database, to the point they cannot be recovered, only reset.
