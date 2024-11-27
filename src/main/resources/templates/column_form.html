@@ -20,7 +20,7 @@
                         <div class="mb-3">
                             <label for="table-column-name">Physical Name *</label>
                             <input type="hidden" id="name-aux" th:value="${column.name}"/>
-                            <select class="form-control" id="table-column-name" name="name" required>
+                            <select class="form-select" id="table-column-name" name="name" required>
                                 <option value="">Select...</option>
                             </select>
                         </div>
@@ -68,7 +68,7 @@
                                 <div class="mb-3">
                                     <label for="foreign-table">Table</label>
                                     <input type="hidden" id="foreign-table-aux" th:value="${column.foreignKey.table.id}" th:unless="${#lists.isEmpty(column.foreignKey)}"/>
-                                    <select class="form-control" id="foreign-table">
+                                    <select class="form-select" id="foreign-table">
                                         <option value="">Select...</option>
                                     </select>
                                 </div>
@@ -77,7 +77,7 @@
                                 <div class="mb-3">
                                     <label for="foreignKey">Column</label>
                                     <input type="hidden" id="foreign-column-aux" th:value="${column.foreignKey.id}" th:unless="${#lists.isEmpty(column.foreignKey)}"/>
-                                    <select class="form-control" id="foreignKey" name="foreignKey">
+                                    <select class="form-select" id="foreignKey" name="foreignKey">
                                         <option value="">Select...</option>
                                     </select>
                                 </div>
