@@ -207,6 +207,7 @@ Execute the following commands to install PostgreSQL:
 
     $ sudo apt-get install postgresql
     $ sudo su - postgres -c "createuser -s $USER"
+    $ createdb
 
 Then create the database for the application:
 
