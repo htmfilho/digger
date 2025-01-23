@@ -215,7 +215,7 @@ Then create the database for the application:
     $ psql -d digger
       =# grant connect on database digger to digger_usr;
       =# \q
-      
+
 If you accidentaly created the user without the `-P` argument, just drop the user and create it again:
 
     $ dropuser digger
@@ -226,6 +226,12 @@ If the database was already created and the username has changed, some tables ma
     $ psql -d digger
       =# alter table table_name owner to digger_usr
       =# \q
+
+PostgreSQL directories are the followings:
+
+    /var/log/postgresql/
+    /var/lib/postgresql/
+    /etc/postgresql/
 
 == Security
 
