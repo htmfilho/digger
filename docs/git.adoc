@@ -80,6 +80,20 @@ If the url starts with https:// then you are using `https` instead of `ssh`. In 
 
 The automatic authentication should work after that.
 
+By the way, when the repository is too big, with a long versioning history, we
+may consider cloning only the latest version to kick-off our day faster. We do
+it using the `--depth` parameter:
+
+    $ git clone --depth 1 -b master git@github.com:htmfilho/digger.git
+
+When we have our configuration done and everything is working, before stopping
+for the day, run:
+
+    $ git fetch --unshallow
+
+to download the rest of the repo. We want this to enable the "blame" feature in
+our IDE.
+
 ==== Changing The Author To The One Recognizable by GitHub
 
 In case your default Git author is not the same as GitHub, configure the author of the repository:

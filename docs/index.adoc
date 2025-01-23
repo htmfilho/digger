@@ -207,6 +207,7 @@ Execute the following commands to install PostgreSQL:
 
     $ sudo apt-get install postgresql
     $ sudo su - postgres -c "createuser -s $USER"
+    $ createdb
 
 Then create the database for the application:
 
@@ -214,6 +215,8 @@ Then create the database for the application:
     $ createuser digger_usr -P
     $ psql -d digger
       =# grant connect on database digger to digger_usr;
+      =# revoke connect on database digger from public;
+      =# alter user digger_usr createdb;
       =# \q
 
 If you accidentaly created the user without the `-P` argument, just drop the user and create it again:
@@ -226,6 +229,10 @@ If the database was already created and the username has changed, some tables ma
     $ psql -d digger
       =# alter table table_name owner to digger_usr
       =# \q
+
+To drop the database after use:
+
+    $ dropdb digger
 
 PostgreSQL directories are the followings:
 
