@@ -211,15 +211,16 @@ Execute the following commands to install PostgreSQL:
 
 Then create the database for the application:
 
-    $ createdb digger
-    $ createuser digger_usr -P
-    $ psql -d digger
-      =# grant connect on database digger to digger_usr;
-      =# revoke connect on database digger from public;
-      =# alter user digger_usr createdb;
-      =# \q
+    $ sudo su - postgres
+    $ psql
+      postgres=# create database digger;
+      postgres=# create user digger_usr with encrypted password 'secret';
+      postgres=# grant all privileges on database digger to digger_usr;
+      postgres=# \c digger postgres
+      digger=# grant all on schema public to digger_usr;
+      digger=# \q
 
-If you accidentaly created the user without the `-P` argument, just drop the user and create it again:
+If you accidentally made a mistake while creating the user, just drop the user and create it again:
 
     $ dropuser digger
     $ createuser digger_usr -P
