@@ -37,7 +37,7 @@ class ColumnResource(
         @PathVariable datasourceId: Long?,
         @PathVariable tableId: Long?,
         @RequestParam(value = "key", defaultValue = "") key: String?,
-        @RequestParam(value = "except", defaultValue = "") except: Long?
+        @RequestParam(value = "except", defaultValue = "0") except: Long?
     ): List<Column> {
         val datasource = datasourceService.findById(datasourceId)
         val table = tableService.findById(tableId)

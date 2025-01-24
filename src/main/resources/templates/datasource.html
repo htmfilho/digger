@@ -20,12 +20,12 @@
                     <h1><img src="/images/datasource.svg"> Datasource</h1>
                 </div>
                 <div class="col-2">
-                    <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
-                        <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            <a th:href="@{/datasources/{id}/edit(id=${datasource.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a>
-                        </div>
+                    <div class="dropdown" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
+                        <button id="btn btn-secondary dropdown-toggle" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Options</button>
+                        <ul class="dropdown-menu">
+                            <li><a th:href="@{/datasources/{id}/edit(id=${datasource.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a></li>
+                            <li><a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg"> Delete</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -80,10 +80,10 @@
             <br>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="tables-tab" data-toggle="tab" href="#tables" role="tab" aria-controls="tables" aria-selected="true">Tables</a>
+                  <a class="nav-link active" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tables" href="#tables" role="tab" aria-controls="tables" aria-selected="true">Tables</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="ignored-tab" data-toggle="tab" href="#ignored" role="tab" aria-controls="ignored" aria-selected="false">Ignored</a>
+                  <a class="nav-link" id="ignored-tab" data-bs-toggle="tab" data-bs-target="#ignored" href="#ignored" role="tab" aria-controls="ignored" aria-selected="false">Ignored</a>
                 </li>
             </ul>
 

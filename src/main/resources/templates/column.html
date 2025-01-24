@@ -22,12 +22,12 @@
                     <h1><img src="/images/column.svg"> Column</h1>
                 </div>
                 <div class="col-2">
-                    <div class="btn-group float-right" role="group" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
-                        <button id="btnGroupDrop" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            <a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a>
-                            <a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg" alt="trash-icon"> Delete</a>
-                        </div>
+                    <div class="dropdown float-right" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')">
+                        <button id="column-options" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Options</button>
+                        <ul class="dropdown-menu" aria-labelledby="column-options">
+                            <li><a th:href="@{/datasources/{datasourceId}/tables/{tableId}/columns/{columnId}/edit(datasourceId=${datasource.id}, tableId=${table.id}, columnId=${column.id})}" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/pencil-square.svg"> Edit</a></li>
+                            <li><a onclick="deleteElement()" href="#" class="dropdown-item" role="button" aria-pressed="true"><img src="/images/trash.svg" alt="trash-icon"> Delete</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="driver">Driver Class *</label>
-                    <select id="driver" name="driver" class="form-control" th:field="${datasource.driver}" required>
+                    <select id="driver" name="driver" class="form-select" th:field="${datasource.driver}" required>
                         <option value="">Select...</option>
                         <option th:each="cl : ${supportedDriverClasses}" th:value="${cl.driverClassName}" th:text="${cl.driverClassName}"></option>
                     </select>
