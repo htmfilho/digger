@@ -4,6 +4,10 @@ Git is a distributed version control system used to manage the source code of Di
 
     $ sudo apt-get install git
 
+To configure the initial branch name to use in all new repositories, use:
+
+    $ git config --global init.DefaultBranch main
+
 ==== Configuring Git to Simplify Authentication
 
 For the moment, every time we push code to GitHub the prompt asks for a username and password. We can bypass this step by registering a SSH key. To do that, we first check whether there is already an existing SSH key we can reuse:
