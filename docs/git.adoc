@@ -4,9 +4,16 @@ Git is a distributed version control system used to manage the source code of Di
 
     $ sudo apt-get install git
 
-To configure the initial branch name to use in all new repositories, use:
+Before using Git, let's do a few initial configurations:
 
-    $ git config --global init.DefaultBranch main
+* The initial branch name to use in all new repositories:
+
+       $ git config --global init.DefaultBranch main
+
+* Identify the author of the commits:
+
+       $ git config --global user.email "you@example.com"
+       $ git config --global user.name "Your Name"
 
 ==== Configuring Git to Simplify Authentication
 
