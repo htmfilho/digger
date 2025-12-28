@@ -569,8 +569,6 @@ Only submit your pull request if these tests pass. To see the test coverage repo
  - https://www.h2database.com[H2]
  - https://www.postgresql.org/[PostgreSQL]
 
-include::git.adoc[]
-
 === The Release Process
 
 1. Review the tickets that are going to be released.
