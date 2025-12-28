@@ -201,45 +201,7 @@ On Windows 10, a service for Digger is configured as follows:
 
 === Creating the PostgreSQL Database
 
-==== On Linux
-
-Execute the following commands to install PostgreSQL:
-
-    $ sudo apt-get install postgresql
-    $ sudo su - postgres -c "createuser -s $USER"
-    $ createdb
-
-Then create the database for the application:
-
-    $ sudo su - postgres
-    $ psql
-      postgres=# create database digger;
-      postgres=# create user digger_usr with encrypted password 'secret';
-      postgres=# grant all privileges on database digger to digger_usr;
-      postgres=# \c digger postgres
-      digger=# grant all on schema public to digger_usr;
-      digger=# \q
-
-If you accidentally made a mistake while creating the user, just drop the user and create it again:
-
-    $ dropuser digger
-    $ createuser digger_usr -P
-
-If the database was already created and the username has changed, some tables may remain under the ownership of a previous user. If you get an error like "_permission denied for table [table_name]_" then it might be the case. Use the command `\dt` to list all the tables with their ownership. For each one of the impacted tables, use the `alter table` statement:
-
-    $ psql -d digger
-      =# alter table table_name owner to digger_usr
-      =# \q
-
-To drop the database after use:
-
-    $ dropdb digger
-
-PostgreSQL directories are the followings:
-
-    /var/log/postgresql/
-    /var/lib/postgresql/
-    /etc/postgresql/
+Follow the instructions to create a PostgreSQL database on the []Minimily Library](https://www.minimily.com/library).
 
 == Security
 
