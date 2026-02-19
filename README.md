@@ -9,7 +9,7 @@
 
 Use Digger to document your relational databases. It is a web application that works like a supporting tool for DBAs and Developers, making sure data is well understood. Everybody in the organization can contribute to the knowledge base.
 
-![Screenshot](java/docs/images/table.png)
+![Screenshot](docs/images/table.png)
 
 ## Documentation 
 
