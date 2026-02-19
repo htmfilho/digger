@@ -1,5 +1,6 @@
 use serde::Deserialize;
 use sqlx::postgres::PgPoolOptions;
+use std::{env, process};
 use std::fs::File;
 use std::io::BufReader;
 
@@ -16,7 +17,18 @@ struct Connection {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let file = File::open("geekswimmers.json")?;
+    let mut args = env::args();
+
+    let program = args.next().unwrap_or_else(|| "geekswimmers".to_string());
+    let json_path = match args.next() {
+        Some(path) => path,
+        None => {
+            eprintln!("Usage: {} <path-to-database-json>", program);
+            process::exit(1);
+        }
+    };
+
+    let file = File::open(json_path)?;
     let reader = BufReader::new(file);
 
     let database: Database = serde_json::from_reader(reader)?;
