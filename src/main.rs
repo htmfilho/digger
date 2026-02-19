@@ -1,4 +1,5 @@
 use serde::Deserialize;
+use sqlx::postgres::PgPoolOptions;
 use std::fs::File;
 use std::io::BufReader;
 
@@ -13,14 +14,22 @@ struct Connection {
     url: String,
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let file = File::open("geekswimmers.json")?;
     let reader = BufReader::new(file);
 
     let database: Database = serde_json::from_reader(reader)?;
 
+    let pool = PgPoolOptions::new()
+        .max_connections(10)
+        .connect(&database.connection.url)
+        .await?;
+
     for table in database.tables {
-        println!("select * from {} order by id", table);
+        let query = format!("select * from {table}");
+        let rows = sqlx::query(&query).fetch_all(&pool).await?;
+        println!("{:?}", rows);
     }
 
     Ok(())
