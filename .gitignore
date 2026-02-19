@@ -8,10 +8,10 @@ data/
 data2/
 logs/
 target/
-os-service/digger-windows-service.wrapper.log
-os-service/digger-windows-service.out.log
-os-service/digger-windows-service.err.log
-os-service/digger-0.2.0.jar
+java/os-service/digger-windows-service.wrapper.log
+java/os-service/digger-windows-service.out.log
+java/os-service/digger-windows-service.err.log
+java/os-service/digger-0.2.0.jar
 *.iml
 *.zip
 *.pdf
