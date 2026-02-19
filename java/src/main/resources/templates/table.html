@@ -10,7 +10,7 @@
         <section>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/"><img src="/images/house-fill.svg" alt="house-icon"></a></li>
+                    <li class="breadcrumb-item"><a href="/java/src/main/resources/static"><img src="/images/house-fill.svg" alt="house-icon"></a></li>
                     <li class="breadcrumb-item"><a th:href="@{/datasources/{id}(id=${datasource.id})}" th:utext="${datasource.name}"></a></li>
                     <li class="breadcrumb-item active" aria-current="page" th:utext="${table.friendlyName}"></li>
                 </ol>
