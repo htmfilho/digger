@@ -3,6 +3,7 @@ use sqlx::postgres::PgPoolOptions;
 use std::{env, process};
 use std::fs::File;
 use std::io::BufReader;
+use sqlx::{Column, Row};
 
 #[derive(Debug, Deserialize)]
 struct Database {
@@ -41,7 +42,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     for table in database.tables {
         let query = format!("select * from {table}");
         let rows = sqlx::query(&query).fetch_all(&pool).await?;
-        println!("{:?}", rows);
+
+        rows.iter().for_each(|row| println!("insert into {} ({}) values ({:?})",
+                                            table,
+                                            row.columns().iter().map(|c| c.name()).collect::<Vec<_>>().join(", "),
+                                            row));
     }
 
     Ok(())
