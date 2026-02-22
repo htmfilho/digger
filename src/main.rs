@@ -44,7 +44,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     for table in database.tables.iter().rev() {
-        println!("truncate table {} restart identity;", table);
+        println!("delete from {};", table);
     }
     println!();
 
