@@ -2,10 +2,12 @@ use serde::Deserialize;
 use std::{env, process};
 use std::fs::File;
 use std::io::BufReader;
+use bigdecimal::BigDecimal;
 use sqlx::postgres::{PgPoolOptions, PgValueRef};
 use sqlx::{Column, Row, TypeInfo};
 use sqlx::ValueRef;
 use sqlx::{Decode, Postgres};
+use sqlx::types::chrono;
 
 #[derive(Debug, Deserialize)]
 struct Database {
@@ -41,6 +43,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .connect(&database.connection.url)
         .await?;
 
+    for table in database.tables.iter().rev() {
+        println!("truncate table {} restart identity;", table);
+    }
+    println!();
+
     for table in database.tables {
         let query = format!("select * from {table}");
         let rows = sqlx::query(&query).fetch_all(&pool).await?;
@@ -52,19 +59,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 values.push(pg_literal(raw, col.type_info().name()));
             }
 
-            println!("insert into {} ({}) values ({})",
+            println!("insert into {} ({}) values ({});",
                      table,
                      row.columns().iter().map(|c| c.name()).collect::<Vec<_>>().join(", "),
                      values.join(", ")
             )
         });
+        println!();
     }
 
     Ok(())
-}
-
-fn quote_string_literal(s: &str) -> String {
-    format!("'{}'", s.replace('\'', "''"))
 }
 
 fn pg_literal(raw: PgValueRef<'_>, ty_name: &str) -> String {
@@ -73,6 +77,18 @@ fn pg_literal(raw: PgValueRef<'_>, ty_name: &str) -> String {
     }
 
     match ty_name {
+        "BOOL" => <bool as Decode<Postgres>>::decode(raw)
+            .map(|v| v.to_string())
+            .unwrap_or_else(|_| "<unprintable BOOL>".to_string()),
+        "DATE" => <chrono::NaiveDate as Decode<Postgres>>::decode(raw)
+            .map(|v| format!("'{}'", v.format("%Y-%m-%d")))
+            .unwrap_or_else(|_| "<unprintable DATE>".to_string()),
+        "FLOAT4" => <f32 as Decode<Postgres>>::decode(raw)
+            .map(|v| v.to_string())
+            .unwrap_or_else(|_| "<unprintable FLOAT4>".to_string()),
+        "FLOAT8" => <f64 as Decode<Postgres>>::decode(raw)
+            .map(|v| v.to_string())
+            .unwrap_or_else(|_| "<unprintable FLOAT8>".to_string()),
         "INT2" => <i16 as Decode<Postgres>>::decode(raw)
             .map(|v| v.to_string())
             .unwrap_or_else(|_| "<unprintable INT2>".to_string()),
@@ -82,22 +98,22 @@ fn pg_literal(raw: PgValueRef<'_>, ty_name: &str) -> String {
         "INT8" => <i64 as Decode<Postgres>>::decode(raw)
             .map(|v| v.to_string())
             .unwrap_or_else(|_| "<unprintable INT8>".to_string()),
-        "FLOAT4" => <f32 as Decode<Postgres>>::decode(raw)
-            .map(|v| v.to_string())
-            .unwrap_or_else(|_| "<unprintable FLOAT4>".to_string()),
-        "FLOAT8" => <f64 as Decode<Postgres>>::decode(raw)
-            .map(|v| v.to_string())
-            .unwrap_or_else(|_| "<unprintable FLOAT8>".to_string()),
-        "BOOL" => <bool as Decode<Postgres>>::decode(raw)
-            .map(|v| v.to_string())
-            .unwrap_or_else(|_| "<unprintable BOOL>".to_string()),
-
         "JSON" | "JSONB" => <serde_json::Value as Decode<Postgres>>::decode(raw)
             .map(|v| quote_string_literal(&v.to_string()))
             .unwrap_or_else(|_| "<unprintable JSON>".to_string()),
+        "NUMERIC" => <BigDecimal as Decode<Postgres>>::decode(raw)
+            .map(|v| format!("'{}'", v.to_string()))
+            .unwrap_or_else(|_| "<unprintable NUMERIC>".to_string()),
+        "TIMESTAMP" => <chrono::NaiveDateTime as Decode<Postgres>>::decode(raw)
+            .map(|v| format!("'{}'", v.format("%Y-%m-%d %H:%M:%S")))
+            .unwrap_or_else(|_| "<unprintable TIMESTAMP>".to_string()),
 
         _ => <String as Decode<Postgres>>::decode(raw)
             .map(|s| quote_string_literal(&s))
             .unwrap_or_else(|_| format!("<unprintable {}>", ty_name)),
     }
+}
+
+fn quote_string_literal(s: &str) -> String {
+    format!("'{}'", s.replace('\'', "''"))
 }
