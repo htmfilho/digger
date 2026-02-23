@@ -17,7 +17,8 @@ struct Database {
 
 #[derive(Debug, Deserialize)]
 struct Connection {
-    url: String,
+    source: String,
+    target: String,
 }
 
 #[tokio::main]
@@ -38,34 +39,41 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let database: Database = serde_json::from_reader(reader)?;
 
-    let pool = PgPoolOptions::new()
+    let source_pool = PgPoolOptions::new()
         .max_connections(10)
-        .connect(&database.connection.url)
+        .connect(&database.connection.source)
         .await?;
 
+    let target_pool = PgPoolOptions::new()
+        .max_connections(10)
+        .connect(&database.connection.target)
+        .await?;
+
+    print!("Deleting records from target database...");
     for table in database.tables.iter().rev() {
-        println!("delete from {};", table);
+        sqlx::query(&format!("delete from {};", table)).execute(&target_pool).await?;
     }
-    println!();
+    println!(" done.");
 
     for table in database.tables {
+        print!("Copying table {}...", table);
         let query = format!("select * from {table}");
-        let rows = sqlx::query(&query).fetch_all(&pool).await?;
+        let rows = sqlx::query(&query).fetch_all(&source_pool).await?;
 
-        rows.iter().for_each(|row| {
+        for row  in &rows {
             let mut values: Vec<String> = Vec::new();
             for (i, col) in row.columns().iter().enumerate() {
                 let raw = row.try_get_raw(i).expect("failed to read raw column value");
                 values.push(pg_literal(raw, col.type_info().name()));
             }
 
-            println!("insert into {} ({}) values ({});",
+            sqlx::query(&format!("insert into {} ({}) values ({});",
                      table,
                      row.columns().iter().map(|c| c.name()).collect::<Vec<_>>().join(", "),
                      values.join(", ")
-            )
-        });
-        println!();
+            )).execute(&target_pool).await?;
+        };
+        println!(" done.");
     }
 
     Ok(())
