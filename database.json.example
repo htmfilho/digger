@@ -1,0 +1,11 @@
+{
+  "connection": {
+    "source": "postgres://database_usr:secret@localhost:5432/database_name",
+    "target": "postgres://database_usr:secret@localhost:5432/database_name_backup"
+  },
+  "tables": [
+    "table_1",
+    "table_2",
+    "table_3"
+  ]
+}
