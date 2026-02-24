@@ -8,5 +8,5 @@ bigdecimal = "0.4.10"
 serde_json = "1.0.149"
 
 serde = { version = "1.0.228", features = ["derive"] }
-sqlx =  { version = "0.8.6", features = ["runtime-tokio", "macros", "postgres", "chrono", "bigdecimal"], default-features = false }
+sqlx =  { version = "0.8.6", features = ["runtime-tokio", "macros", "postgres", "chrono", "bigdecimal", "tls-rustls"], default-features = false }
 tokio = { version = "1.49.0", features = ["rt-multi-thread", "macros"]}

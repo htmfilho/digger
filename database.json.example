@@ -1,7 +1,7 @@
 {
   "connection": {
-    "source": "postgres://database_usr:secret@localhost:5432/database_name",
-    "target": "postgres://database_usr:secret@localhost:5432/database_name_backup"
+    "source": "postgres://database_usr:secret@localhost:5432/database_name?sslmode=require",
+    "target": "postgres://database_usr:secret@localhost:5432/database_name_backup?sslmode=require"
   },
   "tables": [
     "table_1",
